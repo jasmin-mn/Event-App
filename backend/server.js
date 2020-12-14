@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-dotenv.config();
+// dot .env.config();
  
 app.get('/' , (request , response)=>{
    response.send({ msg : 'welcome to Event Manager App' })
