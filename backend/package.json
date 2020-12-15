@@ -1,8 +1,16 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Events manager app",
+  "description": "",
   "main": "server.js",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {},
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
@@ -10,12 +18,5 @@
     "dev": "concurrently \"npm run server\"  \" npm run frontend\" "
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "concurrently": "^5.3.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.11.7",
-    "nodemon": "^2.0.6"
-  }
+  "license": "ISC"
 }
