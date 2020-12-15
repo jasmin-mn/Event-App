@@ -6,6 +6,9 @@ const RegisterSchema = new mongoose.Schema({
     lastName:{type: String, required: true},
     email:{ type:String, Number, required: true},
     password:{type: String, Number, required: true},
-    gender:{type: String, enum: ['female', 'male'], default: NaN}
+    gender:{type: String, enum: ['female', 'male'], default: NaN},
+    events: {type: String, enum: []}
 
 })
+
+module.exports = RegisterSchema
