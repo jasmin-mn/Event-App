@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config();
-const Register = require("./Models/UserModel")
+const User = require("./Models/UserModel")
 
 app.get('/', (request, response) => {
     response.send({ msg: 'welcome to Event Manager App' })

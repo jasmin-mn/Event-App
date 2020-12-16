@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
-const RegisterSchema = require("../Schemas/UserSchema")
-const Register = mongoose.model("Register", RegisterSchema)
+const UserSchema = require("../Schemas/UserSchema")
+const User = mongoose.model("User", UserSchema)
 
 
 
-module.exports = Register
+module.exports = User
