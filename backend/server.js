@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config();
+const Event=require("./Models/EventModel")
 const Register = require("./Models/UserModel")
 
 app.get('/', (request, response) => {
@@ -19,6 +20,11 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${
     })
     .catch((err) => {
         console.log(err);
+    })
+
+    const startEvent=new Event({
+
+        Event_name,description,
     })
 
 
