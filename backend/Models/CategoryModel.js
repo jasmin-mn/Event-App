@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Contact = require('../Schemas/CategorySchema');
+const CategorySchema = require('../Schemas/CategorySchema');
 
 const CategorytModel = mongoose.model('Category', CategorySchema);
 
