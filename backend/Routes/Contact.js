@@ -1,8 +1,7 @@
 const express = require('express');
 const ContactModel = require('../Models/ContactModel');
 const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+// const sendEmail = require('../Utilities/sendEmail')
 
 const router = express.Router();
 
@@ -19,7 +18,7 @@ const router = express.Router();
 // });
 
 
-router.post('/sendEmail', async (request, response) => {
+router.post('/', async (request, response) => {
 
     const { name, email, Phone, Date, subject, message } = request.body;
 
@@ -37,11 +36,11 @@ router.post('/sendEmail', async (request, response) => {
     `
 
     let transporter = nodemailer.createTransport({
-        host: "Gmail",
-        port: 465,
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
         auth: {
-            user: "app.event10@gmail.com",
-            pass: "Erfolg21"
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS
         },
         tls: {
             rejectUnauthorized: false
@@ -50,7 +49,7 @@ router.post('/sendEmail', async (request, response) => {
 
     let mailOptions = {
         from: email,
-        to: "app.event10@gmail.com",
+        to: "najeebselwi@gmail.com",
         subject,
         Phone,
         message,
@@ -62,7 +61,6 @@ router.post('/sendEmail', async (request, response) => {
         console.log('Message sent', info.messageId);
         response.send({ msg: 'Email have been sent' });
     })
-
 });
 
 
