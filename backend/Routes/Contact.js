@@ -37,7 +37,7 @@ router.post('/', async (request, response) => {
 
     let mailOptions = {
         from: email,
-        to: "najeebselwi@gmail.com",
+        to: process.env.CONTACT_EMAIL,
         subject,
         Phone,
         message,

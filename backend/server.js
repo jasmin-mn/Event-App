@@ -34,7 +34,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${
 
 
 
-app.listen(7000, () => {
-    console.log('Server Started on port 7000');
+app.listen(process.env.PORT, () => {
+    console.log(`Server Started on port ${process.env.PORT}`);
 })
 
