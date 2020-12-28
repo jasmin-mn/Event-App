@@ -16,6 +16,9 @@ app.get('/', (request, response) => {
 })
 app.use(express.json())
 app.use('/contact' , require('./Routes/Contact'))
+
+
+
 app.use('/user', require('./Routes/UserRoute'))
 app.use('/event', require('./Routes/EventRoute'))
 app.use('/login', require('./Routes/UserRoute'))
@@ -25,6 +28,7 @@ app.use('/event', require('./Routes/EventRoute'))
 
  
  
+
 
 
 // connect to mongodb 
