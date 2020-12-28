@@ -21,6 +21,7 @@ app.use('/event', require('./Routes/EventRoute'))
 app.use('/login', require('./Routes/UserRoute'))
 app.use('/register', require('./Routes/UserRoute'))
 app.use('/profile', require('./Routes/UserRoute'))
+app.use('/event', require('./Routes/EventRoute'))
 
  
  
