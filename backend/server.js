@@ -16,8 +16,11 @@ app.get('/', (request, response) => {
 })
 app.use(express.json())
 app.use('/contact' , require('./Routes/Contact'))
-app.use('/register', require('./Routes/UserRoute'))
-app.use('/login', require('./Routes/UserRoute'))
+app.use('/user', require('./Routes/UserRoute'))
+//app.use('/login', require('./Routes/UserRoute'))
+//app.use('/register', require('./Routes/UserRoute'))
+app.use('/profile', require('./Routes/UserRoute'))
+
  
  
 

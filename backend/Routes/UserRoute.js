@@ -5,7 +5,7 @@ const authenticate = require("authenticate")
 const User = require('../Models/UserModel');
 const router = express.Router()
 
-router.post("/", async(request,response)=>{
+router.post("/register", async(request,response)=>{
     const {userName,firstName, lastName, email, password, gender} = request.body;
     try{
         let data = await User.findOne({ email })
@@ -54,16 +54,20 @@ router.post("/", async(request,response)=>{
    
 // })
 
-router.post("/", async(request,response)=>{
+router.post("/login", async(request,response)=>{
     const { email, password} = request.body
     let data = await User.findOne({ email })
     if(!data){
         return response.status(400).json({msg: "Invalid email or password. Kindly type in the right information."})
+    } else{
+        return response.status(200).json({msg: "Login."})
     }
 
     const isMatch = await bcrypt.compare(password, data.password)
     if(!isMatch){
         return response.status(400).json({msg: "Invalid email or password. Kindly type in the right information."})
+    } else{
+        return response.status(200).json({msg: "Login."})
     }
 
     // token
@@ -90,6 +94,19 @@ router.post("/", async(request,response)=>{
         response.status(500).send("Server error")
     }
 
+})
+
+// Profile
+
+router.get("/", async(request, response)=>{
+    const{ userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    const newUser = new User({
+        userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others
+
+    })
+
+    await newUser.save()
+    response.send("Profile Updated")
 })
 
 
