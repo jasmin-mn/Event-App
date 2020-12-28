@@ -12,6 +12,7 @@ app.get('/', (request, response) => {
 })
 app.use(express.json())
 app.use('/contact' , require('./Routes/Contact'))
+app.use('/startNewEvent',require('./Routes/EventRoute'))
 
 // connect to mongodb 
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.MONGO_URI}/${process.env.DB_NAME}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -22,10 +23,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${
         console.log(err);
     })
 
-    const startEvent=new Event({
-
-        Event_name,description,
-    })
+  
 
 
 
