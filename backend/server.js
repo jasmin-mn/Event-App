@@ -16,8 +16,8 @@ app.get('/', (request, response) => {
 })
 app.use(express.json())
 
-app.use('/contact', require('./Routes/Contact'));
-app.use('/category', require('./Routes/Category'));
+app.use('/contact', require('./Routes/ContactRoute'));
+app.use('/category', require('./Routes/CategoryRoute'));
 app.use('/user', require('./Routes/UserRoute'));
 app.use('/event', require('./Routes/EventRoute'))
 
