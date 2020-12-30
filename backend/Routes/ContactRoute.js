@@ -13,11 +13,11 @@ router.post('/', async (request, response) => {
     const output = `
     <p>you have a new message</p>
     <ul>
-        <li> Name: ${name} </li>
+        <li> From: ${name} </li>
         <li> Email: ${email} </li>
-        <li> Email: ${Phone} </li>
-        <li> Email: ${Date} </li>
-        <li> Company: ${subject} </li>
+        <li> Phone: ${Phone} </li>
+        <li> Date: ${Date} </li>
+        <li> subject: ${subject} </li>
     </ul>
     <p> Message: ${message} </p>
 
