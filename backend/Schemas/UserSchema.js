@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     events: {type: String},
     role:{ type: String, enum:["user", "admin"], default: "user"},
 
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpire: String
+
 })
 
 module.exports = UserSchema
