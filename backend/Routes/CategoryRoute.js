@@ -24,21 +24,19 @@ router.post('/add', async (request, response) => {
 
 // Updating Category name
 router.put('/edit/:id', async (request, response) => {
-    try {
-        const { name, description } = request.body;
-        const category = await Category.findByIdAndUpdate(
-            { _id: (request.params.id) },
-            { $set: { name, description } }
-        );
-        if (category) {
-            response.send(`The Category name have been updated !!`)
-        } else {
-            response.send('server error');
-        }
-    } catch (err) {
-        console.log(err);
+
+    const { name, description } = request.body;
+    const category = await Category.findByIdAndUpdate(
+        { _id: (request.params.id) },
+        { $set: { name, description } }
+    );
+
+    if (category) {
+        response.send(`The Category name have been updated !!`)
+    } else {
         response.send('server error');
     }
+
 })
 
 router.delete('/delete/:id', async (request, response) => {
