@@ -21,24 +21,30 @@ router.post('/add', async (request, response) => {
     }
 });
 
-router.put('/edit/:id', (request, response) => {
+
+// Updating Category name
+router.put('/edit/:id', async (request, response) => {
     try {
-        const category = ('Category').updateOne({ _id: new ObjectID(request.params.id) }, {
-            $set: { name: 'Najeeb' }
+        const category = await Category.findByIdAndUpdate(
+            { _id: (request.params.id) }, {
+            $set: { name: 'Frontend' }
         });
-        response.send('Category have been updated!!')
+
+            response.send(`The Category name have been updated !!`)
+  
     } catch (err) {
         console.log(err);
         response.send('server error');
     }
 })
 
-router.delete('/delete/:id', (request, response) => {
+router.delete('/delete/:id', async (request, response) => {
     try {
-        EventsMgr.collection('Category').deleteOne({ _id: new ObjectID(request.params.id) }, {
-            $set: { name: 'js' }
-        });
-        response.send('Category have been Deleted!!')
+        const category = await Category.findByIdAndUpdate({ _id: (request.params.id) });
+        if (category) {
+            response.send('Category have been Deleted!!')
+        }
+
     } catch (err) {
         console.log(err);
         response.send('server error');
