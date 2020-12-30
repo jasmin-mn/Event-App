@@ -14,8 +14,9 @@ const Register = require("./Models/UserModel")
 app.get('/', (request, response) => {
     response.send({ msg: 'welcome to Event Manager App' })
 })
-app.use(express.json())
 
+// middleware
+app.use(express.json())
 app.use('/contact', require('./Routes/ContactRoute'));
 app.use('/category', require('./Routes/CategoryRoute'));
 app.use('/user', require('./Routes/UserRoute'));

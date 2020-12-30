@@ -1,6 +1,6 @@
 
 const express = require('express');
-const Events = require('../Models/CategoryModel');
+const Category = require('../Models/CategoryModel');
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/add', async (request, response) => {
 
     const { name, description } = request.body;
-    const event = new Events({
+    const event = new Category({
         name, description
     });
     await event.save();
