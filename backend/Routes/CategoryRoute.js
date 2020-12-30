@@ -22,7 +22,7 @@ router.post('/add', async (request, response) => {
 });
 
 
-// Updating Category name
+// Updating Categories
 router.put('/edit/:id', async (request, response) => {
 
     const { name, description } = request.body;
@@ -39,6 +39,9 @@ router.put('/edit/:id', async (request, response) => {
 
 })
 
+
+
+// Deleting Categories
 router.delete('/delete/:id', async (request, response) => {
 
     const category = await Category.findByIdAndDelete({ _id: (request.params.id) });
