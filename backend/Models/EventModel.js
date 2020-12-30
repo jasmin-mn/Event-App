@@ -4,5 +4,5 @@
 
 //const EventModel=mongoose.model("Events",EventSchema);
 
-module.exports = EventModel;
+// module.exports = EventModel;
 
