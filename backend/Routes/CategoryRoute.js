@@ -7,18 +7,23 @@ const router = express.Router();
 // Adding new Categories
 router.post('/add', async (request, response) => {
 
-    const { name, description } = request.body;
-    const event = new Category({
-        name, description
-    });
-    await event.save();
+    try {
+        const { name, description } = request.body;
+        const category = new Category({
+            name, description
+        });
+        await category.save();
 
-    response.send(`${name} Categeory have been created !!`)
+        response.send(`${name} Categeory have been created !!`)
+    } catch (err) {
+        console.log(err);
+        response.send('server error');
+    }
 });
 
 router.put('/edit/:id', (request, response) => {
     try {
-        EventsMgr.collection('Category').updateOne({ _id: new ObjectID(request.params.id) }, {
+        const category = ('Category').updateOne({ _id: new ObjectID(request.params.id) }, {
             $set: { name: 'Najeeb' }
         });
         response.send('Category have been updated!!')
