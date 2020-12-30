@@ -25,13 +25,16 @@ router.post('/add', async (request, response) => {
 // Updating Category name
 router.put('/edit/:id', async (request, response) => {
     try {
+        const { name, description } = request.body;
         const category = await Category.findByIdAndUpdate(
-            { _id: (request.params.id) }, {
-            $set: { name: 'Frontend' }
-        });
-
+            { _id: (request.params.id) },
+            { $set: { name, description } }
+        );
+        if (category) {
             response.send(`The Category name have been updated !!`)
-  
+        } else {
+            response.send('server error');
+        }
     } catch (err) {
         console.log(err);
         response.send('server error');
@@ -39,17 +42,14 @@ router.put('/edit/:id', async (request, response) => {
 })
 
 router.delete('/delete/:id', async (request, response) => {
-    try {
-        const category = await Category.findByIdAndUpdate({ _id: (request.params.id) });
-        if (category) {
-            response.send('Category have been Deleted!!')
-        }
 
-    } catch (err) {
-        console.log(err);
+    const category = await Category.findByIdAndDelete({ _id: (request.params.id) });
+
+    if (category) {
+        response.send('Category have been Deleted!!')
+    } else {
         response.send('server error');
     }
-
 })
 
 
