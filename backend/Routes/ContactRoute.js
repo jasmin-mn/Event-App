@@ -1,5 +1,5 @@
 const express = require('express');
-const ContactModel = require('../Models/ContactModel');
+const Contact = require('../Models/ContactModel');
 const nodemailer = require('nodemailer');
 // const sendEmail = require('../Utilities/sendEmail')
 
@@ -9,6 +9,13 @@ const router = express.Router();
 router.post('/', async (request, response) => {
 
     const { name, email, Phone, Date, subject, message } = request.body;
+
+    const NewMessage = new Contact({ // Saving the received E-Mail in the Database
+        name, email, Phone, Date, subject, message
+    });
+    await NewMessage.save();
+
+    response.send(`Thank you ${name} for contacting us, your E-Mail has been sent !!`)
 
     const output = `
     <p>you have a new message</p>

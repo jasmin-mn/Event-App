@@ -1,44 +1,74 @@
 
 const express = require('express');
-const Events = require('../Models/CategoryModel');
+const Category = require('../Models/CategoryModel');
 
 const router = express.Router();
+
 
 // Adding new Categories
 router.post('/add', async (request, response) => {
 
-    const { name, description } = request.body;
-    const event = new Events({
-        name, description
-    });
-    await event.save();
+    try {
+        const { name, description } = request.body;
+        const category = new Category({
+            name, description
+        });
+        await category.save();
 
-    response.send(`${name} Categeory have been created !!`)
+        response.send(`${name} Categeory have been created !!`)
+    } catch (err) {
+        console.log(err);
+        response.send('server error');
+    }
 });
 
-router.put('/edit/:id', (request, response) => {
+
+// View all Categories
+router.get('/view', async (request, response) => {
+
     try {
-        EventsMgr.collection('Category').updateOne({ _id: new ObjectID(request.params.id) }, {
-            $set: { name: 'Najeeb' }
-        });
-        response.send('Category have been updated!!')
-    } catch (err) {
-        console.log(err);
+        const category = await Category.find(request.id);
+        if (!category) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.json(category)
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+
+    }
+});
+
+
+// Updating Categories
+router.put('/edit/:id', async (request, response) => {
+
+    const { name, description } = request.body;
+    const category = await Category.findByIdAndUpdate(
+        { _id: (request.params.id) },
+        { $set: { name, description } }
+    );
+
+    if (category) {
+        response.send(`The Category name have been updated !!`)
+    } else {
         response.send('server error');
     }
+
 })
 
-router.delete('/delete/:id', (request, response) => {
-    try {
-        EventsMgr.collection('Category').deleteOne({ _id: new ObjectID(request.params.id) }, {
-            $set: { name: 'js' }
-        });
+
+
+// Deleting Categories
+router.delete('/delete/:id', async (request, response) => {
+
+    const category = await Category.findByIdAndDelete({ _id: (request.params.id) });
+
+    if (category) {
         response.send('Category have been Deleted!!')
-    } catch (err) {
-        console.log(err);
+    } else {
         response.send('server error');
     }
-
 })
 
 
