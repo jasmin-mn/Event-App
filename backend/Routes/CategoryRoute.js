@@ -4,6 +4,7 @@ const Category = require('../Models/CategoryModel');
 
 const router = express.Router();
 
+
 // Adding new Categories
 router.post('/add', async (request, response) => {
 
@@ -18,6 +19,23 @@ router.post('/add', async (request, response) => {
     } catch (err) {
         console.log(err);
         response.send('server error');
+    }
+});
+
+
+// View all Categories
+router.get('/view', async (request, response) => {
+
+    try {
+        const category = await Category.find(request.id);
+        if (!category) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.json(category)
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+
     }
 });
 
