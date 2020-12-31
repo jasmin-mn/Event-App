@@ -10,7 +10,7 @@ router.post('/', async (request, response) => {
 
     const { name, email, Phone, Date, subject, message } = request.body;
 
-    const NewMessage = new Contact({ // Saving the received Email in the Database
+    const NewMessage = new Contact({ // Saving the received E-Mail in the Database
         name, email, Phone, Date, subject, message
     });
     await NewMessage.save();
