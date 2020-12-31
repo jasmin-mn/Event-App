@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import logo from '../Images/logo.png'
+import headerBg from '../Images/binary.jpg'
 
 
 export default function Nav() {
@@ -8,10 +9,10 @@ export default function Nav() {
     return (
         <div id='header'>
 
-            <div>
+            <div id='nav'>
                 <img id="logo" src={logo} alt={"logo"} />
 
-                <ul className='nav'>
+                <ul className='nav_list'>
                     <li>
                         <Link to={'/'}>Home</Link>
                     </li>
@@ -31,9 +32,9 @@ export default function Nav() {
 
             </div>
 
-            <div>
+            <div id='header_bg'>
                 <p>Enjoy fun Coding events, learning workshops classes from home</p>
-                <button>Join us</button>
+                <button className='btn'>Join us</button>
             </div>
         </div>
     )
