@@ -33,8 +33,10 @@ export default function Nav() {
             </div>
 
             <div id='header_bg'>
-                <p>Enjoy fun Coding events, learning workshops classes from home</p>
-                <button className='btn'>Join us</button>
+                <div className='header_text'>
+                    <p>Enjoy fun Coding events, learning workshops classes from home</p>
+                    <button className='btn'>Join us</button>
+                </div>
             </div>
         </div>
     )
