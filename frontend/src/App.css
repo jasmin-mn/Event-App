@@ -1,0 +1,75 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+/* Start Header */
+#nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  background-color: #87a714fa;
+}
+
+.nav_list {
+  list-style-type: none;
+  display: flex;
+  /* border: 1px solid red; */
+}
+
+.nav_list li a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px;
+  /* border: 1px solid red; */
+  height: 50px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: large;
+}
+
+.nav_list li a:hover {
+  border-bottom: 2px solid #fff;
+  color: #fff;
+}
+
+#header_bg {
+  background-image: url(./Images/binary.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  height: 350px;
+}
+
+#header_bg p {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  border: 1px solid red;
+  color: #fff;
+  font-size: 40px;
+  width: 30%;
+  margin: 0;
+  padding: 30px;
+}
+
+.btn {
+  height: 50px;
+  background-color: orange;
+  color: rgb(2, 0, 0);
+  font-size: 25px;
+  text-align: center;
+  padding: 0px 30px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: #fff;
+  font-size: 25px;
+  margin: 0;
+}
