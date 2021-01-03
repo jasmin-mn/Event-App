@@ -18,7 +18,7 @@ export default function Nav() {
                     </li>
 
                     <li>
-                        <Link to={'/contact'}>Contact</Link>
+                        <Link to={'/contact'}>About us</Link>
                     </li>
 
                     <li>
@@ -26,6 +26,10 @@ export default function Nav() {
                     </li>
                     <li>
                         <Link to={'/signup'}>Sign up</Link>
+                    </li>
+                    
+                    <li>
+                        <Link to={'/contact'}>Contact us</Link>
                     </li>
 
                 </ul>
