@@ -20,7 +20,8 @@ app.use(express.json())
 app.use('/contact', require('./Routes/ContactRoute'));
 app.use('/category', require('./Routes/CategoryRoute'));
 app.use('/user', require('./Routes/UserRoute'));
-app.use('/event', require('./Routes/EventRoute'))
+app.use('/event', require('./Routes/EventRoute'));
+app.use('/admin', require('./Routes/AdminRoute'))
 
 
 
