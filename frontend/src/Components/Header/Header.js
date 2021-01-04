@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import logo from '../Images/logo.png'
-
+import logo from '../Images/logo.png';
+import styles from './Header.module.css';
 
 export default function Header() {
 
     return (
-        <div id='header'>
+        <div className={styles.header}>
 
-            <div id='nav'>
+            <div className={styles.nav}>
                 <img id="logo" src={logo} alt={"logo"} />
 
-                <ul className='nav_list'>
+                <ul className={styles.nav_list}>
                     <li>
                         <Link to={'/'}>Home</Link>
                     </li>
@@ -26,7 +26,7 @@ export default function Header() {
                     <li>
                         <Link to={'/signup'}>Sign up</Link>
                     </li>
-                    
+
                     <li>
                         <Link to={'/contact'}>Contact us</Link>
                     </li>
