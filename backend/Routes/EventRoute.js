@@ -7,13 +7,18 @@ const router = express.Router();
 
 router.post('/sendData',authenticate, async (request, response) => {
 
-    const {group_name,group_admin,location,member,description,dateEventstarted } = request.body;
-    const event = new Events({
-        group_name,group_admin,description,location,member,dateEventstarted,user_id:request.id
-    });
-    await event.save();
+    try {
+            const {group_name,group_admin,location,member,description,dateEventstarted , category_id} = request.body;
+            const event = new Events({
+            group_name,group_admin,description,location,member,dateEventstarted,user_id:request.id , category_id
+        });
+        await event.save();
 
     response.send('you have created your Event ')
+        
+    } catch (error) {
+        response.send(error)
+    }
 });
 
 
