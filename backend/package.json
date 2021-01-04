@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "authenticate": "^0.1.5",
@@ -24,5 +23,8 @@
     "dev": "concurrently \"npm run server\"  \" npm run frontend\" "
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
 }
