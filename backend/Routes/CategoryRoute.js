@@ -31,7 +31,7 @@ router.post('/add', authenticate, restrictTo('admin'), async (request, response)
 router.get('/view', authenticate, restrictTo('admin'), async (request, response) => {
 
     try {
-        const category = await Category.find(request.id);
+        const category = await Category.find(request.params.id);
         if (!category) {
             return response.status(500).send({ msg: 'Server error' })
         }
