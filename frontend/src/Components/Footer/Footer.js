@@ -1,10 +1,11 @@
 import React from 'react'
+import styles from './Footer.module.css';
 
 
 export default function Footer() {
 
     return (
-        <div id='footer'>
+        <div className={styles.footer}>
             <p>footer</p>
         </div>
     )
