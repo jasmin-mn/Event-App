@@ -11,6 +11,11 @@ const EventSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Category'
     },
+
+    user_id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     description:{type:String},
     dateEventcreated:{type:Date,default:Date.now},
     location:{type:String},
