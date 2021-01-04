@@ -1,18 +1,20 @@
 
 const express = require('express');
 const Category = require('../Models/CategoryModel');
+const authenticate = require("../middleware/authenticate")
+const restrictTo = require('../middleware/restrictTo');
 
 const router = express.Router();
 
 
 
 // Adding new Categories
-router.post('/add', async (request, response) => {
+router.post('/add', authenticate, restrictTo('admin'), async (request, response) => {
 
     try {
-        const { name, description } = request.body;
+        const { name, photo, description } = request.body;
         const category = new Category({
-            name, description
+            name, photo, description
         });
         await category.save();
 
@@ -26,14 +28,14 @@ router.post('/add', async (request, response) => {
 
 
 // View all Categories
-router.get('/view', async (request, response) => {
+router.get('/view', authenticate, restrictTo('admin'), async (request, response) => {
 
     try {
         const category = await Category.find(request.id);
         if (!category) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        response.json(category)
+        response.send(category)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
@@ -44,12 +46,12 @@ router.get('/view', async (request, response) => {
 
 
 // Updating Categories
-router.put('/edit/:id', async (request, response) => {
+router.put('/edit/:id', authenticate, restrictTo('admin'), async (request, response) => {
 
-    const { name, description } = request.body;
+    const { name, photo, description } = request.body;
     const category = await Category.findByIdAndUpdate(
         { _id: (request.params.id) },
-        { $set: { name, description } }
+        { $set: { name, photo, description } }
     );
 
     if (category) {
@@ -63,7 +65,7 @@ router.put('/edit/:id', async (request, response) => {
 
 
 // Deleting Categories
-router.delete('/delete/:id', async (request, response) => {
+router.delete('/delete/:id', authenticate, restrictTo('admin'), async (request, response) => {
 
     const category = await Category.findByIdAndDelete({ _id: (request.params.id) });
 
