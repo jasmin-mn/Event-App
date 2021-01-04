@@ -5,6 +5,7 @@ const Category = require('../Models/CategoryModel');
 const router = express.Router();
 
 
+
 // Adding new Categories
 router.post('/add', async (request, response) => {
 
@@ -23,6 +24,7 @@ router.post('/add', async (request, response) => {
 });
 
 
+
 // View all Categories
 router.get('/view', async (request, response) => {
 
@@ -38,6 +40,7 @@ router.get('/view', async (request, response) => {
 
     }
 });
+
 
 
 // Updating Categories
