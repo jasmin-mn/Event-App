@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import logo from '../Images/logo.png';
+import logo from '../../Images/logo.png';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -35,10 +35,10 @@ export default function Header() {
 
             </div>
 
-            <div id='header_bg'>
-                <div className='header_text'>
+            <div id={styles.header_bg}>
+                <div className={styles.header_text}>
                     <p>Enjoy fun Coding events, learning workshops classes from home</p>
-                    <button className='btn'>Join us</button>
+                    <button className={styles.btn}>Join us</button>
                 </div>
             </div>
         </div>
