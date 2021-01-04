@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import logo from '../Images/logo.png'
-import headerBg from '../Images/binary.jpg'
 
 
-export default function Nav() {
+export default function Header() {
 
     return (
         <div id='header'>
