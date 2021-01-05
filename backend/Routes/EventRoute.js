@@ -103,5 +103,22 @@ router.get('/viewByCity', async (request, response) => {
 });
 
 
+// View all Events by Category
+router.get('/viewByCategory', async (request, response) => {
+
+    try {
+        const events = await Events.find({ "category_id": request.body.category_id });
+        if (!events) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.send(events)
+
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+
+    }
+});
+
 
 module.exports = router
