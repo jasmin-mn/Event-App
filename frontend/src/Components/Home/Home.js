@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useState ,useEffect } from 'react'
 import styles from './Home.module.css';
+import axios from "axios";
 
 
 function Home() {
+
+    const [events, setEvents] = useState();
+
+    const getEvents = async()=> {
+        try {
+            const result = await axios.get('/event/viewAll');
+            console.log(result.data)
+        } catch (error) {
+            console.log(error);
+        }
+       
+    }
+    useEffect(()=>{
+        getEvents()
+    },[])
+
     return (
         <div className={styles.main}>
 
