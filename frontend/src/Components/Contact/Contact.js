@@ -1,12 +1,14 @@
-import React from 'react'
-
+import React, { Component } from 'react';
+import axios from 'axios';
 import styles from './Contact.module.css';
 
-export default function Header() {
+
+export default function Contact() {
 
     return (
-        <div className={styles.contact}>
+        <form className={styles.contact}>
 
-        </div>
+
+        </form>
     )
 }
