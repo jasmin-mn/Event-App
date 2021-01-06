@@ -51,7 +51,7 @@
 #header_bg p {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: #fff;
-  font-size: 50px;
+  font-size: 35px;
   margin: 0;
 }
 
@@ -71,4 +71,16 @@
   color: #fff;
   font-size: 25px;
   margin: 0;
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    #header_bg p {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  #header_bg p {
+    font-size: 20px;
+  }
 }

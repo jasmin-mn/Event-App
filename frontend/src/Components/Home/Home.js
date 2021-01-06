@@ -6,6 +6,9 @@ import axios from "axios";
 function Home() {
 
     const [events, setEvents] = useState();
+    const [eventsByCity, setEventsByCity] = useState();
+    const [eventsByCategiry, setEventsByCategiry] = useState();
+
 
     // get all Events
     const getAllEvents = async () => {
@@ -13,13 +16,33 @@ function Home() {
             const result = await axios.get('/event/viewAll');
             console.log('All Events:')
             console.log(result.data)
+
+            if (result.data !== 0) {
+                let myEvents = result.data.map((event) => {
+                    console.log(event);
+                    return (
+                        <dev className={styles.events_container}>
+
+                            <div className={styles.events_all}>
+                                <img className={styles.events_bg} src={event.event_photo} alt="" />
+                                <p>{event.dateEventstarted}</p>
+                                <p>{event.group_name}, {event.category_id[0]}</p>
+                            </div>
+                        </dev>
+                    )
+                })
+                setEvents(myEvents)
+                
+            }
+
         } catch (error) {
             console.log(error);
         }
 
     }
     useEffect(() => {
-        getAllEvents()
+        getAllEvents();
+       
     }, []);
 
 
@@ -46,6 +69,7 @@ function Home() {
             const result = await axios.get('/event/viewByCategory');
             console.log('Events by Category:')
             console.log(result.data)
+
         } catch (error) {
             console.log(error);
         }
@@ -66,7 +90,7 @@ function Home() {
                 </div>
 
                 <div className={styles.upcoming_envents_body}>
-
+                     {events}
                 </div>
             </div>
 
