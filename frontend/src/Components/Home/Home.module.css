@@ -1,0 +1,16 @@
+.main {
+  border: 1px solid red;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.upcoming_envents_head,
+.envents_by_city_head,
+.envents_by_Category_head {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+
+  border: 1px solid green;
+}

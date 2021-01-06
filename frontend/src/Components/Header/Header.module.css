@@ -23,7 +23,7 @@
   height: 50px;
   text-decoration: none;
   color: rgb(0, 0, 0);
-  font-size: x-large;
+  font-size: large;
 }
 
 .nav_list li a:hover {
@@ -41,7 +41,7 @@
 }
 
 .header_text {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 40%;
   position: absolute;
   top: 50px;
