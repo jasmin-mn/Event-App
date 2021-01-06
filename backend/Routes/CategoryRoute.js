@@ -13,6 +13,12 @@ router.post('/add', authenticate, restrictTo('admin'), async (request, response)
 
     try {
         const { name, photo, description } = request.body;
+
+        let data = await Category.findOne({ name })
+        if(data){
+            return response.status(400).json({msg: "Category already exist"})
+        }
+
         const category = new Category({
             name, photo, description
         });
