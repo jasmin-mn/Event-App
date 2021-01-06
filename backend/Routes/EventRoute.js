@@ -1,7 +1,7 @@
 
 const express = require('express');
 const Events = require('../Models/EventModel');
-const authenticate = require('../middleware/authenticate')
+const authenticate=require('../middleware/authenticate')
 const router = express.Router();
 
 
@@ -24,7 +24,7 @@ router.post('/sendData', authenticate, async (request, response) => {
 });
 
 
-router.post('/delete', authenticate, async (req, res) => {
+router.delete('/delete', authenticate, async (req, res) => {
     // Make sure user own the event 
     try {
         const event = await Events.findById(req.body.id);
@@ -123,4 +123,5 @@ router.get('/viewByCategory', async (request, response) => {
 });
 
 
-module.exports = router
+
+module.exports=router
