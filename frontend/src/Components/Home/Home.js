@@ -7,7 +7,7 @@ function Home() {
 
     const [events, setEvents] = useState();
     const [eventsByCity, setEventsByCity] = useState();
-    const [eventsByCategiry, setEventsByCategiry] = useState();
+    const [eventsByCategiry, setEventsByCategory] = useState();
 
 
     // get all Events
@@ -32,17 +32,13 @@ function Home() {
                     )
                 })
                 setEvents(myEvents)
-                
             }
-
         } catch (error) {
             console.log(error);
         }
-
     }
     useEffect(() => {
         getAllEvents();
-       
     }, []);
 
 
@@ -52,14 +48,28 @@ function Home() {
             const result = await axios.get('/event/viewByCity');
             console.log('Events by Location/City:')
             console.log(result.data)
+
+            if (result.data !== 0) {
+                let myEvents = result.data.map((event) => {
+                    console.log(event);
+                    return (
+                        <dev className={styles.events_container}>
+
+                            <div className={styles.events_by_city}>
+                                <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
+                                <p>{event.location}</p>
+                            </div>
+                        </dev>
+                    )
+                })
+                setEventsByCity(myEvents)
+            }
         } catch (error) {
             console.log(error);
         }
-
     }
     useEffect(() => {
         getAEventsByCity()
-
     }, []);
 
 
@@ -69,16 +79,29 @@ function Home() {
             const result = await axios.get('/event/viewByCategory');
             console.log('Events by Category:')
             console.log(result.data)
+            if (result.data !== 0) {
+                let myEvents = result.data.map((event) => {
+                    console.log(event);
+                    return (
+                        <dev className={styles.events_container}>
 
+                            <div className={styles.events_by_category}>
+                                <img className={styles.events_by_category_bg} src={event.event_photo} alt="" />
+                                <p>{event.category_id[0]}</p>
+                            </div>
+                        </dev>
+                    )
+                })
+                setEventsByCategory(myEvents)
+            }
         } catch (error) {
             console.log(error);
         }
-
     }
     useEffect(() => {
         getAEventsByCategory()
-
     }, []);
+
 
     return (
         <div className={styles.main}>
@@ -90,7 +113,7 @@ function Home() {
                 </div>
 
                 <div className={styles.upcoming_envents_body}>
-                     {events}
+                    {events}
                 </div>
             </div>
 
@@ -102,7 +125,7 @@ function Home() {
                 </div>
 
                 <div className={styles.envents_by_citys_body}>
-
+                    {eventsByCity}
                 </div>
             </div>
 
@@ -114,7 +137,7 @@ function Home() {
                 </div>
 
                 <div className={styles.envents_by_Category_body}>
-
+                    {eventsByCategiry}
                 </div>
             </div>
 
