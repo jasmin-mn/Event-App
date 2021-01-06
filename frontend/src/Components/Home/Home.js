@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Home.module.css';
 import axios from "axios";
 
@@ -7,18 +7,54 @@ function Home() {
 
     const [events, setEvents] = useState();
 
-    const getEvents = async()=> {
+    // get all Events
+    const getAllEvents = async () => {
         try {
             const result = await axios.get('/event/viewAll');
+            console.log('All Events:')
             console.log(result.data)
         } catch (error) {
             console.log(error);
         }
-       
+
     }
-    useEffect(()=>{
-        getEvents()
-    },[])
+    useEffect(() => {
+        getAllEvents()
+    }, []);
+
+
+    // filter all Events by Location/City
+    const getAEventsByCity = async () => {
+        try {
+            const result = await axios.get('/event/viewByCity');
+            console.log('Events by Location/City:')
+            console.log(result.data)
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    useEffect(() => {
+        getAEventsByCity()
+
+    }, []);
+
+
+    // filter all Events by Category
+    const getAEventsByCategory = async () => {
+        try {
+            const result = await axios.get('/event/viewByCategory');
+            console.log('Events by Category:')
+            console.log(result.data)
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    useEffect(() => {
+        getAEventsByCategory()
+
+    }, []);
 
     return (
         <div className={styles.main}>
