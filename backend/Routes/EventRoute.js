@@ -52,11 +52,11 @@ router.post('/update', authenticate, (req, res) => {
 
     Events.findByIdAndUpdate(req.body.id, {
 
-        event_name: req.body.group_name,
-        event_admin: req.body.group_admin,
+        event_name: req.body.event_name,
+        event_admin: req.body.event_admin,
         description: req.body.description,
         location: req.body.location,
-        languag: req.body.languag,
+        language: req.body.language,
         member: req.body.member,
         dateEventstarted: req.body.dateEventstarted
 
