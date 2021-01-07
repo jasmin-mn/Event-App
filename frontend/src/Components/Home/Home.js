@@ -26,7 +26,7 @@ function Home() {
                             <div className={styles.events_all}>
                                 <img className={styles.events_bg} src={event.event_photo} alt="" />
                                 <p>{event.dateEventstarted}</p>
-                                <p>{event.group_name}, {event.category_id[0]}</p>
+                                <p>{event.event_name}, {event.category_id[0]}</p>
                             </div>
                         </dev>
                     )
