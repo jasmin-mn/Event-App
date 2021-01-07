@@ -19,16 +19,18 @@ function Home() {
 
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
-                    console.log(event);
+                    // console.log(event);
                     return (
-                        <dev className={styles.events_container}>
+                        <div className={styles.events_container}>
 
                             <div className={styles.events_all}>
                                 <img className={styles.events_bg} src={event.event_photo} alt="" />
                                 <p>{event.dateEventstarted}</p>
-                                <p>{event.event_name}, {event.category_id[0]}</p>
+
+                                <p>{event.event_name},
+                                {event.category_id.map((category) => <>{category.name}</>)}</p>
                             </div>
-                        </dev>
+                        </div>
                     )
                 })
                 setEvents(myEvents)
@@ -53,13 +55,13 @@ function Home() {
                 let myEvents = result.data.map((event) => {
                     console.log(event);
                     return (
-                        <dev className={styles.events_container}>
+                        <div className={styles.events_container}>
 
                             <div className={styles.events_by_city}>
                                 <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
                                 <p>{event.location}</p>
                             </div>
-                        </dev>
+                        </div>
                     )
                 })
                 setEventsByCity(myEvents)
@@ -83,13 +85,13 @@ function Home() {
                 let myEvents = result.data.map((event) => {
                     console.log(event);
                     return (
-                        <dev className={styles.events_container}>
+                        <div className={styles.events_container}>
 
                             <div className={styles.events_by_category}>
                                 <img className={styles.events_by_category_bg} src={event.event_photo} alt="" />
                                 <p>{event.category_id[0]}</p>
                             </div>
-                        </dev>
+                        </div>
                     )
                 })
                 setEventsByCategory(myEvents)

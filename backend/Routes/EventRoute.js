@@ -1,6 +1,7 @@
 
 const express = require('express');
 const Events = require('../Models/EventModel');
+const Category = require('../Models/CategoryModel');
 const authenticate = require('../middleware/authenticate')
 const router = express.Router();
 
@@ -8,11 +9,11 @@ const router = express.Router();
 router.post('/sendData', authenticate, async (request, response) => {
 
     try {
-        let { event_name, event_admin, location, language, member, description, dateEventstarted, category_id } = request.body;
+        let { event_name, event_admin, event_photo, location, language, member, description, dateEventstarted, category_id } = request.body;
         location = location.charAt(0).toUpperCase() + location.slice(1);
 
         const event = new Events({
-            event_name, event_admin, description, location, language, member, dateEventstarted, user_id: request.id, category_id
+            event_name, event_admin, event_photo, description, location, language, member, dateEventstarted, user_id: request.id, category_id
         });
         await event.save();
 
@@ -54,6 +55,7 @@ router.post('/update', authenticate, (req, res) => {
 
         event_name: req.body.event_name,
         event_admin: req.body.event_admin,
+        event_photo:req.body.event_photo,
         description: req.body.description,
         location: req.body.location,
         language: req.body.language,
@@ -75,7 +77,10 @@ router.post('/update', authenticate, (req, res) => {
 router.get('/viewAll', async (request, response) => {
 
     try {
-        const events = await Events.find(request.id);
+      
+        
+        const events = await Events.find().populate('category_id');
+
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
