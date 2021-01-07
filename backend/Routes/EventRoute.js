@@ -1,20 +1,20 @@
 
 const express = require('express');
 const Events = require('../Models/EventModel');
-const authenticate=require('../middleware/authenticate')
+const authenticate = require('../middleware/authenticate')
 const router = express.Router();
 
 
 router.post('/sendData', authenticate, async (request, response) => {
 
     try {
-        let { group_name, group_admin, location, member, description, dateEventstarted, category_id } = request.body;
+        let { event_name, event_admin, location, language, member, description, dateEventstarted, category_id } = request.body;
         location = location.charAt(0).toUpperCase() + location.slice(1);
 
         const event = new Events({
-            group_name, group_admin, description, location, member, dateEventstarted, user_id: request.id, category_id
+            event_name, event_admin, description, location, language, member, dateEventstarted, user_id: request.id, category_id
         });
-        // await event.save();
+        await event.save();
 
         response.send('you have created your Event ')
 
@@ -52,10 +52,11 @@ router.post('/update', authenticate, (req, res) => {
 
     Events.findByIdAndUpdate(req.body.id, {
 
-        group_name: req.body.group_name,
-        group_admin: req.body.group_admin,
+        event_name: req.body.group_name,
+        event_admin: req.body.group_admin,
         description: req.body.description,
         location: req.body.location,
+        languag: req.body.languag,
         member: req.body.member,
         dateEventstarted: req.body.dateEventstarted
 
@@ -74,7 +75,7 @@ router.post('/update', authenticate, (req, res) => {
 router.get('/viewAll', async (request, response) => {
 
     try {
-        const events = await Events.find(request.params.id);
+        const events = await Events.find(request.id);
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
@@ -124,4 +125,4 @@ router.get('/viewByCategory', async (request, response) => {
 
 
 
-module.exports=router
+module.exports = router
