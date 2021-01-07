@@ -1,6 +1,7 @@
 
 const express = require('express');
 const Events = require('../Models/EventModel');
+
 const authenticate=require('../middleware/authenticate')
 const restrictTo = require('../middleware/restrictTo');
 const router = express.Router();
@@ -8,19 +9,25 @@ const router = express.Router();
 
 router.post('/sendData',authenticate,restrictTo('admin','superuser'), async (request, response) => {
 
-    try {
-            const {group_name,group_admin,location,member,description,dateEventstarted , category_id} = request.body;
-            const event = new Events({
-            group_name,group_admin,description,location,member,dateEventstarted,user_id:request.id , category_id
-        });
-        await event.save();
 
-    response.send('you have created your Event ')
-        
+
+
+    try {
+        let { group_name, group_admin, location, member, description, dateEventstarted, category_id } = request.body;
+        location = location.charAt(0).toUpperCase() + location.slice(1);
+
+        const event = new Events({
+            group_name, group_admin, description, location, member, dateEventstarted, user_id: request.id, category_id
+        });
+        // await event.save();
+
+        response.send('you have created your Event ')
+
     } catch (error) {
         response.send(error)
     }
 });
+
 
 
 router.delete('/delete',authenticate, async (req,res)=>{
@@ -39,36 +46,90 @@ router.delete('/delete',authenticate, async (req,res)=>{
           await Events.findByIdAndRemove(req.body.id)   
        
 
+
         res.send("deleted")
     }
-    
-    catch(err){
+
+    catch (err) {
         console.log(err);
     }
 })
+
 
 router.post('/update',authenticate,restrictTo('admin','superuser'),(req,res)=>{
 
-    Events.findByIdAndUpdate(req.body.id,{
 
-        group_name:req.body.group_name,
-        group_admin:req.body.group_admin,
-        description:req.body.description,
-        location:req.body.location,
-        member:req.body.member,
-        dateEventstarted:req.body.dateEventstarted
+    Events.findByIdAndUpdate(req.body.id, {
+
+        group_name: req.body.group_name,
+        group_admin: req.body.group_admin,
+        description: req.body.description,
+        location: req.body.location,
+        member: req.body.member,
+        dateEventstarted: req.body.dateEventstarted
 
 
-    }).then(data=>{
+    }).then(data => {
         console.log(data);
         res.send("updated")
     })
-    .catch(err=>{
-        console.log(err);
-    })
+        .catch(err => {
+            console.log(err);
+        })
 })
 
 
+// View all Events
+router.get('/viewAll', async (request, response) => {
+
+    try {
+        const events = await Events.find(request.params.id);
+        if (!events) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.send(events)
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+
+    }
+});
 
 
-module.exports=router
+// View all Events by Location
+router.get('/viewByCity', async (request, response) => {
+
+    try {
+        const events = await Events.find({ "location": request.body.location });
+        if (!events) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.send(events)
+
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+
+    }
+});
+
+
+// View all Events by Category
+router.get('/viewByCategory', async (request, response) => {
+
+    try {
+        const events = await Events.find({ "category_id": request.body.category_id });
+        if (!events) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.send(events)
+
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+
+    }
+});
+
+
+module.exports = router

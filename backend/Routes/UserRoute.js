@@ -103,7 +103,7 @@ router.post("/login", async(request,response)=>{
 // Profile
 
 router.get("/profile" ,authenticate , async(request, response)=>{
-    const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    // const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
     console.log("this is test request.id", request.id);
     try{
         const user = await User.findById(request.id).select('-password')
@@ -114,14 +114,37 @@ router.get("/profile" ,authenticate , async(request, response)=>{
     } catch(error){
         response.status(500).json({msg:'Server error'})
     }
-    // const{ userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
-    // const newUser = new User({
-    //     userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others
+    
+})
 
-    // })
+// Delete Profile
+// router.delete('/delete/:id', authenticate, async(request, response)=>{
+//    const user = await User.findByIdAndDelete({_id:(request.params.id)})
+//    if(user){
+//        response.send('Successfully Deleted')
+//    } else{
+//        response.send('Server Error')
+//    }
+// })
 
-    // await newUser.save()
-    // response.send("Profile Updated")
+// Edit Profile
+
+router.put('/edit/:id', authenticate, async(request,response)=>{
+    console.log("the id of the current logged in user is : ",request.id);
+    // MAke sure that the user own the profile    
+    if(request.id !== request.params.id){
+        return response.status(401).json({  msg : "Not authorized" })
+    }
+    const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    const user = await User.findByIdAndUpdate(
+        {_id: (request.params.id)},
+        {$set: { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others }}
+    )
+    if(user){
+        response.send(`Profile has been updated`)
+    } else{
+        response.send('Server Error')
+    }
 })
 
 // Get user/adminboard

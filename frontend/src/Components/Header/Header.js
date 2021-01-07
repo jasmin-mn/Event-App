@@ -1,24 +1,23 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import logo from '../Images/logo.png'
-import headerBg from '../Images/binary.jpg'
+import logo from '../../Images/logo.png';
+import styles from './Header.module.css';
 
-
-export default function Nav() {
+export default function Header() {
 
     return (
-        <div id='header'>
+        <div className={styles.header}>
 
-            <div id='nav'>
+            <div className={styles.nav}>
                 <img id="logo" src={logo} alt={"logo"} />
 
-                <ul className='nav_list'>
+                <ul className={styles.nav_list}>
                     <li>
                         <Link to={'/'}>Home</Link>
                     </li>
 
                     <li>
-                        <Link to={'/contact'}>Contact</Link>
+                        <Link to={'/contact'}>About us</Link>
                     </li>
 
                     <li>
@@ -28,14 +27,18 @@ export default function Nav() {
                         <Link to={'/signup'}>Sign up</Link>
                     </li>
 
+                    <li>
+                        <Link to={'/contact'}>Contact us</Link>
+                    </li>
+
                 </ul>
 
             </div>
 
-            <div id='header_bg'>
-                <div className='header_text'>
+            <div id={styles.header_bg}>
+                <div className={styles.header_text}>
                     <p>Enjoy fun Coding events, learning workshops classes from home</p>
-                    <button className='btn'>Join us</button>
+                    <button className={styles.btn}>Join us</button>
                 </div>
             </div>
         </div>

@@ -12,12 +12,12 @@
     "express": "^4.17.1",
     "i": "^0.3.6",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.8",
+    "mongoose": "^5.11.9",
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "start": "node server",
+    "start": "npm server",
     "server": "nodemon server",
     "frontend": "npm start --prefix ../frontend",
     "dev": "concurrently \"npm run server\"  \" npm run frontend\" "
