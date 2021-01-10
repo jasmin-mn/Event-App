@@ -21,7 +21,7 @@
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   /* border: 1px solid blue; */
 }
 
@@ -29,5 +29,14 @@
   border: 1px solid rosybrown;
   margin: 10px;
   height: 300px;
-  width: 300px;
+  width: 344px;
+}
+
+.events_container p {
+  margin: 0;
+  padding: 0;
+}
+.events_bg {
+  height: 250px;
+  width: 344px;
 }

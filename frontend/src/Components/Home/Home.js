@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Search from '../Search/Search';
 import styles from './Home.module.css';
 import axios from "axios";
 
@@ -83,13 +84,13 @@ function Home() {
             console.log(result.data)
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
-                    console.log(event);
+                    // console.log(event);
                     return (
                         <div className={styles.events_container}>
 
                             <div className={styles.events_by_category}>
-                                <img className={styles.events_by_category_bg} src={event.event_photo} alt="" />
-                                <p>{event.category_id[0]}</p>
+                                <img className={styles.events_by_category_bg} src={event.category_id.map((category) => <>{category.name}</>)} alt="" />
+                                <p>{event.category_id.map((category) => <>{category.name}</>)}</p>
                             </div>
                         </div>
                     )
@@ -106,6 +107,8 @@ function Home() {
 
 
     return (
+
+
         <div className={styles.main}>
 
             <div className={styles.upcoming_envents}>

@@ -103,7 +103,6 @@ router.get('/viewByCity', async (request, response) => {
         }
         response.send(events)
 
-
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
 
@@ -115,7 +114,7 @@ router.get('/viewByCity', async (request, response) => {
 router.get('/viewByCategory', async (request, response) => {
 
     try {
-        const events = await Events.find({ "category_id": request.body.category_id });
+        const events = await Events.find().populate('category_id');
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
