@@ -1,30 +1,33 @@
 const express = require('express');
 const Contact = require('../Models/ContactModel');
 const nodemailer = require('nodemailer');
-// const sendEmail = require('../Utilities/sendEmail')
+const sendEmail = require('../Utilities/sendEmail')
 
 const router = express.Router();
 
 
 router.post('/', async (request, response) => {
 
-    const { name, email, Phone, Date, subject, message } = request.body;
+    const { name, email, phone, date, subject, message } = request.body;
 
     const NewMessage = new Contact({ // Saving the received E-Mail in the Database
-        name, email, Phone, Date, subject, message
+        name, email, phone, date, subject, message
     });
     await NewMessage.save();
 
     response.send(`Thank you ${name} for contacting us, your E-Mail has been sent !!`)
+
+    const today = Date.now();
+    let todayDate = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(today);
 
     const output = `
     <p>you have a new message</p>
     <ul>
         <li> From: ${name} </li>
         <li> Email: ${email} </li>
-        <li> Phone: ${Phone} </li>
-        <li> Date: ${Date} </li>
-        <li> subject: ${subject} </li>
+        <li> Phone: ${phone} </li>
+        <li> Date: ${todayDate} </li>
+        <li> Subject: ${subject} </li>
     </ul>
     <p> Message: ${message} </p>
 
@@ -46,7 +49,8 @@ router.post('/', async (request, response) => {
         from: email,
         to: process.env.CONTACT_EMAIL,
         subject,
-        Phone,
+        date,
+        phone,
         message,
         html: output
     }

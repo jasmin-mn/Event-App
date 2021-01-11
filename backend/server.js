@@ -1,15 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const User = require("./Models/UserModel")
+const Event = require("./Models/EventModel")
+const Register = require("./Models/UserModel")
 const dotenv = require('dotenv');
 
 dotenv.config();
-
-const User = require("./Models/UserModel")
-
-const Event = require("./Models/EventModel")
-const Register = require("./Models/UserModel")
-
 
 app.get('/', (request, response) => {
     response.send({ msg: 'welcome to Event Manager App' })

@@ -1,12 +1,13 @@
-
 const mongoose = require("mongoose");
-
 
 
 const EventSchema = new mongoose.Schema({
 
-    group_name: { type: String, required: true },
-    group_admin: { type: String, required: true },
+    event_name: { type: String, required: true },
+    event_photo: { type: String, default:'https://www.pexels.com/de-de/foto/hand-laptop-computer-gerat-574071/' },
+
+    event_admin: { type: String, required: true },
+
     category_id: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category'
@@ -16,14 +17,14 @@ const EventSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+
     description: { type: String },
-    dateEventcreated: { type: Date, default: Date.now },
+    dateEventcreated: { type: Date, default: Date.now() },
     location: { type: String },
-    event_photo: { type: String },
+    language: { type: String },
     member: { type: Number },
     eventtype: { type: String },
     dateEventstarted: { type: Date }
-
 
 })
 

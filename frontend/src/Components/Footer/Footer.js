@@ -6,7 +6,9 @@ export default function Footer() {
 
     return (
         <div className={styles.footer}>
-            <p>footer</p>
+            <p>&copy; 2021 EventsMGR Team</p>
         </div>
     )
 }
+
+

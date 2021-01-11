@@ -1,20 +1,30 @@
 
 const express = require('express');
 const Events = require('../Models/EventModel');
-const authenticate = require('../middleware/authenticate')
+
+
+const authenticate=require('../middleware/authenticate')
+const restrictTo = require('../middleware/restrictTo');
+
+const Category = require('../Models/CategoryModel');
+
+
 const router = express.Router();
 
 
-router.post('/sendData', authenticate, async (request, response) => {
+router.post('/sendData',authenticate,restrictTo('admin','superuser'), async (request, response) => {
+
+
+
 
     try {
-        let { group_name, group_admin, location, member, description, dateEventstarted, category_id } = request.body;
+        let { event_name, event_admin, event_photo, location, language, member, description, dateEventstarted, category_id } = request.body;
         location = location.charAt(0).toUpperCase() + location.slice(1);
 
         const event = new Events({
-            group_name, group_admin, description, location, member, dateEventstarted, user_id: request.id, category_id
+            event_name, event_admin, event_photo, description, location, language, member, dateEventstarted, user_id: request.id, category_id
         });
-        // await event.save();
+        await event.save();
 
         response.send('you have created your Event ')
 
@@ -24,20 +34,26 @@ router.post('/sendData', authenticate, async (request, response) => {
 });
 
 
-router.post('/delete', authenticate, async (req, res) => {
-    // Make sure user own the event 
+
+
+
+
+router.delete('/delete', authenticate, async (req, res) => {
+
+   
     try {
         const event = await Events.findById(req.body.id);
-        console.log('the user id : ', req.id);
-
-        if (!event) {
-            return res.status(404).json({ msg: ' event not found  ' })
-        }
-        console.log('user id is : ', event.user_id);
-        if (event.user_id.toString() !== req.id) {
-            return res.status(401).json({ msg: ' you are not authorized to delete ' })
-        }
-        await Events.findByIdAndRemove(req.body.id)
+        console.log('the user id : ',req.id);
+   
+    if(!event) {
+        return res.status(404).json({ msg : ' event not found  ' })  
+    }
+  console.log('user id is : ',event.user_id);
+     if(event.user_id.toString() !== req.id ) {
+         return res.status(401).json({ msg : ' you are not authorized to delete ' })
+     }
+          await Events.findByIdAndRemove(req.body.id)   
+       
 
 
         res.send("deleted")
@@ -48,14 +64,18 @@ router.post('/delete', authenticate, async (req, res) => {
     }
 })
 
-router.post('/update', authenticate, (req, res) => {
+
+router.post('/update',authenticate,restrictTo('admin','superuser'),(req,res)=>{
+
 
     Events.findByIdAndUpdate(req.body.id, {
 
-        group_name: req.body.group_name,
-        group_admin: req.body.group_admin,
+        event_name: req.body.event_name,
+        event_admin: req.body.event_admin,
+        event_photo:req.body.event_photo,
         description: req.body.description,
         location: req.body.location,
+        language: req.body.language,
         member: req.body.member,
         dateEventstarted: req.body.dateEventstarted
 
@@ -74,7 +94,10 @@ router.post('/update', authenticate, (req, res) => {
 router.get('/viewAll', async (request, response) => {
 
     try {
-        const events = await Events.find(request.params.id);
+      
+        
+        const events = await Events.find().populate('category_id');
+
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
@@ -97,7 +120,6 @@ router.get('/viewByCity', async (request, response) => {
         }
         response.send(events)
 
-
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
 
@@ -109,7 +131,7 @@ router.get('/viewByCity', async (request, response) => {
 router.get('/viewByCategory', async (request, response) => {
 
     try {
-        const events = await Events.find({ "category_id": request.body.category_id });
+        const events = await Events.find().populate('category_id');
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
@@ -121,6 +143,7 @@ router.get('/viewByCategory', async (request, response) => {
 
     }
 });
+
 
 
 module.exports = router
