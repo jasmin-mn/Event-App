@@ -21,7 +21,7 @@ const sendEmail = async (options) => {
         to: options.email,
         subject: options.subject,
         Phone: options.Phone,
-        message: options.message,
+        text: options.text,
         // html: output
     }
 

@@ -7,10 +7,11 @@ const User = require('../Models/UserModel');
 // const User = require('../Models/UserModel');
 const router = express.Router()
 const nodemailer = require('nodemailer');
-const sendEmail = require('../Utilities/sendEmail')
+const sendEmail = require('../Utilities/sendEmail');
+const { response } = require('express');
 
 //register
-router.post("/register", async(request,response)=>{
+router.post("/signup", async(request,response)=>{
     const {userName,firstName, lastName, email, password, gender} = request.body;
     try{
         let data = await User.findOne({ email })
@@ -162,11 +163,19 @@ router.get('/', authenticate, restrictTo('supervisor', 'admin'), async(request,r
     }
 })
 
+// Signout
+
+router.get('/signout', async(request,response)=>{
+    return request.body
+    
+
+})
+
 // Forgot password/reset password
 
-router.post('/forgotPassword', async (request, response)=>{
+router.get('/forgotPassword', async (request, response)=>{
     const {email} = request.body
-    const user = await User.findOne({email})
+    const user = await User.findOne({email: request.body.email})
     if(!user){
         return response.status(400).json({msg: 'User email is not exist'})
     }
@@ -177,25 +186,42 @@ router.post('/forgotPassword', async (request, response)=>{
     const token = jwt.sign(
         payload,
         process.env.RESETPASSWORD_SECRET,
-        {expiresIn: '60m'}
+        {expiresIn: '1m'}
     )
     console.log(token);
     user.passwordResetToken = token 
+    user.passwordChangedAt = Date.now() + 3600000 //(1 * 60 * 1000)
     user.save()
     const resetUrl = `${request.protocol}://${request.get('host')}/user/resetPassword/${token}`
     const message = `Forgot your password? Click on the link and submit your new password and password confirmation to ${resetUrl} \n \n if you did not reset your password. Kindly ignore this email`
 
     try {
         await sendEmail({
+            from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
             email: user.email,
             subject: 'Your password reset link is valid for 60 minutes',
-            text: message
+            text: message,
+            
         })
         response.status(200).json({msg: 'You have received email to change your password.'})
     } catch(error) {
 
+        console.log(error);
     }
 })
- 
+
+router.get('/resetPassword/:token', async(request,response)=>{
+    const token = request.params.token
+    
+    const user = await User.findOne({passwordResetToken: request.params.token, passwordChangedAt: {$gt : Date.now()}})
+    if(!user ){
+        return response.status(500).json({msg: 'Token is invalid or already expired'})
+    } else{
+        response.send(`You may reset your Password`)
+    } 
+
+})
+
+
 
 module.exports = router
