@@ -1,12 +1,21 @@
 
 const express = require('express');
 const Events = require('../Models/EventModel');
+
+
+const authenticate=require('../middleware/authenticate')
+const restrictTo = require('../middleware/restrictTo');
+
 const Category = require('../Models/CategoryModel');
-const authenticate = require('../middleware/authenticate')
+
+
 const router = express.Router();
 
 
-router.post('/sendData', authenticate, async (request, response) => {
+router.post('/sendData',authenticate,restrictTo('admin','superuser'), async (request, response) => {
+
+
+
 
     try {
         let { event_name, event_admin, event_photo, location, language, member, description, dateEventstarted, category_id } = request.body;
@@ -25,20 +34,26 @@ router.post('/sendData', authenticate, async (request, response) => {
 });
 
 
+
+
+
+
 router.delete('/delete', authenticate, async (req, res) => {
-    // Make sure user own the event 
+
+   
     try {
         const event = await Events.findById(req.body.id);
-        console.log('the user id : ', req.id);
-
-        if (!event) {
-            return res.status(404).json({ msg: ' event not found  ' })
-        }
-        console.log('user id is : ', event.user_id);
-        if (event.user_id.toString() !== req.id) {
-            return res.status(401).json({ msg: ' you are not authorized to delete ' })
-        }
-        await Events.findByIdAndRemove(req.body.id)
+        console.log('the user id : ',req.id);
+   
+    if(!event) {
+        return res.status(404).json({ msg : ' event not found  ' })  
+    }
+  console.log('user id is : ',event.user_id);
+     if(event.user_id.toString() !== req.id ) {
+         return res.status(401).json({ msg : ' you are not authorized to delete ' })
+     }
+          await Events.findByIdAndRemove(req.body.id)   
+       
 
 
         res.send("deleted")
@@ -49,7 +64,9 @@ router.delete('/delete', authenticate, async (req, res) => {
     }
 })
 
-router.post('/update', authenticate, (req, res) => {
+
+router.post('/update',authenticate,restrictTo('admin','superuser'),(req,res)=>{
+
 
     Events.findByIdAndUpdate(req.body.id, {
 
