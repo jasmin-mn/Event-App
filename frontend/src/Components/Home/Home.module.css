@@ -16,7 +16,9 @@
   border: 1px solid green;
 }
 
-.upcoming_envents_body {
+.upcoming_envents_body,
+.envents_by_citys_body,
+.envents_by_Category_body {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
