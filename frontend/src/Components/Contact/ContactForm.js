@@ -12,10 +12,14 @@ const ContactForm = () => {
         setStatus("Sending...");
 
         const { name, phone, email, subject, message } = e.target.elements;
+        const today = Date.now();
 
+        let date = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(today);
+        
         let details = {
             name: name.value,
             phone: phone.value,
+            date: date,
             email: email.value,
             subject: subject.value,
             message: message.value,
