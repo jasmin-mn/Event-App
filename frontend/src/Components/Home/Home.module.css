@@ -12,8 +12,18 @@
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  margin: 10px;
   border: 1px solid green;
+  margin: 20px 10px 0;
+  padding: 0;
+}
+
+.upcoming_envents_head h3,
+p,
+.envents_by_city_head h3,
+p,
+.envents_by_Category_head h3,
+p {
+  margin: 20px 0 0;
 }
 
 .upcoming_envents_body,
@@ -28,17 +38,23 @@
 }
 
 .events_container {
-  border: 1px solid rosybrown;
-  margin: 10px;
+
+  border: 1px solid rgb(163, 216, 248);
+  border-radius: 10px;
   height: 300px;
   width: 344px;
+  margin: 10px;
 }
 
 .events_container p {
+  text-align: left;
   margin: 0;
   padding: 0;
 }
+
 .events_bg {
+  border-radius: 10px;
+
   height: 250px;
   width: 344px;
 }
