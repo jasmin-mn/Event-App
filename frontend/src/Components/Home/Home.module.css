@@ -1,7 +1,8 @@
 .main {
   border: 1px solid red;
-  max-width: 80%;
+  max-width: 1100px;
   margin: 0 auto;
+  padding: 0;
 }
 
 .upcoming_envents_head,
@@ -11,6 +12,31 @@
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-
+  margin: 10px;
   border: 1px solid green;
+}
+
+.upcoming_envents_body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  /* border: 1px solid blue; */
+}
+
+.events_container {
+  border: 1px solid rosybrown;
+  margin: 10px;
+  height: 300px;
+  width: 344px;
+}
+
+.events_container p {
+  margin: 0;
+  padding: 0;
+}
+.events_bg {
+  height: 250px;
+  width: 344px;
 }
