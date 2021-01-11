@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const EventSchema = new mongoose.Schema({
 
     event_name: { type: String, required: true },
-    event_photo: { type: String, default:'https://www.pexels.com/de-de/foto/hand-laptop-computer-gerat-574071/' },
+    event_photo: { type: String, default:'https://www.pexels.com/de-de/foto/hand-laptop-computer-gerat-574071' },
 
     event_admin: { type: String, required: true },
 

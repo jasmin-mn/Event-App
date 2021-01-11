@@ -41,15 +41,29 @@ function Search() {
 
 
     return (
-        <div className={styles.upcoming_envents}>
+        <div className={styles.search}>
 
-            <div className={styles.upcoming_envents_body}>
-                {/* <h2> Upcoming Events</h2> */}
+            <p>Search for your next Event</p>
 
-                {events}
-            </div>
+            <form className={styles.search_form}>
+        
+                <input
+                    placeholder="Search for..."
+                // value={this.state.query}
+                // onChange={this.handleInputChange}
+                />
+                <input
+                    placeholder="Location..."
+                // value={this.state.query}
+                // onChange={this.handleInputChange}
+                />
+
+                <button className={styles.btn} type="submit">Search</button>
+
+            </form>
         </div>
-    )
+    );
+
 
 }
 

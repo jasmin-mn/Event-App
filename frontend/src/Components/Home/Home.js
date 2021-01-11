@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import Search from '../Search/Search';
+import Search from '../Search/Search';
 import styles from './Home.module.css';
 import axios from "axios";
 
@@ -21,6 +21,7 @@ function Home() {
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
                     // console.log(event);
+                    
                     return (
                         <div className={styles.events_container}>
 
@@ -111,9 +112,10 @@ function Home() {
 
         <div className={styles.main}>
 
+<Search/>
             <div className={styles.upcoming_envents}>
                 <div className={styles.upcoming_envents_head}>
-                    <h2> Upcoming Events</h2>
+                    <h3> Upcoming Events</h3>
                     <p>See all Events</p>
                 </div>
 
@@ -125,7 +127,7 @@ function Home() {
 
             <div className={styles.envents_by_city}>
                 <div className={styles.envents_by_city_head}>
-                    <h2> Events by City</h2>
+                    <h3> Events by City</h3>
                     <p>See all Events</p>
                 </div>
 
@@ -137,7 +139,7 @@ function Home() {
 
             <div className={styles.envents_by_Category}>
                 <div className={styles.envents_by_Category_head}>
-                    <h2> Events by Category</h2>
+                    <h3> Events by Category</h3>
                     <p>See all Events</p>
                 </div>
 
