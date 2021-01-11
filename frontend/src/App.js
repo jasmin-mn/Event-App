@@ -20,12 +20,10 @@ function App() {
 
       <Switch>
 
-
         <Route path='/' component={Home} exact />
         <Route path='/login' component={Login} exact />
         <Route path='/signup' component={Register} exact />
         <Route path='/contact' component={ContactForm} exact />
-
 
       </Switch>
 

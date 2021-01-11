@@ -3,7 +3,7 @@ const express = require('express');
 const Events = require('../Models/EventModel');
 
 
-const authenticate=require('../middleware/authenticate')
+const authenticate = require('../middleware/authenticate')
 const restrictTo = require('../middleware/restrictTo');
 
 const Category = require('../Models/CategoryModel');
@@ -12,7 +12,7 @@ const Category = require('../Models/CategoryModel');
 const router = express.Router();
 
 
-router.post('/sendData',authenticate,restrictTo('admin','superuser'), async (request, response) => {
+router.post('/sendData', authenticate, restrictTo('admin', 'superuser'), async (request, response) => {
 
 
 
@@ -40,20 +40,20 @@ router.post('/sendData',authenticate,restrictTo('admin','superuser'), async (req
 
 router.delete('/delete', authenticate, async (req, res) => {
 
-   
+
     try {
         const event = await Events.findById(req.body.id);
-        console.log('the user id : ',req.id);
-   
-    if(!event) {
-        return res.status(404).json({ msg : ' event not found  ' })  
-    }
-  console.log('user id is : ',event.user_id);
-     if(event.user_id.toString() !== req.id ) {
-         return res.status(401).json({ msg : ' you are not authorized to delete ' })
-     }
-          await Events.findByIdAndRemove(req.body.id)   
-       
+        console.log('the user id : ', req.id);
+
+        if (!event) {
+            return res.status(404).json({ msg: ' event not found  ' })
+        }
+        console.log('user id is : ', event.user_id);
+        if (event.user_id.toString() !== req.id) {
+            return res.status(401).json({ msg: ' you are not authorized to delete ' })
+        }
+        await Events.findByIdAndRemove(req.body.id)
+
 
 
         res.send("deleted")
@@ -65,14 +65,14 @@ router.delete('/delete', authenticate, async (req, res) => {
 })
 
 
-router.post('/update',authenticate,restrictTo('admin','superuser'),(req,res)=>{
+router.post('/update', authenticate, restrictTo('admin', 'superuser'), (req, res) => {
 
 
     Events.findByIdAndUpdate(req.body.id, {
 
         event_name: req.body.event_name,
         event_admin: req.body.event_admin,
-        event_photo:req.body.event_photo,
+        event_photo: req.body.event_photo,
         description: req.body.description,
         location: req.body.location,
         language: req.body.language,
@@ -94,8 +94,8 @@ router.post('/update',authenticate,restrictTo('admin','superuser'),(req,res)=>{
 router.get('/viewAll', async (request, response) => {
 
     try {
-      
-        
+
+
         const events = await Events.find().populate('category_id');
 
         if (!events) {
@@ -114,7 +114,19 @@ router.get('/viewAll', async (request, response) => {
 router.get('/viewByCity', async (request, response) => {
 
     try {
-        const events = await Events.find({ "location": request.body.location });
+
+        const filter = await Events.aggregate([{
+            $group: { _id: '$location', count: { $sum: 1 } }
+        }], (error, result) => {
+            if (error) {
+
+                return response.send(error);
+           }
+           response.send(result);
+        });
+        console.log(filter);
+        const events = await Events.find(filter);
+        console.log(events);
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
