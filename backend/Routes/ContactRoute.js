@@ -17,13 +17,16 @@ router.post('/', async (request, response) => {
 
     response.send(`Thank you ${name} for contacting us, your E-Mail has been sent !!`)
 
+    const today = Date.now();
+    let todayDate = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(today);
+
     const output = `
     <p>you have a new message</p>
     <ul>
         <li> From: ${name} </li>
         <li> Email: ${email} </li>
         <li> Phone: ${phone} </li>
-        <li> Date: ${date} </li>
+        <li> Date: ${todayDate} </li>
         <li> Subject: ${subject} </li>
     </ul>
     <p> Message: ${message} </p>
