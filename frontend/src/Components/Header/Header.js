@@ -17,14 +17,14 @@ export default function Header() {
                     </li>
 
                     <li>
-                        <Link to={'/contact'}>About us</Link>
+                        <Link to={'/about'}>About us</Link>
                     </li>
 
                     <li>
                         <Link to={'/login'}>Login</Link>
                     </li>
                     <li>
-                        <Link to={'/signup'}>Sign up</Link>
+                        <Link to={'/signup'}>Signup</Link>
                     </li>
 
                     <li>

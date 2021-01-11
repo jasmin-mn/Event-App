@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const sendEmail = async (options) => {
 
     let transporter = nodemailer.createTransport({
-        host: "process.env.SMTP_HOST",
+        host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
         secure: false,
         auth: {
@@ -21,7 +21,7 @@ const sendEmail = async (options) => {
         to: options.email,
         subject: options.subject,
         Phone: options.Phone,
-        message: options.message,
+        text: options.text,
         // html: output
     }
 
