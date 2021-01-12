@@ -125,8 +125,10 @@ router.get('/viewByCity', async (request, response) => {
            response.send(result);
         });
         console.log(filter);
+
         const events = await Events.find(filter);
         console.log(events);
+
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
@@ -134,7 +136,6 @@ router.get('/viewByCity', async (request, response) => {
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
-
     }
 });
 

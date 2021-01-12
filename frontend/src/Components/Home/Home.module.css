@@ -30,21 +30,19 @@ p {
 .envents_by_citys_body,
 .envents_by_Category_body {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   flex-direction: row;
   align-items: center;
   overflow: scroll;
-  /* flex-wrap: nowrap; */
   /* border: 1px solid blue; */
 }
 
 .events_container {
-
   border: 1px solid rgb(163, 216, 248);
   border-radius: 10px;
   height: 300px;
   width: 344px;
-  margin: 10px;
+  margin:5px 10px;
 }
 
 .events_container p {
