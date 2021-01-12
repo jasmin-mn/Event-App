@@ -9,6 +9,9 @@ import Register from './Components/Register/Register'
 
 import ContactForm from './Components/Contact/ContactForm';
 
+import UserPage from './Components/UserPage/UserPage'
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
+
 
 import './App.css';
 
@@ -20,10 +23,20 @@ function App() {
 
       <Switch>
 
+<<<<<<< HEAD
         <Route path='/' component={Home} exact />
         <Route path='/login' component={Login} exact />
         <Route path='/signup' component={Register} exact />
         <Route path='/contact' component={ContactForm} exact />
+=======
+
+        <Route path='/' component={Home} exact/>
+       
+       <Route path='/login' component={Login} exact />
+       <Route path='/signup' component={Register} exact/>
+       <PrivateRoute path="/userpage" component={UserPage} />
+       
+>>>>>>> 4384d40f46bc36cacb7686c47fd057129a64156d
 
       </Switch>
 

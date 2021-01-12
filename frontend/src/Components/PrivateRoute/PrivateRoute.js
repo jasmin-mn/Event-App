@@ -1,9 +1,9 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 export default function PrivateRoute(props) {
 
-    const loggedIn = localStorage.getItem("loggedIn");
+    const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn")?true:"did not work");
 
     return (
         <>
