@@ -11,7 +11,7 @@ const sendEmail = require('../Utilities/sendEmail');
 const { response } = require('express');
 
 //register
-router.post("/signup", async(request,response)=>{
+router.post("/register", async(request,response)=>{
     const {userName,firstName, lastName, email, password, gender} = request.body;
     try{
         let data = await User.findOne({ email })
