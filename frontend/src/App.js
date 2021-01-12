@@ -9,6 +9,9 @@ import Register from './Components/Register/Register'
 
 import ContactForm from './Components/Contact/ContactForm';
 
+import UserPage from './Components/UserPage/UserPage'
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
+
 
 import './App.css';
 
@@ -25,6 +28,7 @@ function App() {
        
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
+       <PrivateRoute path="/userpage" component={UserPage} />
        
 
       </Switch>
