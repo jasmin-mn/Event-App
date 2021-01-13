@@ -149,7 +149,7 @@ export default function Header() {
 
                     <div className={styles.header_bg}>
                         <div className={styles.header_text}>
-                            <p className={styles.header_tittel}>Enjoy fun Coding events, learning workshops classes from home</p>
+                            <p className={styles.header_tittel}>Enjoy Coding Events, <br/> learning, Workshops Classes from Home.</p>
                             <button className={styles.btn}>Join us</button>
                         </div>
                     </div>
