@@ -5,15 +5,7 @@ const User = require("./Models/UserModel")
 const Event = require("./Models/EventModel")
 const Register = require("./Models/UserModel")
 const dotenv = require('dotenv');
-<<<<<<< HEAD
-
-const cors=require('cors')
-  
-  
-
-=======
 const cors = require('cors')
->>>>>>> master
 dotenv.config();
 
 app.get('/', (request, response) => {
