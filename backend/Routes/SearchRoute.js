@@ -7,15 +7,23 @@ const router = express.Router();
 
 // Search for all Events filterd by Location
 router.post('/', async (request, response) => {
-    const {event_name , location } = request.body;
+    const { event_name, location } = request.body;
 
     try {
-         
+
         const events = await Events.find(
-            
-            {$and :[  { location }, { event_name } ]}
+
+            {
+                $and: [
+                    { location: { $regex: location, $options: "gi" } },
+                    {
+                        event_name: { $regex: event_name, $options: "gi" },
+                        // description: { $regex: event_name, $options: "i" }
+                    }
+                ]
+            }
         );
-        
+
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
