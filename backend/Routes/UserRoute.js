@@ -22,7 +22,7 @@ router.post("/register", async(request,response)=>{
             return response.status(400).json({msg: "User already exist"})
         }
         data = new User({
-            userName,firstName, lastName, email, password, gender
+            userName,firstName, lastName, email, password,
 
 
         })
