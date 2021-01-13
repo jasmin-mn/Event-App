@@ -23,13 +23,11 @@ function App() {
 
       <Switch>
 
-
-        <Route path='/' component={Home} exact/>
-       
-       <Route path='/login' component={Login} exact />
-       <Route path='/signup' component={Register} exact/>
-       <PrivateRoute path="/userpage" component={UserPage} />
-       
+        <Route path='/' component={Home} exact />
+        <Route path='/login' component={Login} exact />
+        <Route path='/signup' component={Register} exact />
+        <Route path='/contact' component={ContactForm} exact />
+        <PrivateRoute path="/userpage" component={UserPage} />
 
       </Switch>
 
