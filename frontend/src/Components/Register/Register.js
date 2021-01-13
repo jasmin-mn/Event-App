@@ -1,6 +1,7 @@
 // import React from 'react'
 import React, { useState} from 'react'
-import styles from './Register.module.css'
+import styles from './Register.module.css';
+
 
 function Register()  {
 
@@ -12,26 +13,26 @@ function Register()  {
                 User <span className={styles.textregister}> Register </span>                
             </h1>
             <form >
-                <div className={styles.formgroup}>
+                 <div className={styles.formgroup}>
                     <label htmlFor="username">User Name</label>
                     <input type="text" username="username"    />
                 </div>
 
-                <div className={styles.formgroup}>
+               <div className={styles.formgroup}>
                     <label htmlFor="fname">Firstname</label>
-                    <input type="text" fname="fname"    />
+                    <input type="text" name="fname"    />
                 </div>
 
-                <div className={styles.formgroup}>
+               <div className={styles.formgroup}>
                     <label htmlFor="lname">Lastname</label>
-                    <input type="text" lname="lname"    />
+                    <input type="text" name="lname"    />
                 </div>
 
-                <div className={styles.formgroup}>
+                 {/* <div className={styles.formgroupgender}>
                     <label htmlFor="gender">Gender</label>
-                    <input type="radio" gender="gender">Female</input>
-                    <input type="radio" gender="gender">Male</input>
-                </div>
+                    <input type="radio" name="gender" value="Female" />
+                    <input type="radio" name="gender" value="Male" />
+                </div> */}
 
                 <div className={styles.formgroup}>
                     <label htmlFor="email">Email Address</label>

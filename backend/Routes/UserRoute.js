@@ -10,8 +10,11 @@ const nodemailer = require('nodemailer');
 const sendEmail = require('../Utilities/sendEmail');
 const { response } = require('express');
 
-//register
+
+//register for Public
 router.post("/register", async(request,response)=>{
+
+
     const {userName,firstName, lastName, email, password, gender} = request.body;
     try{
         let data = await User.findOne({ email })
@@ -47,32 +50,19 @@ router.post("/register", async(request,response)=>{
 })
 
 
-// router.post("/", async (request, response)=>{
-//     const {userName,firstName, lastName, email, password, gender} = request.body;
-//     const newUser = new User({
-//         userName, firstName, lastName, email, password, gender
-        
-//     })
-
-//     await newUser.save()
-//     response.send("Thank you, You are successfully registered")
-   
-   
-// })
-
-//login
+//login signin public
 router.post("/login", async(request,response)=>{
     const { email, password} = request.body
     let data = await User.findOne({ email })
     if(!data){
-        return response.status(400).json({msg: "Invalid email or password. Kindly type in the right information."})
+        return response.status(400).json({msg: "Invalid Credentials"})
     } else{
          console.log('login...');
     }
 
     const isMatch = await bcrypt.compare(password, data.password)
     if(!isMatch){
-        return response.status(400).json({msg: "Invalid email or password. Kindly type in the right information."})
+        return response.status(400).json({msg: "Successfully Login"})
     }
 
     // token
@@ -100,6 +90,25 @@ router.post("/login", async(request,response)=>{
     }
 
 })
+
+// @root POST user/dashboard for private
+ 
+router.get('/dashboardboard' ,authenticate , async (request , response)=>{
+  
+    console.log('this is request.id', request.id);
+    try {
+        const user = await User.findById(request.id).select('-password');
+        if(!user){
+            return response.status(500).json({msg : 'Server error'})
+        }
+        response.json({ msg : ` welcome back ${user.userName}`})
+        
+    } catch (error) {
+        response.status(500).json({msg : 'Server error'})
+        
+    }
+});
+
 
 // Profile
 
@@ -165,7 +174,7 @@ router.get('/', authenticate, restrictTo('supervisor', 'admin'), async(request,r
 
 // Signout
 
-router.get('/signout', async(request,response)=>{
+router.post('/signout', async(request,response)=>{
     return request.body
     
 
@@ -173,9 +182,10 @@ router.get('/signout', async(request,response)=>{
 
 // Forgot password/reset password
 
-router.get('/forgotPassword', async (request, response)=>{
-    const {email} = request.body
-    const user = await User.findOne({email: request.body.email})
+router.post('/forgotPassword', async (request, response)=>{
+    console.log(request.body);
+    const { email } = request.body;
+    const user = await User.findOne({ email})
     if(!user){
         return response.status(400).json({msg: 'User email is not exist'})
     }
@@ -186,11 +196,11 @@ router.get('/forgotPassword', async (request, response)=>{
     const token = jwt.sign(
         payload,
         process.env.RESETPASSWORD_SECRET,
-        {expiresIn: '1m'}
+        {expiresIn: '60m'}
     )
     console.log(token);
     user.passwordResetToken = token 
-    user.passwordChangedAt = Date.now() + 3600000 //(1 * 60 * 1000)
+    user.passwordChangedAt = Date.now() + (1 * 60 * 60 * 1000)  //(1 * 60 * 1000)
     user.save()
     const resetUrl = `${request.protocol}://${request.get('host')}/user/resetPassword/${token}`
     const message = `Forgot your password? Click on the link and submit your new password and password confirmation to ${resetUrl} \n \n if you did not reset your password. Kindly ignore this email`
@@ -210,7 +220,8 @@ router.get('/forgotPassword', async (request, response)=>{
     }
 })
 
-router.get('/resetPassword/:token', async(request,response)=>{
+router.post('/resetPassword/:token', async(request,response)=>{
+    console.log(request.body);
     const token = request.params.token
     
     const user = await User.findOne({passwordResetToken: request.params.token, passwordChangedAt: {$gt : Date.now()}})
