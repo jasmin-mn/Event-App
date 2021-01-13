@@ -31,7 +31,7 @@
   color: #fff;
 }
 
-#header_bg {
+.header_bg {
   position: relative;
   background-image: url(../../Images/codingCover.jpg);
   background-position: center;
@@ -48,7 +48,7 @@
   right: 50px;
 }
 
-#header_bg p {
+.header_bg p {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: #fff;
   font-size: 35px;
