@@ -2,20 +2,15 @@
 const express = require('express');
 const Events = require('../Models/EventModel');
 
-
 const authenticate = require('../middleware/authenticate')
 const restrictTo = require('../middleware/restrictTo');
 
 const Category = require('../Models/CategoryModel');
 
-
 const router = express.Router();
 
 
 router.post('/sendData', authenticate, restrictTo('admin', 'superuser'), async (request, response) => {
-
-
-
 
     try {
         let { event_name, event_admin, event_photo, location, language, member, description, dateEventstarted, category_id } = request.body;
@@ -35,12 +30,7 @@ router.post('/sendData', authenticate, restrictTo('admin', 'superuser'), async (
 
 
 
-
-
-
 router.delete('/delete', authenticate, async (req, res) => {
-
-
     try {
         const event = await Events.findById(req.body.id);
         console.log('the user id : ', req.id);
@@ -53,12 +43,8 @@ router.delete('/delete', authenticate, async (req, res) => {
             return res.status(401).json({ msg: ' you are not authorized to delete ' })
         }
         await Events.findByIdAndRemove(req.body.id)
-
-
-
         res.send("deleted")
     }
-
     catch (err) {
         console.log(err);
     }
@@ -94,8 +80,6 @@ router.post('/update', authenticate, restrictTo('admin', 'superuser'), (req, res
 router.get('/viewAll', async (request, response) => {
 
     try {
-
-
         const events = await Events.find().populate('category_id');
 
         if (!events) {
@@ -119,10 +103,9 @@ router.get('/viewByCity', async (request, response) => {
             $group: { _id: '$location', count: { $sum: 1 } }
         }], (error, result) => {
             if (error) {
-
                 return response.send(error);
-           }
-           response.send(result);
+            }
+            response.send(result);
         });
         console.log(filter);
 
@@ -150,10 +133,8 @@ router.get('/viewByCategory', async (request, response) => {
         }
         response.send(events)
 
-
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
-
     }
 });
 

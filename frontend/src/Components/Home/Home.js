@@ -113,6 +113,7 @@ function Home() {
         <div className={styles.main}>
 
             <Search />
+            
             <div className={styles.upcoming_envents}>
                 <div className={styles.upcoming_envents_head}>
                     <h3> Upcoming Events</h3>

@@ -7,9 +7,11 @@ function Search() {
     const [events, setEvents] = useState();
 
 
-    const getEvents = async () => {
+    const getEvents = async (e) => {
+        // e.preventDefault();
+
         try {
-            const result = await axios.get('/event/search');
+            const result = await axios.get('/search');
             console.log('Search Events:')
             console.log(result.data)
 
@@ -46,21 +48,20 @@ function Search() {
             <p>Search for your next Event</p>
 
             <form className={styles.search_form}>
-        
-                <input
-                    placeholder="Search for..."
-                // value={this.state.query}
-                // onChange={this.handleInputChange}
-                />
-                <input
-                    placeholder="Location..."
-                // value={this.state.query}
-                // onChange={this.handleInputChange}
-                />
 
-                <button className={styles.btn} type="submit">Search</button>
+                <label htmlFor="search"></label>
+                <input name="event" placeholder="Search for..."  />
+                <input name="location" placeholder="Location..."  />
+
+                <button
+                    className={styles.btn}
+                    onSubmit={getEvents}
+                    type="submit">Search</button>
 
             </form>
+
+            <>{events}</>
+
         </div>
     );
 
