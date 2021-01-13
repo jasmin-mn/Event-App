@@ -21,7 +21,7 @@ function HomeDefault() {
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
                     // console.log(event);
-                    
+
                     return (
                         <div className={styles.events_container}>
 
@@ -102,11 +102,6 @@ function HomeDefault() {
     }, []);
 
     return (
-
-
-//         <div className={styles.main}>
-
-// <Search/>
         <>
             <div className={styles.upcoming_events}>
                 <div className={styles.upcoming_events_head}>
