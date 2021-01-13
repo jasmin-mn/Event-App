@@ -10,6 +10,7 @@ const nodemailer = require('nodemailer');
 const sendEmail = require('../Utilities/sendEmail');
 const { response } = require('express');
 
+
 //register
 router.post("/register", async(request,response)=>{
     const {userName,firstName, lastName, email, password, gender} = request.body;

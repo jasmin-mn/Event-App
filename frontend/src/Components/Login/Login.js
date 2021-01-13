@@ -1,9 +1,14 @@
-import React, { useState} from 'react'
+import React, { useContext } from 'react'
 import styles from './Login.module.css';
 import {useHistory}from "react-router-dom"
 import axios from 'axios';
 
+import { UserStateContext } from '../../App';
+
 const Login = (event) => {
+
+    const {setLoggedIn }=useContext(UserStateContext)
+
 const history=useHistory();
 const sendLogin = async (allFormData)=>{
     const config = {
@@ -35,8 +40,8 @@ const sendLogin = async (allFormData)=>{
         // if the user successfully logs in
         // save the item "loggedIn" into localstorage, set it to true
    
-        window.localStorage.setItem("loggedIn", JSON.stringify(true))
-   
+       
+   setLoggedIn(true)
         history.push('/userpage')
        
    
