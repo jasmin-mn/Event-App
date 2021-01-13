@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
@@ -17,16 +17,45 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
 
 import './App.css';
 
+export const UserStateContext = createContext();
+
 function App() {
+
+  const [loggedInState, setLoggedInState] = useState(false);
+
+  const setLoggedIn = (state) => {
+    if(state) {
+       window.localStorage.setItem("loggedIn", JSON.stringify(true));
+    } else {
+      window.localStorage.removeItem('loggedIn');
+    }
+   
+    setLoggedInState(state);
+  }
+
+  useEffect(() => {
+    if (JSON.parse(window.localStorage.getItem("loggedIn"))) {
+      setLoggedInState(true);
+    };
+  }, [])
+
   return (
-    <Router>
+    <UserStateContext.Provider value={{ loggedInState, setLoggedIn }}>
+      <Router>
 
-      <Header />
+        <Header  />
 
-      <Switch>
+        <Switch>
 
 
         <Route path='/' component={Home} exact/>
+<<<<<<< HEAD
+        
+        <Route path='/login' component={Login} exact />
+        <Route path='/signup' component={Register} exact/>
+        <PrivateRoute path="/userpage" component={UserPage} />
+        
+=======
        
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
@@ -37,12 +66,14 @@ function App() {
        <Route path='/forgotPassword' component={Forgotpasswordpage}/>
        
 
+>>>>>>> master
 
-      </Switch>
+        </Switch>
 
-      <Footer />
+        <Footer />
 
-    </Router>);
+      </Router>
+    </UserStateContext.Provider>);
 }
 
 export default App;

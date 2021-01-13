@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+
 import styles from './Login.module.css';
 import { useHistory } from "react-router-dom"
 import axios from 'axios';
 
+import { UserStateContext } from '../../App';
+
 const Login = (event) => {
 
-    const history = useHistory();
-    
-    const sendLogin = async (allFormData) => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+    const {setLoggedIn }=useContext(UserStateContext)
+
+const history=useHistory();
+const sendLogin = async (allFormData)=>{
+    const config = {
+        headers : {
+            'Content-Type' : 'application/json'
+
         }
         try {
             const result = await axios.post('/user/login', allFormData, config)
@@ -48,6 +52,24 @@ const Login = (event) => {
             console.log(error);
         }
 
+
+    }
+    try{
+        sendLogin(data);
+
+        // if the user successfully logs in
+        // save the item "loggedIn" into localstorage, set it to true
+   
+       
+   setLoggedIn(true)
+        history.push('/userpage')
+       
+   
+       }catch(error){
+   
+           console.log(error);
+       }
+   
 
     }
 

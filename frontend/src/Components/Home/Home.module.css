@@ -5,9 +5,9 @@
   padding: 0;
 }
 
-.upcoming_envents_head,
-.envents_by_city_head,
-.envents_by_Category_head {
+.upcoming_events_head,
+.events_by_city_head,
+.events_by_Category_head {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -17,18 +17,18 @@
   padding: 0;
 }
 
-.upcoming_envents_head h3,
+.upcoming_events_head h3,
 p,
-.envents_by_city_head h3,
+.events_by_city_head h3,
 p,
-.envents_by_Category_head h3,
+.events_by_Category_head h3,
 p {
   margin: 20px 0 0;
 }
 
-.upcoming_envents_body,
-.envents_by_citys_body,
-.envents_by_Category_body {
+.upcoming_events_body,
+.events_by_citys_body,
+.events_by_Category_body {
   display: flex;
   justify-content: left;
   flex-direction: row;

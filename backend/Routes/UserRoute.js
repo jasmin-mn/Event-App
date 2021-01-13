@@ -11,7 +11,11 @@ const sendEmail = require('../Utilities/sendEmail');
 const { response } = require('express');
 
 
+<<<<<<< HEAD
+//register
+=======
 //register for Public
+>>>>>>> master
 router.post("/register", async(request,response)=>{
 
 

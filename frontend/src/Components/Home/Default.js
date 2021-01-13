@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import Search from '../Search/Search';
 import styles from './Home.module.css';
+import axios from "axios";
 
 
-<<<<<<< HEAD
-import HomeDefault from './Default';
-import HomeLoggedIn from './LoggedIn';
-=======
-function Home() {
+function HomeDefault() {
 
     const [events, setEvents] = useState();
     const [eventsByCity, setEventsByCity] = useState();
-    const [eventsByCategiry, setEventsByCategory] = useState();
+    const [eventsByCategory, setEventsByCategory] = useState();
 
 
     // get all Events
     const getAllEvents = async () => {
         try {
             const result = await axios.get('/event/viewAll');
-            // console.log('All Events:')
-            // console.log(result.data)
+            console.log('All Events:')
+            console.log(result.data)
 
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
                     // console.log(event);
-
+                    
                     return (
                         <div className={styles.events_container}>
 
@@ -44,27 +41,23 @@ function Home() {
             console.log(error);
         }
     }
-    useEffect(() => {
-        getAllEvents();
-    }, []);
-
 
     // filter all Events by Location/City
     const getAEventsByCity = async () => {
         try {
             const result = await axios.get('/event/viewByCity');
-            // console.log('Events by Location/City:')
-            // console.log(result.data)
+            console.log('Events by Location/City:')
+            console.log(result.data)
 
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
-                    // console.log(event);
+                    console.log(event);
                     return (
                         <div className={styles.events_container}>
 
                             <div className={styles.events_by_city}>
                                 <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                <p>{event._id}</p>
+                                <p>{event.location}</p>
                             </div>
                         </div>
                     )
@@ -75,10 +68,6 @@ function Home() {
             console.log(error);
         }
     }
-    useEffect(() => {
-        getAEventsByCity()
-    }, []);
-
 
     // filter all Events by Category
     const getAEventsByCategory = async () => {
@@ -91,60 +80,70 @@ function Home() {
                     // console.log(event);
                     return (
                         <div className={styles.events_container}>
->>>>>>> master
 
-function Home() {
+                            <div className={styles.events_by_category}>
+                                <img className={styles.events_by_category_bg} src={event.category_id.map((category) => <>{category.name}</>)} alt="" />
+                                <p>{event.category_id.map((category) => <>{category.name}</>)}</p>
+                            </div>
+                        </div>
+                    )
+                })
+                setEventsByCategory(myEvents)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-    const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn") ? true : false);
+    useEffect(() => {
+        getAllEvents();
+        getAEventsByCity()
+        getAEventsByCategory()
+    }, []);
 
     return (
-        <div className={styles.main}>
-<<<<<<< HEAD
-            <Search/>
-            {loggedIn ? <HomeLoggedIn /> : <HomeDefault />}
-=======
 
-            <Search />
-            
-            <div className={styles.upcoming_envents}>
-                <div className={styles.upcoming_envents_head}>
+
+//         <div className={styles.main}>
+
+// <Search/>
+        <>
+            <div className={styles.upcoming_events}>
+                <div className={styles.upcoming_events_head}>
                     <h3> Upcoming Events</h3>
                     <p>See all Events</p>
                 </div>
 
-                <div className={styles.upcoming_envents_body}>
+                <div className={styles.upcoming_events_body}>
                     {events}
                 </div>
             </div>
 
 
-            <div className={styles.envents_by_city}>
-                <div className={styles.envents_by_city_head}>
+            <div className={styles.events_by_city}>
+                <div className={styles.events_by_city_head}>
                     <h3> Events by City</h3>
                     <p>See all Events</p>
                 </div>
 
-                <div className={styles.envents_by_citys_body}>
+                <div className={styles.events_by_citys_body}>
                     {eventsByCity}
                 </div>
             </div>
 
 
-            <div className={styles.envents_by_Category}>
-                <div className={styles.envents_by_Category_head}>
+            <div className={styles.events_by_Category}>
+                <div className={styles.events_by_Category_head}>
                     <h3> Events by Category</h3>
                     <p>See all Events</p>
                 </div>
 
-                <div className={styles.envents_by_Category_body}>
-                    {eventsByCategiry}
+                <div className={styles.events_by_Category_body}>
+                    {eventsByCategory}
                 </div>
             </div>
-
->>>>>>> master
-        </div>
+        </>
     )
-
 }
 
-export default Home
+export default HomeDefault
