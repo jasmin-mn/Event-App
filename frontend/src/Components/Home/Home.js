@@ -18,8 +18,8 @@ function Home() {
     const getAllEvents = async () => {
         try {
             const result = await axios.get('/event/viewAll');
-            console.log('All Events:')
-            console.log(result.data)
+            // console.log('All Events:')
+            // console.log(result.data)
 
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
@@ -53,12 +53,12 @@ function Home() {
     const getAEventsByCity = async () => {
         try {
             const result = await axios.get('/event/viewByCity');
-            console.log('Events by Location/City:')
-            console.log(result.data)
+            // console.log('Events by Location/City:')
+            // console.log(result.data)
 
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
-                    console.log(event);
+                    // console.log(event);
                     return (
                         <div className={styles.events_container}>
 

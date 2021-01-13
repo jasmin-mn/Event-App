@@ -107,7 +107,7 @@ router.get('/viewByCity', async (request, response) => {
             }
             response.send(result);
         });
-        console.log(filter);
+        // console.log(filter);
 
         const events = await Events.find(filter);
         console.log(events);
