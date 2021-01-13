@@ -7,15 +7,22 @@ function Search() {
     const [events, setEvents] = useState();
 
 
-    const getEvents = async () => {
+    const getEvents = async (searchEvents) => {
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
         try {
-            const result = await axios.get('/event/search');
+            const result = await axios.post('/search', searchEvents, config);
             console.log('Search Events:')
             console.log(result.data)
 
             if (result.data !== 0) {
                 let mySearch = result.data.map((event) => {
-                    // console.log(event);
+                    console.log(event);
                     return (
                         <div className={styles.events_container}>
 
@@ -34,10 +41,30 @@ function Search() {
         } catch (error) {
             console.log(error);
         }
+
+
     }
+
     useEffect(() => {
         getEvents();
     }, []);
+
+
+    const handelSubmit = (events) => {
+        events.preventDefault();
+
+        const formData = new FormData(events.target)
+        const data = {
+            event: formData.get("event"),
+            location: formData.get("location")
+        }
+
+        try {
+            getEvents(data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
     return (
@@ -45,26 +72,20 @@ function Search() {
 
             <p>Search for your next Event</p>
 
-            <form className={styles.search_form}>
-        
-                <input
-                    placeholder="Search for..."
-                // value={this.state.query}
-                // onChange={this.handleInputChange}
-                />
-                <input
-                    placeholder="Location..."
-                // value={this.state.query}
-                // onChange={this.handleInputChange}
-                />
+            <form onSubmit={handelSubmit} className={styles.search_form} >
+
+                <label htmlFor="search"></label>
+                <input name="event" placeholder="Search for..." />
+                <input name="location" placeholder="Location..." />
 
                 <button className={styles.btn} type="submit">Search</button>
 
             </form>
+
+            <>{events}</>
+
         </div>
     );
-
-
 }
 
 

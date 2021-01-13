@@ -5,11 +5,15 @@ const User = require("./Models/UserModel")
 const Event = require("./Models/EventModel")
 const Register = require("./Models/UserModel")
 const dotenv = require('dotenv');
+<<<<<<< HEAD
 
 const cors=require('cors')
   
   
 
+=======
+const cors = require('cors')
+>>>>>>> master
 dotenv.config();
 
 app.get('/', (request, response) => {
@@ -27,6 +31,8 @@ app.use('/category', require('./Routes/CategoryRoute'));
 app.use('/user', require('./Routes/UserRoute'));
 app.use('/event', require('./Routes/EventRoute'));
 app.use('/admin', require('./Routes/AdminRoute'))
+app.use('/search', require('./Routes/SearchRoute'));
+
 
 
 
