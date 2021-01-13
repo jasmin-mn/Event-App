@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Search from '../Search/Search';
 import styles from './Home.module.css';
 
-
 import HomeDefault from './Default';
 import HomeLoggedIn from './LoggedIn';
 
