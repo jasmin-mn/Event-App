@@ -68,6 +68,7 @@ const Search = () => {
 
     return (
         <div className={styles.search}>
+        
             <p>Search for your next Event</p>
 
             <SearchBar onSubmit={handelSubmit} />
