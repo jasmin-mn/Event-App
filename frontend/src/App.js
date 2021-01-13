@@ -49,13 +49,6 @@ function App() {
 
 
         <Route path='/' component={Home} exact/>
-<<<<<<< HEAD
-        
-        <Route path='/login' component={Login} exact />
-        <Route path='/signup' component={Register} exact/>
-        <PrivateRoute path="/userpage" component={UserPage} />
-        
-=======
        
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
@@ -66,7 +59,6 @@ function App() {
        <Route path='/forgotPassword' component={Forgotpasswordpage}/>
        
 
->>>>>>> master
 
         </Switch>
 
