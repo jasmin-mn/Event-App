@@ -42,6 +42,7 @@ function Search() {
     }, []);
 
 
+
     return (
         <div className={styles.search}>
 
@@ -50,8 +51,8 @@ function Search() {
             <form className={styles.search_form}>
 
                 <label htmlFor="search"></label>
-                <input name="event" placeholder="Search for..."  />
-                <input name="location" placeholder="Location..."  />
+                <input name="event" placeholder="Search for..." value='' />
+                <input name="location" placeholder="Location..." value='' />
 
                 <button
                     className={styles.btn}
