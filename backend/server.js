@@ -6,6 +6,10 @@ const Event = require("./Models/EventModel")
 const Register = require("./Models/UserModel")
 const dotenv = require('dotenv');
 
+const cors=require('cors')
+  
+  
+
 dotenv.config();
 
 app.get('/', (request, response) => {
@@ -14,6 +18,10 @@ app.get('/', (request, response) => {
 
 // middleware
 app.use(express.json())
+ 
+app.use(cors({
+    origin : 'http://localhost:3000'
+    })) 
 app.use('/contact', require('./Routes/ContactRoute'));
 app.use('/category', require('./Routes/CategoryRoute'));
 app.use('/user', require('./Routes/UserRoute'));
