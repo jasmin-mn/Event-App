@@ -21,7 +21,7 @@ function Home() {
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
                     // console.log(event);
-                    
+
                     return (
                         <div className={styles.events_container}>
 
@@ -61,7 +61,7 @@ function Home() {
 
                             <div className={styles.events_by_city}>
                                 <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                <p>{event.location}</p>
+                                <p>{event._id}</p>
                             </div>
                         </div>
                     )
@@ -112,7 +112,8 @@ function Home() {
 
         <div className={styles.main}>
 
-<Search/>
+            <Search />
+            
             <div className={styles.upcoming_envents}>
                 <div className={styles.upcoming_envents_head}>
                     <h3> Upcoming Events</h3>

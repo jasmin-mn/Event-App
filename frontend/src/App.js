@@ -31,10 +31,12 @@ function App() {
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
        <PrivateRoute path="/userpage" component={UserPage} />
+       <Route path='/contact' component={ContactForm} exact />
        
        <Route path='/resetPassword' component={Resetpasswordpage}/>
        <Route path='/forgotPassword' component={Forgotpasswordpage}/>
        
+
 
       </Switch>
 
