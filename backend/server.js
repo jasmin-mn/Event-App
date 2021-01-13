@@ -5,7 +5,7 @@ const User = require("./Models/UserModel")
 const Event = require("./Models/EventModel")
 const Register = require("./Models/UserModel")
 const dotenv = require('dotenv');
-
+const cors = require('cors')
 dotenv.config();
 
 app.get('/', (request, response) => {
@@ -19,7 +19,7 @@ app.use('/category', require('./Routes/CategoryRoute'));
 app.use('/user', require('./Routes/UserRoute'));
 app.use('/event', require('./Routes/EventRoute'));
 app.use('/admin', require('./Routes/AdminRoute'))
-
+ app.use(cors({origin : 'http://localhost:3000'}))
 
 
 // connect to mongodb 

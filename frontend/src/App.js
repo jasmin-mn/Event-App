@@ -8,6 +8,8 @@ import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
 
 import ContactForm from './Components/Contact/ContactForm';
+import Resetpasswordpage from './Components/Resetpasswordpage/Resetpasswordpage'
+import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpage'
 
 
 import './App.css';
@@ -25,6 +27,9 @@ function App() {
        
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
+       
+       <Route path='/resetPassword' component={Resetpasswordpage}/>
+       <Route path='/forgotPassword' component={Forgotpasswordpage}/>
        
 
       </Switch>
