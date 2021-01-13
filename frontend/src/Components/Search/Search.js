@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import SearchBar from './SearchBar';
 import styles from './Search.module.css';
 import axios from "axios";
 
-function Search() {
+const Search = () => {
 
     const [events, setEvents] = useState();
-
 
     const getEvents = async (searchEvents) => {
 
         const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' }
         }
 
         try {
@@ -37,12 +36,13 @@ function Search() {
                     )
                 })
                 setEvents(mySearch)
+            } else {
+                <p> Unfortunately, no events were found. <br />Try another keyword </p>
             }
+
         } catch (error) {
             console.log(error);
         }
-
-
     }
 
     useEffect(() => {
@@ -50,12 +50,12 @@ function Search() {
     }, []);
 
 
-    const handelSubmit = (events) => {
-        events.preventDefault();
+    const handelSubmit = (event) => {
+        event.preventDefault();
 
-        const formData = new FormData(events.target)
+        const formData = new FormData(event.target)
         const data = {
-            event: formData.get("event"),
+            event: formData.get("event_name"),
             location: formData.get("location")
         }
 
@@ -66,29 +66,16 @@ function Search() {
         }
     }
 
-
     return (
         <div className={styles.search}>
-
             <p>Search for your next Event</p>
 
-            <form onSubmit={handelSubmit} className={styles.search_form} >
+            <SearchBar onSubmit={handelSubmit} />
 
-                <label htmlFor="search"></label>
-                <input name="event" placeholder="Search for..." />
-                <input name="location" placeholder="Location..." />
-
-                <button className={styles.btn} type="submit">Search</button>
-
-            </form>
-
-            <>{events}</>
+            {events}
 
         </div>
     );
 }
-
-
-
 
 export default Search

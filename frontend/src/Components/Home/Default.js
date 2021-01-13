@@ -10,7 +10,6 @@ function HomeDefault() {
     const [eventsByCity, setEventsByCity] = useState();
     const [eventsByCategory, setEventsByCategory] = useState();
 
-
     // get all Events
     const getAllEvents = async () => {
         try {
