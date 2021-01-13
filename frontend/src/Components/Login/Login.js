@@ -76,6 +76,12 @@ const sendLogin = async (allFormData)=>{
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password"  />
                 </div>
+                <div className={styles.formlink}>
+                {/* <a href = "localhost:7000/user/signup" target = "register">Register</a> */}
+                <a href = "localhost:7000/user/forgotPassword/" target = "_blank">Forgot Password</a>
+                
+                </div>
+                
 
                 
                 <input type="submit" value="Login" className={styles.login} />

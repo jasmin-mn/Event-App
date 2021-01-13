@@ -30,20 +30,19 @@ p {
 .events_by_citys_body,
 .events_by_Category_body {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   flex-direction: row;
   align-items: center;
-  flex-wrap: nowrap;
+  overflow: scroll;
   /* border: 1px solid blue; */
 }
 
 .events_container {
-
   border: 1px solid rgb(163, 216, 248);
   border-radius: 10px;
   height: 300px;
   width: 344px;
-  margin: 10px;
+  margin:5px 10px;
 }
 
 .events_container p {

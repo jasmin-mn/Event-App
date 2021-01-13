@@ -24,23 +24,23 @@ p {
   margin: 10px;
 }
 
-input{
-    border-radius: 7px;
+input {
+  border-radius: 7px;
 }
 
 .btn {
-    height: 40px;
-    background-color: rgb(35, 117, 184);
-    color: black;
-    font-size: 20px;
-    text-align: center;
-    padding: 0px 40px;
-    border-radius: 15px;
-    border: none;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-  
-  .btn:hover {
-    color: #fff;
-  }
+  height: 45px;
+  background-color: rgb(35, 117, 184);
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  padding: 0px 40px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.btn:hover {
+  color: #fff;
+}
