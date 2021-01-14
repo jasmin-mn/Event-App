@@ -19,11 +19,11 @@ router.post("/register", async(request,response)=>{
         if(data){
             return response.status(400).json({msg: "User already exist"})
         }
-        data = new User({
-            userName,firstName, lastName, email, password
+        // data = new User({
+        //     userName,firstName, lastName, email, password
 
 
-        })
+        // })
         const salt = await bcrypt.genSalt(10)
         data.password = await bcrypt.hash(password, salt)
         await data.save();
