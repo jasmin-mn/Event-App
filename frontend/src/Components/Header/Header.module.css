@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 45px;
   width: 100%;
   background-color: orange;
 }
@@ -31,56 +31,81 @@
   color: #fff;
 }
 
-#header_bg {
+.header_bg {
   position: relative;
-  background-image: url(../../Images/codingCover.jpg);
+  background: url(../../Images/codingCover.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 250px;
+  height: 200px;
+  width: 100%;
+  /* border: 1px solid red; */
 }
 
 .header_text {
   /* border: 1px solid red; */
-  width: 40%;
+  width: 50%;
   position: absolute;
-  top: 50px;
+  top: 30px;
   right: 50px;
 }
 
-#header_bg p {
+.header_tittel {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: #fff;
-  font-size: 35px;
-  margin: 0;
+  font-size: 30px;
+  margin: 0 0 10px 0;
+  text-align: left;
 }
 
 .btn {
-  height: 50px;
+  height: 40px;
   background-color: orange;
   color: rgb(2, 0, 0);
   font-size: 25px;
   text-align: center;
-  padding: 0px 40px;
-  border-radius: 25px;
+  padding: 0px 30px;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
 }
 
 .btn:hover {
   color: #fff;
-  font-size: 25px;
-  margin: 0;
-}
-
-@media (min-width: 601px) and (max-width: 768px) {
-  #header_bg p {
-    font-size: 30px;
-  }
 }
 
 @media (max-width: 600px) {
-  #header_bg p {
+  .header_tittel {
+    font-size: 25px;
+  }
+
+  .btn {
+    height: 35px;
     font-size: 20px;
+    padding: 0px 20px;
+  }
+
+  .header_text {
+    width: 80%;
+    top: 20px;
+    left: 20px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .header_tittel {
+    font-size: 30px;
+  }
+
+  .btn {
+    height: 35px;
+    font-size: 20px;
+    padding: 0px 20px;
+  }
+
+  .header_text {
+    width: 80%;
+    top: 20px;
+    left: 20px;
   }
 }

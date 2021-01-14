@@ -14,6 +14,10 @@ app.get('/', (request, response) => {
 
 // middleware
 app.use(express.json())
+ 
+app.use(cors({
+    origin : 'http://localhost:3000'
+    })) 
 app.use('/contact', require('./Routes/ContactRoute'));
 app.use('/category', require('./Routes/CategoryRoute'));
 app.use('/user', require('./Routes/UserRoute'));
