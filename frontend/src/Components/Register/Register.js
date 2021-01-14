@@ -25,12 +25,12 @@ const Register= (e)=>{
         e.preventDefault()
         const formData = new FormData(e.target)
         const data=  {
-            userName:formData.get("User Name"),
+            userName:formData.get("UserName"),
             firstName:formData.get("Firstname"),
             lastName:formData.get("Lastname"),
             email:formData.get("Email Address"),
-            password:formData.get("Password")
-            // password:formData.get("Confirm Password")
+            password:formData.get("Password"),
+            password_confirm:formData.get("Confirm Password")
 
         }
         try{
@@ -57,17 +57,17 @@ const Register= (e)=>{
             <form onSubmit={handleSubmit} >
                  <div className={styles.formgroup}>
                     <label htmlFor="username">User Name</label>
-                    <input type="text" username="username"    />
+                    <input type="text" username="userName"    />
                 </div>
 
                <div className={styles.formgroup}>
                     <label htmlFor="fname">Firstname</label>
-                    <input type="text" name="fname"    />
+                    <input type="text" name="firstName"    />
                 </div>
 
                <div className={styles.formgroup}>
                     <label htmlFor="lname">Lastname</label>
-                    <input type="text" name="lname"    />
+                    <input type="text" name="lastName"    />
                 </div>
 
                  {/* <div className={styles.formgroupgender}>
@@ -88,7 +88,7 @@ const Register= (e)=>{
 
                 <div className={styles.formgroup}>
                     <label htmlFor="password">Confirm Password</label>
-                    <input type="password" name="password"  />
+                    <input type="password" name="password_confirm"  />
                 </div>
                 <input type="submit" value="Register" className={styles.submitregister} />
             </form>

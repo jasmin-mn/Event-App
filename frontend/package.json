@@ -2,9 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-
   "proxy": "http://localhost:7000/",
-
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -40,5 +38,4 @@
       "last 1 safari version"
     ]
   }
-
 }
