@@ -29,8 +29,8 @@ const Register= (e)=>{
             firstName:formData.get("Firstname"),
             lastName:formData.get("Lastname"),
             email:formData.get("Email Address"),
-            password:formData.get("Password")
-            // password:formData.get("Confirm Password")
+            password:formData.get("Password"),
+            password:formData.get("Confirm Password")
 
         }
         try{
