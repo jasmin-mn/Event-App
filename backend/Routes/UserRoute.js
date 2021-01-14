@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken")
 const authenticate = require("../middleware/authenticate")
 const restrictTo = require('../middleware/restrictTo');
 const User = require('../Models/UserModel');
-// const User = require('../Models/UserModel');
 const router = express.Router()
 const nodemailer = require('nodemailer');
 const sendEmail = require('../Utilities/sendEmail');
@@ -14,15 +13,14 @@ const { response } = require('express');
 //register
 router.post("/register", async(request,response)=>{
 
-
-    const {userName,firstName, lastName, email, password, gender} = request.body;
+    const {userName,firstName, lastName, email, password} = request.body;
     try{
-        let data = await User.findOne({ email })
+        const data = await User.findOne({ email })
         if(data){
             return response.status(400).json({msg: "User already exist"})
         }
         data = new User({
-            userName,firstName, lastName, email, password,
+            userName,firstName, lastName, email, password
 
 
         })
