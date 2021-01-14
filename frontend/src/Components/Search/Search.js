@@ -36,9 +36,10 @@ const Search = () => {
                     )
                 })
                 setEvents(mySearch)
-            } else {
-                <p> Unfortunately, no events were found. <br />Try another keyword </p>
             }
+            // else {
+            //     <p> Unfortunately, no events were found. <br />Try another keyword </p>
+            // }
 
         } catch (error) {
             console.log(error);
@@ -55,7 +56,7 @@ const Search = () => {
 
         const formData = new FormData(event.target)
         const data = {
-            event: formData.get("event_name"),
+            event_name: formData.get("event_name"),
             location: formData.get("location")
         }
 
@@ -64,18 +65,21 @@ const Search = () => {
         } catch (error) {
             console.log(error);
         }
+
     }
 
     return (
-        <div className={styles.search}>
-        
-            <p>Search for your next Event</p>
+        <>
+            <div className={styles.search}>
+                <p>Search for your next Event</p>
+                <SearchBar onSubmit={handelSubmit} />
+            </div>
 
-            <SearchBar onSubmit={handelSubmit} />
-
-            {events}
-
-        </div>
+            <p>Search result:</p>
+            <div className={styles.search_results}>
+                {events}
+            </div>
+        </>
     );
 }
 
