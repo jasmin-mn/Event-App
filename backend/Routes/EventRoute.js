@@ -113,9 +113,9 @@ router.get('/viewByCity', async (request, response) => {
         console.log(events);
 
         if (!events) {
-            return response.status(500).send({ msg: 'Server error' })
+            response.status(500).send({ msg: 'Server error' })
         }
-        response.send(events)
+        return response.send(events)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Search from '../Search/Search';
 import styles from './Home.module.css';
-
 import HomeDefault from './Default';
 import HomeLoggedIn from './LoggedIn';
 
@@ -11,11 +10,10 @@ function Home() {
 
     return (
         <div className={styles.main}>
-            <Search/>
+            <Search />
             {loggedIn ? <HomeLoggedIn /> : <HomeDefault />}
         </div>
     )
-
 }
 
 export default Home
