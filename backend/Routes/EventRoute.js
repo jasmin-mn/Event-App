@@ -53,7 +53,6 @@ router.delete('/delete', authenticate, async (req, res) => {
 
 router.post('/update', authenticate, restrictTo('admin', 'superuser'), (req, res) => {
 
-
     Events.findByIdAndUpdate(req.body.id, {
 
         event_name: req.body.event_name,
@@ -122,13 +121,13 @@ router.get('/viewByCity', async (request, response) => {
     }
 });
 
+
 // View Events by seected Location
 router.get('/viewBySelectedCity/:city', async (request, response) => {
 
     try {
 
         const events = await Events.find({ location: request.params.city });
-
 
         console.log(events);
 

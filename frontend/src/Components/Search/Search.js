@@ -15,7 +15,7 @@ const Search = () => {
         }
 
         try {
-            const result = await axios.post('/search', searchEvents, config);
+            const result = await axios.post('http://localhost:7000/search', searchEvents, config);
             console.log('Search Events:')
             console.log(result.data)
 

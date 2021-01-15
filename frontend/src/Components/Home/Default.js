@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Search from '../Search/Search';
+// import Search from '../Search/Search';
 import styles from './Home.module.css';
 import axios from "axios";
 
@@ -13,7 +13,7 @@ function HomeDefault() {
     // get all Events
     const getAllEvents = async () => {
         try {
-            const result = await axios.get('/event/viewAll');
+            const result = await axios.get('http://localhost:7000/event/viewAll');
             console.log('All Events:')
             console.log(result.data)
 
@@ -26,9 +26,8 @@ function HomeDefault() {
 
                             <div className={styles.events_all}>
                                 <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                <p>{event.dateEventstarted}</p>
-
-                                <p>{event.event_name},
+                                <p className={styles.events_date}>{event.dateEventstarted}</p>
+                                <p className={styles.events_name_category}>{event.event_name},
                                 {event.category_id.map((category) => <>{category.name}</>)}</p>
                             </div>
                         </div>
@@ -44,7 +43,7 @@ function HomeDefault() {
     // filter all Events by Location/City
     const getAEventsByCity = async () => {
         try {
-            const result = await axios.get('/event/viewByCity');
+            const result = await axios.get('http://localhost:7000/event/viewByCity');
             console.log('Events by Location/City:')
             console.log(result.data)
 
@@ -56,7 +55,7 @@ function HomeDefault() {
 
                             <div className={styles.events_by_city}>
                                 <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                <p>{event.location}</p>
+                                <p className={styles.location_text}>{event._id}</p>
                             </div>
                         </div>
                     )
@@ -71,7 +70,7 @@ function HomeDefault() {
     // filter all Events by Category
     const getAEventsByCategory = async () => {
         try {
-            const result = await axios.get('/event/viewByCategory');
+            const result = await axios.get('http://localhost:7000/event/viewByCategory');
             console.log('Events by Category:')
             console.log(result.data)
             if (result.data !== 0) {
@@ -82,7 +81,7 @@ function HomeDefault() {
 
                             <div className={styles.events_by_category}>
                                 <img className={styles.events_by_category_bg} src={event.category_id.map((category) => <>{category.name}</>)} alt="" />
-                                <p>{event.category_id.map((category) => <>{category.name}</>)}</p>
+                                <p className={styles.category_text}>{event.category_id.map((category) => <>{category.name}</>)}</p>
                             </div>
                         </div>
                     )
