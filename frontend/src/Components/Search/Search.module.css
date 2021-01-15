@@ -46,18 +46,14 @@ input {
 }
 
 .search_results {
-  
-  display: flex;
-  justify-content: left;
-  flex-direction: unset;
-  align-items: center;
-  /* overflow: scroll; */
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .events_container {
   border: 1px solid rgb(163, 216, 248);
   border-radius: 10px;
-  height: 300px;
+  height: 200px;
   width: 344px;
   margin:5px 10px;
 }
@@ -70,7 +66,6 @@ input {
 
 .events_bg {
   border-radius: 10px;
-
-  height: 250px;
+  height: 150px;
   width: 344px;
 }

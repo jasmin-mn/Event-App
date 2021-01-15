@@ -115,7 +115,7 @@ function HomeDefault() {
 
             <div className={styles.events_by_city}>
                 <div className={styles.events_by_city_head}>
-                    <h3> Events by City</h3>
+                    <h3> Events by Location</h3>
                     <p>See all Events</p>
                 </div>
 
