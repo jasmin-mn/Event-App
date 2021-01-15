@@ -37,7 +37,7 @@ const Search = () => {
                 setEvents(mySearch)
             }
             else {
-               return <p> Unfortunately, no events were found. <br />Try another keyword </p>
+                return <p> Unfortunately, no events were found. <br />Try another keyword </p>
             }
 
         } catch (error) {
@@ -67,9 +67,6 @@ const Search = () => {
     }
 
 
-
-
-
     return (
         <>
             <div className={styles.search}>
@@ -77,7 +74,7 @@ const Search = () => {
                 <SearchBar onSubmit={handelSubmit} />
             </div>
 
-            
+
             <div className={styles.search_results}>
                 {events}
             </div>
