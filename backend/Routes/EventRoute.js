@@ -83,9 +83,9 @@ router.get('/viewAll', async (request, response) => {
         const events = await Events.find().populate('category_id');
 
         if (!events) {
-            response.status(500).send({ msg: 'Server error' })
+            return response.status(500).send({ msg: 'Server error' })
         }
-        return response.send(events)
+        response.send(events)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
@@ -103,9 +103,9 @@ router.get('/viewByCity', async (request, response) => {
             $group: { _id: '$location', count: { $sum: 1 } }
         }], (error, result) => {
             if (error) {
-                response.send(error);
+                return response.send(error);
             }
-            return response.send(result);
+            response.send(result);
         });
         // console.log(filter);
 
@@ -113,9 +113,29 @@ router.get('/viewByCity', async (request, response) => {
         console.log(events);
 
         if (!events) {
-            response.status(500).send({ msg: 'Server error' })
+            return response.status(500).send({ msg: 'Server error' })
         }
-        return response.send(events)
+        response.send(events)
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+    }
+});
+
+// View Events by seected Location
+router.get('/viewBySelectedCity/:city', async (request, response) => {
+
+    try {
+
+        const events = await Events.find({ location: request.params.city });
+
+
+        console.log(events);
+
+        if (!events) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.send(events)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
@@ -129,14 +149,14 @@ router.get('/viewByCategory', async (request, response) => {
     try {
         const events = await Events.find().populate('category_id');
         if (!events) {
-            response.status(500).send({ msg: 'Server error' })
+            return response.status(500).send({ msg: 'Server error' })
         }
-        return response.send(events)
+        response.send(events)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
     }
-    
+
 });
 
 

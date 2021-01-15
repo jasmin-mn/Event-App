@@ -25,16 +25,16 @@ p {
 }
 
 input {
-  border-radius: 7px;
+  border-radius: 5px;
 }
 
 .btn {
   height: 40px;
   background-color: rgb(35, 117, 184);
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
-  padding: 0px 25x;
+  padding: 0px 25px;
   border-radius: 15px;
   border: none;
   cursor: pointer;
@@ -46,6 +46,7 @@ input {
 }
 
 .search_results {
+  
   display: flex;
   justify-content: left;
   flex-direction: unset;
