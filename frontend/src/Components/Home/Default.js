@@ -74,14 +74,14 @@ function HomeDefault() {
             console.log('Events by Category:')
             console.log(result.data)
             if (result.data !== 0) {
-                let myEvents = result.data.map((event) => {
+                let myEvents = result.data.map((event, index) => {
                     // console.log(event);
                     return (
                         <div className={styles.events_container}>
 
                             <div className={styles.events_by_category}>
-                                <img className={styles.events_by_category_bg} src={event.category_id.map((category) => <>{category.name}</>)} alt="" />
-                                <p className={styles.category_text}>{event.category_id.map((category) => <>{category.name}</>)}</p>
+                                {/* <img className={styles.events_by_category_bg} src={event.category_id.map((category) => <>{category.name}</>)} alt="" /> */}
+                                <p className={styles.category_text}>{event._id.map((category) => <>{category.name}</>)}</p>
                             </div>
                         </div>
                     )

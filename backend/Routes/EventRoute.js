@@ -146,7 +146,31 @@ router.get('/viewBySelectedCity/:city', async (request, response) => {
 router.get('/viewByCategory', async (request, response) => {
 
     try {
-        const events = await Events.find().populate('category_id');
+        const filter = await Events.aggregate([{
+
+            // $group: { _id: '$category_id', count: { $sum: 1 } },
+
+            "$lookup":
+            {
+                from: "categories",
+                foreignField: "_id",
+                localField: "category_id",
+                as: "category"
+            }
+
+        }, 
+        {
+
+            $group: { _id: '$category', count: { $sum: 1 } }
+        }], (error, result) => {
+            if (error) {
+                return response.send(error);
+            }
+            response.send(result);
+        });
+
+        const events = await Events.find(filter);
+
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
@@ -157,6 +181,7 @@ router.get('/viewByCategory', async (request, response) => {
     }
 
 });
+
 
 
 
