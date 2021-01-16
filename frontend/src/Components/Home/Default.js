@@ -10,7 +10,7 @@ function HomeDefault() {
     const [eventsByCity, setEventsByCity] = useState();
     const [eventsByCategory, setEventsByCategory] = useState();
 
-    
+
     // get all Events
     const getAllEvents = async () => {
         try {
@@ -49,14 +49,14 @@ function HomeDefault() {
             console.log(result.data)
 
             if (result.data !== 0) {
-                let myEvents = result.data.map((event) => {
+                let myEvents = result.data.map((event, index) => {
                     console.log(event);
                     return (
                         <div className={styles.events_container}>
 
                             <div className={styles.events_by_city}>
                                 <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                <p className={styles.location_text}>{event._id}</p>
+                                <p className={styles.location_text}>{event._id.location}</p>
                             </div>
                         </div>
                     )

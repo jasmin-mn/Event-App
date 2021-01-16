@@ -33,7 +33,7 @@ p {
   justify-content: left;
   flex-direction: row;
   align-items: center;
-  overflow: scroll;
+  overflow-x: scroll;
   /* border: 1px solid blue; */
 }
 

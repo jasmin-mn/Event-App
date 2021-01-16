@@ -99,7 +99,12 @@ router.get('/viewByCity', async (request, response) => {
     try {
 
         const filter = await Events.aggregate([{
-            $group: { _id: '$location', count: { $sum: 1 } }
+            $group: {
+                _id: { location: '$location' },
+                event_photo: { $first: '$event_photo' },
+                count: { $sum: 1 }
+            }
+            // { event_photo: '$event_photo', count: { $sum: 1 } }
         }], (error, result) => {
             if (error) {
                 return response.send(error);
@@ -158,9 +163,8 @@ router.get('/viewByCategory', async (request, response) => {
                 as: "category"
             }
 
-        }, 
+        },
         {
-
             $group: { _id: '$category', count: { $sum: 1 } }
         }], (error, result) => {
             if (error) {
