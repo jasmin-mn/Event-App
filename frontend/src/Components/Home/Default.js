@@ -10,6 +10,7 @@ function HomeDefault() {
     const [eventsByCity, setEventsByCity] = useState();
     const [eventsByCategory, setEventsByCategory] = useState();
 
+    
     // get all Events
     const getAllEvents = async () => {
         try {
@@ -80,7 +81,7 @@ function HomeDefault() {
                         <div className={styles.events_container}>
 
                             <div className={styles.events_by_category}>
-                                {/* <img className={styles.events_by_category_bg} src={event.category_id.map((category) => <>{category.name}</>)} alt="" /> */}
+                                <img className={styles.events_by_category_bg} src={event._id.map((category) => <>{category.photo}</>)} alt="" />
                                 <p className={styles.category_text}>{event._id.map((category) => <>{category.name}</>)}</p>
                             </div>
                         </div>
