@@ -24,6 +24,7 @@ const Register = (e) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
+
         const data = {
             userName: formData.get("User Name"),
             firstName: formData.get("Firstname"),
@@ -31,6 +32,7 @@ const Register = (e) => {
             email: formData.get("Email Address"),
             password: formData.get("Password")
             // password:formData.get("Confirm Password")
+
 
         }
         try {
@@ -57,17 +59,21 @@ const Register = (e) => {
             <form onSubmit={handleSubmit} >
                 <div className={styles.formgroup}>
                     <label htmlFor="username">User Name</label>
+
                     <input type="text" username="username" />
+
                 </div>
 
                 <div className={styles.formgroup}>
                     <label htmlFor="fname">Firstname</label>
                     <input type="text" name="fname" />
+
                 </div>
 
                 <div className={styles.formgroup}>
                     <label htmlFor="lname">Lastname</label>
                     <input type="text" name="lname" />
+
                 </div>
 
                 {/* <div className={styles.formgroupgender}>
@@ -89,6 +95,7 @@ const Register = (e) => {
                 <div className={styles.formgroup}>
                     <label htmlFor="password">Confirm Password</label>
                     <input type="password" name="password" />
+
                 </div>
                 <input type="submit" value="Register" className={styles.submitregister} />
             </form>
