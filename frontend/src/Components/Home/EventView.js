@@ -6,7 +6,7 @@ import React from 'react'
 function EventView() {
 
     return (
-        <p> EventView</p>
+        <h1> EventView</h1>
     )
 }
 

@@ -113,7 +113,7 @@ function HomeDefault() {
         <>
             <div className={styles.upcoming_events}>
                 <div className={styles.upcoming_events_head}>
-                    <h3> Upcoming Events</h3>
+                    <h2> Upcoming Events</h2>
                     <p>See all Events</p>
                 </div>
 
@@ -125,7 +125,7 @@ function HomeDefault() {
 
             <div className={styles.events_by_city}>
                 <div className={styles.events_by_city_head}>
-                    <h3> Events by Location</h3>
+                    <h2> Events by Location</h2>
                     <p>See all Events</p>
                 </div>
 
@@ -137,7 +137,7 @@ function HomeDefault() {
 
             <div className={styles.events_by_Category}>
                 <div className={styles.events_by_Category_head}>
-                    <h3> Events by Category</h3>
+                    <h2> Events by Category</h2>
                     <p>See all Events</p>
                 </div>
 

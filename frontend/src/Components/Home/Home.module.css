@@ -17,11 +17,11 @@
   padding: 0;
 }
 
-.upcoming_events_head h3,
+.upcoming_events_head h2,
 p,
-.events_by_city_head h3,
+.events_by_city_head h2,
 p,
-.events_by_Category_head h3,
+.events_by_Category_head h2,
 p {
   margin: 20px 0 0;
 }
