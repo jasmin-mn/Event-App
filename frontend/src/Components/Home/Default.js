@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-// import Search from '../Search/Search';
+import { useHistory } from "react-router-dom"
 import styles from './Home.module.css';
 import axios from "axios";
 
 
 function HomeDefault() {
+
+    const history = useHistory();
 
     const [events, setEvents] = useState();
     const [eventsByCity, setEventsByCity] = useState();
@@ -19,11 +21,11 @@ function HomeDefault() {
             console.log(result.data)
 
             if (result.data !== 0) {
-                let myEvents = result.data.map((event) => {
+                let myEvents = result.data.map((event, i) => {
                     // console.log(event);
 
                     return (
-                        <div className={styles.events_container}>
+                        <div onClick={handleEvent} className={`${styles.events_container} ${styles.event_view[i]}`}>
 
                             <div className={styles.events_all}>
                                 <img className={styles.events_bg} src={event.event_photo} alt="" />
@@ -39,6 +41,12 @@ function HomeDefault() {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const handleEvent = () => {
+
+        history.push("/eventView/")
+
     }
 
     // filter all Events by Location/City
@@ -75,7 +83,7 @@ function HomeDefault() {
             console.log('Events by Category:')
             console.log(result.data)
             if (result.data !== 0) {
-                let myEvents = result.data.map((event, index) => {
+                let myEvents = result.data.map((event) => {
                     // console.log(event);
                     return (
                         <div className={styles.events_container}>
@@ -99,6 +107,7 @@ function HomeDefault() {
         getAEventsByCity()
         getAEventsByCategory()
     }, []);
+
 
     return (
         <>
