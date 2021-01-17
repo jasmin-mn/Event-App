@@ -15,7 +15,7 @@ const Search = () => {
         }
 
         try {
-            const result = await axios.post('/search', searchEvents, config);
+            const result = await axios.post('http://localhost:7000/search', searchEvents, config);
             console.log('Search Events:')
             console.log(result.data)
 
@@ -28,7 +28,6 @@ const Search = () => {
                             <div className={styles.events_all}>
                                 <img className={styles.events_bg} src={event.event_photo} alt="" />
                                 <p>{event.dateEventstarted}</p>
-
                                 <p>{event.event_name},
                                 {event.category_id.map((category) => <>{category.name}</>)}</p>
                             </div>
@@ -36,8 +35,9 @@ const Search = () => {
                     )
                 })
                 setEvents(mySearch)
-            } else {
-                <p> Unfortunately, no events were found. <br />Try another keyword </p>
+            }
+            else {
+                return <p> Unfortunately, no events were found. <br />Try another keyword </p>
             }
 
         } catch (error) {
@@ -55,7 +55,7 @@ const Search = () => {
 
         const formData = new FormData(event.target)
         const data = {
-            event: formData.get("event_name"),
+            event_name: formData.get("event_name"),
             location: formData.get("location")
         }
 
@@ -66,16 +66,19 @@ const Search = () => {
         }
     }
 
+
     return (
-        <div className={styles.search}>
-        
-            <p>Search for your next Event</p>
+        <>
+            <div className={styles.search}>
+                <p>Search for your next Event</p>
+                <SearchBar onSubmit={handelSubmit} />
+            </div>
 
-            <SearchBar onSubmit={handelSubmit} />
 
-            {events}
-
-        </div>
+            <div className={styles.search_results}>
+                {events}
+            </div>
+        </>
     );
 }
 
