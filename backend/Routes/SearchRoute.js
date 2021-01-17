@@ -1,4 +1,3 @@
-
 const express = require('express');
 const Events = require('../Models/EventModel');
 const router = express.Router();
@@ -13,20 +12,11 @@ router.post('/', async (request, response) => {
             {
                 $and: [
                     { location: { $regex: location, $options: "gi" } },
-                    {
-                        event_name: { $regex: event_name, $options: "gi" },
-                        // description: { $regex: event_name, $options: "i" }
-                    }
+                    { event_name: { $regex: event_name, $options: "gi" } }
                 ]
-            }
-        );
+            }).populate('category_id');
 
-        if (!events) {
-            response.status(500).send({ msg: 'Server error' })
-        }
         return response.send(events)
-
-        console.log(events);
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })

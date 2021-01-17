@@ -1,19 +1,19 @@
-import React, { useState} from 'react'
+import React from 'react'
 import styles from './Register.module.css';
-import {useHistory}from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import axios from 'axios'
 
 
-const Register= (e)=>{
+const Register = (e) => {
 
-    const history=useHistory();
-    const sendRegister = async(registerData)=>{
+    const history = useHistory();
+    const sendRegister = async (registerData) => {
         const config = {
             'Content-Type': 'application/json'
 
         }
-        try{
-            const result =  await axios.post('/user/register', registerData, config )
+        try {
+            const result = await axios.post('/user/register', registerData, config)
             console.log(result);
             localStorage.setItem("registered", JSON.stringify(true))
             history.push('/userpage')
@@ -22,8 +22,8 @@ const Register= (e)=>{
             alert(error.response.data.msg);
         } //
     }
-    
-    const handleSubmit= async(e)=>{
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const data=  {
@@ -45,13 +45,13 @@ const Register= (e)=>{
             // console.log(registered);
 
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
 
- 
-     
+
+
     return (
         <div className ={styles.formcontainer}>
             <h1 className={styles.textregister}>
@@ -102,9 +102,9 @@ const Register= (e)=>{
                 <p>By clicking Register, you agree on our <a href="#">terms and condition</a>.</p>
                 <input type="submit" value="Register" className={styles.submitregister} />
             </form>
-            
+
         </div>
-        )
+    )
 }
 
 export default Register;
