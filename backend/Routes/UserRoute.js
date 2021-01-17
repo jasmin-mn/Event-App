@@ -19,17 +19,21 @@ router.post("/register", async(request,response)=>{
         if(data){
             return response.status(400).json({msg: "User already exist"})
         }
-        data = new User({
+        const user = new User({
             userName,firstName, lastName, email, password
 
 
         })
+        
+        
         const salt = await bcrypt.genSalt(10)
-        data.password = await bcrypt.hash(password, salt)
-        await data.save();
+        user.password = await bcrypt.hash(password, salt);
+        console.log(user.password);
+        await user.save();
+        
 
         const payload = {
-            id: data.id,
+            id: user.id,
             iat:Date.now(),
             exp:Date.now() + 60000
         }
@@ -54,15 +58,13 @@ router.post("/login", async(request,response)=>{
     let data = await User.findOne({ email })
     if(!data){
         return response.status(400).json({msg: "Invalid Credentials"})
-    } else{
-         console.log('login...');
-    }
+    } 
 
     const isMatch = await bcrypt.compare(password, data.password)
     if(!isMatch){
-        return response.status(400).json({msg: "Successfully Login"})
+        return response.status(400).json({msg: "Invalid Credentials"})
     }
-
+    
     // token
     const payload = {
         id: data.id,
@@ -70,6 +72,7 @@ router.post("/login", async(request,response)=>{
         exp:Date.now() + 600000
 
     }
+    try{
     jwt.sign(
         payload,
         process.env.SECRET,
@@ -80,7 +83,7 @@ router.post("/login", async(request,response)=>{
         }
     )
 
-    try{
+    
 
     } catch(error){
         console.log(error);

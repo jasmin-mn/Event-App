@@ -103,9 +103,9 @@ router.get('/viewByCity', async (request, response) => {
             $group: { _id: '$location', count: { $sum: 1 } }
         }], (error, result) => {
             if (error) {
-                response.send(error);
+                console.log(error);
             }
-            return response.send(result);
+        //    return response.send(result);
         });
         // console.log(filter);
 
@@ -118,7 +118,7 @@ router.get('/viewByCity', async (request, response) => {
         return response.send(events)
 
     } catch (error) {
-        response.status(500).send({ msg: 'Server error' })
+        response.status(500).send({ msg: error})
     }
 });
 
