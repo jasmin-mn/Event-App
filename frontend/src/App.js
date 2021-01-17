@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
+import Profilepage from './Components/Profilepage/Profilepage'
 
 import ContactForm from './Components/Contact/ContactForm';
 import Resetpasswordpage from './Components/Resetpasswordpage/Resetpasswordpage'
@@ -52,6 +53,7 @@ function App() {
        
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
+       <Route path='/edit' component={Profilepage} exact/>
        <PrivateRoute path="/userpage" component={UserPage} />
        <Route path='/contact' component={ContactForm} exact />
        
