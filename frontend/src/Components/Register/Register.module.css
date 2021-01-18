@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-p {
+.formcontainer p {
   font-size: 12px;
   width: 150px;
   display: inline-block;

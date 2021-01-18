@@ -21,11 +21,11 @@ function HomeDefault() {
             console.log(result.data)
 
             if (result.data !== 0) {
-                let myEvents = result.data.map((event) => {
+                let myEvents = result.data.map((event, i) => {
                     // console.log(event);
 
                     return (
-                        <div onClick={handleEvent} className={`${styles.events_container} ${styles.event_view}`}>
+                        <div onClick={handleEvent} className={`${styles.events_container} ${styles.event_view[i]}`}>
 
                             <div className={styles.events_all}>
                                 <img className={styles.events_bg} src={event.event_photo} alt="" />

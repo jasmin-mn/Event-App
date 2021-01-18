@@ -109,7 +109,7 @@ router.get('/viewByCity', async (request, response) => {
             if (error) {
                 console.log(error);
             }
-        //    return response.send(result);
+           return response.send(result);
         });
         // console.log(filter);
 
