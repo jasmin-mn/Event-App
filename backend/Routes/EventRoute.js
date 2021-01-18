@@ -107,9 +107,9 @@ router.get('/viewByCity', async (request, response) => {
             // { event_photo: '$event_photo', count: { $sum: 1 } }
         }], (error, result) => {
             if (error) {
-                return response.send(error);
+                console.log(error);
             }
-            response.send(result);
+        //    return response.send(result);
         });
         // console.log(filter);
 
@@ -142,7 +142,7 @@ router.get('/viewBySelectedCity/:city', async (request, response) => {
         response.send(events)
 
     } catch (error) {
-        response.status(500).send({ msg: 'Server error' })
+        response.status(500).send({ msg: error})
     }
 });
 

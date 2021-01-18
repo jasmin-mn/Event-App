@@ -1,0 +1,66 @@
+.profileheader{
+    
+    
+    text-align: center;
+}
+
+.profileform{
+    text-align: center;
+
+}
+
+.submitregister{
+    background-color: gray;
+    margin-left: 60px;
+
+}
+
+.formgroupgender[type=radio]{
+    cursor: pointer;
+    -ms-transform: scale(.6); /* IE 9 */
+    -webkit-transform: scale(.6); /* Chrome, Safari, Opera */
+    transform: scale(.8);
+    background-color: red;
+    
+ 
+
+}
+.formgroupgender{
+    font-size: 15px;
+    margin-left: 550px;
+    display: flex;
+    align-items: center;
+
+}
+
+.formemail{
+    display: inline-block;
+    text-align: right;
+    margin-left: -35px;
+}
+
+.formdate{
+    display: inline-block;
+    text-align: right;
+    margin-left: -20px;
+
+}
+.formplace{
+    margin-left: 25px;
+
+}
+.formhometown{
+    margin-left: -10px;
+}
+.formlang{
+    margin-left: -8px;
+
+}
+.forminterest{
+    margin-left: -35px;
+
+}
+
+.formothers{
+    margin-left: 11px;
+}

@@ -15,9 +15,11 @@ const Register = (e) => {
         try {
             const result = await axios.post('/user/register', registerData, config)
             console.log(result);
+            localStorage.setItem("registered", JSON.stringify(true))
+            history.push('/userpage')
         }
-        catch (error) {
-            console.log(error);
+        catch(error){
+            alert(error.response.data.msg);
         } //
     }
 
@@ -25,22 +27,21 @@ const Register = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const data=  {
-            userName:formData.get("UserName"),
-            firstName:formData.get("Firstname"),
-            lastName:formData.get("Lastname"),
-            email:formData.get("Email Address"),
-            password:formData.get("Password"),
-
-            password:formData.get("Confirm Password")
+            userName:formData.get("userName"),
+            firstName:formData.get("firstName"),
+            lastName:formData.get("lastName"),
+            email:formData.get("email"),
+            password:formData.get("password"),
+            password_confirm:formData.get("confirm_password")
 
 
         }
-        try {
+        
+        try{
             sendRegister(data)
             // const registered = localStorage.getItem("registered")
             // registered = JSON.parse(registered)
-            localStorage.setItem("registered", JSON.stringify(true))
-            history.push('/login')
+            
             // console.log(registered);
 
         }
@@ -52,46 +53,53 @@ const Register = (e) => {
 
 
     return (
-        <div className={styles.formcontainer}>
-            <h1>
-                User <span className={styles.textregister}> Register </span>
+        <div className ={styles.formcontainer}>
+            <h1 className={styles.textregister}>
+                 Registration 
             </h1>
             <form onSubmit={handleSubmit} >
-                <div className={styles.formgroup}>
-                    <label htmlFor="username">User Name</label>
-                    <input type="text" username="userName"    />
+                 <div className={styles.formgroup}>
+                    <label id="icon" htmlFor="userName"> <i class="icon-user"></i></label>
+                    <input type="text" name="userName"  placeholder="User Name"  />
+                </div>
+
+               <div className={styles.formgroup}>
+                    <label id="icon"  htmlFor="firstName"> <i class="icon-user"></i></label>
+                    <input type="text" name="firstName" placeholder="First Name"    />
+                </div>
+
+               <div className={styles.formgroup}>
+                    <label id="icon"  htmlFor="lastName"> <i class="icon-user"></i></label>
+                    <input type="text" name="lastName" placeholder="Last Name"     />
+                </div>
+
+                 <div className={styles.formgroupgender}>
+                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="None" checked/> 
+                   
+                    <label className={styles.formgroupgenderlabel}  htmlFor="gender" class="radio"  chec>Female</label>
+                    </div>
+                   
+                    <div className={styles.formgroupgender}>
+                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="None" /> 
+                    
+                    <label className={styles.formgroupgenderlabel}  htmlFor="gender" class="radio"  chec>Male</label>
                 </div>
 
                 <div className={styles.formgroup}>
-                    <label htmlFor="fname">Firstname</label>
-                    <input type="text" name="firstName"    />
+                    <label id="icon"  htmlFor="email"><i class="icon-envelope "></i></label>
+                    <input type="email" name="email" placeholder="Email"   />
                 </div>
 
                 <div className={styles.formgroup}>
-                    <label htmlFor="lname">Lastname</label>
-                    <input type="text" name="lastName"    />
-                </div>
-
-                {/* <div className={styles.formgroupgender}>
-                    <label htmlFor="gender">Gender</label>
-                    <input type="radio" name="gender" value="Female" />
-                    <input type="radio" name="gender" value="Male" />
-                </div> */}
-
-                <div className={styles.formgroup}>
-                    <label htmlFor="email">Email Address</label>
-                    <input type="email" name="email" />
+                    <label id="icon"  htmlFor="password"><i class="icon-shield"></i></label>
+                    <input type="password" name="password" placeholder="Password"/>
                 </div>
 
                 <div className={styles.formgroup}>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" />
+                    <label id="icon"  htmlFor="password"><i class="icon-shield"></i></label>
+                    <input type="password" name="password_confirm" placeholder="Confirm Password" />
                 </div>
-
-                <div className={styles.formgroup}>
-                    <label htmlFor="password">Confirm Password</label>
-                    <input type="password" name="password_confirm"  />
-                </div>
+                <p>By clicking Register, you agree on our <a href="#">terms and condition</a>.</p>
                 <input type="submit" value="Register" className={styles.submitregister} />
             </form>
 
