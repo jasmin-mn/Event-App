@@ -54,7 +54,7 @@ const Login = (event) => {
             </h1>
             <form onSubmit={handleSubmit}  >
                 <div className={styles.form}>
-                    <label htmlFor="email"> <i class="icon-envelope "></i></label>
+                    <label htmlFor="email"><i class="icon-envelope "></i></label>
                     <input type="email" name="email" placeholder="Email" />
                 </div>
                 <div className={styles.container}>
@@ -62,6 +62,10 @@ const Login = (event) => {
                     <input type="password" name="password" placeholder="Password" />
                 </div>
                 <input type="submit" value="Login" className={styles.login} />
+                <h2 className={styles.containerhelp}>
+                    Need to <a href="/signup">sign up</a> for an account
+                    or <a href="/forgotPassword" id="forgot_password_link" >reset</a> your password?
+                    </h2>
             </form>
         </div>
     )

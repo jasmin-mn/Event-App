@@ -21,7 +21,7 @@ export default function Header() {
                         </li>
 
                         <li>
-                            <Link to={'/Profile'}>Profile</Link>
+                            <Link to={'/profileUpdate'}>Profile</Link>
                         </li>
 
                         <li>

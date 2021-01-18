@@ -28,18 +28,20 @@ const submitResetpw = async(e)=>{
 
 
   return (
-    <div>
+    <div className={styles.containerresetpw}>
       <h1>Resetpassword</h1>
       <form onSubmit = {submitResetpw}>
         <div className={styles.formpassword}>
-          <label htmlFor="password">New Password</label>
+          <label htmlFor="password"><i class="icon-shield"></i></label>
           <input type="password" onChange={changePw} name="password" placeholder = " Enter your new Password"/>
-          <div> 
-          <label htmlFor="password">Confirm New Password</label>
+          </div> 
+          
+          <div className={styles.formpasswordnew}>
+          <label htmlFor="password"><i class="icon-shield"></i></label>
           <input type="password" onChange={changePw} name="password" placeholder = " Confirm your new Password"/>
           </div>
           <input type="submit" value="Resetpassword" className={styles.submitresetpw} />
-        </div>
+       
 
       </form>
     </div>

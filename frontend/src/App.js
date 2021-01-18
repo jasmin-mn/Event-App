@@ -56,7 +56,7 @@ function App() {
        
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
-       <Route path='/edit' component={Profilepage} exact/>
+       <Route path='/profileUpdate' component={Profilepage} exact/>
        <PrivateRoute path="/userpage" component={UserPage} />
        <Route path='/contact' component={ContactForm} exact />
        

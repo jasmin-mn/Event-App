@@ -16,7 +16,7 @@ const Register = (e) => {
             const result = await axios.post('/user/register', registerData, config)
             console.log(result);
             localStorage.setItem("registered", JSON.stringify(true))
-            history.push('/userpage')
+            history.push('/')
         }
         catch(error){
             alert(error.response.data.msg);
@@ -31,6 +31,7 @@ const Register = (e) => {
             firstName:formData.get("firstName"),
             lastName:formData.get("lastName"),
             email:formData.get("email"),
+            gender:formData.get("gender"),
             password:formData.get("password"),
             password_confirm:formData.get("confirm_password")
 
@@ -74,7 +75,7 @@ const Register = (e) => {
                 </div>
 
                  <div className={styles.formgroupgender}>
-                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="None" checked/> 
+                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="true" checked/> 
                    
                     <label className={styles.formgroupgenderlabel}  htmlFor="gender" class="radio"  chec>Female</label>
                     </div>
