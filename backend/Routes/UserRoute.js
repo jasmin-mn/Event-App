@@ -168,7 +168,7 @@ router.post("/profileUpdate" ,authenticate , async(request, response)=>{
 
 // Edit Profile
 
-router.get('/profile/:id', authenticate, async(request,response)=>{
+router.post('/profile/:id', authenticate, async(request,response)=>{
     console.log("the id of the current logged in user is : ",request.id);
     // MAke sure that the user own the profile    
     if(request.id !== request.params.id){
