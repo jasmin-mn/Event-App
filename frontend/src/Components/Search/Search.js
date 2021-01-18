@@ -36,9 +36,9 @@ const Search = () => {
                 })
                 setEvents(mySearch)
             }
-            else {
-                return <p> Unfortunately, no events were found. <br />Try another keyword </p>
-            }
+            // else {
+            //     return <p> Unfortunately, no events were found. <br />Try another keyword </p>
+            // }
 
         } catch (error) {
             console.log(error);
@@ -59,12 +59,19 @@ const Search = () => {
             location: formData.get("location")
         }
 
+        console.log(data);
+
         try {
-            getEvents(data)
+            if (data.event_name === "" && data.location === "") {
+                return <p> Unfortunately, no events were found. <br />Try another keyword </p>
+            } else {
+                getEvents(data)
+            }
         } catch (error) {
             console.log(error);
         }
     }
+
 
 
     return (
@@ -76,6 +83,7 @@ const Search = () => {
 
 
             <div className={styles.search_results}>
+
                 {events}
             </div>
         </>

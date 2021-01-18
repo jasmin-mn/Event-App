@@ -37,7 +37,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 280px;
+  height: 200px;
   width: 100%;
   /* border: 1px solid red; */
 }
@@ -51,10 +51,11 @@
 }
 
 .header_tittel {
+
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: #fff;
   font-size: 30px;
-  margin:  -30px 10px 0;
+  margin:  20px 10px 0;
   text-align: left;
 }
 
