@@ -127,6 +127,34 @@ router.get("/profile" ,authenticate , async(request, response)=>{
     }
     
 })
+router.post("/profileUpdate" ,authenticate , async(request, response)=>{
+    const { userName, firstName, lastName, email, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    console.log("this is test request.id", request.id);
+    try{
+        const user = await User.findById(request.id).select('-password')
+        if(!user){
+            return response.status(500).json({msg: 'Server error'})
+        }
+       /////// response.json({msg: `Welcome Back ${user.userName}`})
+       user.userName = userName;
+       user.firstName = firstName;
+       user.lastName = lastName;
+       user.email = email;
+       user.dateOfBirth = dateOfBirth;
+       user.place = place;
+       user.hometown = hometown;
+       user.gender = gender;
+       user.language = language;
+       user.yourInterests = yourInterests;
+       user.others = others;
+
+       user.save();
+       response.json({msg: `user info updated  Back ${user.userName}` , user})
+    } catch(error){
+        response.status(500).json({msg:'Server error'})
+    }
+    
+})
 
 // Delete Profile
 // router.delete('/delete/:id', authenticate, async(request, response)=>{
@@ -140,16 +168,16 @@ router.get("/profile" ,authenticate , async(request, response)=>{
 
 // Edit Profile
 
-router.put('/edit/:id', authenticate, async(request,response)=>{
+router.get('/profile/:id', authenticate, async(request,response)=>{
     console.log("the id of the current logged in user is : ",request.id);
     // MAke sure that the user own the profile    
     if(request.id !== request.params.id){
         return response.status(401).json({  msg : "Not authorized" })
     }
-    const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    const { userName, firstName, lastName, email, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
     const user = await User.findByIdAndUpdate(
         {_id: (request.params.id)},
-        {$set: { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others }}
+        {$set: { userName, firstName, lastName, email, dateOfBirth, place, hometown, gender, language, yourInterests, others }}
     )
     if(user){
         response.send(`Profile has been updated`)
