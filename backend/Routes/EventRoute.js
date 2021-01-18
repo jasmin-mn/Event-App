@@ -181,7 +181,7 @@ router.get('/viewByCategory', async (request, response) => {
         response.send(events)
 
     } catch (error) {
-        response.status(500).send({ msg: 'Server error' })
+        // response.status(500).send({ msg: 'Server error' })
     }
 
 });
