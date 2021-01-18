@@ -50,7 +50,7 @@ const Search = () => {
     }, []);
 
 
-    const handelSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         const formData = new FormData(event.target)
@@ -71,7 +71,7 @@ const Search = () => {
         <>
             <div className={styles.search}>
                 <p>Search for your next Event</p>
-                <SearchBar onSubmit={handelSubmit} />
+                <SearchBar onSubmit={handleSubmit} />
             </div>
 
 
