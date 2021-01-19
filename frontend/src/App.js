@@ -74,8 +74,6 @@ function App() {
        
        <Route path='/resetPassword' component={Resetpasswordpage}/>
        <Route path='/forgotPassword' component={Forgotpasswordpage}/>
-       
-
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
