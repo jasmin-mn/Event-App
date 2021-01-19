@@ -55,6 +55,7 @@ function App() {
       <Router>
 
         <Header />
+
         <Notifications>
 
           <Switch>
@@ -62,19 +63,21 @@ function App() {
             <Route path='/' component={Home} exact />
             <Route path='/login' component={Login} exact />
             <Route path='/signup' component={Register} exact />
-            <Route path='/edit' component={Profilepage} exact />
             <PrivateRoute path="/userpage" component={UserPage} />
             <Route path='/contact' component={ContactForm} exact />
+
             <Route path='/viewOneEvent/:id' render={(props) => (<EventView {...props} />)} />
-  
-            <Route path='/resetPassword' component={Resetpasswordpage}/>
-            <Route path='/forgotPassword' component={Forgotpasswordpage}/>
+            <Route path='/' component={EventView} exact />
+
+            <Route path='/resetPassword' component={Resetpasswordpage} />
+            <Route path='/forgotPassword' component={Forgotpasswordpage} />
             <Route path='/savedEvent' component={savedEvents} />
             <Route path='/StartNewEvent' component={StartNewEvent} />
             <Route path='/editProfile' component={Profilepage} />
             <Route path='/logout' component={Logout} />
 
           </Switch>
+
         </Notifications>
 
         <Footer />
