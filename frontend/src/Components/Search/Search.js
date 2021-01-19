@@ -47,11 +47,6 @@ const Search = () => {
         }
     }
 
-    useEffect(() => {
-        getEvents();
-    }, []);
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -86,7 +81,7 @@ const Search = () => {
     return (
         <>
             <div className={styles.search}>
-                <p>Search for your next Event</p>
+                <p className={styles.search_text}>Search for your next Event</p>
                 <SearchBar onSubmit={handleSubmit} />
             </div>
 
