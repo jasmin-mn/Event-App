@@ -36,7 +36,7 @@ function Profilepage(e) {
             lastName:formData.get("lastName"),
             email:formData.get("email"),
             gender:formData.get("gender"),
-            dateOfBirth:formData.get("dateOfBirth"),
+            age:formData.get("age"),
             place:formData.get("place"),
             hometown:formData.get("hometown"),
             language:formData.get("language"),
@@ -99,8 +99,8 @@ function Profilepage(e) {
                 </div>
 
                 <div className={styles.formdate}>
-                    <label htmlFor="dateOfBirth">Date of birth</label>
-                    <input type="text" name="dateOfBirth"  />
+                    <label htmlFor="age">Age</label>
+                    <input type="text" name="age"  />
                 </div>
                 <div className={styles.formplace}>
                     <label htmlFor="place">Place</label>

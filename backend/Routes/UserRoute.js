@@ -128,7 +128,7 @@ router.get("/profile" ,authenticate , async(request, response)=>{
     
 })
 router.post("/profileUpdate" ,authenticate , async(request, response)=>{
-    const { userName, firstName, lastName, email, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    const { userName, firstName, lastName, email, age, place, hometown, gender, language, yourInterests, others} = request.body
     console.log("this is test request.id", request.id);
     try{
         const user = await User.findById(request.id).select('-password')
@@ -140,7 +140,7 @@ router.post("/profileUpdate" ,authenticate , async(request, response)=>{
        user.firstName = firstName;
        user.lastName = lastName;
        user.email = email;
-       user.dateOfBirth = dateOfBirth;
+       user.age = age;
        user.place = place;
        user.hometown = hometown;
        user.gender = gender;
