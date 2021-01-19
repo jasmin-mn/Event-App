@@ -93,6 +93,24 @@ router.get('/viewAll', async (request, response) => {
 });
 
 
+// View one Event
+router.get('/viewOneEvent/:id', async (request, response) => {
+
+    try {
+        const events = await Events.findById({ _id: request.params.id }).populate('category_id');
+
+        if (!events) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.send(events)
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+
+    }
+});
+
+
 // View all Events by Location
 router.get('/viewByCity', async (request, response) => {
 
@@ -109,7 +127,7 @@ router.get('/viewByCity', async (request, response) => {
             if (error) {
                 console.log(error);
             }
-           return response.send(result);
+            return response.send(result);
         });
         // console.log(filter);
 
@@ -119,7 +137,7 @@ router.get('/viewByCity', async (request, response) => {
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        response.send(events)
+        return response.send(events)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
@@ -139,10 +157,10 @@ router.get('/viewBySelectedCity/:city', async (request, response) => {
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        response.send(events)
+        return response.send(events)
 
     } catch (error) {
-        response.status(500).send({ msg: error})
+        response.status(500).send({ msg: error })
     }
 });
 
@@ -153,8 +171,6 @@ router.get('/viewByCategory', async (request, response) => {
     try {
         const filter = await Events.aggregate([{
 
-            // $group: { _id: '$category_id', count: { $sum: 1 } },
-
             "$lookup":
             {
                 from: "categories",
@@ -162,7 +178,6 @@ router.get('/viewByCategory', async (request, response) => {
                 localField: "category_id",
                 as: "category"
             }
-
         },
         {
             $group: { _id: '$category', count: { $sum: 1 } }
@@ -178,10 +193,10 @@ router.get('/viewByCategory', async (request, response) => {
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        response.send(events)
+        return response.send(events)
 
     } catch (error) {
-        // response.status(500).send({ msg: 'Server error' })
+        response.status(500).send({ msg: 'Server error' })
     }
 
 });

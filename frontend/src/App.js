@@ -16,6 +16,7 @@ import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpa
 import UserPage from './Components/UserPage/UserPage'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
 
+import Notifications, { NotificationsContext } from './Components/Notifications/Notifications';
 
 import './App.css';
 
@@ -43,14 +44,25 @@ function App() {
 
 
   return (
+
     <UserStateContext.Provider value={{ loggedInState, setLoggedIn }}>
+
+
       <Router>
 
         <Header />
+        <Notifications>
 
-        <Switch>
+          <Switch>
 
-          <Route path='/' component={Home} exact />
+            <Route path='/' component={Home} exact />
+
+            <Route path='/login' component={Login} exact />
+            <Route path='/signup' component={Register} exact />
+            <Route path='/edit' component={Profilepage} exact />
+            <PrivateRoute path="/userpage" component={UserPage} />
+            <Route path='/contact' component={ContactForm} exact />
+            <Route path='/viewOneEvent/:id' render={(props) => (<EventView {...props} />)} />
 
         <Route path='/' component={Home} exact/>
        
@@ -63,11 +75,17 @@ function App() {
        <Route path='/resetPassword' component={Resetpasswordpage}/>
        <Route path='/forgotPassword' component={Forgotpasswordpage}/>
 
-        </Switch>
+            <Route path='/resetPassword' component={Resetpasswordpage} />
+            <Route path='/forgotPassword' component={Forgotpasswordpage} />
+
+          </Switch>
+        </Notifications>
 
         <Footer />
 
       </Router>
+
+
     </UserStateContext.Provider>);
 }
 

@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 45px;
+  height: 40px;
   width: 100%;
   background-color: orange;
 }
@@ -46,16 +46,15 @@
   /* border: 1px solid red; */
   width: 50%;
   position: absolute;
-  top: 30px;
+  top: 20px;
   right: 50px;
 }
 
 .header_tittel {
-
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: #fff;
   font-size: 30px;
-  margin:  20px 10px 0;
+  margin: 0;
   text-align: left;
 }
 
@@ -66,7 +65,7 @@
   font-size: 25px;
   text-align: center;
   padding: 0px 30px;
-  position:absolute;
+  position: absolute;
 
   border-radius: 20px;
   border: none;
