@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import SearchBar from './SearchBar';
 import styles from './Search.module.css';
 import axios from "axios";
+// import { NotificationsContext } from '../Notifications/Notifications';
 
 const Search = () => {
 
-    const [events, setEvents] = useState();
+    const [events, setEvents] = useState([]);
+    const [serchInputs, setSerchInputs] = useState(true);
+
+    // const { addNotificationToQueue } = useContext(NotificationsContext);
 
     const getEvents = async (searchEvents) => {
 
@@ -33,12 +37,10 @@ const Search = () => {
                             </div>
                         </div>
                     )
-                })
+                });
+
                 setEvents(mySearch)
             }
-            // else {
-            //     return <p> Unfortunately, no events were found. <br />Try another keyword </p>
-            // }
 
         } catch (error) {
             console.log(error);
@@ -61,12 +63,19 @@ const Search = () => {
 
         console.log(data);
 
+
         try {
             if (data.event_name === "" && data.location === "") {
-                return <p> Unfortunately, no events were found. <br />Try another keyword </p>
+
+                // addNotificationToQueue("Unfortunately, no events were found.")
+                setEvents([])
+                setSerchInputs(false)
+
             } else {
+                setSerchInputs(true)
                 getEvents(data)
             }
+
         } catch (error) {
             console.log(error);
         }
@@ -83,8 +92,9 @@ const Search = () => {
 
 
             <div className={styles.search_results}>
-
+                {!serchInputs && 'Unfortunately, no events were found.'}
                 {events}
+
             </div>
         </>
     );

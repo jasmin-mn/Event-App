@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom"
 import styles from './Home.module.css';
 import axios from "axios";
+import EventView from "./EventView";
 
 
 function HomeDefault() {
@@ -21,11 +22,11 @@ function HomeDefault() {
             console.log(result.data)
 
             if (result.data !== 0) {
-                let myEvents = result.data.map((event, i) => {
+                let myEvents = result.data.map((event) => {
                     // console.log(event);
 
                     return (
-                        <div onClick={handleEvent} className={`${styles.events_container} ${styles.event_view[i]}`}>
+                        <div onClick={handleEvent} className={`${styles.events_container} ${styles.event_view}`}>
 
                             <div className={styles.events_all}>
                                 <img className={styles.events_bg} src={event.event_photo} alt="" />
@@ -57,7 +58,7 @@ function HomeDefault() {
             console.log(result.data)
 
             if (result.data !== 0) {
-                let myEvents = result.data.map((event, index) => {
+                let myEvents = result.data.map((event) => {
                     console.log(event);
                     return (
                         <div className={styles.events_container}>
@@ -89,7 +90,7 @@ function HomeDefault() {
                         <div className={styles.events_container}>
 
                             <div className={styles.events_by_category}>
-                                <img className={styles.events_by_category_bg} src={event._id.map((category) => <>{category.photo}</>)} alt="" />
+                                <img className={styles.events_by_category_bg} alt={event._id.map((category) => <>{category.photo}</>)} alt="" />
                                 <p className={styles.category_text}>{event._id.map((category) => <>{category.name}</>)}</p>
                             </div>
                         </div>
