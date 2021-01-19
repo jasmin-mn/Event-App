@@ -49,8 +49,10 @@ export default function Header() {
                          
                         </li>
 
-                        <li>
+                        <li onMouseEnter={handleMouseEnter}>
                             <Link to={'/profileUpdate'}>Profile</Link>
+
+                            {dropdown && <Dropdown handleMouseLeave={handleMouseLeave} />}
                         </li>
 
                         <li>
