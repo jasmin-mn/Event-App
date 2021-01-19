@@ -105,12 +105,7 @@ router.get('/viewByCity', async (request, response) => {
                 count: { $sum: 1 }
             }
             // { event_photo: '$event_photo', count: { $sum: 1 } }
-        }], (error, result) => {
-            if (error) {
-                console.log(error);
-            }
-           return response.send(result);
-        });
+        }]);
         // console.log(filter);
 
         const events = await Events.find(filter);
@@ -119,7 +114,7 @@ router.get('/viewByCity', async (request, response) => {
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        response.send(events)
+        return response.send(events)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
@@ -166,12 +161,7 @@ router.get('/viewByCategory', async (request, response) => {
         },
         {
             $group: { _id: '$category', count: { $sum: 1 } }
-        }], (error, result) => {
-            if (error) {
-                return response.send(error);
-            }
-            response.send(result);
-        });
+        }]);
 
         const events = await Events.find(filter);
 

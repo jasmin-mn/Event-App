@@ -12,7 +12,7 @@ export default function Dropdown({ handleMouseLeave }) {
 
     return (
         <>
-            <ul className={styles.dropdownmenu} onMouseLeave={handleMouseLeave}>
+            <ul className={styles.dropdownmenu} onMouseLeave={handleMouseLeave} onClick={handleMouseLeave}>
                 {MenuItems.map((item,index)=>{
 
                     return(
