@@ -28,6 +28,11 @@ export const MenuItems=[
         cName:'dropdown-Link'
      },
      {
+      title:'Settings',
+      path:'/settings',
+      cName:'dropdown-Link'
+   },
+     {
         title:'Log out',
         path:'/Logout',
         cName:'dropdown-Link'
