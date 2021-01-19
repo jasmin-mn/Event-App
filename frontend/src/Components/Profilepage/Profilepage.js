@@ -6,29 +6,65 @@ import axios from 'axios'
 
 
 
+
 function Profilepage(e) {
     const history=useHistory();
-    const editRegister = async(registerData)=>{
+    const editRegister = async(updateData)=>{
+        console.log(e);
         const config = {
             'Content-Type': 'application/json'
 
         }
         try{
-            const result =  await axios.put('/user/edit', registerData, config )
+            const result =  await axios.post('/user/profileUpdate', updateData, config )
             console.log(result);
             localStorage.setItem("registered", JSON.stringify(true))
-            // history.push('/userpage')
+            
+            history.push('/profile/:id')
         }
         catch(error){
             alert(error.response.data.msg);
         } //
     }
 
+    const handleUpdate = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const data=  {
+            userName:formData.get("userName"),
+            firstName:formData.get("firstName"),
+            lastName:formData.get("lastName"),
+            email:formData.get("email"),
+            gender:formData.get("gender"),
+            dateOfBirth:formData.get("dateOfBirth"),
+            place:formData.get("place"),
+            hometown:formData.get("hometown"),
+            language:formData.get("language"),
+            yourInterests:formData.get("language"),
+            othersyourInterests:formData.get("others")
+
+
+        }
+        
+        try{
+            editRegister(data)
+            // const registered = localStorage.getItem("registered")
+            // registered = JSON.parse(registered)
+            
+            // console.log(registered);
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
     return (
         <div className={styles.profilecontainer}> 
             <h1 className={styles.profileheader}>Profile</h1> 
-            <form className={styles.profileform}>
+            <form onSubmit={handleUpdate} className={styles.profileform}>
                  <div className={styles.formusername}>
                     <label htmlFor="userName">User name</label>
                     <input type="text" name="userName"    />
@@ -60,11 +96,6 @@ function Profilepage(e) {
                 <div className={styles.formemail}>
                     <label htmlFor="email">Email Address</label>
                     <input type="text" name="email"  />
-                </div>
-
-                <div className={styles.formgroup}>
-                    <label htmlFor="password">Password</label>
-                    <input type="text" name="password"   />
                 </div>
 
                 <div className={styles.formdate}>
