@@ -64,16 +64,16 @@ function App() {
             <Route path='/contact' component={ContactForm} exact />
             <Route path='/viewOneEvent/:id' render={(props) => (<EventView {...props} />)} />
 
-        <Route path='/' component={Home} exact/>
-       
-       <Route path='/login' component={Login} exact />
-       <Route path='/signup' component={Register} exact/>
-       <Route path='/profileUpdate' component={Profilepage} exact/>
-       <PrivateRoute path="/userpage" component={UserPage} />
-       <Route path='/contact' component={ContactForm} exact />
-       
-       <Route path='/resetPassword' component={Resetpasswordpage}/>
-       <Route path='/forgotPassword' component={Forgotpasswordpage}/>
+            <Route path='/' component={Home} exact />
+
+            <Route path='/login' component={Login} exact />
+            <Route path='/signup' component={Register} exact />
+            <Route path='/profileUpdate' component={Profilepage} exact />
+            <PrivateRoute path="/userpage" component={UserPage} />
+            <Route path='/contact' component={ContactForm} exact />
+
+            <Route path='/resetPassword' component={Resetpasswordpage} />
+            <Route path='/forgotPassword' component={Forgotpasswordpage} />
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
