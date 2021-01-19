@@ -47,11 +47,6 @@ const Search = () => {
         }
     }
 
-    useEffect(() => {
-        getEvents();
-    }, []);
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
 

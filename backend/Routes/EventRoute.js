@@ -116,31 +116,22 @@ router.get('/viewByCity', async (request, response) => {
 
     try {
 
-        const filter = await Events.aggregate([{
+        const events = await Events.aggregate([{
             $group: {
                 _id: { location: '$location' },
                 event_photo: { $first: '$event_photo' },
                 count: { $sum: 1 }
             }
             // { event_photo: '$event_photo', count: { $sum: 1 } }
-        }], (error, result) => {
-            if (error) {
-                console.log(error);
-            }
-            return response.send(result);
-        });
-        // console.log(filter);
-
-        const events = await Events.find(filter);
-        console.log(events);
+        }]);
 
         if (!events) {
-            return response.status(500).send({ msg: 'Server error' })
+            return response.status(500).send({ msg: 'No events' })
         }
         return response.send(events)
 
     } catch (error) {
-        response.status(500).send({ msg: 'Server error' })
+        response.status(500).send({ msg: 'Server error' + error })
     }
 });
 
@@ -169,7 +160,7 @@ router.get('/viewBySelectedCity/:city', async (request, response) => {
 router.get('/viewByCategory', async (request, response) => {
 
     try {
-        const filter = await Events.aggregate([{
+        const events = await Events.aggregate([{
 
             "$lookup":
             {
@@ -181,14 +172,7 @@ router.get('/viewByCategory', async (request, response) => {
         },
         {
             $group: { _id: '$category', count: { $sum: 1 } }
-        }], (error, result) => {
-            if (error) {
-                return response.send(error);
-            }
-            response.send(result);
-        });
-
-        const events = await Events.find(filter);
+        }]);
 
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })

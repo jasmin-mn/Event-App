@@ -49,9 +49,16 @@ export default function Header() {
                          
                         </li>
 
-                        <li>
-                            <Link to={'/profileUpdate'}>Profile</Link>
+                        <li onMouseEnter={handleMouseEnter}>
+                            <Link to={'/Account'} className='navbar-logo'>Account</Link>
+                         {dropdown && <Dropdown handleMouseLeave={handleMouseLeave}/>  }
+
                         </li>
+
+                        {/* <li>
+                            <Link to={'/profileUpdate'}>Profile</Link>
+
+                        </li> */}
 
                         <li>
                             <Link to={'/Messages'}>Messages</Link>
@@ -71,7 +78,7 @@ export default function Header() {
     } else {
 
         return (
-            <Dropdown/>,
+           
             <div className={styles.header}>
                 <nav className={styles.nav}>
                     <img id="logo" src={logo} alt={"logo"} />
