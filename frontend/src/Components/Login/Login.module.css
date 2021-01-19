@@ -12,10 +12,18 @@ h1{
 }
 .login{
     text-align: center;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 13px;
+    width: 510px;
+    background-color: gray;
+
 }
 
 .formlink{
     display: block;
     font-size:15px;
+}
+.containerhelp{
+    font-size: 15px;
 }

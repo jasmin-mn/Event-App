@@ -49,10 +49,8 @@ export default function Header() {
                          
                         </li>
 
-                        <li onMouseEnter={handleMouseEnter}>
-                            <Link to={'/Profile'}>Profile</Link>
-
-                            {dropdown && <Dropdown handleMouseLeave={handleMouseLeave} />}
+                        <li>
+                            <Link to={'/profileUpdate'}>Profile</Link>
                         </li>
 
                         <li>

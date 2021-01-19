@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
+import EventView from './Components/Home/EventView';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
+import Profilepage from './Components/Profilepage/Profilepage'
 
 import ContactForm from './Components/Contact/ContactForm';
 import Resetpasswordpage from './Components/Resetpasswordpage/Resetpasswordpage'
@@ -24,12 +26,12 @@ function App() {
   const [loggedInState, setLoggedInState] = useState(false);
 
   const setLoggedIn = (state) => {
-    if(state) {
-       window.localStorage.setItem("loggedIn", JSON.stringify(true));
+    if (state) {
+      window.localStorage.setItem("loggedIn", JSON.stringify(true));
     } else {
       window.localStorage.removeItem('loggedIn');
     }
-   
+
     setLoggedInState(state);
   }
 
@@ -39,19 +41,22 @@ function App() {
     };
   }, [])
 
+
   return (
     <UserStateContext.Provider value={{ loggedInState, setLoggedIn }}>
       <Router>
 
-        <Header  />
+        <Header />
 
         <Switch>
 
+          <Route path='/' component={Home} exact />
 
         <Route path='/' component={Home} exact/>
        
        <Route path='/login' component={Login} exact />
        <Route path='/signup' component={Register} exact/>
+       <Route path='/profileUpdate' component={Profilepage} exact/>
        <PrivateRoute path="/userpage" component={UserPage} />
        <Route path='/contact' component={ContactForm} exact />
        

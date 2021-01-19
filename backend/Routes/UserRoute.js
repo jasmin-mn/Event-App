@@ -19,17 +19,21 @@ router.post("/register", async(request,response)=>{
         if(data){
             return response.status(400).json({msg: "User already exist"})
         }
-        // data = new User({
-        //     userName,firstName, lastName, email, password
+        const user = new User({
+            userName,firstName, lastName, email, password
 
 
-        // })
+        })
+        
+        
         const salt = await bcrypt.genSalt(10)
-        data.password = await bcrypt.hash(password, salt)
-        await data.save();
+        user.password = await bcrypt.hash(password, salt);
+        console.log(user.password);
+        await user.save();
+        
 
         const payload = {
-            id: data.id,
+            id: user.id,
             iat:Date.now(),
             exp:Date.now() + 60000
         }
@@ -54,15 +58,13 @@ router.post("/login", async(request,response)=>{
     let data = await User.findOne({ email })
     if(!data){
         return response.status(400).json({msg: "Invalid Credentials"})
-    } else{
-         console.log('login...');
-    }
+    } 
 
     const isMatch = await bcrypt.compare(password, data.password)
     if(!isMatch){
-        return response.status(400).json({msg: "Successfully Login"})
+        return response.status(400).json({msg: "Invalid Credentials"})
     }
-
+    
     // token
     const payload = {
         id: data.id,
@@ -70,6 +72,7 @@ router.post("/login", async(request,response)=>{
         exp:Date.now() + 600000
 
     }
+    try{
     jwt.sign(
         payload,
         process.env.SECRET,
@@ -80,7 +83,7 @@ router.post("/login", async(request,response)=>{
         }
     )
 
-    try{
+    
 
     } catch(error){
         console.log(error);
@@ -124,6 +127,34 @@ router.get("/profile" ,authenticate , async(request, response)=>{
     }
     
 })
+router.post("/profileUpdate" ,authenticate , async(request, response)=>{
+    const { userName, firstName, lastName, email, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    console.log("this is test request.id", request.id);
+    try{
+        const user = await User.findById(request.id).select('-password')
+        if(!user){
+            return response.status(500).json({msg: 'Server error'})
+        }
+       /////// response.json({msg: `Welcome Back ${user.userName}`})
+       user.userName = userName;
+       user.firstName = firstName;
+       user.lastName = lastName;
+       user.email = email;
+       user.dateOfBirth = dateOfBirth;
+       user.place = place;
+       user.hometown = hometown;
+       user.gender = gender;
+       user.language = language;
+       user.yourInterests = yourInterests;
+       user.others = others;
+
+       user.save();
+       response.json({msg: `user info updated  Back ${user.userName}` , user})
+    } catch(error){
+        response.status(500).json({msg:'Server error'})
+    }
+    
+})
 
 // Delete Profile
 // router.delete('/delete/:id', authenticate, async(request, response)=>{
@@ -137,16 +168,16 @@ router.get("/profile" ,authenticate , async(request, response)=>{
 
 // Edit Profile
 
-router.put('/edit/:id', authenticate, async(request,response)=>{
+router.post('/profile/:id', authenticate, async(request,response)=>{
     console.log("the id of the current logged in user is : ",request.id);
     // MAke sure that the user own the profile    
     if(request.id !== request.params.id){
         return response.status(401).json({  msg : "Not authorized" })
     }
-    const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+    const { userName, firstName, lastName, email, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
     const user = await User.findByIdAndUpdate(
         {_id: (request.params.id)},
-        {$set: { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others }}
+        {$set: { userName, firstName, lastName, email, dateOfBirth, place, hometown, gender, language, yourInterests, others }}
     )
     if(user){
         response.send(`Profile has been updated`)

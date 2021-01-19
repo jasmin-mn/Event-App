@@ -20,8 +20,10 @@ const Login = (event) => {
         try {
             const result = await axios.post('/user/login', allFormData, config)
             console.log(result)
+            setLoggedIn(true)
+            history.push('/userpage')
         } catch (error) {
-            console.log(error);
+            alert(error.response.data.msg);
         }
     }
 
@@ -38,8 +40,8 @@ const Login = (event) => {
             sendLogin(data);
             // if the user successfully logs in
             // save the item "loggedIn" into localstorage, set it to true
-            setLoggedIn(true)
-            history.push('/userpage')
+          
+            
         } catch (error) {
             console.log(error);
         }
@@ -47,19 +49,23 @@ const Login = (event) => {
 
     return (
         <div className={styles.container}>
-            <h1>
-                User <span className={styles.user}> Login </span>
+            <h1
+               className={styles.user}> Login
             </h1>
             <form onSubmit={handleSubmit}  >
                 <div className={styles.form}>
-                    <label htmlFor="email">Email Address</label>
-                    <input type="email" name="email" />
+                    <label htmlFor="email"><i class="icon-envelope "></i></label>
+                    <input type="email" name="email" placeholder="Email" />
                 </div>
                 <div className={styles.container}>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" />
+                    <label htmlFor="password"><i class="icon-shield"></i></label>
+                    <input type="password" name="password" placeholder="Password" />
                 </div>
                 <input type="submit" value="Login" className={styles.login} />
+                <h2 className={styles.containerhelp}>
+                    Need to <a href="/signup">sign up</a> for an account
+                    or <a href="/forgotPassword" id="forgot_password_link" >reset</a> your password?
+                    </h2>
             </form>
         </div>
     )

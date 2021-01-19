@@ -1,4 +1,51 @@
-.formcontainer{
-    text-align: center;
-    
- }
+.formcontainer {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.formcontainer p {
+  font-size: 12px;
+  width: 150px;
+  display: inline-block;
+  margin-left: 18px;
+}
+
+.submitregister {
+  top: 3px;
+  background-color: gray;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  width: 340px;
+  cursor: pointer;
+}
+
+.formgroupgender {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  margin-left: -50px;
+  width: 1200px;
+  margin-left: 500px;
+  margin-right: 100px;
+}
+
+
+.formgroupgenderinput[type=radio] {
+  cursor: pointer;
+  width: 450px;
+  -ms-transform: scale(.6); /* IE 9 */
+  -webkit-transform: scale(.6); /* Chrome, Safari, Opera */
+  transform: scale(.6);
+
+}
+
+input:focus{
+  background-color: orange;
+}
+
+input:hover{
+  background-color: orange;
+  cursor: pointer;
+}

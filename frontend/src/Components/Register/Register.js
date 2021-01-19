@@ -1,102 +1,111 @@
-import React, { useState} from 'react'
+import React from 'react'
 import styles from './Register.module.css';
-import {useHistory}from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import axios from 'axios'
 
 
-const Register= (e)=>{
+const Register = (e) => {
 
-    const history=useHistory();
-    const sendRegister = async(registerData)=>{
+    const history = useHistory();
+    const sendRegister = async (registerData) => {
         const config = {
             'Content-Type': 'application/json'
 
         }
-        try{
-            const result =  await axios.post('/user/register', registerData, config )
+        try {
+            const result = await axios.post('/user/register', registerData, config)
             console.log(result);
+            localStorage.setItem("registered", JSON.stringify(true))
+            history.push('/')
         }
         catch(error){
-            console.log(error);
+            alert(error.response.data.msg);
         } //
     }
-    
-    const handleSubmit= async(e)=>{
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const data=  {
-            userName:formData.get("UserName"),
-            firstName:formData.get("Firstname"),
-            lastName:formData.get("Lastname"),
-            email:formData.get("Email Address"),
-            password:formData.get("Password"),
-
-            password:formData.get("Confirm Password")
+            userName:formData.get("userName"),
+            firstName:formData.get("firstName"),
+            lastName:formData.get("lastName"),
+            email:formData.get("email"),
+            gender:formData.get("gender"),
+            password:formData.get("password"),
+            password_confirm:formData.get("confirm_password")
 
 
         }
+        
         try{
             sendRegister(data)
             // const registered = localStorage.getItem("registered")
             // registered = JSON.parse(registered)
-            localStorage.setItem("registered", JSON.stringify(true))
-            history.push('/login')
+            
             // console.log(registered);
 
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
 
- 
-     
+
+
     return (
         <div className ={styles.formcontainer}>
-            <h1>
-                User <span className={styles.textregister}> Register </span>                
+            <h1 className={styles.textregister}>
+                 Registration 
             </h1>
             <form onSubmit={handleSubmit} >
                  <div className={styles.formgroup}>
-                    <label htmlFor="username">User Name</label>
-                    <input type="text" username="userName"    />
+                    <label id="icon" htmlFor="userName"> <i class="icon-user"></i></label>
+                    <input type="text" name="userName"  placeholder="User Name"  />
                 </div>
 
                <div className={styles.formgroup}>
-                    <label htmlFor="fname">Firstname</label>
-                    <input type="text" name="firstName"    />
+                    <label id="icon"  htmlFor="firstName"> <i class="icon-user"></i></label>
+                    <input type="text" name="firstName" placeholder="First Name"    />
                 </div>
 
                <div className={styles.formgroup}>
-                    <label htmlFor="lname">Lastname</label>
-                    <input type="text" name="lastName"    />
+                    <label id="icon"  htmlFor="lastName"> <i class="icon-user"></i></label>
+                    <input type="text" name="lastName" placeholder="Last Name"     />
                 </div>
 
-                 {/* <div className={styles.formgroupgender}>
-                    <label htmlFor="gender">Gender</label>
-                    <input type="radio" name="gender" value="Female" />
-                    <input type="radio" name="gender" value="Male" />
-                </div> */}
-
-                <div className={styles.formgroup}>
-                    <label htmlFor="email">Email Address</label>
-                    <input type="email" name="email"  />
-                </div>
-
-                <div className={styles.formgroup}>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password"   />
+                 <div className={styles.formgroupgender}>
+                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="true" checked/> 
+                   
+                    <label className={styles.formgroupgenderlabel}  htmlFor="gender" class="radio"  chec>Female</label>
+                    </div>
+                   
+                    <div className={styles.formgroupgender}>
+                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="None" /> 
+                    
+                    <label className={styles.formgroupgenderlabel}  htmlFor="gender" class="radio"  chec>Male</label>
                 </div>
 
                 <div className={styles.formgroup}>
-                    <label htmlFor="password">Confirm Password</label>
-                    <input type="password" name="password_confirm"  />
+                    <label id="icon"  htmlFor="email"><i class="icon-envelope "></i></label>
+                    <input type="email" name="email" placeholder="Email"   />
                 </div>
+
+                <div className={styles.formgroup}>
+                    <label id="icon"  htmlFor="password"><i class="icon-shield"></i></label>
+                    <input type="password" name="password" placeholder="Password"/>
+                </div>
+
+                <div className={styles.formgroup}>
+                    <label id="icon"  htmlFor="password"><i class="icon-shield"></i></label>
+                    <input type="password" name="password_confirm" placeholder="Confirm Password" />
+                </div>
+                <p>By clicking Register, you agree on our <a href="#">terms and condition</a>.</p>
                 <input type="submit" value="Register" className={styles.submitregister} />
             </form>
-            
+
         </div>
-        )
+    )
 }
 
 export default Register;
