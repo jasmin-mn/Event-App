@@ -13,7 +13,7 @@ const Register = (e) => {
 
         }
         try {
-            const result = await axios.post('/user/register', registerData, config)
+            const result = await axios.post('http://localhost:7000/user/register', registerData, config)
             console.log(result);
             localStorage.setItem("registered", JSON.stringify(true))
             history.push('/')

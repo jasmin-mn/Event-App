@@ -14,7 +14,7 @@ export const MenuItems=[
      },
      {
         title:'view Profile',
-        path:'/Profile',
+        path:'/editProfile',
         cName:'dropdown-Link'
      },
      {
