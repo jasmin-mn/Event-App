@@ -1,6 +1,7 @@
 import React, { useState, createContext } from 'react'
 import styles from './Notifications.module.css';
 
+
 export const NotificationsContext = createContext();
 
 export default function Notifications(props) {
