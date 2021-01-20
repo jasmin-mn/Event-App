@@ -4,6 +4,7 @@ import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import EventView from './Components/Home/EventView';
+import GroupEventView from './Components/Home/GroupEventView';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -66,8 +67,8 @@ function App() {
             <PrivateRoute path="/userpage" component={UserPage} />
             <Route path='/contact' component={ContactForm} exact />
 
-            <Route path='/viewOneEvent/:id' render={(props) => (<EventView {...props} />)} />
-            <Route path='/' component={EventView} exact />
+            <Route path='/viewOneEvent/:eventId' render={props => <EventView {...props} />} />
+            <Route path='/viewBySelectedLocation/:eventLocation' render={props => <GroupEventView {...props} />} />
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
