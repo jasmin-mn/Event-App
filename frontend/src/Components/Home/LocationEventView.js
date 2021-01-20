@@ -8,6 +8,7 @@ const LocationEventView = (props) => {
 
     const { eventLocation } = props.match.params;
     console.log(props);
+    console.log(eventLocation);
 
     return (
         <div>

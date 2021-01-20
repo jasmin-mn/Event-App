@@ -9,10 +9,12 @@ export default function Notifications(props) {
     const [notifications, setNotifications] = useState([]);
 
     const addNotificationToQueue = (message) => {
+
         setNotifications([...notifications, message]);
+        
         setTimeout(() => {
             setNotifications([...notifications.slice(1)]);
-        }, 1000);
+        }, 3000);
     };
 
     return (

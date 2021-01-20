@@ -7,6 +7,7 @@ import axios from 'axios';
 const CategoryEventView = (props) => {
 
     const { eventCategory } = props.match.params;
+    console.log(eventCategory);
     console.log(props);
 
     return (

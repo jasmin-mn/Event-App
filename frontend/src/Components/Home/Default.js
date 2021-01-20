@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, Link, BrowserRouter, Route } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import styles from './Home.module.css';
 import axios from "axios";
 import EventView from "./EventView";
@@ -28,22 +28,20 @@ function HomeDefault() {
 
                     // console.log(event);
 
-                    const eventLink = `/viewOneEvent/${event._id}`
+                    let eventLink = `/viewOneEvent/${event._id}`
+                    let category = event.category_id.map((category) => <>{category.name}</>);
 
                     return (
-                        <BrowserRouter>
-                            <Link to={eventLink} exact>
-                                <div className={styles.events_container}>
+                        <Link to={eventLink}  >
+                            <div className={styles.events_container}>
 
-                                    <div className={styles.events_all}>
-                                        <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                        <p className={styles.events_date}>{event.dateEventstarted}</p>
-                                        <p className={styles.events_name_category}>{event.event_name},
-                                            {event.category_id.map((category) => <>{category.name}</>)}</p>
-                                    </div>
+                                <div className={styles.events_all}>
+                                    <img className={styles.events_bg} src={event.event_photo} alt="" />
+                                    <p className={styles.events_date}>{event.dateEventstarted}</p>
+                                    <p className={styles.events_name_category}>{event.event_name},{category}</p>
                                 </div>
-                            </Link>
-                        </BrowserRouter>
+                            </div>
+                        </Link>
                     )
                 })
                 setEvents(myEvents)
@@ -69,17 +67,15 @@ function HomeDefault() {
                     const eventLink = `/viewBySelectedLocation/${event._id.location}`
 
                     return (
-                        <BrowserRouter>
-                            <Link to={eventLink} exact>
-                                <div className={styles.events_container}>
+                        <Link to={eventLink} >
+                            <div className={styles.events_container}>
 
-                                    <div className={styles.events_by_city}>
-                                        <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                        <p className={styles.location_text}>{event._id.location}</p>
-                                    </div>
+                                <div className={styles.events_by_city}>
+                                    <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
+                                    <p className={styles.location_text}>{event._id.location}</p>
                                 </div>
-                            </Link>
-                        </BrowserRouter>
+                            </div>
+                        </Link>
                     )
                 })
                 setEventsByCity(myEvents)
@@ -97,22 +93,22 @@ function HomeDefault() {
             console.log(result.data)
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
-                    // console.log(event);
+                    console.log(event);
 
-                    const eventLink = `/viewBySelectedCategory/`
+                    let category = event._id.map((category) => <>{category.name}</>);
+                    // let photo = event._id.map((category) => <>{category.photo}</>);
+                    const eventLink = `/viewBySelectedCategory/${category}`;
 
                     return (
-                        <BrowserRouter>
-                            <Link to={eventLink} exact>
-                                <div className={styles.events_container}>
+                        <Link to={eventLink} >
+                            <div className={styles.events_container}>
 
-                                    <div className={styles.events_by_category}>
-                                        <img className={styles.events_by_category_bg} src={event._id.map((category) => <>{category.photo}</>)} alt="" />
-                                        <p className={styles.category_text}>{event._id.map((category) => <>{category.name}</>)}</p>
-                                    </div>
+                                <div className={styles.events_by_category}>
+                                    <img className={styles.events_by_category_bg} src={event._id.map((category) => <>{category.photo}</>)} alt="" />
+                                    <p className={styles.category_text}>{category}</p>
                                 </div>
-                            </Link>
-                        </BrowserRouter>
+                            </div>
+                        </Link>
                     )
                 })
                 setEventsByCategory(myEvents)
