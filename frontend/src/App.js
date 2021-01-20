@@ -4,7 +4,8 @@ import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import EventView from './Components/Home/EventView';
-import GroupEventView from './Components/Home/LocationEventView';
+import LocationEventView from './Components/Home/LocationEventView';
+import CategoryEventView from './Components/Home/CategoryEventView';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -69,6 +70,7 @@ function App() {
 
             <Route path='/viewOneEvent/:eventId' render={props => <EventView {...props} />} />
             <Route path='/viewBySelectedLocation/:eventLocation' render={props => <LocationEventView {...props} />} />
+            <Route path='/viewBySelectedCategory/:eventCategory' render={props => <CategoryEventView {...props} />} />
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
