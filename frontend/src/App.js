@@ -23,7 +23,7 @@ import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
 import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
-import Settings from './Components/Settings/Settings'
+// import Settings from './Components/Settings/Settings'
 
 import './App.css';
 
@@ -79,7 +79,7 @@ function App() {
             <Route path='/savedEvent' component={savedEvents} />
             <Route path='/StartNewEvent' component={StartNewEvent} />
             <Route path='/editProfile' component={Profilepage} />
-            <Route path='/settings' component={Settings} />
+            {/* <Route path='/settings' component={Settings} /> */}
             <Route path='/logout' component={Logout} />
 
           </Switch>
