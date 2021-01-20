@@ -4,7 +4,7 @@ import styles from './Home.module.css';
 import axios from 'axios';
 
 
-const GroupEventView = (props) => {
+const LocationEventView = (props) => {
 
     const { eventLocation } = props.match.params;
     console.log(props);
@@ -19,4 +19,4 @@ const GroupEventView = (props) => {
     )
 }
 
-export default GroupEventView
+export default LocationEventView
