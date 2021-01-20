@@ -122,7 +122,6 @@ router.get('/viewByCity', async (request, response) => {
                 event_photo: { $first: '$event_photo' },
                 count: { $sum: 1 }
             }
-            // { event_photo: '$event_photo', count: { $sum: 1 } }
         }]);
 
         if (!events) {
@@ -137,7 +136,7 @@ router.get('/viewByCity', async (request, response) => {
 
 
 // View Events by seected Location
-router.get('/viewBySelectedCity/:city', async (request, response) => {
+router.get('/viewBySelectedLocation/:city', async (request, response) => {
 
     try {
 
@@ -154,6 +153,7 @@ router.get('/viewBySelectedCity/:city', async (request, response) => {
         response.status(500).send({ msg: error })
     }
 });
+
 
 
 // View all Events by Category
@@ -185,7 +185,24 @@ router.get('/viewByCategory', async (request, response) => {
 
 });
 
+// View Events by seected Category
+// router.get('/viewBySelectedCategory/:name', async (request, response) => {
 
+//     try {
+
+//         const events = await Events.find({ name: request.params.name });
+
+//         console.log(events);
+
+//         if (!events) {
+//             return response.status(500).send({ msg: 'Server error' })
+//         }
+//         return response.send(events)
+
+//     } catch (error) {
+//         response.status(500).send({ msg: error })
+//     }
+// });
 
 
 module.exports = router
