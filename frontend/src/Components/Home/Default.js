@@ -30,7 +30,6 @@ function HomeDefault() {
                     return (
                         <Link to={eventLink} >
                             <div className={styles.events_container}>
-
                                 <div className={styles.events_all}>
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
                                     <p className={styles.events_date}>{event.dateEventstarted}</p>
