@@ -12,7 +12,7 @@ const CategoryEventView = (props) => {
     return (
         <div>
             <h1> {eventCategory} </h1>
-            <h1> Group event view page</h1>
+            <h1>  eventCategory view page</h1>
         </div>
 
 

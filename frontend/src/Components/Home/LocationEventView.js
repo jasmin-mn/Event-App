@@ -12,7 +12,7 @@ const LocationEventView = (props) => {
     return (
         <div>
             <h1> {eventLocation} </h1>
-            <h1> Group event view page</h1>
+            <h1> eventLocation view page</h1>
         </div>
 
 

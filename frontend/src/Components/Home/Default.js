@@ -99,7 +99,7 @@ function HomeDefault() {
                 let myEvents = result.data.map((event) => {
                     // console.log(event);
 
-                    const eventLink = `/viewBySelectedCategory/${event._id.location}`
+                    const eventLink = `/viewBySelectedCategory/`
 
                     return (
                         <BrowserRouter>
