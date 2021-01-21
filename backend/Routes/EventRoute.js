@@ -79,7 +79,8 @@ router.post('/update', authenticate, restrictTo('admin', 'superuser'), (req, res
 router.get('/viewAll', async (request, response) => {
 
     try {
-        const events = await Events.find().populate('category_id');
+        const events = await Events.find()
+            .populate('category_id user_id')
 
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
