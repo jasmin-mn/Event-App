@@ -187,23 +187,23 @@ router.get('/viewByCategory', async (request, response) => {
 });
 
 // View Events by seected Category
-// router.get('/viewBySelectedCategory/:name', async (request, response) => {
+router.get('/viewBySelectedCategory/:name', async (request, response) => {
 
-//     try {
+    try {
 
-//         const events = await Events.find({ name: request.params.name });
+        const events = await Category.find({name: request.params.name});
 
-//         console.log(events);
+        console.log(events);
 
-//         if (!events) {
-//             return response.status(500).send({ msg: 'Server error' })
-//         }
-//         return response.send(events)
+        if (!events) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        return response.send(events)
 
-//     } catch (error) {
-//         response.status(500).send({ msg: error })
-//     }
-// });
+    } catch (error) {
+        response.status(500).send({ msg: error })
+    }
+});
 
 
 module.exports = router

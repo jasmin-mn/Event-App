@@ -41,7 +41,7 @@ function HomeDefault() {
                 })
                 setEvents(myEvents)
             }
-            
+
         } catch (error) {
             console.log(error);
         }
@@ -86,24 +86,20 @@ function HomeDefault() {
         try {
             const result = await axios.get('http://localhost:7000/event/viewByCategory');
             console.log('Events by Category:')
-            console.log(result.data)
+            console.log(88888, result.data)
 
-            if (result.data !== 0) {
-                let myEvents = result.data.map((event) => {
-                    console.log(event);
+            if (result.data && result.data.length !== 0) {
+                const myEvents = result.data.map((event) => {
 
-
-                    let category = event._id.map((category) => <>{category.name}</>);
-                    let photo = event._id.map((category) => <>{category.photo}</>);
-                    const eventLink = `/viewBySelectedCategory/${category}`;
+                    const { name, photo, description } = event._id[0];
+                    const eventLink = `/viewBySelectedCategory/${name}`;
 
                     return (
                         <Link to={eventLink} >
                             <div className={styles.events_container}>
-
                                 <div className={styles.events_by_category}>
                                     <img className={styles.events_by_category_bg} src={photo} alt="" />
-                                    <p className={styles.category_text}>{category}</p>
+                                    <p className={styles.category_text}>{name},{description}</p>
                                 </div>
                             </div>
                         </Link>
