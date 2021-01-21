@@ -191,7 +191,7 @@ router.get('/viewBySelectedCategory/:name', async (request, response) => {
 
     try {
 
-        const events = await Category.find({name: request.params.name});
+        const events = await Category.find({name:request.params.name});
 
         console.log(events);
 

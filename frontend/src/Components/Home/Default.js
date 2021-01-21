@@ -10,6 +10,7 @@ function HomeDefault() {
     const [eventsByCity, setEventsByCity] = useState();
     const [eventsByCategory, setEventsByCategory] = useState();
 
+
     // get all Events
     const getAllEvents = async () => {
 
@@ -99,7 +100,7 @@ function HomeDefault() {
                             <div className={styles.events_container}>
                                 <div className={styles.events_by_category}>
                                     <img className={styles.events_by_category_bg} src={photo} alt="" />
-                                    <p className={styles.category_text}>{name},{description}</p>
+                                    <p className={styles.category_text}>{name}</p>
                                 </div>
                             </div>
                         </Link>
