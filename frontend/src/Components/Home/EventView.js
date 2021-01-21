@@ -13,8 +13,7 @@ const EventView = () => {
 
         try {
             const result = await axios.get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
-            console.log(result);
-
+  
             if (result.data) {
                 setEventDetails(result.data)
             }
