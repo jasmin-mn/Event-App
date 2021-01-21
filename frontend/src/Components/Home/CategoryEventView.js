@@ -1,4 +1,6 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import Default from "./Default";
 import styles from './Home.module.css';
 import axios from 'axios';
@@ -6,7 +8,7 @@ import axios from 'axios';
 
 const CategoryEventView = (props) => {
 
-    const { eventCategory } = props.match.params;
+    const { eventCategory } = useParams();
     console.log(eventCategory);
     console.log(props);
 
