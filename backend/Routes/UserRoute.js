@@ -187,7 +187,7 @@ router.post("/profileUpdate" ,authenticate , async(request, response)=>{
       });
     });
     //    response.json({msg: `user info updated  Back ${user.userName}` , user})
-  } catch (error) {
+  } catch(error) {
     response.status(500).json({ msg: "Server error" });
   }
 });
