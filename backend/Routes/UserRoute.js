@@ -112,7 +112,6 @@ router.get("/profile", authenticate, async (request, response) => {
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
-
     response.json({ msg: `Welcome Back ${user.userName}` , user});
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
@@ -137,35 +136,6 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
     const user = await User.findById(request.id).select("-password");
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
-
-    
-})
-router.post("/profileUpdate" ,authenticate , async(request, response)=>{
-    const { userName, firstName, lastName, email, age, place, hometown, gender, language, yourInterests, others} = request.body
-    console.log("this is test request.id", request.id);
-    try{
-        const user = await User.findById(request.id).select('-password')
-        if(!user){
-            return response.status(500).json({msg: 'Server error'})
-        }
-       /////// response.json({msg: `Welcome Back ${user.userName}`})
-       user.userName = userName;
-       user.firstName = firstName;
-       user.lastName = lastName;
-       user.email = email;
-       user.age = age;
-       user.place = place;
-       user.hometown = hometown;
-       user.gender = gender;
-       user.language = language;
-       user.yourInterests = yourInterests;
-       user.others = others;
-
-       user.save();
-       response.json({msg: `user info updated  Back ${user.userName}` , user})
-    } catch(error){
-        response.status(500).json({msg:'Server error'})
-
     }
     /////// response.json({msg: `Welcome Back ${user.userName}`})
     user.userName = userName;
@@ -187,7 +157,7 @@ router.post("/profileUpdate" ,authenticate , async(request, response)=>{
       });
     });
     //    response.json({msg: `user info updated  Back ${user.userName}` , user})
-  } catch(error) {
+  } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
 });
@@ -202,7 +172,7 @@ router.post("/profileUpdate" ,authenticate , async(request, response)=>{
 //    }
 // })
 
-// Edit Profile
+// Edit profile
 
 // router.get("/profileUser",authenticate, async(request,response)=>{
 
