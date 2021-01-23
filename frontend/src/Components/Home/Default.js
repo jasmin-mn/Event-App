@@ -1,39 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import styles from './Home.module.css';
 import axios from "axios";
-import EventView from "./EventView";
 
 
 function HomeDefault() {
-
 
     const [events, setEvents] = useState();
     const [eventsByCity, setEventsByCity] = useState();
     const [eventsByCategory, setEventsByCategory] = useState();
 
-    const history = useHistory();
 
     // get all Events
     const getAllEvents = async () => {
+
         try {
             const result = await axios.get('http://localhost:7000/event/viewAll');
             console.log('All Events:')
             console.log(result.data)
 
             if (result.data !== 0) {
+
                 let myEvents = result.data.map((event) => {
+
                     // console.log(event);
 
-                    return (
-                        <Link to = "/event/viewOneEvent/:id" exact>
-                            <div onClick={handleEvent} className={`${styles.events_container} ${styles.event_view}`}>
+                    let category = event.category_id.map((category) => <>{category.name}</>);
+                    let eventLink = `/viewOneEvent/${event._id}`
 
+                    return (
+                        <Link to={eventLink} >
+                            <div className={styles.events_container}>
                                 <div className={styles.events_all}>
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
                                     <p className={styles.events_date}>{event.dateEventstarted}</p>
-                                    <p className={styles.events_name_category}>{event.event_name},
-                                {event.category_id.map((category) => <>{category.name}</>)}</p>
+                                    <p className={styles.events_name_category}>{event.event_name},{category}</p>
                                 </div>
                             </div>
                         </Link>
@@ -41,16 +42,13 @@ function HomeDefault() {
                 })
                 setEvents(myEvents)
             }
+
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleEvent = () => {
 
-        history.push("/eventView/")
-
-    }
 
     // filter all Events by Location/City
     const getAEventsByCity = async () => {
@@ -62,14 +60,19 @@ function HomeDefault() {
             if (result.data !== 0) {
                 let myEvents = result.data.map((event) => {
                     console.log(event);
-                    return (
-                        <div className={styles.events_container}>
 
-                            <div className={styles.events_by_city}>
-                                <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                <p className={styles.location_text}>{event._id.location}</p>
+                    const eventLink = `/viewBySelectedLocation/${event._id.location}`
+
+                    return (
+                        <Link to={eventLink} >
+                            <div className={styles.events_container}>
+
+                                <div className={styles.events_by_city}>
+                                    <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
+                                    <p className={styles.location_text}>{event._id.location}</p>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     )
                 })
                 setEventsByCity(myEvents)
@@ -84,20 +87,25 @@ function HomeDefault() {
         try {
             const result = await axios.get('http://localhost:7000/event/viewByCategory');
             console.log('Events by Category:')
-            console.log(result.data)
-            if (result.data !== 0) {
-                let myEvents = result.data.map((event) => {
-                    // console.log(event);
-                    return (
-                        <div className={styles.events_container}>
+            console.log(88888, result.data)
 
-                            <div className={styles.events_by_category}>
-                                <img className={styles.events_by_category_bg} alt={event._id.map((category) => <>{category.photo}</>)} alt="" />
-                                <p className={styles.category_text}>{event._id.map((category) => <>{category.name}</>)}</p>
+            if (result.data && result.data.length !== 0) {
+                const myEvents = result.data.map((event) => {
+
+                    const { name, photo, description } = event._id[0];
+                    const eventLink = `/viewBySelectedCategory/${name}`;
+
+                    return (
+                        <Link to={eventLink} >
+                            <div className={styles.events_container}>
+                                <div className={styles.events_by_category}>
+                                    <img className={styles.events_by_category_bg} src={photo} alt="" />
+                                    <p className={styles.category_text}>{name}</p>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     )
-                })
+                });
                 setEventsByCategory(myEvents)
             }
         } catch (error) {

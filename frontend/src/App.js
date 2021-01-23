@@ -4,6 +4,8 @@ import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import EventView from './Components/Home/EventView';
+import LocationEventView from './Components/Home/LocationEventView';
+import CategoryEventView from './Components/Home/CategoryEventView';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -21,7 +23,11 @@ import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
 import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
+
 import AboutUs from './Components/AboutUs/AboutUs'
+=======
+import Settings from './Components/Settings/Settings'
+
 
 import './App.css';
 
@@ -59,24 +65,30 @@ function App() {
 
         <Notifications>
 
+
           <Switch>
 
             <Route path='/' component={Home} exact />
-            <Route path='/login' component={Login} exact />
-            <Route path='/signup' component={Register} exact />
+            <Route path='/login' component={Login} />
+            <Route path='/signup' component={Register} />
             <PrivateRoute path="/userpage" component={UserPage} />
-            <Route path='/contact' component={ContactForm} exact />
+            <Route path='/contact' component={ContactForm} />
 
-            <Route path='/viewOneEvent/:id' render={(props) => (<EventView {...props} />)} />
-            <Route path='/' component={EventView} exact />
+            <Route path='/viewOneEvent/:eventId' component={EventView} />
+            <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
+            <Route path='/viewBySelectedCategory/:eventCategory' component={CategoryEventView} />
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
             <Route path='/savedEvent' component={savedEvents} />
             <Route path='/StartNewEvent' component={StartNewEvent} />
             <Route path='/editProfile' component={Profilepage} />
+
             <Route path='/about' component={AboutUs} />
             {/* <Route path='/profileUser' component={Profilepage} /> */}
+
+            <Route path='/settings' component={Settings} />
+
             <Route path='/logout' component={Logout} />
             
             
