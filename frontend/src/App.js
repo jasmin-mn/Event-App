@@ -21,6 +21,7 @@ import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
 import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
+import AboutUs from './Components/AboutUs/AboutUs'
 
 import './App.css';
 
@@ -74,7 +75,11 @@ function App() {
             <Route path='/savedEvent' component={savedEvents} />
             <Route path='/StartNewEvent' component={StartNewEvent} />
             <Route path='/editProfile' component={Profilepage} />
+            <Route path='/about' component={AboutUs} />
+            {/* <Route path='/profileUser' component={Profilepage} /> */}
             <Route path='/logout' component={Logout} />
+            
+            
 
           </Switch>
 

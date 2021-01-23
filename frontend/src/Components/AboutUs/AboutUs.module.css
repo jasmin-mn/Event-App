@@ -1,0 +1,58 @@
+.containerheader {
+  text-align: center;
+  border: white;
+
+  /* opacity: 0.8; */
+
+  color: white;
+  margin-bottom: 40px;
+
+  height: 410px;
+}
+.headerparag {
+  /* line-height: normal; */
+  font-size: 15px;
+  color: black;
+}
+.headerhr {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.header {
+  margin-top: 0px;
+  padding-top: 40px;
+}
+
+.containerfooter {
+  background: url(../../Images/abstract.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  color: white;
+  /* opacity: 0.8; */
+  display: flex;
+  align-items: center;
+  
+  
+        
+        
+       
+  height: 200px;
+  
+}
+.subcontainer{
+    list-style-type:none;
+    flex-grow: 1;
+    margin-left: 200px;
+    margin-top: 30px;
+    
+    
+
+}
+
+/* .iconfb{
+    width: 20px;
+
+} */
