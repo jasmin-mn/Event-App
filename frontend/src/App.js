@@ -25,7 +25,7 @@ import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
 
 import AboutUs from './Components/AboutUs/AboutUs'
-=======
+
 import Settings from './Components/Settings/Settings'
 
 
