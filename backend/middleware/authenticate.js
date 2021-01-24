@@ -7,6 +7,7 @@ module.exports = async(request,response,next)=>{
 
 
    const token = request.cookies.jwt
+   
    //const token = request.header('authorization')
    
 //    console.log(request.cookies);
