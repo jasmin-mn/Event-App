@@ -9,9 +9,9 @@ function HomeLoggedIn() {
 
 
     return (
-
-        <DefaultHome />
-
+        <div>
+            <DefaultHome />
+        </div>
     )
 }
 
