@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import SocialShare from '../ShareButtons/ShareButtons';
+import ShareButtons from '../ShareButtons/ShareButtons';
 import styles from './EventView.module.css';
 import axios from 'axios';
 
@@ -14,9 +14,9 @@ const EventView = () => {
 
         try {
             const result = await axios.get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
-            // const { firstName, lastName, photo } = eventDetails.user_id._id;
 
             if (result.data) {
+
                 setEventDetails(result.data)
             }
 
@@ -30,8 +30,10 @@ const EventView = () => {
 
     }, []);
 
+    // const { firstName, lastName, photo } = eventDetails.user_id;
 
     return (
+
         <div className={styles.events_show}>
 
             <div>
@@ -42,8 +44,8 @@ const EventView = () => {
 
                 <div className={styles.events_actions}>
                     <div>
-                        {/* <img className={styles.host_photo} src={eventDetails.user_id._id.photo} alt="" /> */}
-                        {/* <p>Hosted by: {eventDetails.user_id._id.firstName} {eventDetails.user_id._id.lastName}</p> */}
+                        {/* <img className={styles.host_photo} src={photo} alt="" />
+                        <p>Hosted by: {firstName} {lastName}</p> */}
                     </div>
 
                     <div>
@@ -58,6 +60,7 @@ const EventView = () => {
             <div>
                 <h1>Description</h1>
                 <p>{eventDetails.description}</p>
+                
             </div>
         </div>
     )
