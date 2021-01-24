@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
-import EventView from './Components/Home/EventView';
+import EventView from './Components/EventView/EventView';
 import LocationEventView from './Components/Home/LocationEventView';
 import CategoryEventView from './Components/Home/CategoryEventView';
 
@@ -23,7 +23,11 @@ import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
 import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
-// import Settings from './Components/Settings/Settings'
+
+import AboutUs from './Components/AboutUs/AboutUs'
+
+import Settings from './Components/Settings/Settings'
+
 
 import './App.css';
 
@@ -79,8 +83,15 @@ function App() {
             <Route path='/savedEvent' component={savedEvents} />
             <Route path='/StartNewEvent' component={StartNewEvent} />
             <Route path='/editProfile' component={Profilepage} />
-            {/* <Route path='/settings' component={Settings} /> */}
+
+            <Route path='/about' component={AboutUs} />
+            {/* <Route path='/profileUser' component={Profilepage} /> */}
+
+            <Route path='/settings' component={Settings} />
+
             <Route path='/logout' component={Logout} />
+            
+            
 
           </Switch>
 

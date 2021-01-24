@@ -1,15 +1,17 @@
 import React from 'react'
-// import Search from '../Search/Search';
+import DefaultHome from './Default';
 // import styles from './Home.module.css';
 // import axios from "axios";
 
 
 function HomeLoggedIn() {
 
-    
+
 
     return (
-        <></>
+        <div>
+            <DefaultHome />
+        </div>
     )
 }
 
