@@ -7,27 +7,28 @@ import axios from 'axios';
 
 const CategoryEventView = (props) => {
 
-    const { eventCategory } = useParams();
-    console.log(eventCategory);
+    const { categoryId } = useParams();
+    console.log(categoryId);
     console.log(props);
 
     const [events, setEvents] = useState();
+    const [categoryName, setCategoryName] = useState();
 
 
     const getEvents = async () => {
 
         try {
-            const result = await axios.get(`http://localhost:7000/event/viewBySelectedCategory/${eventCategory}`);
+            const result = await axios.get(`http://localhost:7000/event/viewBySelectedCategory/${categoryId}`);
 
             const data = result.data;
 
             if (data !== 0) {
+                console.log(data);
 
                 let details = data.map((event) => {
 
-                    // console.log(event);
-
                     let category = event.category_id.map((category) => <>{category.name}</>);
+                    setCategoryName(category)
 
                     let eventLink = `/viewOneEvent/${event._id}`
 
@@ -62,7 +63,7 @@ const CategoryEventView = (props) => {
 
         <div className={styles.main}>
 
-            <h1> All Events in {eventCategory} Category</h1>
+            <h1> All Events in {categoryName} Category</h1>
 
             <div className={styles.events_by_category}>
                 {events}

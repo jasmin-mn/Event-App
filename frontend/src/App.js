@@ -75,7 +75,7 @@ function App() {
 
             <Route path='/viewOneEvent/:eventId' component={EventView} />
             <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
-            <Route path='/viewBySelectedCategory/:eventCategory' component={CategoryEventView} />
+            <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
