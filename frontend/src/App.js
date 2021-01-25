@@ -18,9 +18,8 @@ import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpa
 import UserPage from './Components/UserPage/UserPage'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
 
-import Notifications, { NotificationsContext } from './Components/Notifications/Notifications';
+import Notifications from './Components/Notifications/Notifications';
 import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
-import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
 

@@ -92,8 +92,8 @@ function HomeDefault() {
             if (result.data && result.data.length !== 0) {
                 const myEvents = result.data.map((event) => {
 
-                    const { name, photo, description } = event._id[0];
-                    const eventLink = `/viewBySelectedCategory/${name}`;
+                    const { _id, name, photo, description } = event._id[0];
+                    const eventLink = `/viewBySelectedCategory/${_id}`;
 
                     return (
                         <Link to={eventLink} >
@@ -101,6 +101,7 @@ function HomeDefault() {
                                 <div className={styles.events_by_category}>
                                     <img className={styles.events_by_category_bg} src={photo} alt="" />
                                     <p className={styles.category_text}>{name}</p>
+                                    <p>{description}</p>
                                 </div>
                             </div>
                         </Link>
