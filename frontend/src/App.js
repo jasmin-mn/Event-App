@@ -89,8 +89,8 @@ function App() {
             <Route path='/settings' component={Settings} />
 
             <Route path='/logout' component={Logout} />
-            
-            
+
+
 
           </Switch>
 
