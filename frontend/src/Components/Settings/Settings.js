@@ -4,17 +4,17 @@ import axios from 'axios';
 
 const Settings = (e)=> {
 
-    const deleteAccount = async(data)=>{
+    const deleteAccount = async(info)=>{
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Authorization': 'authorizationToken'
             }
         }
 
     
     
     try {
-        const result = await axios.delete('http://localhost:7000/user/deleteAccount/:id', data, config)
+        const result = await axios.delete('http://localhost:7000/user/deleteAccount/:id', info, config)
             console.log(result)
             // setLoggedIn(true)
     } catch (error) {
@@ -25,8 +25,12 @@ const Settings = (e)=> {
 
     const handleDeleteSubmit = async(e)=>{
         e.preventDefault();
-        const userDelete = new userDelete(e.target.id)
-        const dataDelete= {_id: userDelete_id}
+        const userDelete = new userDelete(e.target)
+        // const dataDelete= {
+        //     _id:userDelete.remove("email")
+            
+
+        // }
 
     }
     try {
@@ -43,7 +47,7 @@ const Settings = (e)=> {
             <p>Are you sure you wanted to delete your account?
                 If you choose to delete your account, you 
                 have to register again.</p>
-            <button onSubmit={handleDeleteSubmit}className={styles.deletecontainer1}>Delete Account</button>
+            <button onClick={handleDeleteSubmit}className={styles.deletecontainer1}>Delete Account</button>
             </div>
             
         </div>
