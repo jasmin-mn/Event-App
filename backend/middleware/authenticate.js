@@ -2,11 +2,13 @@ const jwt = require("jsonwebtoken")
 const User = require("../Models/UserModel")
 
 module.exports = async(request,response,next)=>{
-    console.log('request.cookies : ',request.cookies);
+    // console.log('request.cookies : ',request.cookies);
+    const token = request.header('authorization')
+        console.log(token);
 
 
 
-   const token = request.cookies.jwt
+//    const token = request.cookies.jwt
    
    //const token = request.header('authorization')
    
