@@ -164,7 +164,7 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
 
 //Delete Account
 router.delete('/deleteAccount/:id', authenticate, async(request, response)=>{
-   const user = await User.findByIdAndRemove({_id:(request.params.id)})
+   const user = await User.findByIdAndRemove({_id:(request.params.id)} )
    if(user){
        response.send('Successfully Deleted')
    } else{
