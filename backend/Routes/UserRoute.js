@@ -162,23 +162,23 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
   }
 });
 
-// Delete Profile
-// router.delete('/delete/:id', authenticate, async(request, response)=>{
-//    const user = await User.findByIdAndDelete({_id:(request.params.id)})
-//    if(user){
-//        response.send('Successfully Deleted')
-//    } else{
-//        response.send('Server Error')
-//    }
-// })
+//Delete Account
+router.delete('/deleteAccount/:id', authenticate, async(request, response)=>{
+   const user = await User.findByIdAndRemove({_id:(request.params.id)})
+   if(user){
+       response.send('Successfully Deleted')
+   } else{
+       response.send('Server Error')
+   }
+})
 
-// Edit profile
+//Edit profile
 
-// router.get("/profileUser",authenticate, async(request,response)=>{
+router.get("/profileUser",authenticate, async(request,response)=>{
 
-//     const user = await User.findById(request.id)
+    const user = await User.findById(request.id)
 
-// } )
+} )
 
 router.get("/profileUser", authenticate, async (request, response) => {
   console.log("this is request.id", request.id);
@@ -321,5 +321,7 @@ router.post("/resetPassword/:token", async (request, response) => {
     response.send(`You may reset your Password`);
   }
 });
+
+
 
 module.exports = router;
