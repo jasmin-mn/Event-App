@@ -18,7 +18,7 @@ const Login = (event) => {
         }
 
         try {
-            const result = await axios.post('/user/login', allFormData, config)
+            const result = await axios.post('http://localhost:7000/user/login', allFormData, config)
             console.log(result)
             setLoggedIn(true)
             history.push('/userpage')
@@ -40,8 +40,8 @@ const Login = (event) => {
             sendLogin(data);
             // if the user successfully logs in
             // save the item "loggedIn" into localstorage, set it to true
-          
-            
+
+
         } catch (error) {
             console.log(error);
         }
@@ -50,7 +50,7 @@ const Login = (event) => {
     return (
         <div className={styles.container}>
             <h1
-               className={styles.user}> Login
+                className={styles.user}> Login
             </h1>
             <form onSubmit={handleSubmit}  >
                 <div className={styles.form}>
