@@ -213,12 +213,14 @@ router.get('/attendEvent/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findByIdAndUpdate(request.params.id,
-            { $addToSet: { participants: request.id } }, // push and avoid duplicates
+            // pushing user id EventSchema and avoid duplicates
+            { $addToSet: { participants: request.id } },
             { new: true }
         )
 
         const user = await Users.findByIdAndUpdate(request.id,
-            { $addToSet: { events: event._id } }, // push and avoid duplicates
+            // pushing event id to UserSchema and avoid duplicates
+            { $addToSet: { events: event._id } },
             { new: true }
         )
         console.log("the loggedin user", request.id);
