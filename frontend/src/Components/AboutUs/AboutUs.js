@@ -22,7 +22,7 @@ const AboutUs = () => {
         </p>
       </div>
 
-      <div className={styles.containerfooter} >
+      {/* <div className={styles.containerfooter} >
         <ul className={styles.subcontainer}> 
           <li className={styles.contactus}>Contact Us</li>
           <li><i class="icon-home icon-2x"></i> Wandalenweg 30, 20097 Hamburg</li>
@@ -42,7 +42,7 @@ const AboutUs = () => {
         
 
 
-      </div>
+      </div> */}
     </>
   );
 };
