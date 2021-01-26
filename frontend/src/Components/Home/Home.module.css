@@ -18,11 +18,11 @@
 }
 
 .upcoming_events_head h2,
-p,
+.upcoming_events_head p,
 .events_by_city_head h2,
-p,
+.events_by_city_head p,
 .events_by_Category_head h2,
-p {
+.events_by_Category_head p {
   margin: 20px 0 0;
 }
 
@@ -69,14 +69,15 @@ p {
 
 .location_text,
 .category_text {
-  text-align: left;
+  text-align: left !important;
   margin: 0;
   padding: 10px;
   font-size: 22px;
+  color: black;
 }
 
-.events_by_location,
-.events_by_category {
+.eventsByLocation,
+.eventsByCategory {
   display: grid;
   grid-template-columns: auto auto auto auto;
 }
