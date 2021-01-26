@@ -1,4 +1,6 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+
 import SearchBar from './SearchBar';
 import styles from './Search.module.css';
 import axios from "axios";
@@ -26,16 +28,21 @@ const Search = () => {
             if (result.data !== 0) {
                 let mySearch = result.data.map((event) => {
                     console.log(event);
-                    return (
-                        <div className={styles.events_container}>
+                    
+                    let eventLink = `/viewOneEvent/${event._id}`
 
-                            <div className={styles.events_all}>
-                                <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                <p>{event.dateEventstarted}</p>
-                                <p>{event.event_name},
+                    return (
+                        <Link to={eventLink} >
+                            <div className={styles.events_container}>
+
+                                <div className={styles.events_all}>
+                                    <img className={styles.events_bg} src={event.event_photo} alt="" />
+                                    <p>{event.dateEventstarted}</p>
+                                    <p>{event.event_name},
                                 {event.category_id.map((category) => <>{category.name}</>)}</p>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     )
                 });
 
