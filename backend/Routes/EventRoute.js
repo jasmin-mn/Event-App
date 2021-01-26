@@ -98,7 +98,7 @@ router.get('/viewAll', async (request, response) => {
 router.get('/viewOneEvent/:id', async (request, response) => {
 
     try {
-        const events = await Events.findById({ _id: request.params.id }).populate('category_id');
+        const events = await Events.findById({ _id: request.params.id }).populate('category_id user_id');
 
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
@@ -187,21 +187,21 @@ router.get('/viewByCategory', async (request, response) => {
 });
 
 // View Events by seected Category
-router.get('/viewBySelectedCategory/:name', async (request, response) => {
+router.get('/viewBySelectedCategory/:id', async (request, response) => {
+    console.log(12321321);
 
     try {
-
-        const events = await Category.find({name:request.params.name});
-
-        console.log(events);
+        const events = await Events.find({ category_id: request.params.id })
+            .populate('category_id user_id')
 
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        return response.send(events)
+        response.send(events)
 
     } catch (error) {
-        response.status(500).send({ msg: error })
+        response.status(500).send({ msg: 'Server error' })
+
     }
 });
 

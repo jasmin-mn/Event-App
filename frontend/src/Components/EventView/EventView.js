@@ -14,10 +14,11 @@ const EventView = () => {
 
         try {
             const result = await axios.get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
-
+            console.log(result.data);
             if (result.data) {
 
                 setEventDetails(result.data)
+               
             }
 
         } catch (error) {
@@ -29,8 +30,12 @@ const EventView = () => {
         getEventDetails();
 
     }, []);
+    
+    
+        
+     
 
-    // const { firstName, lastName, photo } = eventDetails.user_id;
+   
 
     return (
 
@@ -44,8 +49,8 @@ const EventView = () => {
 
                 <div className={styles.events_actions}>
                     <div>
-                        {/* <img className={styles.host_photo} src={photo} alt="" />
-                        <p>Hosted by: {firstName} {lastName}</p> */}
+                        <img className={styles.host_photo} src={eventDetails.user_id && eventDetails.user_id.photo} alt="" />
+                        <p>Hosted by: { eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
                     </div>
 
                     <div>
@@ -60,7 +65,7 @@ const EventView = () => {
             <div>
                 <h1>Description</h1>
                 <p>{eventDetails.description}</p>
-                
+
             </div>
         </div>
     )
