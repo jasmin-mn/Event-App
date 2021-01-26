@@ -5,6 +5,15 @@
   padding: 0;
 }
 
+.upcoming_events,
+.events_by_city,
+.events_by_Category {
+  border-radius: 10px;
+  /* border: 1px solid green; */
+  margin-bottom: 30px;
+  padding: 0;
+}
+
 .upcoming_events_head,
 .events_by_city_head,
 .events_by_Category_head {
@@ -13,7 +22,7 @@
   flex-direction: row;
   align-items: center;
   /* border: 1px solid green; */
-  margin: 20px 10px 0;
+  margin: 0 10px;
   padding: 0;
 }
 
@@ -23,7 +32,7 @@
 .events_by_city_head p,
 .events_by_Category_head h2,
 .events_by_Category_head p {
-  margin: 20px 0 0;
+  margin: 0;
 }
 
 .upcoming_events_body,
