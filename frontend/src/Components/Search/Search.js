@@ -10,6 +10,7 @@ const Search = () => {
 
     const [events, setEvents] = useState([]);
     const [serchInputs, setSerchInputs] = useState(true);
+    const [serchResults, setSerchResults] = useState(true);
 
     // const { addNotificationToQueue } = useContext(NotificationsContext);
 
@@ -25,10 +26,10 @@ const Search = () => {
             console.log('Search Events:')
             console.log(result.data)
 
-            if (result.data !== 0) {
+            if (result.data) {
                 let mySearch = result.data.map((event) => {
                     console.log(event);
-                    
+
                     let eventLink = `/viewOneEvent/${event._id}`
 
                     return (
@@ -48,6 +49,7 @@ const Search = () => {
 
                 setEvents(mySearch)
             }
+            setSerchResults(false)
 
         } catch (error) {
             console.log(error);
@@ -94,7 +96,8 @@ const Search = () => {
 
 
             <div className={styles.search_results}>
-                {!serchInputs && 'Unfortunately, no events were found.'}
+                {!serchInputs && 'Please enter a value to get a results'}
+                {!serchResults && 'Unfortunately, no events were found.'}
                 {events}
 
             </div>

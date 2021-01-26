@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer';
 import EventView from './Components/EventView/EventView';
 import LocationEventView from './Components/Home/LocationEventView';
 import CategoryEventView from './Components/Home/CategoryEventView';
+import AttendEvent from './Components/AttendEvent/AttendEvent';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -27,8 +28,8 @@ import AboutUs from './Components/AboutUs/AboutUs'
 
 import Settings from './Components/Settings/Settings'
 
-
 import './App.css';
+
 
 export const UserStateContext = createContext();
 
@@ -76,6 +77,7 @@ function App() {
             <Route path='/viewOneEvent/:eventId' component={EventView} />
             <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
             <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
+            {/* <Route path='/attendEvent/:eventId' component={AttendEvent} /> */}
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />

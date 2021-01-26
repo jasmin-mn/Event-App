@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ShareButtons from '../ShareButtons/ShareButtons';
+import AttendEvent from '../AttendEvent/AttendEvent';
 import styles from './EventView.module.css';
 import axios from 'axios';
 
@@ -13,7 +14,8 @@ const EventView = () => {
     const getEventDetails = async () => {
 
         try {
-            const result = await axios.get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
+            const result = await axios
+                .get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
             console.log(result.data);
             if (result.data) {
 
@@ -49,9 +51,17 @@ const EventView = () => {
                     </div>
 
                     <div>
-                        <Link><button className={styles.btn}>Attend Event</button></Link>
-                        <Link><button className={styles.btn}>Save Event</button></Link>
-                        <Link to={ShareButtons}><button className={styles.btn}>Share Event</button></Link>
+                        <Link to={`/attendEvent/${eventId}`}>
+                            <button className={styles.btn}>Attend Event</button>
+                        </Link>
+
+                        <Link>
+                            <button className={styles.btn}>Save Event</button>
+                        </Link>
+
+                        <Link to={ShareButtons}>
+                            <button className={styles.btn}>Share Event</button>
+                        </Link>
                     </div>
                 </div>
 
