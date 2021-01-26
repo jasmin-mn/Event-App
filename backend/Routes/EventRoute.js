@@ -1,6 +1,7 @@
 
 const express = require('express');
 const Events = require('../Models/EventModel');
+const Users = require('../Models/UserModel');
 
 const authenticate = require('../middleware/authenticate')
 const restrictTo = require('../middleware/restrictTo');
@@ -205,5 +206,31 @@ router.get('/viewBySelectedCategory/:id', async (request, response) => {
     }
 });
 
+
+
+// Attend Event
+router.get('/attendEvent/:id', authenticate, async (request, response) => {
+
+    try {
+        const event = await Events.findByIdAndUpdate(request.params.id,
+            { $addToSet: { participants: request.id } }, // push and avoid duplicates
+            { new: true }
+        )
+
+        const user = await Users.findByIdAndUpdate(request.id,
+            { $addToSet: { events: event._id } }, // push and avoid duplicates
+            { new: true }
+        )
+        console.log("the loggedin user", request.id);
+
+        if (!event) {
+            return response.status(500).send({ msg: 'Server error' })
+        }
+        response.send(event)
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+    }
+});
 
 module.exports = router

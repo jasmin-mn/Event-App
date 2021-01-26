@@ -16,12 +16,16 @@ const UserSchema = new mongoose.Schema({
     language: { type: [String] },
     yourInterests: { type: [String] },
     others: { type: [String] },
-    events: { type: String },
     role: { type: String, enum: ["user", "admin"], default: "user" },
 
     passwordChangedAt: Date,
     passwordResetToken: String,
-    passwordResetExpire: String
+    passwordResetExpire: String,
+
+    events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Events'
+    }]
 
 })
 

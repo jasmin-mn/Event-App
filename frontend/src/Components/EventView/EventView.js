@@ -18,7 +18,7 @@ const EventView = () => {
             if (result.data) {
 
                 setEventDetails(result.data)
-               
+
             }
 
         } catch (error) {
@@ -30,12 +30,7 @@ const EventView = () => {
         getEventDetails();
 
     }, []);
-    
-    
-        
-     
 
-   
 
     return (
 
@@ -50,13 +45,13 @@ const EventView = () => {
                 <div className={styles.events_actions}>
                     <div>
                         <img className={styles.host_photo} src={eventDetails.user_id && eventDetails.user_id.photo} alt="" />
-                        <p>Hosted by: { eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
+                        <p>Hosted by: {eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
                     </div>
 
                     <div>
-                        <button className={styles.btn}>Join</button>
-                        <button className={styles.btn}>Save</button>
-                        <button className={styles.btn}>Share</button>
+                        <Link><button className={styles.btn}>Attend Event</button></Link>
+                        <Link><button className={styles.btn}>Save Event</button></Link>
+                        <Link to={ShareButtons}><button className={styles.btn}>Share Event</button></Link>
                     </div>
                 </div>
 
