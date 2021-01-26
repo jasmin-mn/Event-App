@@ -18,9 +18,8 @@ import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpa
 import UserPage from './Components/UserPage/UserPage'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
 
-import Notifications, { NotificationsContext } from './Components/Notifications/Notifications';
+import Notifications from './Components/Notifications/Notifications';
 import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
-import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
 
@@ -76,7 +75,7 @@ function App() {
 
             <Route path='/viewOneEvent/:eventId' component={EventView} />
             <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
-            <Route path='/viewBySelectedCategory/:eventCategory' component={CategoryEventView} />
+            <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
@@ -90,8 +89,8 @@ function App() {
             <Route path='/settings' component={Settings} />
 
             <Route path='/logout' component={Logout} />
-            
-            
+
+
 
           </Switch>
 

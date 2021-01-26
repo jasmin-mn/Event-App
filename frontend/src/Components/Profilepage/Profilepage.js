@@ -17,7 +17,7 @@ function Profilepage(e) {
     const data = await response.json();
 
     setUserData(data.user);
-    console.log(data);
+    console.log('data .: ',data);
   };
   useEffect(() => {
     getUser();
