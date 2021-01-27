@@ -34,15 +34,13 @@
 }
 
 .formemail{
-   
-    /* text-align: right; */
+
     margin-left: -35px;
 }
 
 .formdate{
-    display: inline-block;
-    text-align: right;
-    margin-left: -20px;
+
+    margin-left: 33px;
 
 }
 .formplace{

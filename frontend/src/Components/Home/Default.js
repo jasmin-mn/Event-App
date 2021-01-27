@@ -10,6 +10,7 @@ function HomeDefault() {
     const [eventsByCity, setEventsByCity] = useState();
     const [eventsByCategory, setEventsByCategory] = useState();
 
+
     // get all Events
     const getAllEvents = async () => {
 
@@ -41,7 +42,7 @@ function HomeDefault() {
                 })
                 setEvents(myEvents)
             }
-            
+
         } catch (error) {
             console.log(error);
         }
@@ -86,24 +87,21 @@ function HomeDefault() {
         try {
             const result = await axios.get('http://localhost:7000/event/viewByCategory');
             console.log('Events by Category:')
-            console.log(result.data)
+            console.log(88888, result.data)
 
-            if (result.data !== 0) {
-                let myEvents = result.data.map((event) => {
-                    console.log(event);
+            if (result.data && result.data.length !== 0) {
+                const myEvents = result.data.map((event) => {
 
-
-                    let category = event._id.map((category) => <>{category.name}</>);
-                    let photo = event._id.map((category) => <>{category.photo}</>);
-                    const eventLink = `/viewBySelectedCategory/${category}`;
+                    const { _id, name, photo, description } = event._id[0];
+                    const eventLink = `/viewBySelectedCategory/${_id}`;
 
                     return (
                         <Link to={eventLink} >
                             <div className={styles.events_container}>
-
                                 <div className={styles.events_by_category}>
                                     <img className={styles.events_by_category_bg} src={photo} alt="" />
-                                    <p className={styles.category_text}>{category}</p>
+                                    <p className={styles.category_text}>{name}</p>
+                                    <p>{description}</p>
                                 </div>
                             </div>
                         </Link>
