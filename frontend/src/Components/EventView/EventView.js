@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ShareButtons from '../ShareButtons/ShareButtons';
 import AttendEvent from '../AttendEvent/AttendEvents';
 import styles from './EventView.module.css';
@@ -42,10 +42,7 @@ const EventView = () => {
             if (result.data.user) {
                 setAttended(true)
                 setAttendBtn('Leave this Event')
-
             }
-
-
 
         } catch (error) {
             console.log(error);

@@ -92,7 +92,7 @@ function HomeDefault() {
             if (result.data && result.data.length !== 0) {
                 const myEvents = result.data.map((event) => {
 
-                    const { _id, name, photo} = event._id[0];
+                    const { _id, name, photo } = event._id[0];
                     const eventLink = `/viewBySelectedCategory/${_id}`;
 
                     return (
