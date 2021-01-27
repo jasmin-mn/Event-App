@@ -12,27 +12,16 @@ import CategoryEventView from './Components/Home/CategoryEventView';
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
 import Profilepage from './Components/Profilepage/Profilepage'
-
 import ContactForm from './Components/Contact/ContactForm';
 import Resetpasswordpage from './Components/Resetpasswordpage/Resetpasswordpage'
 import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpage'
-
 import UserPage from './Components/UserPage/UserPage'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
-
-
 import Notifications, { NotificationsContext } from './Components/Notifications/Notifications';
-
 import HomeDefault from './Components/Home/Default'
-
-
-import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
-
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
-
 import AboutUs from './Components/AboutUs/AboutUs'
-
 import Settings from './Components/Settings/Settings'
 
 
@@ -89,7 +78,7 @@ function App() {
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
             <Route path='/savedEvent' component={savedEvents} />
-            <Route path='/StartNewEvent' component={StartNewEvent} />
+            
             <Route path='/editProfile' component={Profilepage} />
 
             <Route path='/about' component={AboutUs} />
