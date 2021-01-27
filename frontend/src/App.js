@@ -6,8 +6,8 @@ import Footer from './Components/Footer/Footer';
 import EventView from './Components/EventView/EventView';
 import LocationEventView from './Components/Home/LocationEventView';
 import CategoryEventView from './Components/Home/CategoryEventView';
-import AttendEvents from './Components/AttendEvent/AttendEvents';
-import SavedEvents from './Components/SavedEvents/savedEvents';
+// import AttendEvents from './Components/AttendEvent/AttendEvents';
+// import SavedEvents from './Components/SavedEvents/savedEvents';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -78,9 +78,9 @@ function App() {
             <Route path='/viewOneEvent/:eventId' component={EventView} />
             <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
             <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
-            
-            <Route path='/attendEvents/:eventId' component={AttendEvents} />
-            <Route path='/savedEvents/:eventId' component={SavedEvents} />
+
+            {/* <Route path='/attendEvents/:eventId' component={AttendEvents} />
+            <Route path='/savedEvents/:eventId' component={SavedEvents} /> */}
 
             <Route path='/resetPassword' component={Resetpasswordpage} />
             <Route path='/forgotPassword' component={Forgotpasswordpage} />
