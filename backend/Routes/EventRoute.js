@@ -123,12 +123,7 @@ router.get('/viewOneEvent/:id', async (request, response) => {
 
 
     }
-    return response.send(events);
-  } catch (error) {
-    response.status(500).send({ msg: "Server error" });
-  }
-});
-
+ 
 // View all Events by Location
 router.get("/viewByCity", async (request, response) => {
   try {
@@ -212,4 +207,4 @@ router.get('/viewBySelectedCategory/:id', async (request, response) => {
     }
 });
 
-module.exports = router;
+module.exports = router

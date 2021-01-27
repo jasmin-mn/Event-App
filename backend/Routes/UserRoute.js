@@ -278,9 +278,8 @@ router.post("/profile/:id", authenticate, async (request, response) => {
         language,
         yourInterests,
         others,
-      },
-    }
-=======
+      }
+
 } )
 
 router.get("/profileUser", authenticate, async (request, response) => {
