@@ -9,7 +9,7 @@ export default function language5(props) {
             value={props.getState("language")}
             name="language"
             onChange={props.handleChange}
-            defaultValue={props.state.name}
+          
           />
         </p>
         <div className={styles.button}>

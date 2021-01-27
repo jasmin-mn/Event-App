@@ -5,7 +5,7 @@ export default function Date9(props) {
     <div className={styles.background}>
       <p>
         date:
-        <input
+        <input type="date"
           value={props.getState("date")}
           name="date"
           onChange={props.handleChange}
