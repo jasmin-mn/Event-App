@@ -39,7 +39,7 @@ function FinalStep(props) {
         <p>Member:{props.state.member}</p>
         <p>Eventtype:{props.state.eventtype}</p>
         <p>Category:{props.state.category}</p>
-        <p>date:{props.state.category}</p>
+        <p>date:{props.state.date}</p>
       </div>
       <div className={styles.button}>
         <button onClick={props.prev}>Previous</button>

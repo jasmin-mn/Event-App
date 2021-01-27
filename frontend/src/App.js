@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-import MultiStepForm from './Components/StartNewEvent/MultiStepForm'
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
@@ -23,6 +23,7 @@ import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
 import AboutUs from './Components/AboutUs/AboutUs'
 import Settings from './Components/Settings/Settings'
+import MultiStepForm from './Components/StartNewEvent/MultiStepForm'
 
 
 import './App.css';
@@ -51,55 +52,47 @@ function App() {
 
 
   return (
-
-
     <UserStateContext.Provider value={{ loggedInState, setLoggedIn }}>
-
-
       <Router>
-
         <Header />
 
         <Notifications>
-
-
           <Switch>
-
-            <Route path='/' component={Home} exact />
-            <Route path='/login' component={Login} />
-            <Route path='/signup' component={Register} />
+            <Route path="/" component={Home} exact />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Register} />
             <PrivateRoute path="/userpage" component={UserPage} />
-            <Route path='/contact' component={ContactForm} />
+            <Route path="/contact" component={ContactForm} />
 
-            <Route path='/viewOneEvent/:eventId' component={EventView} />
-            <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
-            <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
+            <Route path="/viewOneEvent/:eventId" component={EventView} />
+            <Route
+              path="/viewBySelectedLocation/:eventLocation"
+              component={LocationEventView}
+            />
+            <Route
+              path="/viewBySelectedCategory/:categoryId"
+              component={CategoryEventView}
+            />
 
-            <Route path='/resetPassword' component={Resetpasswordpage} />
-            <Route path='/forgotPassword' component={Forgotpasswordpage} />
-            <Route path='/savedEvent' component={savedEvents} />
-            
-            <Route path='/editProfile' component={Profilepage} />
+            <Route path="/resetPassword" component={Resetpasswordpage} />
+            <Route path="/forgotPassword" component={Forgotpasswordpage} />
+            <Route path="/savedEvent" component={savedEvents} />
+            <Route path="/startNewEvent" component={MultiStepForm} exact />
+            <Route path="/editProfile" component={Profilepage} />
 
-            <Route path='/about' component={AboutUs} />
+            <Route path="/about" component={AboutUs} />
             {/* <Route path='/profileUser' component={Profilepage} /> */}
 
-            <Route path='/settings' component={Settings} />
+            <Route path="/settings" component={Settings} />
 
-            <Route path='/logout' component={Logout} />
-
-
-
+            <Route path="/logout" component={Logout} />
           </Switch>
-
         </Notifications>
 
         <Footer />
-
       </Router>
-
-
-    </UserStateContext.Provider>);
+    </UserStateContext.Provider>
+  );
 
 }
 

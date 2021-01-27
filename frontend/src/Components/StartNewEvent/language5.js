@@ -3,11 +3,13 @@ import styles from "./multiStep.module.css";
 export default function language5(props) {
     return (
       <div className={styles.background}>
-        <p>Language
+        <p>
+          Language
           <input
             value={props.getState("language")}
-            language="language"
+            name="language"
             onChange={props.handleChange}
+            defaultValue={props.state.name}
           />
         </p>
         <div className={styles.button}>
