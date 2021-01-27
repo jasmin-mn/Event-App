@@ -1,26 +1,13 @@
-const jwt = require("jsonwebtoken")
-const User = require("../Models/UserModel")
+const passport = require("passport");
 
-module.exports = async(request,response,next)=>{
-    const token = request.header('authorization')
-    console.log(token);
+const authenticate = (request, response, next) => {
+  passport.authenticate("jwt", { session: false }, (error, user) => {
+    if (!user || error) {
+      response.status(401).send(error);
+    }
+    request.user = user;
+    next();
+  })(request, response, next);
+};
 
-    if(!token){
-        return response.status(400).json({msg: 'No Token authorization denied!!'})
-    }
-    try{
-        const decode = await jwt.verify(token, process.env.SECRET)
-        console.log('decode:', decode);
-        request.id = decode.id
-        const currentUser = await User.findById(decode.id)
-        if(!currentUser){
-            return response.status(400).json({msg: 'The User with the current token is no longer exist'})
-        }
-        request.id = currentUser.id
-        console.log(request.user);
-        next()
-    } catch(error){
-        console.log(error);
-        return response.status(400).json({msg: 'Token is not valid'})
-    }
-}
+module.exports = authenticate;
