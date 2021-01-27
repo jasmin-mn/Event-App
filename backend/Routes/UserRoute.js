@@ -1,7 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const passport = require("passport");
 const authenticate = require("../middleware/authenticate");
 const restrictTo = require("../middleware/restrictTo");
 const User = require("../Models/UserModel");
@@ -16,9 +15,7 @@ router.post("/register", async (request, response) => {
   try {
     const data = await User.findOne({ email });
     if (data) {
-      return response
-        .status(400)
-        .json({ msg: "Email is already exist. Please use different email." });
+      return response.status(400).json({ msg: "User already exist" });
     }
     const user = new User({
       userName,
@@ -61,7 +58,7 @@ router.post("/login", async (request, response) => {
     return response.status(400).json({ msg: "Invalid Credentials" });
   }
 
-  // token store the id
+  // token
   const payload = {
     id: data.id,
     iat: Date.now(),
@@ -70,16 +67,14 @@ router.post("/login", async (request, response) => {
   try {
     jwt.sign(payload, process.env.SECRET, (error, token) => {
       if (error) throw error;
-      console.log(token);
-      // // response.json({token})
-     return response
+      //console.log(token);
+      // response.cookie({token})
+      return response
         .cookie("jwt", token, {
           httpOnly: true,
-          secure: false,
-          sameSite:"lax",
-          maxAge: 90000000,
+
         })
-        .json({ success: true, message: "Logged In" });
+        .send("ok");
     });
   } catch (error) {
     console.log(error);
@@ -89,7 +84,7 @@ router.post("/login", async (request, response) => {
 
 // @root POST user/dashboard for private
 
-router.get("/dashboard", async (request, response) => {
+router.get("/dashboardboard", authenticate, async (request, response) => {
   console.log("this is request.id", request.id);
   try {
     const user = await User.findById(request.id).select("-password");
@@ -104,8 +99,13 @@ router.get("/dashboard", async (request, response) => {
 
 // Profile
 
+
 router.get("/profile", passport.authenticate(), async (request, response) => {
   // const { userName, firstName, lastName, email, password, age, place, hometown, gender, language, yourInterests, others} = request.body
+
+router.get("/profile", authenticate, async (request, response) => {
+  // const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+
   console.log("this is test request.id", request.id);
   
   try {
@@ -113,7 +113,7 @@ router.get("/profile", passport.authenticate(), async (request, response) => {
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
-    response.json({ msg: `Welcome Back ${user.userName}` , user});
+    response.json({ msg: `Welcome Back ${user.userName}` });
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
@@ -151,49 +151,25 @@ router.post("/profileUpdate", passport.authenticate(), async (request, response)
     user.yourInterests = yourInterests;
     user.others = others;
 
-    user.save().then(function () {
-      return response.json({
-        msg: `user info updated  Back ${user.userName}`,
-        user,
-      });
-    });
-    //    response.json({msg: `user info updated  Back ${user.userName}` , user})
+    user.save();
+    response.json({ msg: `user info updated  Back ${user.userName}`, user });
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
   
 });
 
-//Delete Account
-router.delete('/deleteAccount/:id', authenticate, async(request, response)=>{
-   const user = await User.findByIdAndRemove({_id:(request.params.id)} )
-   if(user){
-       response.send('Successfully Deleted')
-   } else{
-       response.send('Server Error')
-   }
-})
+// Delete Profile
+// router.delete('/delete/:id', authenticate, async(request, response)=>{
+//    const user = await User.findByIdAndDelete({_id:(request.params.id)})
+//    if(user){
+//        response.send('Successfully Deleted')
+//    } else{
+//        response.send('Server Error')
+//    }
+// })
 
-//Edit profile
-
-router.get("/profileUser",authenticate, async(request,response)=>{
-
-    const user = await User.findById(request.id)
-
-} )
-
-router.get("/profileUser", authenticate, async (request, response) => {
-  console.log("this is request.id", request.id);
-  try {
-    const user = await User.findById(request.id);
-    if (!user) {
-      return response.status(500).json({ msg: "Server error" });
-    }
-    response.json({ msg: ` welcome back ${user.userName}` });
-  } catch (error) {
-    response.status(500).json({ msg: "Server error" });
-  }
-});
+// Edit Profile
 
 router.post("/profile/:id", authenticate, async (request, response) => {
   console.log("the id of the current logged in user is : ", request.id);
@@ -206,7 +182,7 @@ router.post("/profile/:id", authenticate, async (request, response) => {
     firstName,
     lastName,
     email,
-    age,
+    dateOfBirth,
     place,
     hometown,
     gender,
@@ -222,7 +198,7 @@ router.post("/profile/:id", authenticate, async (request, response) => {
         firstName,
         lastName,
         email,
-        age,
+        dateOfBirth,
         place,
         hometown,
         gender,
@@ -323,7 +299,5 @@ router.post("/resetPassword/:token", async (request, response) => {
     response.send(`You may reset your Password`);
   }
 });
-
-
 
 module.exports = router;
