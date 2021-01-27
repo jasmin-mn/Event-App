@@ -216,7 +216,8 @@ router.get('/attendEvent/:id', authenticate, async (request, response) => {
             // pushing user id EventSchema and avoid duplicates
             { $addToSet: { participants: request.id } },
             { new: true }
-        )
+        ).populate('category_id user_id');
+
 
         const user = await Users.findByIdAndUpdate(request.id,
             // pushing event id to UserSchema and avoid duplicates
@@ -241,7 +242,8 @@ router.get('/attendEvent/:id', authenticate, async (request, response) => {
 router.get('/savedEvent/:id', authenticate, async (request, response) => {
 
     try {
-        const event = await Events.findById(request.params.id);
+        const event = await Events.findById(request.params.id)
+            .populate('category_id user_id');
 
         const user = await Users.findByIdAndUpdate(request.id,
             // pushing event id to UserSchema and avoid duplicates

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
-export default function AttendEvent() {
+export default function AttendEvents() {
 
     const [confirmMsg, setConfirmMsg] = useState({});
     const { eventId } = useParams();
@@ -12,7 +12,7 @@ export default function AttendEvent() {
 
         try {
             const result = await axios
-                .get(`http://localhost:7000/event/AttendEvent/${eventId}`);
+                .get(`http://localhost:7000/event/attendEvents/${eventId}`);
             console.log(result.data);
             if (result.data) {
 
@@ -31,7 +31,7 @@ export default function AttendEvent() {
 
     return (
         <div>
-            <p>AttendEvent {eventId}</p>
+            <p>AttendEvents {eventId}</p>
             {confirmMsg}
         </div>
     )

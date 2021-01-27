@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ShareButtons from '../ShareButtons/ShareButtons';
-import AttendEvent from '../AttendEvent/AttendEvent';
+import AttendEvent from '../AttendEvent/AttendEvents';
 import styles from './EventView.module.css';
 import axios from 'axios';
 
@@ -51,11 +51,11 @@ const EventView = () => {
                     </div>
 
                     <div>
-                        <Link to={`/attendEvent/${eventId}`}>
+                        <Link to={`/attendEvents/${eventId}`}>
                             <button className={styles.btn}>Attend Event</button>
                         </Link>
 
-                        <Link>
+                        <Link to={`/savedEvents/${eventId}`}>
                             <button className={styles.btn}>Save Event</button>
                         </Link>
 
