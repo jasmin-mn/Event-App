@@ -209,14 +209,15 @@ router.get('/viewBySelectedCategory/:id', async (request, response) => {
 
 
 // Attend Event
-router.get('/attendEvent/:id', authenticate, async (request, response) => {
+router.get('/attendEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findByIdAndUpdate(request.params.id,
             // pushing user id EventSchema and avoid duplicates
             { $addToSet: { participants: request.id } },
             { new: true }
-        ).populate('category_id user_id');
+        )
+        // .populate('category_id user_id');
 
 
         const user = await Users.findByIdAndUpdate(request.id,
@@ -239,7 +240,7 @@ router.get('/attendEvent/:id', authenticate, async (request, response) => {
 
 
 // Save Event
-router.get('/savedEvent/:id', authenticate, async (request, response) => {
+router.get('/savedEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findById(request.params.id)

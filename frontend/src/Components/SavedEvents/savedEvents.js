@@ -5,18 +5,19 @@ import axios from 'axios';
 
 export default function SavedEvents() {
 
-  const [confirmMsg, setConfirmMsg] = useState({});
+  const [savedEvent, setSavedEvent] = useState({});
   const { eventId } = useParams();
 
-  const getConfirmMsg = async () => {
+  const getSavedEvent = async () => {
 
     try {
       const result = await axios
-        .get(`http://localhost:7000/event/savedEvent/${eventId}`);
+        .get(`http://localhost:7000/event/savedEvents/${eventId}`);
       console.log(result.data);
+
       if (result.data) {
 
-        setConfirmMsg(result.data)
+        setSavedEvent(result.data)
 
       }
 
@@ -26,13 +27,13 @@ export default function SavedEvents() {
   }
 
   useEffect(() => {
-    getConfirmMsg();
+    getSavedEvent();
   }, []);
 
   return (
     <div>
       <p>SavedEvent {eventId}</p>
-      {confirmMsg}
+      {savedEvent}
     </div>
   )
 }
