@@ -1,4 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
+
+import MultiStepForm from './Components/StartNewEvent/MultiStepForm'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
@@ -18,8 +20,14 @@ import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpa
 import UserPage from './Components/UserPage/UserPage'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
 
-import Notifications from './Components/Notifications/Notifications';
+
+import Notifications, { NotificationsContext } from './Components/Notifications/Notifications';
+
+import HomeDefault from './Components/Home/Default'
+
+
 import StartNewEvent from './Components/StartNewEvent/StartNewEvent'
+
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
 
@@ -54,6 +62,7 @@ function App() {
 
 
   return (
+
 
     <UserStateContext.Provider value={{ loggedInState, setLoggedIn }}>
 
@@ -102,6 +111,8 @@ function App() {
 
 
     </UserStateContext.Provider>);
+
 }
+
 
 export default App;
