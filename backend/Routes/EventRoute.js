@@ -14,35 +14,36 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
 
   try {
     let {
-      event_name,
-      event_admin,
-      event_photo,
+      name,
+      photo,
+      description,
       location,
       language,
       member,
-      description,
-      dateEventstarted,
-      category_id,
+      eventtype,
+      date,
+      // category,
     } = request.body;
-    location = location.charAt(0).toUpperCase() + location.slice(1);
+    //location = location.charAt(0).toUpperCase() + location.slice(1);
 
     const event = new Events({
-      event_name,
-      event_admin,
-      event_photo,
+      event_name: name,
+      event_photo:photo,
       description,
       location,
       language,
       member,
-      dateEventstarted,
+      eventtype,
+      dateEventstarted:date,
       user_id: request.id,
-      category_id,
+      // category_id:category,
     });
     await event.save();
 
     response.send("you have created your Event ");
   } catch (error) {
-    response.send(error);
+    console.log(error);
+    response.status(500).send(error);
   }
 });
 

@@ -21,7 +21,7 @@ const EventSchema = new mongoose.Schema({
     location: { type: String },
     language: { type: String },
     member: { type: Number },
-    eventtype: { type: String },
+    eventtype: { type: String,enum: ["Online", "Present"], default: "Online" }, 
     dateEventstarted: { type: Date }
 
 })
