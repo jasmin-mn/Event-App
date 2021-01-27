@@ -22,10 +22,10 @@ const UserSchema = new mongoose.Schema({
     passwordResetToken: String,
     passwordResetExpire: String,
 
-    events: [{
+    attendEvent: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Events'
-    }]
+    }],
 
     savedEvents: [{
         type: mongoose.Schema.Types.ObjectId,

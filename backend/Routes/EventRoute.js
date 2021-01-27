@@ -220,7 +220,7 @@ router.get('/attendEvent/:id', authenticate, async (request, response) => {
 
         const user = await Users.findByIdAndUpdate(request.id,
             // pushing event id to UserSchema and avoid duplicates
-            { $addToSet: { events: event._id } },
+            { $addToSet: { attendEvent: event._id } },
             { new: true }
         )
         console.log("the loggedin user", request.id);
@@ -238,7 +238,7 @@ router.get('/attendEvent/:id', authenticate, async (request, response) => {
 
 
 // Save Event
-router.get('/attendEvent/:id', authenticate, async (request, response) => {
+router.get('/savedEvent/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findById(request.params.id);
@@ -259,5 +259,6 @@ router.get('/attendEvent/:id', authenticate, async (request, response) => {
         response.status(500).send({ msg: 'Server error' })
     }
 });
+
 
 module.exports = router
