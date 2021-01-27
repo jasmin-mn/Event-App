@@ -104,7 +104,7 @@ router.get("/dashboard", async (request, response) => {
 
 // Profile
 
-router.get("/profile", authenticate, async (request, response) => {
+router.get("/profile", passport.authenticate(), async (request, response) => {
   // const { userName, firstName, lastName, email, password, age, place, hometown, gender, language, yourInterests, others} = request.body
   console.log("this is test request.id", request.id);
   
@@ -118,7 +118,7 @@ router.get("/profile", authenticate, async (request, response) => {
     response.status(500).json({ msg: "Server error" });
   }
 });
-router.post("/profileUpdate", authenticate, async (request, response) => {
+router.post("/profileUpdate", passport.authenticate(), async (request, response) => {
   const {
     userName,
     firstName,

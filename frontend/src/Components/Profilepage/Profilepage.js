@@ -35,6 +35,7 @@ function Profilepage(e) {
 
   const editRegister = async (updateData) => {
     const config = {
+      withCredentials: true,
       headers:{"Content-Type": "application/json"}
       
     };
