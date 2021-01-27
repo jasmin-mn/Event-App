@@ -10,8 +10,9 @@ const Login = (event) => {
     const history = useHistory();
 
     const sendLogin = async (allFormData) => {
-
+     
         const config = {
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
