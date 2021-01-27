@@ -1,10 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-
 const passport = require("passport");
-
 const authenticate = require("../middleware/authenticate");
 const restrictTo = require("../middleware/restrictTo");
 const User = require("../Models/UserModel");
@@ -239,12 +236,12 @@ router.delete('/deleteAccount/:id', authenticate, async(request, response)=>{
 //Edit profile
 
 
-router.get("/profileUser",authenticate, async(request,response)=>{
+router.get("/profileUser",passport ,authenticate(), async(request,response)=>{
 
     const user = await User.findById(request.id)
 
 
-router.post("/profile/:id", authenticate, async (request, response) => {
+router.post("/profile/:id",passport, authenticate(), async (request, response) => {
   console.log("the id of the current logged in user is : ", request.id);
   // MAke sure that the user own the profile
   if (request.id !== request.params.id) {
@@ -280,7 +277,7 @@ router.post("/profile/:id", authenticate, async (request, response) => {
         others,
       },
     }
-=======
+
 } )
 
 router.get("/profileUser", authenticate, async (request, response) => {
