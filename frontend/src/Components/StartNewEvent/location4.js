@@ -7,7 +7,7 @@ export default function location4(props) {
           Location
           <input
             value={props.getState("location")}
-            language="location"
+            name="location"
             onChange={props.handleChange}
           />
         </p>

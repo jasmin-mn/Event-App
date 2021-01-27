@@ -11,7 +11,6 @@ import React from "react";
           Enter a name for Your Event:
           <input
             value={props.getState("name")}
-            defaultValue={props.state.name}
             onChange={props.handleChange}
             name="name"
             required
