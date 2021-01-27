@@ -199,7 +199,7 @@ router.post("/profile/:id", authenticate, async (request, response) => {
         language,
         yourInterests,
         others,
-      },
+      }
     }
 
 } )
