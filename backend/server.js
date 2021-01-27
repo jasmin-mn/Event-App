@@ -36,14 +36,10 @@ app.use("/admin", require("./Routes/AdminRoute"));
 app.use("/search", require("./Routes/SearchRoute"));
 
 // connect to mongodb
+
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.MONGO_URI}/${process.env.DB_NAME}?retryWrites=true&w=m
-
-
-
-app.listen(process.env.PORT, () => {
-  console.log(`Server Started on port ${process.env.PORT}`);ajority`,
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.MONGO_URI}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
@@ -52,4 +48,10 @@ app.listen(process.env.PORT, () => {
   .catch((err) => {
     console.log(err);
   });
-});
+  app.listen(process.env.PORT, () => {
+    console.log(`Server Started on port ${process.env.PORT}`);
+  });
+
+
+
+
