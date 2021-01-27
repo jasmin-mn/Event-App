@@ -1,9 +1,8 @@
 .containerheader {
   text-align: center;
   border-radius: 200px;
-  
-  position: relative;
 
+  position: relative;
 
   color: white;
   margin-bottom: 40px;
@@ -15,13 +14,10 @@
   font-size: 20px;
   color: black;
   text-align: center;
-  
+
   margin-left: 150px;
   margin-right: 150px;
   position: absolute;
-  
-  
-  
 }
 .headerhr {
   margin: 0;
@@ -31,26 +27,25 @@
 .header {
   margin-top: 0px;
   padding-top: 40px;
-  color:orange;
+  color: orange;
   font-weight: bolder;
-  
 }
 
-.containerfooter {
+/* .containerfooter { */
   /* background: url(../../Images/abstract.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; */
-  background-color: orange;
+  /* background-color: orange;
 
   color: black;
-  /* opacity: 0.8; */
+
   display: flex;
   align-items: center;
 
   height: 250px;
-}
-.subcontainer {
+} */
+/* .subcontainer {
   list-style-type: none;
   flex-grow: 1;
   margin-left: 200px;
@@ -93,4 +88,4 @@
 
 .icon-github{
   color: black;
-}
+} */

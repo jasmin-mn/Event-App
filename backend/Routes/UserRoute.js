@@ -73,7 +73,7 @@ router.post("/login", async (request, response) => {
       return response
         .cookie("jwt", token, {
           httpOnly: true,
-          sameSite: "lax",
+
         })
         .send("ok");
     });
@@ -100,9 +100,15 @@ router.get("/dashboardboard", authenticate, async (request, response) => {
 
 // Profile
 
+
+router.get("/profile", passport.authenticate(), async (request, response) => {
+  // const { userName, firstName, lastName, email, password, age, place, hometown, gender, language, yourInterests, others} = request.body
+
 router.get("/profile", authenticate, async (request, response) => {
   // const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
+
   console.log("this is test request.id", request.id);
+  
   try {
     const user = await User.findById(request.id).select("-password");
     if (!user) {
@@ -113,7 +119,7 @@ router.get("/profile", authenticate, async (request, response) => {
     response.status(500).json({ msg: "Server error" });
   }
 });
-router.post("/profileUpdate", authenticate, async (request, response) => {
+router.post("/profileUpdate", passport.authenticate(), async (request, response) => {
   const {
     userName,
     firstName,
@@ -151,6 +157,7 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
+  
 });
 
 // Delete Profile
