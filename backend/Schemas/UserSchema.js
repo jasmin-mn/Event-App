@@ -27,6 +27,11 @@ const UserSchema = new mongoose.Schema({
         ref: 'Events'
     }]
 
+    savedEvents: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Events'
+    }]
+
 })
 
 module.exports = UserSchema
