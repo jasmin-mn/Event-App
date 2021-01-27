@@ -6,18 +6,26 @@ import axios from "axios";
 
 function Profilepage(e) {
   const [userData, setUserData] = useState({});
-  const getUser = async () => {
+  const getUser = async (update) => {
+    const config = {
+      withCredentials: true,
+      headers:{"Content-Type": "application/json"}
+      
+    };
     // const res = await axios.get('http://localhost:7000/user/profile' , { withCredentials: true })
     // console.log('res : ',res);
-
-    const response = await fetch(
-      "http://localhost:7000/user/profile",
-      { credentials: "include" } // could also try 'same-origin'
+    let token = localStorage.getItem("token")
+    const response = await axios.get(
+      "http://localhost:7000/user/profile", update, config
+      
+      //{ credentials: "include" } // could also try 'same-origin',
+      
     );
-    const data = await response.json();
+    const data = await response.json({msg:"message"});
 
     setUserData(data.user);
     console.log('data .: ',data);
+    
   };
   useEffect(() => {
     getUser();
@@ -27,7 +35,7 @@ function Profilepage(e) {
 
   const editRegister = async (updateData) => {
     const config = {
-      "Content-Type": "application/json"
+      headers:{"Content-Type": "application/json"}
       
     };
     try {
@@ -47,7 +55,7 @@ function Profilepage(e) {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target.value);
     const data = {
       userName: formData.get("userName"),
       firstName: formData.get("firstName"),
@@ -111,7 +119,7 @@ function Profilepage(e) {
 
         <div className={styles.formemail}>
           <label htmlFor="email">Email Address</label>
-          <input type="text" name="email" />
+          <input type="text" name="email" value= "email"/>
         </div>
 
         <div className={styles.formdate}>
@@ -129,7 +137,7 @@ function Profilepage(e) {
         </div>
         <div className={styles.formlang}>
           <label htmlFor="language">Language</label>
-          <input type="text" name="language" />
+          <input type="text" name="language" value= ""  />
         </div>
         <div className={styles.forminterest}>
           <label htmlFor="yourInterests">Your Interests</label>
@@ -137,7 +145,7 @@ function Profilepage(e) {
         </div>
         <div className={styles.formothers}>
           <label htmlFor="others">Others</label>
-          <input type="text" name="others" />
+          <input type="text" name="others" value= "" />
         </div>
         <input type="submit" value="Save" className={styles.submitregister} />
       </form>

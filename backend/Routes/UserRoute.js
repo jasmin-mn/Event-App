@@ -76,7 +76,7 @@ router.post("/login", async (request, response) => {
         .cookie("jwt", token, {
           httpOnly: true,
           secure: false,
-          sameSite: "lax",
+          sameSite:"lax",
           maxAge: 90000000,
         })
         .json({ success: true, message: "Logged In" });
@@ -107,6 +107,7 @@ router.get("/dashboard", async (request, response) => {
 router.get("/profile", authenticate, async (request, response) => {
   // const { userName, firstName, lastName, email, password, age, place, hometown, gender, language, yourInterests, others} = request.body
   console.log("this is test request.id", request.id);
+  
   try {
     const user = await User.findById(request.id).select("-password");
     if (!user) {
@@ -160,6 +161,7 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
+  
 });
 
 //Delete Account
