@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// import React, { useState, useEffect } from 'react';
+// import { useParams } from 'react-router-dom';
+// import axios from 'axios';
 
 
-export default function AttendEvents() {
+// export default function AttendEvents() {
 
-    const [confirmMsg, setConfirmMsg] = useState({});
-    const { eventId } = useParams();
+//     const [confirmMsg, setConfirmMsg] = useState({});
+//     const { eventId } = useParams();
 
-    const getConfirmMsg = async () => {
+//     const getConfirmMsg = async () => {
 
-        try {
-            const result = await axios
-                .get(`http://localhost:7000/event/attendEvents/${eventId}`);
-            console.log(result.data);
-            if (result.data) {
+//         try {
+//             const result = await axios
+//                 .get(`http://localhost:7000/event/attendEvents/${eventId}`);
+//             console.log(result.data);
+//             if (result.data) {
 
-                setConfirmMsg(result.data)
+//                 setConfirmMsg(result.data)
 
-            }
+//             }
 
-        } catch (error) {
-            console.log(error);
-        }
-    }
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
 
-    useEffect(() => {
-        getConfirmMsg();
-    }, []);
+//     useEffect(() => {
+//         getConfirmMsg();
+//     }, []);
 
-    return (
-        <div>
-            <p>AttendEvents {eventId}</p>
-            {confirmMsg}
-        </div>
-    )
-}
+//     return (
+//         <div>
+//             <p>AttendEvents {eventId}</p>
+//             {confirmMsg}
+//         </div>
+//     )
+// }

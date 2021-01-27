@@ -9,6 +9,8 @@ import axios from 'axios';
 const EventView = () => {
 
     const [eventDetails, setEventDetails] = useState({});
+    const [attended, setAttended] = useState(false);
+    const [attendBtn, setAttendBtn] = useState('Join this Event');
     const { eventId } = useParams();
 
     const getEventDetails = async () => {
@@ -18,9 +20,7 @@ const EventView = () => {
                 .get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
             console.log(result.data);
             if (result.data) {
-
                 setEventDetails(result.data)
-
             }
 
         } catch (error) {
@@ -32,6 +32,36 @@ const EventView = () => {
         getEventDetails();
 
     }, []);
+
+
+    const getAttendEvent = async () => {
+        try {
+            const result = await axios
+                .get(`http://localhost:7000/event/attendEvents/${eventId}`, { withCredentials: true });
+            console.log("event view", result.data.user);
+            if (result.data.user) {
+                setAttended(true)
+                setAttendBtn('Leave this Event')
+
+            }
+
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getSaveEvent = async () => {
+        try {
+            const result = await axios
+                .get(`http://localhost:7000/event/savedEvents/${eventId}`, { withCredentials: true });
+            console.log('save event', result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
 
     return (
@@ -51,17 +81,11 @@ const EventView = () => {
                     </div>
 
                     <div>
-                        <Link to={`/attendEvents/${eventId}`}>
-                            <button className={styles.btn}>Attend Event</button>
-                        </Link>
+                        <button onClick={getAttendEvent} className={styles.btn}>{attendBtn}</button>
 
-                        <Link to={`/savedEvents/${eventId}`}>
-                            <button className={styles.btn}>Save Event</button>
-                        </Link>
+                        <button onClick={getSaveEvent} className={styles.btn}>Save Event</button>
 
-                        <Link to={ShareButtons}>
-                            <button className={styles.btn}>Share Event</button>
-                        </Link>
+                        <button className={styles.btn}>Share Event</button>
                     </div>
                 </div>
 

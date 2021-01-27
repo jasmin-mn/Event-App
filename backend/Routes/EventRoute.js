@@ -213,7 +213,7 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findByIdAndUpdate(request.params.id,
-            // pushing user id EventSchema and avoid duplicates
+            // pushing user id to EventSchema and avoid duplicates
             { $addToSet: { participants: request.id } },
             { new: true }
         )
@@ -222,15 +222,15 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
 
         const user = await Users.findByIdAndUpdate(request.id,
             // pushing event id to UserSchema and avoid duplicates
-            { $addToSet: { attendEvent: event._id } },
+            { $addToSet: { attendEvents: event._id } },
             { new: true }
         )
         console.log("the loggedin user", request.id);
 
         if (!event) {
-            return response.status(500).send({ msg: 'Server error' })
+            return response.status(500).send({ msg: 'Server error event not saved' })
         }
-        response.send(event)
+        response.json({ event, user })
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
@@ -244,7 +244,7 @@ router.get('/savedEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findById(request.params.id)
-            .populate('category_id user_id');
+            .populate('user_id');
 
         const user = await Users.findByIdAndUpdate(request.id,
             // pushing event id to UserSchema and avoid duplicates
@@ -263,5 +263,6 @@ router.get('/savedEvents/:id', authenticate, async (request, response) => {
     }
 });
 
+//
 
 module.exports = router
