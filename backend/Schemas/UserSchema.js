@@ -1,22 +1,23 @@
 const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema({
-    userName:{type: String,Number, required: true},
-    firstName:{type: String, required: true},
-    lastName:{type: String, required: true},
-    email:{ type:String, Number, required: true},
-    password:{type: String, Number, required: true},
-    gender:{type: String, enum: ['female', 'male', 'N/A'], default: 'N/A'},
+    userName: { type: String, Number, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: { type: String, Number, required: true },
+    password: { type: String, Number, required: true },
+    gender: { type: String, enum: ['female', 'male', 'N/A'], default: 'N/A' },
 
-    age: {type: Number},
-    photo:{type: String},
-    place:{type: String},
-    location:{type: String},
-    language:{type: [String]},
-    yourInterests:{type:[String]},
-    others:{type:[String]},
-    events: {type: String},
-    role:{ type: String, enum:["user", "admin"], default: "user"},
+    age: { type: Number },
+
+    photo: { type: String },
+    place: { type: String },
+    location: { type: String },
+    language: { type: [String] },
+    yourInterests: { type: [String] },
+    others: { type: [String] },
+    events: { type: String },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
 
     passwordChangedAt: Date,
     passwordResetToken: String,

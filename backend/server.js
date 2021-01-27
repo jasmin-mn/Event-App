@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const cookie = require("cookie-parser");
 const app = express();
+
 const strategy = require("./middleware/jwtStrategy");
 const mongoose = require("mongoose");
 const User = require("./Models/UserModel");
@@ -35,6 +36,7 @@ app.use("/admin", require("./Routes/AdminRoute"));
 app.use("/search", require("./Routes/SearchRoute"));
 
 // connect to mongodb
+
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.MONGO_URI}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
@@ -46,7 +48,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+  app.listen(process.env.PORT, () => {
+    console.log(`Server Started on port ${process.env.PORT}`);
+  });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server Started on port ${process.env.PORT}`);
-});
+
+
+
