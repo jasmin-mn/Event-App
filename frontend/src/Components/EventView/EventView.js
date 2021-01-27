@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ShareButtons from '../ShareButtons/ShareButtons';
+import AttendEvent from '../AttendEvent/AttendEvents';
 import styles from './EventView.module.css';
 import axios from 'axios';
 
@@ -8,17 +9,18 @@ import axios from 'axios';
 const EventView = () => {
 
     const [eventDetails, setEventDetails] = useState({});
+    const [attended, setAttended] = useState(false);
+    const [attendBtn, setAttendBtn] = useState('Join this Event');
     const { eventId } = useParams();
 
     const getEventDetails = async () => {
 
         try {
-            const result = await axios.get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
+            const result = await axios
+                .get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
             console.log(result.data);
             if (result.data) {
-
                 setEventDetails(result.data)
-               
             }
 
         } catch (error) {
@@ -30,12 +32,34 @@ const EventView = () => {
         getEventDetails();
 
     }, []);
-    
-    
-        
-     
 
-   
+
+    const getAttendEvent = async () => {
+        try {
+            const result = await axios
+                .get(`http://localhost:7000/event/attendEvents/${eventId}`, { withCredentials: true });
+            console.log("event view", result.data.user);
+            if (result.data.user) {
+                setAttended(true)
+                setAttendBtn('Leave this Event')
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getSaveEvent = async () => {
+        try {
+            const result = await axios
+                .get(`http://localhost:7000/event/savedEvents/${eventId}`, { withCredentials: true });
+            console.log('save event', result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
     return (
 
@@ -50,13 +74,15 @@ const EventView = () => {
                 <div className={styles.events_actions}>
                     <div>
                         <img className={styles.host_photo} src={eventDetails.user_id && eventDetails.user_id.photo} alt="" />
-                        <p>Hosted by: { eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
+                        <p>Hosted by: {eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
                     </div>
 
                     <div>
-                        <button className={styles.btn}>Join</button>
-                        <button className={styles.btn}>Save</button>
-                        <button className={styles.btn}>Share</button>
+                        <button onClick={getAttendEvent} className={styles.btn}>{attendBtn}</button>
+
+                        <button onClick={getSaveEvent} className={styles.btn}>Save Event</button>
+
+                        <button className={styles.btn}>Share Event</button>
                     </div>
                 </div>
 
