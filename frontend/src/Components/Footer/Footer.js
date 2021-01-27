@@ -6,7 +6,6 @@ export default function Footer() {
 
     return (
         <div className={styles.footer}>
-
             <div className={styles.containerfooter} >
                 <ul className={styles.subcontainer}>
                     <li className={styles.contactus}>Contact Us</li>
@@ -32,5 +31,6 @@ export default function Footer() {
         </div>
     )
 }
+
 
 
