@@ -21,4 +21,6 @@ const strategy = new Strategy(
     }
   }
 );
+
 module.exports = strategy;
+

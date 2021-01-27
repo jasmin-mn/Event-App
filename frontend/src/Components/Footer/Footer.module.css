@@ -1,12 +1,15 @@
 .footer {
   width: 100%;
-  background-color: gray;
+  
+  background-color: rgb(75, 71, 71);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 5px;
-
+  margin-top: 200px;
+  
+ 
+  
   /* position: freezed;
   bottom: 0;
   left: 0; */
@@ -15,9 +18,12 @@
 .footer p {
   padding: 0;
   margin: 5px;
+  color: white;
+  
+  
 }
 
-.containerheader {
+/* .containerheader {
   text-align: center;
   border-radius: 200px;
 
@@ -27,7 +33,8 @@
   margin-bottom: 40px;
 
   height: 410px;
-}
+  
+} */
 .headerparag {
   line-height: 50px;
   font-size: 20px;
@@ -55,33 +62,43 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; */
-  background-color: orange;
+  
   width: 100%;
   color: black;
-  /* opacity: 0.8; */
+  
   display: flex;
   align-items: center;
 
-  height: 150px;
+  height: 120px;
+  
 }
 .subcontainer {
   list-style-type: none;
   flex-grow: 1;
   margin-left: 200px;
-  margin-top: 30px;
-  margin-top: -40px;
+  
+  margin-top: 7px;
+  color: white;
+
+  
 }
 .subcontainer1 {
   list-style-type: none;
   flex-grow: 1;
   margin-left: 200px;
+ 
+ 
+
 }
 .subcontainer1 li {
   list-style-type: none;
-  padding-bottom: 15px;
+  /* padding-bottom: 5px; */
+  padding-right: 30px;
+
+  display: inline;
 }
 .subcontainer li {
-  padding-bottom: 15px;
+  padding-bottom: -3px;
 }
 .follow {
   padding-bottom: 10px;

@@ -1,39 +1,34 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./Settings.module.css";
 import axios from "axios";
 
-const Settings = (e) => {
-  const deleteAccount = async (info) => {
-    const config = {
-      headers: {
-        'Authorization': "authorizationToken"
-      }
-    };
+const Settings = () => {
+  const [deleteId, setDeleteId] = useState()
 
-    try {
-      const result = await axios.delete(
-        "http://localhost:7000/user/deleteAccount/:id",
-        info,
-        config
-      );
-      console.log(result);
-      // setLoggedIn(true)
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(()=>{
+    getData() 
 
-  const handleDeleteSubmit = async (e) => {
-    e.preventDefault();
-    const userDelete = new userDelete(e.target);
-    // const dataDelete= {
-    //     _id:userDelete.remove("email")
+  },[])
+   const getData = async()=>{
+     const response = await axios.get("http://localhost:7000/user/profile")
+     setDeleteId(response.data)
+   }
 
-    // }
-  };
-  try {
-    deleteAccount();
-  } catch (error) {}
+   const removeData = (id)=>{
+     axios.delete(`${"http://localhost:7000/user/deleteAccount"}/${id}`).then(response =>{
+       const del = deleteId.filter(deleteId=> id !== deleteId.id )
+       setDeleteId(del)
+
+     })
+   }
+
+  //  const renderHeader = (e)=>{
+  //   const config = {
+  //     headers: {
+  //       'Authorization': "authorizationToken"
+  //     }
+  //   };
+  //  }
 
   return (
     <div className={styles.containersetting}>
@@ -45,7 +40,7 @@ const Settings = (e) => {
           delete your account, you have to register again.
         </p>
         <button
-          onClick={handleDeleteSubmit}
+          onClick={removeData}
           className={styles.deletecontainer1}
         >
           Delete Account
