@@ -22,7 +22,7 @@ function Forgotpasswordpage() {
       //   headers : { 'Content-Type': 'application/json'},
       //   body : JSON.stringify(email)
       // })
-      const result =await axios.post('/user/forgotPassword',data , config);
+      const result =await axios.post('/user/forgotPassword', config);
       console.log(result);
       
       

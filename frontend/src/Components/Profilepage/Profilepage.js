@@ -39,13 +39,13 @@ function Profilepage(e) {
     try {
       const result = await axios.post(
         "/user/profileUpdate",
-        updateData,
+        
         config
       );
       console.log(result);
       localStorage.setItem("registered", JSON.stringify(true));
 
-      // history.push('/profile/:id')
+      
     } catch (error) {
       alert(error.response.data.msg);
     } //
