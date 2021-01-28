@@ -22,7 +22,7 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
       member,
       eventtype,
       date,
-      // category,
+       category,
     } = request.body;
     //location = location.charAt(0).toUpperCase() + location.slice(1);
 
