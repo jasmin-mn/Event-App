@@ -23,7 +23,7 @@ const Login = (event) => {
             const result = await axios.post('http://localhost:7000/user/login', allFormData, config)
             console.log(result)
             setLoggedIn(true)
-            history.push('/userpage')
+            history.push('/')
         } catch (error) {
             alert(error.response.data.msg);
         }

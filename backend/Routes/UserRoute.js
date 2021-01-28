@@ -116,7 +116,7 @@ router.get("/profile", authenticate, async (request, response) => {
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
-    response.json({ msg: `Welcome Back ${user.userName}` });
+    response.json({ user} );
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
@@ -135,11 +135,11 @@ router.post("/profileUpdate",authenticate, async (request, response) => {
     gender,
     language,
     yourInterests,
-    others,
+    others
   } = request.body;
-  console.log("this is test request.id", request.id);
+  console.log("this is test request.id", request.user._id);
   try {
-    const user = await User.findById(request.id).select("-password");
+    const user = await User.findById(request.user._id).select("-password");
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
@@ -163,15 +163,18 @@ router.post("/profileUpdate",authenticate, async (request, response) => {
   }
 });
 
-// Delete Profile
-// router.delete('/delete/:id', authenticate, async(request, response)=>{
-//    const user = await User.findByIdAndDelete({_id:(request.params.id)})
-//    if(user){
-//        response.send('Successfully Deleted')
-//    } else{
-//        response.send('Server Error')
-//    }
-// })
+
+
+//Delete Account
+router.delete('/deleteAccount/:id', authenticate, async(request, response)=>{
+  const user = await User.findByIdAndDelete({_id:(request.params.id)} )
+  if(user){
+      response.send('Successfully Deleted')
+  } else{
+      response.send('Server Error')
+  }
+})
+
 
 // Edit Profile
 
