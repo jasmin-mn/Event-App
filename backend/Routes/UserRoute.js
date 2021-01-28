@@ -1,7 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const passport = require("passport");
 const authenticate = require("../middleware/authenticate");
 const restrictTo = require("../middleware/restrictTo");
 const User = require("../Models/UserModel");
@@ -73,7 +72,7 @@ router.post("/login", async (request, response) => {
       return response
         .cookie("jwt", token, {
           httpOnly: true,
-
+          sameSite: 'lax'
         })
         .send("ok");
     });
@@ -101,16 +100,15 @@ router.get("/dashboardboard", authenticate, async (request, response) => {
 // Profile
 
 
-router.get("/profile", passport.authenticate(), async (request, response) => {
-  // const { userName, firstName, lastName, email, password, age, place, hometown, gender, language, yourInterests, others} = request.body
+
 
 router.get("/profile", authenticate, async (request, response) => {
   // const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
 
-  console.log("this is test request.id", request.id);
+  console.log("this is test request.id", request.user._id);
   
   try {
-    const user = await User.findById(request.id).select("-password");
+    const user = await User.findById(request.user._id).select("-password");
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
@@ -119,7 +117,7 @@ router.get("/profile", authenticate, async (request, response) => {
     response.status(500).json({ msg: "Server error" });
   }
 });
-router.post("/profileUpdate", passport.authenticate(), async (request, response) => {
+router.post("/profileUpdate",authenticate, async (request, response) => {
   const {
     userName,
     firstName,
@@ -206,61 +204,8 @@ router.post("/profile/:id", authenticate, async (request, response) => {
         language,
         yourInterests,
         others,
-      }
-    }
-
-} )
-
-router.get("/profileUser", authenticate, async (request, response) => {
-  console.log("this is request.id", request.id);
-  try {
-    const user = await User.findById(request.id);
-    if (!user) {
-      return response.status(500).json({ msg: "Server error" });
-    }
-    response.json({ msg: ` welcome back ${user.userName}` });
-  } catch (error) {
-    response.status(500).json({ msg: "Server error" });
-  }
-});
-
-router.post("/profile/:id", authenticate, async (request, response) => {
-  console.log("the id of the current logged in user is : ", request.id);
-  // MAke sure that the user own the profile
-  if (request.id !== request.params.id) {
-    return response.status(401).json({ msg: "Not authorized" });
-  }
-  const {
-    userName,
-    firstName,
-    lastName,
-    email,
-    age,
-    place,
-    hometown,
-    gender,
-    language,
-    yourInterests,
-    others,
-  } = request.body;
-  const user = await User.findByIdAndUpdate(
-    { _id: request.params.id },
-    {
-      $set: {
-        userName,
-        firstName,
-        lastName,
-        email,
-        age,
-        place,
-        hometown,
-        gender,
-        language,
-        yourInterests,
-        others,
       },
     }
-
   );
   if (user) {
     response.send(`Profile has been updated`);

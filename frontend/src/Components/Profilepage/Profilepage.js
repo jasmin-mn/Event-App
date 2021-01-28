@@ -14,17 +14,15 @@ function Profilepage(e) {
     };
     // const res = await axios.get('http://localhost:7000/user/profile' , { withCredentials: true })
     // console.log('res : ',res);
-    let token = localStorage.getItem("token")
+    //let token = localStorage.getItem("token")
     const response = await axios.get(
-      "http://localhost:7000/user/profile", update, config
-      
-      //{ credentials: "include" } // could also try 'same-origin',
-      
+      "http://localhost:7000/user/profile", config
+        
     );
-    const data = await response.json({msg:"message"});
+    // const data = await response.json();
 
-    setUserData(data.user);
-    console.log('data .: ',data);
+    // setUserData(data.user);
+    // console.log('data .: ',data);
     
   };
   useEffect(() => {
@@ -37,7 +35,6 @@ function Profilepage(e) {
     const config = {
       withCredentials: true,
       headers:{"Content-Type": "application/json"}
-      
     };
     try {
       const result = await axios.post(
@@ -77,10 +74,10 @@ function Profilepage(e) {
 
     try {
       editRegister(data);
-      // const registered = localStorage.getItem("registered")
-      // registered = JSON.parse(registered)
+      const registered = localStorage.getItem("registered")
+      registered = JSON.parse(registered)
 
-      // console.log(registered);
+      console.log(registered);
     } catch (error) {
       console.log(error);
     }
@@ -138,7 +135,7 @@ function Profilepage(e) {
         </div>
         <div className={styles.formlang}>
           <label htmlFor="language">Language</label>
-          <input type="text" name="language" value= ""  />
+          <input type="text" name="language"  />
         </div>
         <div className={styles.forminterest}>
           <label htmlFor="yourInterests">Your Interests</label>
@@ -146,7 +143,7 @@ function Profilepage(e) {
         </div>
         <div className={styles.formothers}>
           <label htmlFor="others">Others</label>
-          <input type="text" name="others" value= "" />
+          <input type="text" name="others"  />
         </div>
         <input type="submit" value="Save" className={styles.submitregister} />
       </form>

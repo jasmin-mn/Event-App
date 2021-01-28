@@ -6,13 +6,13 @@ const Settings = () => {
   const [deleteId, setDeleteId] = useState()
 
   useEffect(()=>{
-    getData() 
+    // getData() 
 
   },[])
-   const getData = async()=>{
-     const response = await axios.get("http://localhost:7000/user/profile")
-     setDeleteId(response.data)
-   }
+  //  const getData = async()=>{
+  //    const response = await axios.get("http://localhost:7000/user/profile")
+  //    setDeleteId(response.data)
+  //  }
 
    const removeData = (id)=>{
      axios.delete(`${"http://localhost:7000/user/deleteAccount"}/${id}`).then(response =>{
