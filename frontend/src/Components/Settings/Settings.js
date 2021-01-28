@@ -13,6 +13,7 @@ const Settings = () => {
   //    const response = await axios.get("http://localhost:7000/user/profile")
   //    setDeleteId(response.data)
   //  }
+  const userUrl = 'http://localhost:7000/user/login'
 
    const removeData = (id)=>{
      axios.delete(`${"http://localhost:7000/user/deleteAccount"}/${id}`).then(response =>{
@@ -22,13 +23,10 @@ const Settings = () => {
      })
    }
 
-  //  const renderHeader = (e)=>{
-  //   const config = {
-  //     headers: {
-  //       'Authorization': "authorizationToken"
-  //     }
-  //   };
-  //  }
+   const renderHeader = (e)=>{
+    const headerElement = ['id','email']
+    
+   }
 
   return (
     <div className={styles.containersetting}>
