@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const EventSchema = new mongoose.Schema({
 
     event_name: { type: String, required: true },
-    event_photo: { type: String, default:'https://www.pexels.com/de-de/foto/hand-laptop-computer-gerat-574071' },
+    event_photo: { type: String, default: 'https://www.pexels.com/de-de/foto/hand-laptop-computer-gerat-574071' },
 
     category_id: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -21,8 +21,17 @@ const EventSchema = new mongoose.Schema({
     location: { type: String },
     language: { type: String },
     member: { type: Number },
+
     eventtype: { type: String,enum: ["Online", "Present"], default: "Online" }, 
     dateEventstarted: { type: Date }
+
+  
+
+    participants: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
+
 
 })
 

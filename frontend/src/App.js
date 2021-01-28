@@ -8,6 +8,8 @@ import Footer from './Components/Footer/Footer';
 import EventView from './Components/EventView/EventView';
 import LocationEventView from './Components/Home/LocationEventView';
 import CategoryEventView from './Components/Home/CategoryEventView';
+// import AttendEvents from './Components/AttendEvent/AttendEvents';
+// import SavedEvents from './Components/SavedEvents/savedEvents';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -17,7 +19,7 @@ import Resetpasswordpage from './Components/Resetpasswordpage/Resetpasswordpage'
 import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpage'
 import UserPage from './Components/UserPage/UserPage'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
-import Notifications, { NotificationsContext } from './Components/Notifications/Notifications';
+import Notifications from './Components/Notifications/Notifications';
 import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
@@ -25,8 +27,8 @@ import AboutUs from './Components/AboutUs/AboutUs'
 import Settings from './Components/Settings/Settings'
 import MultiStepForm from './Components/StartNewEvent/MultiStepForm'
 
-
 import './App.css';
+
 
 export const UserStateContext = createContext();
 
@@ -62,17 +64,15 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Register} />
             <PrivateRoute path="/userpage" component={UserPage} />
-            <Route path="/contact" component={ContactForm} />
 
-            <Route path="/viewOneEvent/:eventId" component={EventView} />
-            <Route
-              path="/viewBySelectedLocation/:eventLocation"
-              component={LocationEventView}
-            />
-            <Route
-              path="/viewBySelectedCategory/:categoryId"
-              component={CategoryEventView}
-            />
+            <Route path='/viewOneEvent/:eventId' component={EventView} />
+            <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
+            <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
+
+            {/* <Route path='/attendEvents/:eventId' component={AttendEvents} />
+            <Route path='/savedEvents/:eventId' component={SavedEvents} /> */}
+
+            <Route path="/contact" component={ContactForm} />
 
             <Route path="/resetPassword" component={Resetpasswordpage} />
             <Route path="/forgotPassword" component={Forgotpasswordpage} />

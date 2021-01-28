@@ -1,4 +1,6 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+
 import SearchBar from './SearchBar';
 import styles from './Search.module.css';
 import axios from "axios";
@@ -8,6 +10,7 @@ const Search = () => {
 
     const [events, setEvents] = useState([]);
     const [serchInputs, setSerchInputs] = useState(true);
+    const [serchResults, setSerchResults] = useState(true);
 
     // const { addNotificationToQueue } = useContext(NotificationsContext);
 
@@ -23,24 +26,30 @@ const Search = () => {
             console.log('Search Events:')
             console.log(result.data)
 
-            if (result.data !== 0) {
+            if (result.data) {
                 let mySearch = result.data.map((event) => {
                     console.log(event);
-                    return (
-                        <div className={styles.events_container}>
 
-                            <div className={styles.events_all}>
-                                <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                <p>{event.dateEventstarted}</p>
-                                <p>{event.event_name},
+                    let eventLink = `/viewOneEvent/${event._id}`
+
+                    return (
+                        <Link to={eventLink} >
+                            <div className={styles.events_container}>
+
+                                <div className={styles.events_all}>
+                                    <img className={styles.events_bg} src={event.event_photo} alt="" />
+                                    <p>{event.dateEventstarted}</p>
+                                    <p>{event.event_name},
                                 {event.category_id.map((category) => <>{category.name}</>)}</p>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     )
                 });
 
                 setEvents(mySearch)
             }
+            setSerchResults(false)
 
         } catch (error) {
             console.log(error);
@@ -87,7 +96,8 @@ const Search = () => {
 
 
             <div className={styles.search_results}>
-                {!serchInputs && 'Unfortunately, no events were found.'}
+                {!serchInputs && 'Please enter a value to get a results'}
+                {!serchResults && 'Unfortunately, no events were found.'}
                 {events}
 
             </div>

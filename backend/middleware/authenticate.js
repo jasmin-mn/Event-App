@@ -6,11 +6,10 @@ const authenticate = (request, response, next) => {
     if (!user || error) {
       response.status(401).send(error);
     }
+    console.log(5464646)
     request.user = user;
     next();
   })(request, response, next);
 };
-
-module.exports = authenticate;
 
 module.exports = authenticate;

@@ -63,7 +63,7 @@ const LocationEventView = (props) => {
 
             <h1> All Events in {eventLocation} </h1>
 
-            <div className={styles.events_by_location}>
+            <div className={styles.eventsByLocation}>
                 {events}
             </div>
 
