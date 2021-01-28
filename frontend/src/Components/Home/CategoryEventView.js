@@ -65,7 +65,7 @@ const CategoryEventView = (props) => {
 
             <h1> All Events in {categoryName} Category</h1>
 
-            <div className={styles.events_by_category}>
+            <div className={styles.eventsByCategory}>
                 {events}
             </div>
         </div>

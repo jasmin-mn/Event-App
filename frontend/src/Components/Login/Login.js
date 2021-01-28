@@ -15,7 +15,8 @@ const Login = (event) => {
             withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true
         }
 
         try {
