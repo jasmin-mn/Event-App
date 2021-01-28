@@ -1,13 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+
+
 .background{
    position: absolute;
    left: 600px;
    top:200px;
     width:600px;
     height: 600px;
+    background-color: rgb(248, 152, 26);
     
-   
-    background-color: rgb(248, 26, 26);
-    
+}
+
+.text{
+    font-size: 25px;
+
+    font-family: 'Yusei Magic', sans-serif;
 }
 
 

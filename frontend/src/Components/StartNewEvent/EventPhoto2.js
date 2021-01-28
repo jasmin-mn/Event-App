@@ -5,7 +5,7 @@ import React from 'react'
 export default function EventPhoto2(props) {
     return (
       <div className={styles.background}>
-        <p>
+        <p className={styles.text}>
           Upload your Photo:
           <input
             value={props.getState("photo")}

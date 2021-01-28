@@ -30,7 +30,7 @@ function FinalStep(props) {
 
   return (
     <div className={styles.finalStep}>
-      <div>
+      <div className={styles.text}>
         <p>Enter a name for your Event:{props.state.name}</p>
         <p>Upload a Photo for your Event:{props.state.photo}</p>
         <p>description:{props.state.description}</p>

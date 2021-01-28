@@ -5,7 +5,7 @@ import React from 'react'
 export default function member6(props) {
     return (
       <div className={styles.background}>
-        <p>
+        <p className={styles.text}>
           member:
           <input
             value={props.getState("member")}

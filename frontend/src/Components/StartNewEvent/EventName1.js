@@ -7,7 +7,7 @@ import React from "react";
 
     return (
       <div className={styles.background}>
-        <p>
+        <p className={styles.text}>
           Enter a name for Your Event:
           <input
             value={props.getState("name")}

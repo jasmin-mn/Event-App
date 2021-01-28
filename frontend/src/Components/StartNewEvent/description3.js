@@ -3,7 +3,7 @@ import styles from "./multiStep.module.css";
 export default function description3(props) {
     return (
       <div className={styles.background}>
-        <p>write a description:</p>
+        <p className={styles.text}>write a description:</p>
         <textarea
           value={props.getState("description")}
           name="description"

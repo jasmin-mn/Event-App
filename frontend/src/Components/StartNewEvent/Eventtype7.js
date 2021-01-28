@@ -6,7 +6,7 @@ import React from 'react'
 export default function Eventtype7(props) {
     return (
       <div className={styles.background}>
-        <form>
+        <form className={styles.text}>
           Eventtype:
           <label>
             Online
