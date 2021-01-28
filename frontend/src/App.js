@@ -88,9 +88,8 @@ function App() {
             <Route path="/logout" component={Logout} />
           </Switch>
         </Notifications>
-
-        <Footer />
       </Router>
+      <Footer />
     </UserStateContext.Provider>
   );
 

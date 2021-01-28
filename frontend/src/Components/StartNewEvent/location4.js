@@ -3,7 +3,7 @@ import styles from "./multiStep.module.css";
 export default function location4(props) {
     return (
       <div className={styles.background}>
-        <p>
+        <p className={styles.text}>
           Location
           <input
             value={props.getState("location")}

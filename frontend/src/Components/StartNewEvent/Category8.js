@@ -3,7 +3,7 @@ import styles from "./multiStep.module.css";
 export default function Category8(props) {
     return (
       <div className={styles.background}>
-        <p>
+        <p className={styles.text}>
           Categories:
           <input
             value={props.getState("category")}

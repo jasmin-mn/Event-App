@@ -21,13 +21,17 @@ const EventSchema = new mongoose.Schema({
     location: { type: String },
     language: { type: String },
     member: { type: Number },
-    eventtype: { type: String },
-    dateEventstarted: { type: Date },
+
+    eventtype: { type: String,enum: ["Online", "Present"], default: "Online" }, 
+    dateEventstarted: { type: Date }
+
+  
 
     participants: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }]
+
 
 })
 

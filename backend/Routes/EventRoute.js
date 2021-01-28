@@ -8,40 +8,44 @@ const Category = require("../Models/CategoryModel");
 const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
-    console.log(242334, request.body);
 
-    try {
-        let {
-            event_name,
-            event_admin,
-            event_photo,
-            location,
-            language,
-            member,
-            description,
-            dateEventstarted,
-            category_id,
-        } = request.body;
-        location = location.charAt(0).toUpperCase() + location.slice(1);
+  console.log(242334, request.body);
 
-        const event = new Events({
-            event_name,
-            event_admin,
-            event_photo,
-            description,
-            location,
-            language,
-            member,
-            dateEventstarted,
-            user_id: request.id,
-            category_id,
-        });
-        await event.save();
+  try {
+    let {
+      name,
+      photo,
+      description,
+      location,
+      language,
+      member,
+      eventtype,
+      date,
+       category,
+    } = request.body;
+    //location = location.charAt(0).toUpperCase() + location.slice(1);
 
-        response.send("you have created your Event ");
-    } catch (error) {
-        response.send(error);
-    }
+    const event = new Events({
+      event_name: name,
+      event_photo:photo,
+      description,
+      location,
+      language,
+      member,
+      eventtype,
+      dateEventstarted:date,
+      user_id: request.id,
+      // category_id:category,
+    });
+    await event.save();
+
+    response.send("you have created your Event ");
+  } catch (error) {
+    console.log(error);
+    response.status(500).send(error);
+  }
+
+
 });
 
 
