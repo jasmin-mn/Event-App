@@ -51,7 +51,7 @@ function HomeDefault() {
 
 
     // filter all Events by Location/City
-    const getAEventsByCity = async () => {
+    const getEventsByCity = async () => {
         try {
             const result = await axios.get('http://localhost:7000/event/viewByCity');
             console.log('Events by Location/City:')
@@ -83,29 +83,34 @@ function HomeDefault() {
     }
 
     // filter all Events by Category
-    const getAEventsByCategory = async () => {
+    const getEventsByCategory = async () => {
         try {
             const result = await axios.get('http://localhost:7000/event/viewByCategory');
-            console.log('Events by Category:')
+            //console.log('Events by Category:')
             console.log(88888, result.data)
 
             if (result.data && result.data.length !== 0) {
+                const test = [1, 2].map(() => {
+                    return (<h1>najbeen</h1>)
+                });
                 const myEvents = result.data.map((event) => {
 
                     const { _id, name, photo } = event._id[0];
                     const eventLink = `/viewBySelectedCategory/${_id}`;
+                    console.log(1233434444, event);
 
                     return (
                         <Link to={eventLink} >
-                            <div className={styles.events_container}>
+                           <div className={styles.events_container}>
                                 <div className={styles.events_by_category}>
                                     <img className={styles.events_by_category_bg} src={photo} alt="" />
-                                    <p className={styles.category_text}>{name}</p>
-                                </div>
-                            </div>
-                        </Link>
+                                     <p className={styles.category_text}>{name}</p>
+                                  </div>
+                               </div>
+                           </Link> 
                     )
                 });
+                console.log(1233, myEvents);
                 setEventsByCategory(myEvents)
             }
         } catch (error) {
@@ -115,9 +120,13 @@ function HomeDefault() {
 
     useEffect(() => {
         getAllEvents();
-        getAEventsByCity()
-        getAEventsByCategory()
+        getEventsByCity()
+        getEventsByCategory()
     }, []);
+
+    useEffect(() => {
+        console.log(55675, eventsByCategory);
+    }, [eventsByCategory])
 
 
     return (

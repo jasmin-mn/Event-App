@@ -35,7 +35,7 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
       eventtype,
       dateEventstarted:date,
       user_id: request.id,
-      // category_id:category,
+    //   category_id: category,
     });
     await event.save();
 
@@ -116,7 +116,7 @@ router.get("/viewAll", async (request, response) => {
 router.get("/viewOneEvent/:id", async (request, response) => {
     try {
         const events = await Events.findById({ _id: request.params.id })
-            .populate("category_id");
+            .populate("category_id user_id");
 
         if (!events) {
             return response.status(500).send({ msg: "Server error" });

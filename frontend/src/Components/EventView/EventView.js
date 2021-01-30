@@ -38,7 +38,7 @@ const EventView = () => {
         try {
             const result = await axios
                 .get(`http://localhost:7000/event/attendEvents/${eventId}`, { withCredentials: true });
-            console.log("event view", result.data.user);
+            console.log("event view", result.data);
             if (result.data.user) {
                 setAttended(true)
                 setAttendBtn('Leave this Event')
@@ -83,6 +83,7 @@ const EventView = () => {
                         <button onClick={getSaveEvent} className={styles.btn}>Save Event</button>
 
                         <button className={styles.btn}>Share Event</button>
+                        <button className={styles.btn}>Delete Event</button>
                     </div>
                 </div>
 
