@@ -35,8 +35,10 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
       eventtype,
       dateEventstarted:date,
       user_id: request.id,
-      // category_id:category,
+       category_id:category,
     });
+
+    console.log(event)
     await event.save();
 
     response.send("you have created your Event ");
