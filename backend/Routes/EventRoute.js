@@ -21,9 +21,10 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
             member,
             eventtype,
             date,
+            time,
             category,
         } = request.body;
-        location = location.charAt(0).toUpperCase() + location.slice(1);
+        // location = location.charAt(0).toUpperCase() + location.slice(1);
 
         const event = new Events({
             event_name: name,
