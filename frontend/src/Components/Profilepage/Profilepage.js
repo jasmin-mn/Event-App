@@ -2,80 +2,93 @@ import React, { useEffect, useState } from "react";
 import styles from "./Profilepage.module.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-// import {useForm} from "react-hook-form"
 
 function Profilepage(e) {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    photo: "",
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    age: "",
+    place: "",
+    hometown: "",
+    gender: "",
+    language: "",
+    yourInterests: "",
+    other: "",
+  });
+  
+
+  const {
+    photo,
+    userName,
+    firstName,
+    lastName,
+    email,
+    age,
+    place,
+    hometown,
+    gender,
+    language,
+    yourInterests,
+    others,
+  } = userData;
   const getUser = async (update) => {
     const config = {
       withCredentials: true,
-      headers:{"Content-Type": "application/json"}
-      
+      headers: { "Content-Type": "application/json" },
     };
-    // const res = await axios.get('http://localhost:7000/user/profile' , { withCredentials: true })
-    // console.log('res : ',res);
-    //let token = localStorage.getItem("token")
-    const response = await axios.get(
-      "http://localhost:7000/user/profile", config
-        
-    );
-    // const data = await response.json();
 
-    // setUserData(data.user);
-    // console.log('data .: ',data);
-    
+    const response = await axios.get(
+      "http://localhost:7000/user/profile",
+      config
+    );
+    console.log(response.data);
+
+    setUserData(response.data.user);
   };
   useEffect(() => {
     getUser();
   }, []);
-  // const {register, handleUpdate} = useForm({ defaultValues: formData})
+  
   const history = useHistory();
 
   const editRegister = async (updateData) => {
     const config = {
       withCredentials: true,
-      headers:{"Content-Type": "application/json"}
+      headers: { "Content-Type": "application/json" },
     };
     try {
       const result = await axios.post(
-        "/user/profileUpdate",
+        "http://localhost:7000/user/profileUpdate",
+
         updateData,
         config
       );
       console.log(result);
       localStorage.setItem("registered", JSON.stringify(true));
-
-      // history.push('/profile/:id')
     } catch (error) {
-      alert(error.response.data.msg);
-    } //
+      console.log()(error);
+    } 
+  };
+  const changeHandler = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
+  const handlePhoto = (e) =>{
+    setUserData({...userData, photo: e.target.files[0]});
+  }
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target.value);
-    const data = {
-      userName: formData.get("userName"),
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      email: formData.get("email"),
-
-      gender: formData.get("Female"),
-
-      gender: formData.get("gender"),
-
-      age: formData.get("age"),
-      place: formData.get("place"),
-      hometown: formData.get("hometown"),
-      language: formData.get("language"),
-      yourInterests: formData.get("yourInterests"),
-      others: formData.get("others"),
-    };
-
+    const formData = new FormData();
+    formData.append('photo',userData.photo)
+   
     try {
-      editRegister(data);
-      const registered = localStorage.getItem("registered")
-      registered = JSON.parse(registered)
+      editRegister(userData);
+      const registered = localStorage.getItem("registered");
+      registered = JSON.parse(registered);
+      
 
       console.log(registered);
     } catch (error) {
@@ -86,64 +99,134 @@ function Profilepage(e) {
   return (
     <div className={styles.profilecontainer}>
       <h1 className={styles.profileheader}>Profile</h1>
-      <form onSubmit={handleUpdate} className={styles.profileform}>
+      <form onSubmit={handleUpdate} encType='multipart/form-data' className={styles.profileform}>
+        <div className={styles.photo} > Click to upload Image
+        <input className={styles.photoInput}
+        type="file"
+        accept=".png, .jpg, .jpeg"
+        name="photo"
+        onChange={handlePhoto}
+        // value={photo}
+        
+        />
+
+        </div>
         <div className={styles.formusername}>
           <label htmlFor="userName">User name</label>
-          <input type="text" name="userName" />
+          <input 
+            type="text"
+            name="userName"
+            onChange={changeHandler}
+            value={userName}
+          />
         </div>
 
         <div className={styles.formgroup}>
           <label htmlFor="firstName">First name</label>
-          <input type="text" name="firstName" lastName />
+          <input
+            type="text"
+            name="firstName"
+            onChange={changeHandler}
+            value={firstName}
+          />
         </div>
 
         <div className={styles.formgroup}>
           <label htmlFor="lastName">Last name</label>
-          <input type="text" name="lastName" />
+          <input
+            type="text"
+            name="lastName"
+            onChange={changeHandler}
+            value={lastName}
+          />
         </div>
 
         <div className={styles.formgroupgender}>
-          <input type="radio" name="gender" value="Female" />
+          <input
+            type="radio"
+            name="gender"
+            onChange={changeHandler}
+            value={gender}
+          />
           <label htmlFor="female">Female</label>
         </div>
         <div className={styles.formgroupgender}>
-          <input type="radio" name="gender" value="Male" />
+          <input
+            type="radio"
+            name="gender"
+            onChange={changeHandler}
+            value={gender}
+          />
           <label htmlFor="female">Male</label>
         </div>
         <div className={styles.formgroupgender}>
-          <input type="radio" name="gender" />
+          <input
+            type="radio"
+            name="gender"
+            onChange={changeHandler}
+            value={gender}
+          />
           <label htmlFor="female">N/A</label>
         </div>
 
         <div className={styles.formemail}>
           <label htmlFor="email">Email Address</label>
-          <input type="text" name="email" value= "email"/>
+          <input
+            type="text"
+            name="email"
+            onChange={changeHandler}
+            value={email}
+          />
         </div>
 
         <div className={styles.formdate}>
           <label htmlFor="age">Age</label>
-
-          <input type="text" name="age" />
+          <input type="text" name="age" onChange={changeHandler} value={age} />
         </div>
         <div className={styles.formplace}>
           <label htmlFor="place">Place</label>
-          <input type="text" name="place" />
+          <input
+            type="text"
+            name="place"
+            onChange={changeHandler}
+            value={place}
+          />
         </div>
         <div className={styles.formhometown}>
           <label htmlFor="hometown">Hometown</label>
-          <input type="text" name="hometown" />
+          <input
+            type="text"
+            name="hometown"
+            onChange={changeHandler}
+            value={hometown}
+          />
         </div>
         <div className={styles.formlang}>
           <label htmlFor="language">Language</label>
-          <input type="text" name="language"  />
+          <input
+            type="text"
+            name="language"
+            onChange={changeHandler}
+            value={language}
+          />
         </div>
         <div className={styles.forminterest}>
           <label htmlFor="yourInterests">Your Interests</label>
-          <input type="text" name="yourInterests" />
+          <input
+            type="text"
+            name="yourInterests"
+            onChange={changeHandler}
+            value={yourInterests}
+          />
         </div>
         <div className={styles.formothers}>
           <label htmlFor="others">Others</label>
-          <input type="text" name="others"  />
+          <input
+            type="text"
+            name="others"
+            onChange={changeHandler}
+            value={others}
+          />
         </div>
         <input type="submit" value="Save" className={styles.submitregister} />
       </form>

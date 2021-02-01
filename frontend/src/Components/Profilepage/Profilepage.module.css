@@ -1,11 +1,14 @@
 .profileheader{
-    
-    
+    margin-bottom: 10px;
     text-align: center;
 }
 
 .profileform{
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -61,4 +64,20 @@
 
 .formothers{
     margin-left: 11px;
+}
+
+.photo{
+    
+    border: 1px dashed black;
+    margin-bottom: 10px;
+    width: 130px;
+
+
+}
+
+.photoInput {
+    width: 95px;
+    margin-left: 20px;
+
+
 }
