@@ -78,7 +78,7 @@ router.post("/login", async (request, response) => {
           sameSite: "lax",
 
         })
-        .send("ok");
+        .send(data.id);
     });
   } catch (error) {
     console.log(error);
@@ -111,7 +111,7 @@ router.get("/profile", authenticate, async (request, response) => {
   // const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
 
   console.log("this is test request.id", request.user._id);
-  
+
 
   try {
     const user = await User.findById(request.user._id).select("-password");

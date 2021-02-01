@@ -9,43 +9,44 @@ const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
-  console.log(242334, request.body);
+    console.log(242334, request.body);
 
-  try {
-    let {
-      name,
-      photo,
-      description,
-      location,
-      language,
-      member,
-      eventtype,
-      date,
-       category,
-    } = request.body;
-    //location = location.charAt(0).toUpperCase() + location.slice(1);
+    try {
+        let {
+            name,
+            photo,
+            description,
+            location,
+            language,
+            member,
+            eventtype,
+            date,
+            category,
+        } = request.body;
+        location = location.charAt(0).toUpperCase() + location.slice(1);
 
-    const event = new Events({
-      event_name: name,
-      event_photo:photo,
-      description,
-      location,
-      language,
-      member,
-      eventtype,
-      dateEventstarted:date,
-      user_id: request.id,
-       category_id:category,
-    });
+        const event = new Events({
+            event_name: name,
+            event_photo: photo,
+            description,
+            location,
+            language,
+            member,
+            eventtype,
+            dateEventstarted: date,
+            eventTime: time,
+            user_id: request.id,
+            category_id: category,
+        });
 
-    console.log(event)
-    await event.save();
+        console.log(event)
+        await event.save();
 
-    response.send("you have created your Event ");
-  } catch (error) {
-    console.log(error);
-    response.status(500).send(error);
-  }
+        response.send("you have created your Event ");
+    } catch (error) {
+        console.log(error);
+        response.status(500).send(error);
+    }
 
 
 });
@@ -118,7 +119,7 @@ router.get("/viewAll", async (request, response) => {
 router.get("/viewOneEvent/:id", async (request, response) => {
     try {
         const events = await Events.findById({ _id: request.params.id })
-            .populate("category_id");
+            .populate("category_id user_id");
 
         if (!events) {
             return response.status(500).send({ msg: "Server error" });
@@ -217,23 +218,48 @@ router.get('/viewBySelectedCategory/:id', async (request, response) => {
 });
 
 
-// Attend Event
+// Attend/Join Event
 router.get('/attendEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findByIdAndUpdate(request.params.id,
             // pushing user id to EventSchema and avoid duplicates
-            { $addToSet: { participants: request.id } },
+            { $addToSet: { participants: request.user._id } },
             { new: true }
         )
         // .populate('category_id user_id');
 
-        const user = await Users.findByIdAndUpdate(request.id,
+        const user = await Users.findByIdAndUpdate(request.user._id,
             // pushing event id to UserSchema and avoid duplicates
             { $addToSet: { attendEvents: event._id } },
             { new: true }
         )
-        console.log("the loggedin user", request.id);
+
+        if (!event) {
+            return response.status(500).send({ msg: 'Server error event not saved' })
+        }
+        response.json({ event, user })
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+    }
+});
+
+
+// Leave Event
+router.get('/leaveEvents/:id', authenticate, async (request, response) => {
+
+    try {
+        const event = await Events.findByIdAndUpdate(request.params.id,
+            { $pull: { participants: request.user._id } },
+            { new: true }
+        )
+        // .populate('category_id user_id');
+
+        const user = await Users.findByIdAndUpdate(request.user._id,
+            { $pull: { attendEvents: event._id } },
+            { new: true }
+        );
 
         if (!event) {
             return response.status(500).send({ msg: 'Server error event not saved' })
@@ -251,19 +277,18 @@ router.get('/savedEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findById(request.params.id)
-            .populate('user_id');
 
-        const user = await Users.findByIdAndUpdate(request.id,
+
+        const user = await Users.findByIdAndUpdate(request.user._id,
             // pushing event id to UserSchema and avoid duplicates
             { $addToSet: { savedEvents: event._id } },
             { new: true }
         )
-        console.log("the loggedin user", request.id);
 
         if (!event) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        response.send(event)
+        response.send(user)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })

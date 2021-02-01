@@ -23,14 +23,14 @@ const EventSchema = new mongoose.Schema({
     member: { type: Number },
 
     eventtype: { type: String,enum: ["Online", "Present"], default: "Online" }, 
-    dateEventstarted: { type: Date },
 
+    dateEventstarted: { type: Date },
+    EventTime: { type: Date },
   
     participants: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }]
-
 
 })
 

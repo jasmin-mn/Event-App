@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import styles from './Home.module.css';
 import axios from "axios";
+import moment from "moment";
 
 
 function HomeDefault() {
@@ -27,13 +28,14 @@ function HomeDefault() {
 
                     let category = event.category_id.map((category) => <>{category.name}</>);
                     let eventLink = `/viewOneEvent/${event._id}`
+                    const date =  moment(event.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
 
                     return (
                         <Link to={eventLink} >
                             <div className={styles.events_container}>
                                 <div className={styles.events_all}>
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                    <p className={styles.events_date}>{event.dateEventstarted}</p>
+                                    <p className={styles.events_date}>{date}</p>
                                     <p className={styles.events_name_category}>{event.event_name},{category}</p>
                                 </div>
                             </div>
@@ -51,7 +53,7 @@ function HomeDefault() {
 
 
     // filter all Events by Location/City
-    const getAEventsByCity = async () => {
+    const getEventsByCity = async () => {
         try {
             const result = await axios.get('http://localhost:7000/event/viewByCity');
             console.log('Events by Location/City:')
@@ -83,17 +85,21 @@ function HomeDefault() {
     }
 
     // filter all Events by Category
-    const getAEventsByCategory = async () => {
+    const getEventsByCategory = async () => {
         try {
             const result = await axios.get('http://localhost:7000/event/viewByCategory');
-            console.log('Events by Category:')
+            //console.log('Events by Category:')
             console.log(88888, result.data)
 
             if (result.data && result.data.length !== 0) {
+                const test = [1, 2].map(() => {
+                    return (<h1>najbeen</h1>)
+                });
                 const myEvents = result.data.map((event) => {
 
                     const { _id, name, photo } = event._id[0];
                     const eventLink = `/viewBySelectedCategory/${_id}`;
+                    console.log(1233434444, event);
 
                     return (
                         <Link to={eventLink} >
@@ -106,6 +112,7 @@ function HomeDefault() {
                         </Link>
                     )
                 });
+                console.log(1233, myEvents);
                 setEventsByCategory(myEvents)
             }
         } catch (error) {
@@ -115,9 +122,13 @@ function HomeDefault() {
 
     useEffect(() => {
         getAllEvents();
-        getAEventsByCity()
-        getAEventsByCategory()
+        getEventsByCity()
+        getEventsByCategory()
     }, []);
+
+    useEffect(() => {
+        console.log(55675, eventsByCategory);
+    }, [eventsByCategory])
 
 
     return (
