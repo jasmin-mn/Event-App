@@ -83,7 +83,7 @@ const EventView = () => {
         }
     }
 
-
+    // const date = eventDetails.dateEventstarted.toLocaleDateString()
 
     return (
 

@@ -1,9 +1,35 @@
 import axios from "axios";
-import React from "react";
+import React, { useState, useEffect} from "react";
 import styles from "./multiStep.module.css";
 
 
 function FinalStep(props) {
+  const [cat, setCat] = useState([]);
+
+  useEffect(() => {
+    getCat()
+
+  }, [])
+
+  const getCat = async () => {
+
+    try {
+      const result = await axios.get("http://localhost:7000/category/view");
+      if (!result) {
+        console.log('server error');
+      }
+     console.log("cat result", result.data);
+     
+        const catName = (result.data.filter((item) =>  item._id === props.state.category));
+        console.log('catName', catName[0].name);
+        
+      setCat(catName[0].name)
+
+    } catch (error) {
+      console.log('server error');
+    }
+  };
+
   const Submit = async () => {
     const config = {
       method: "POST",
@@ -40,8 +66,9 @@ function FinalStep(props) {
         <p>Language:{props.state.language}</p>
         <p>Member:{props.state.member}</p>
         <p>Eventtype:{props.state.eventtype}</p>
-        <p>Category:{props.state.category}</p>
-        <p>date:{props.state.date}</p>
+        <p>Category:{cat}</p>
+        <p>Date:{props.state.date}</p>
+        <p>Time:{props.state.time}</p>
       </div>
       <div className={styles.button}>
         <button onClick={props.prev}>Previous</button>
