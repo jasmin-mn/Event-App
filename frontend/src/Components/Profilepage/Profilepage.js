@@ -4,6 +4,32 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 function Profilepage(e) {
+  // delete 
+  const [deleteId, setDeleteId] = useState()
+
+  useEffect(()=>{
+    getData() 
+
+  },[])
+   const getData = async(deleteData)=>{
+     const response = await axios.get("http://localhost:7000/user/profile")
+     setDeleteId(response.data)
+   }
+  
+
+   const removeData = (id)=>{
+     axios.delete("http://localhost:7000/user/deleteAccount").then(response =>{
+       const del = deleteId.filter(deleteId=> id !== deleteId.id )
+       setDeleteId(del)
+
+     })
+   }
+
+   const renderHeader = (e)=>{
+    const headerElement = ['id','email']
+    
+   }
+// end of delete part
   const [userData, setUserData] = useState({
     photo: "",
     userName: "",
@@ -69,7 +95,7 @@ function Profilepage(e) {
       console.log(result);
       localStorage.setItem("registered", JSON.stringify(true));
     } catch (error) {
-      console.log()(error);
+      console.log(error);
     } 
   };
   const changeHandler = (e) => {
@@ -99,6 +125,20 @@ function Profilepage(e) {
   return (
     <div className={styles.profilecontainer}>
       <h1 className={styles.profileheader}>Profile</h1>
+
+      <div className={styles.deletecontainer}>
+        <p>
+          Are you sure you wanted to delete your account? <br />If you choose to
+          delete your account, you have to register again.
+        </p>
+        <button
+          onClick={removeData}
+          className={styles.deletecontainer1}
+        >
+          Delete Account
+        </button>
+      </div>
+
       <form onSubmit={handleUpdate} encType='multipart/form-data' className={styles.profileform}>
         <div className={styles.photo} > Click to upload Image
         <input className={styles.photoInput}

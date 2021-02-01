@@ -24,7 +24,7 @@ import HomeDefault from './Components/Home/Default'
 import savedEvents from './Components/SavedEvents/savedEvents'
 import Logout from './Components/Logout/Logout'
 import AboutUs from './Components/AboutUs/AboutUs'
-import Settings from './Components/Settings/Settings'
+// import Settings from './Components/Settings/Settings'
 import MultiStepForm from './Components/StartNewEvent/MultiStepForm'
 
 import './App.css';
@@ -83,7 +83,7 @@ function App() {
             <Route path="/about" component={AboutUs} />
             {/* <Route path='/profileUser' component={Profilepage} /> */}
 
-            <Route path="/settings" component={Settings} />
+            {/* <Route path="/settings" component={Settings} /> */}
 
             <Route path="/logout" component={Logout} />
           </Switch>

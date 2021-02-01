@@ -143,6 +143,8 @@ const fileFilter = (request, file, cb) => {
 }
 let upload = multer({ storage, fileFilter });
 
+///////
+
 router.post("/profileUpdate",authenticate, upload.single('photo'), async (request, response) => {
   // const photo = request.file.filename;
   const {
