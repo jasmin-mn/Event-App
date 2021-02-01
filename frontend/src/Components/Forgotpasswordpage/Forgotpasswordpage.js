@@ -11,18 +11,15 @@ function Forgotpasswordpage() {
   }
   const sendData = async(data)=>{
     const config = {
+      withCredentials: true,
       headers : {  
       'Content-Type': 'application/json'
     }
       
     };
     try {
-      // const result = await fetch('/user/forgotPassword',{
-      //   method : 'POST',
-      //   headers : { 'Content-Type': 'application/json'},
-      //   body : JSON.stringify(email)
-      // })
-      const result =await axios.post('/user/forgotPassword', config);
+     
+      const result =await axios.post('/user/forgotPassword',data , config);
       console.log(result);
       
       
@@ -54,3 +51,4 @@ function Forgotpasswordpage() {
 }
 
 export default Forgotpasswordpage;
+

@@ -5,6 +5,7 @@ import axios from "axios";
 
 function Profilepage(e) {
   const [userData, setUserData] = useState({
+    photo: "",
     userName: "",
     firstName: "",
     lastName: "",
@@ -17,8 +18,10 @@ function Profilepage(e) {
     yourInterests: "",
     other: "",
   });
+  
 
   const {
+    photo,
     userName,
     firstName,
     lastName,
@@ -48,7 +51,7 @@ function Profilepage(e) {
   useEffect(() => {
     getUser();
   }, []);
-  // const {register, handleUpdate} = useForm({ defaultValues: formData})
+  
   const history = useHistory();
 
   const editRegister = async (updateData) => {
@@ -67,13 +70,19 @@ function Profilepage(e) {
       localStorage.setItem("registered", JSON.stringify(true));
     } catch (error) {
       console.log()(error);
-    } //
+    } 
   };
   const changeHandler = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  const handlePhoto = (e) =>{
+    setUserData({...userData, photo: e.target.files[0]});
+  }
   const handleUpdate = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('photo',userData.photo)
    
     try {
       editRegister(userData);
@@ -90,10 +99,21 @@ function Profilepage(e) {
   return (
     <div className={styles.profilecontainer}>
       <h1 className={styles.profileheader}>Profile</h1>
-      <form onSubmit={handleUpdate} className={styles.profileform}>
+      <form onSubmit={handleUpdate} encType='multipart/form-data' className={styles.profileform}>
+        <div className={styles.photo} > Click to upload Image
+        <input className={styles.photoInput}
+        type="file"
+        accept=".png, .jpg, .jpeg"
+        name="photo"
+        onChange={handlePhoto}
+        // value={photo}
+        
+        />
+
+        </div>
         <div className={styles.formusername}>
           <label htmlFor="userName">User name</label>
-          <input
+          <input 
             type="text"
             name="userName"
             onChange={changeHandler}
