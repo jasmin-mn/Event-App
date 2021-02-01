@@ -215,7 +215,7 @@ router.get('/viewBySelectedCategory/:id', async (request, response) => {
 });
 
 
-// Attend Event
+// Attend/Join Event
 router.get('/attendEvents/:id', authenticate, async (request, response) => {
 
     try {
@@ -230,6 +230,35 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
             // pushing event id to UserSchema and avoid duplicates
             { $addToSet: { attendEvents: event._id } },
             { new: true }
+        )
+        console.log("the loggedin user", request.id);
+
+        if (!event) {
+            return response.status(500).send({ msg: 'Server error event not saved' })
+        }
+        response.json({ event, user })
+
+    } catch (error) {
+        response.status(500).send({ msg: 'Server error' })
+    }
+});
+
+
+// Leave Event
+router.get('/leaveEvents/:id', authenticate, async (request, response) => {
+
+    try {
+        const event = await Events.findByIdAndDelete(request.params.id,
+            // pushing user id to EventSchema and avoid duplicates
+            { $pull: { participants: request.id } },
+            // { new: true }
+        )
+        // .populate('category_id user_id');
+
+        const user = await Users.findByIdAndDelete(request.id,
+            // pushing event id to UserSchema and avoid duplicates
+            { $pull: { attendEvents: event._id } },
+            // { new: true }
         )
         console.log("the loggedin user", request.id);
 

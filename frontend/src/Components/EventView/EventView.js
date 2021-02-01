@@ -60,6 +60,17 @@ const EventView = () => {
     }
 
 
+    const getLeaveEvent = async () => {
+        try {
+            const result = await axios
+                .get(`http://localhost:7000/event/leaveEvents/${eventId}`, { withCredentials: true });
+            console.log('leave event', result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
     return (
 
@@ -83,7 +94,7 @@ const EventView = () => {
                         <button onClick={getSaveEvent} className={styles.btn}>Save Event</button>
 
                         <button className={styles.btn}>Share Event</button>
-                        <button className={styles.btn}>Delete Event</button>
+                        <button onClick={getLeaveEvent} className={styles.btn}>Leave Event</button>
                     </div>
                 </div>
 

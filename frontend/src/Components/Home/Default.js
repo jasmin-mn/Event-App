@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import styles from './Home.module.css';
 import axios from "axios";
+import moment from "moment";
 
 
 function HomeDefault() {
@@ -27,13 +28,14 @@ function HomeDefault() {
 
                     let category = event.category_id.map((category) => <>{category.name}</>);
                     let eventLink = `/viewOneEvent/${event._id}`
+                    const date =  moment(event.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
 
                     return (
                         <Link to={eventLink} >
                             <div className={styles.events_container}>
                                 <div className={styles.events_all}>
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                    <p className={styles.events_date}>{event.dateEventstarted}</p>
+                                    <p className={styles.events_date}>{date}</p>
                                     <p className={styles.events_name_category}>{event.event_name},{category}</p>
                                 </div>
                             </div>
@@ -101,13 +103,13 @@ function HomeDefault() {
 
                     return (
                         <Link to={eventLink} >
-                           <div className={styles.events_container}>
+                            <div className={styles.events_container}>
                                 <div className={styles.events_by_category}>
                                     <img className={styles.events_by_category_bg} src={photo} alt="" />
-                                     <p className={styles.category_text}>{name}</p>
-                                  </div>
-                               </div>
-                           </Link> 
+                                    <p className={styles.category_text}>{name}</p>
+                                </div>
+                            </div>
+                        </Link>
                     )
                 });
                 console.log(1233, myEvents);
