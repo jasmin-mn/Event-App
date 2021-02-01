@@ -9,41 +9,41 @@ const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
-  console.log(242334, request.body);
+    console.log(242334, request.body);
 
-  try {
-    let {
-      name,
-      photo,
-      description,
-      location,
-      language,
-      member,
-      eventtype,
-      date,
-       category,
-    } = request.body;
-    //location = location.charAt(0).toUpperCase() + location.slice(1);
+    try {
+        let {
+            name,
+            photo,
+            description,
+            location,
+            language,
+            member,
+            eventtype,
+            date,
+            category,
+        } = request.body;
+        //location = location.charAt(0).toUpperCase() + location.slice(1);
 
-    const event = new Events({
-      event_name: name,
-      event_photo:photo,
-      description,
-      location,
-      language,
-      member,
-      eventtype,
-      dateEventstarted:date,
-      user_id: request.id,
-    //   category_id: category,
-    });
-    await event.save();
+        const event = new Events({
+            event_name: name,
+            event_photo: photo,
+            description,
+            location,
+            language,
+            member,
+            eventtype,
+            dateEventstarted: date,
+            user_id: request.id,
+            //   category_id: category,
+        });
+        await event.save();
 
-    response.send("you have created your Event ");
-  } catch (error) {
-    console.log(error);
-    response.status(500).send(error);
-  }
+        response.send("you have created your Event ");
+    } catch (error) {
+        console.log(error);
+        response.status(500).send(error);
+    }
 
 
 });
@@ -221,17 +221,16 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
     try {
         const event = await Events.findByIdAndUpdate(request.params.id,
             // pushing user id to EventSchema and avoid duplicates
-            { $addToSet: { participants: request.id } },
+            { $addToSet: { participants: request.user._id } },
             { new: true }
         )
         // .populate('category_id user_id');
 
-        const user = await Users.findByIdAndUpdate(request.id,
+        const user = await Users.findByIdAndUpdate(request.user._id,
             // pushing event id to UserSchema and avoid duplicates
             { $addToSet: { attendEvents: event._id } },
             { new: true }
         )
-        console.log("the loggedin user", request.id);
 
         if (!event) {
             return response.status(500).send({ msg: 'Server error event not saved' })
@@ -248,19 +247,16 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
 router.get('/leaveEvents/:id', authenticate, async (request, response) => {
 
     try {
-        const event = await Events.findByIdAndDelete(request.params.id,
-            // pushing user id to EventSchema and avoid duplicates
-            { $pull: { participants: request.id } },
-            // { new: true }
+        const event = await Events.findByIdAndUpdate(request.params.id,
+            { $pull: { participants: request.user._id } },
+            { new: true }
         )
         // .populate('category_id user_id');
 
-        const user = await Users.findByIdAndDelete(request.id,
-            // pushing event id to UserSchema and avoid duplicates
+        const user = await Users.findByIdAndUpdate(request.user._id,
             { $pull: { attendEvents: event._id } },
-            // { new: true }
-        )
-        console.log("the loggedin user", request.id);
+            { new: true }
+        );
 
         if (!event) {
             return response.status(500).send({ msg: 'Server error event not saved' })
@@ -278,19 +274,18 @@ router.get('/savedEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findById(request.params.id)
-            .populate('user_id');
+           
 
-        const user = await Users.findByIdAndUpdate(request.id,
+        const user = await Users.findByIdAndUpdate(request.user._id,
             // pushing event id to UserSchema and avoid duplicates
             { $addToSet: { savedEvents: event._id } },
             { new: true }
         )
-        console.log("the loggedin user", request.id);
 
         if (!event) {
             return response.status(500).send({ msg: 'Server error' })
         }
-        response.send(event)
+        response.send(user)
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })

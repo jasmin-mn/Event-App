@@ -10,7 +10,7 @@ const Login = (event) => {
     const history = useHistory();
 
     const sendLogin = async (allFormData) => {
-     
+
         const config = {
             withCredentials: true,
             headers: {
@@ -21,8 +21,7 @@ const Login = (event) => {
 
         try {
             const result = await axios.post('http://localhost:7000/user/login', allFormData, config)
-            console.log(result)
-            setLoggedIn(true)
+            setLoggedIn(result.data)
             history.push('/userpage')
         } catch (error) {
             alert(error.response.data.msg);

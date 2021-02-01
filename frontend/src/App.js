@@ -34,21 +34,23 @@ export const UserStateContext = createContext();
 
 function App() {
 
-  const [loggedInState, setLoggedInState] = useState(false);
+  const [loggedInState, setLoggedInState] = useState(null);
 
-  const setLoggedIn = (state) => {
-    if (state) {
-      window.localStorage.setItem("loggedIn", JSON.stringify(true));
+  const setLoggedIn = (userId) => {
+    if (userId) {
+      window.localStorage.setItem("loggedIn", JSON.stringify(userId));
     } else {
       window.localStorage.removeItem('loggedIn');
     }
 
-    setLoggedInState(state);
+    setLoggedInState(userId);
   }
 
   useEffect(() => {
-    if (JSON.parse(window.localStorage.getItem("loggedIn"))) {
-      setLoggedInState(true);
+    const userId = JSON.parse(window.localStorage.getItem("loggedIn"));
+
+    if (userId) {
+      setLoggedInState(userId);
     };
   }, [])
 

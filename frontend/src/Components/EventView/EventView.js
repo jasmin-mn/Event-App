@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ShareButtons from '../ShareButtons/ShareButtons';
 import AttendEvent from '../AttendEvent/AttendEvents';
 import styles from './EventView.module.css';
 import axios from 'axios';
+import { UserStateContext } from '../../App';
+
 
 
 const EventView = () => {
 
+    const { loggedInState } = useContext(UserStateContext)
+
     const [eventDetails, setEventDetails] = useState({});
     const [attended, setAttended] = useState(false);
-    const [attendBtn, setAttendBtn] = useState('Join this Event');
     const { eventId } = useParams();
 
     const getEventDetails = async () => {
@@ -18,8 +21,15 @@ const EventView = () => {
         try {
             const result = await axios
                 .get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
-            console.log(result.data);
+            console.log('result', result.data);
             if (result.data) {
+
+                const user = result.data.participants.includes(loggedInState)
+
+                if (user) {
+                    setAttended(true)
+                }
+
                 setEventDetails(result.data)
             }
 
@@ -41,7 +51,6 @@ const EventView = () => {
             console.log("event view", result.data);
             if (result.data.user) {
                 setAttended(true)
-                setAttendBtn('Leave this Event')
             }
 
         } catch (error) {
@@ -64,7 +73,11 @@ const EventView = () => {
         try {
             const result = await axios
                 .get(`http://localhost:7000/event/leaveEvents/${eventId}`, { withCredentials: true });
-            console.log('leave event', result);
+            console.log('leave event', result.data);
+
+            if (result.data.user) {
+                setAttended(false)
+            }
         } catch (error) {
             console.log(error);
         }
@@ -89,12 +102,15 @@ const EventView = () => {
                     </div>
 
                     <div>
-                        <button onClick={getAttendEvent} className={styles.btn}>{attendBtn}</button>
+                        {attended ?
+                            <button onClick={getLeaveEvent} className={styles.btn}>Leave Event</button>
+                            :
+                            <button onClick={getAttendEvent} className={styles.btn}>Join Event</button>
+                        }
 
                         <button onClick={getSaveEvent} className={styles.btn}>Save Event</button>
 
                         <button className={styles.btn}>Share Event</button>
-                        <button onClick={getLeaveEvent} className={styles.btn}>Leave Event</button>
                     </div>
                 </div>
 
