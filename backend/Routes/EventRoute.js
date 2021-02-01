@@ -9,43 +9,44 @@ const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
-  console.log(242334, request.body);
+    console.log(242334, request.body);
 
-  try {
-    let {
-      name,
-      photo,
-      description,
-      location,
-      language,
-      member,
-      eventtype,
-      date,
-       category,
-    } = request.body;
-    //location = location.charAt(0).toUpperCase() + location.slice(1);
+    try {
+        let {
+            name,
+            photo,
+            description,
+            location,
+            language,
+            member,
+            eventtype,
+            date,
+            category,
+        } = request.body;
+        location = location.charAt(0).toUpperCase() + location.slice(1);
 
-    const event = new Events({
-      event_name: name,
-      event_photo:photo,
-      description,
-      location,
-      language,
-      member,
-      eventtype,
-      dateEventstarted:date,
-      user_id: request.id,
-       category_id:category,
-    });
+        const event = new Events({
+            event_name: name,
+            event_photo: photo,
+            description,
+            location,
+            language,
+            member,
+            eventtype,
+            dateEventstarted: date,
+            eventTime: time,
+            user_id: request.id,
+            category_id: category,
+        });
 
-    console.log(event)
-    await event.save();
+        console.log(event)
+        await event.save();
 
-    response.send("you have created your Event ");
-  } catch (error) {
-    console.log(error);
-    response.status(500).send(error);
-  }
+        response.send("you have created your Event ");
+    } catch (error) {
+        console.log(error);
+        response.status(500).send(error);
+    }
 
 
 });
@@ -276,7 +277,7 @@ router.get('/savedEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findById(request.params.id)
-           
+
 
         const user = await Users.findByIdAndUpdate(request.user._id,
             // pushing event id to UserSchema and avoid duplicates
