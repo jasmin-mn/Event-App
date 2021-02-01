@@ -81,7 +81,7 @@ function App() {
             <Route path="/editProfile" component={Profilepage} />
 
             <Route path="/about" component={AboutUs} />
-            {/* <Route path='/profileUser' component={Profilepage} /> */}
+            
 
             {/* <Route path="/settings" component={Settings} /> */}
 

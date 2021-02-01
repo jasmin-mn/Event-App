@@ -83,7 +83,9 @@ function Profilepage(e) {
   const editRegister = async (updateData) => {
     const config = {
       withCredentials: true,
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+                 "Content-Type" :"application/json"
+    },
     };
     try {
       const result = await axios.post(
@@ -104,19 +106,20 @@ function Profilepage(e) {
 
   const handlePhoto = (e) =>{
     setUserData({...userData, photo: e.target.files[0]});
+    console.log(userData.photo);
   }
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('photo',userData.photo)
+    // const formData = new FormData();
+    // formData.append('photo',userData.photo)
    
     try {
       editRegister(userData);
-      const registered = localStorage.getItem("registered");
-      registered = JSON.parse(registered);
+      // const registered = localStorage.getItem("registered");
+      // registered = JSON.parse(registered);
       
 
-      console.log(registered);
+      // console.log(registered);
     } catch (error) {
       console.log(error);
     }
@@ -139,8 +142,9 @@ function Profilepage(e) {
         </button>
       </div>
 
-      <form onSubmit={handleUpdate} encType='multipart/form-data' className={styles.profileform}>
+      <form onSubmit={handleUpdate}  className={styles.profileform}>
         <div className={styles.photo} > Click to upload Image
+        { userData.photo && <img src={`"${userData.photo.name}"`} /> }
         <input className={styles.photoInput}
         type="file"
         accept=".png, .jpg, .jpeg"
