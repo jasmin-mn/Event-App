@@ -142,7 +142,7 @@ function Profilepage(e) {
         </button>
       </div>
 
-      <form onSubmit={handleUpdate}  className={styles.profileform}>
+      <form onSubmit={handleUpdate} className={styles.profileform} encType='multipart/form-data'>
         <div className={styles.photo} > Click to upload Image
         { userData.photo && <img src={`"${userData.photo.name}"`} /> }
         <input className={styles.photoInput}

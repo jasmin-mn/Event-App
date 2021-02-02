@@ -10,6 +10,7 @@ const sendEmail = require("../Utilities/sendEmail");
 const { response } = require("express");
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
+const path = require('path');
 const fileUpload = require('express-fileupload'); 
 router.use(fileUpload())
 //register
@@ -124,29 +125,29 @@ router.get("/profile", authenticate, async (request, response) => {
     response.status(500).json({ msg: "Server error" });
   }
 });
-// upload pix
-// const storage = multer.diskStorage({
-//   destination: function(request, file, cb) {
-//       cb(null, 'images');
-//   },
-//   filename: function(request, file, cb) {   
-//       cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
-//   }
-// });
+//upload pix
+const storage = multer.diskStorage({
+  destination: function(request, file, cb) {
+      cb(null, 'images');
+  },
+  filename: function(request, file, cb) {   
+      cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
 
-// const fileFilter = (request, file, cb) => {
-//   const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-//   if(allowedFileTypes.includes(file.mimetype)) {
-//       cb(null, true);
-//   } else {
-//       cb(null, false);
-//   }
-// }
-// let upload = multer({ storage, fileFilter });
+const fileFilter = (request, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if(allowedFileTypes.includes(file.mimetype)) {
+      cb(null, true);
+  } else {
+      cb(null, false);
+  }
+}
+let upload = multer({ storage, fileFilter });
 
 /////// upload.single('photo'),
 
-router.post("/profileUpdate",authenticate,  async (request, response) => {
+router.post("/profileUpdate",authenticate, upload.single('photo'),  async (request, response) => {
   try {
   // console.log('request.files : ', request.files)
   
