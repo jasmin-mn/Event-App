@@ -17,7 +17,7 @@ export default function Footer() {
                 </ul>
 
                 <ul className={styles.subcontainer1}>
-                    <li className={styles.follow}>Follow</li>
+                    <li className={styles.follow}>Follow Us</li>
                     <li><a href="https://www.facebook.com/"><i class="icon-facebook-sign icon-2x btn-white" ></i> </a></li>
                     <li><a href="https://www.instagram.com/"><i class="icon-instagram icon-2x btn-success"></i></a></li>
                     <li><a href="https://www.youtube.com/"><i class="icon-youtube-sign icon-2x btn-danger"></i></a></li>
@@ -26,7 +26,7 @@ export default function Footer() {
 
             </div>
 
-            <p>&copy; 2021 EventsMGR Team</p>
+            <p className={styles.copyRight} >&copy; 2021 EventsMGR Team</p>
             
         </div>
     )
