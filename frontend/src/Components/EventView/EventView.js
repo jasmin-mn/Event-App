@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useHistory } from 'react';
 import { useParams } from 'react-router-dom';
+import Login from '../Login/Login';
 import ShareButtons from '../ShareButtons/ShareButtons';
 import AttendEvent from '../AttendEvent/AttendEvents';
+// import { NotificationsContext } from '../Notifications/Notifications';
+
 import styles from './EventView.module.css';
 import axios from 'axios';
 import { UserStateContext } from '../../App';
 
 
 
-const EventView = () => {
+const EventView = (props) => {
+
+    // const { addNotificationToQueue } = useContext(NotificationsContext);
 
     const { loggedInState } = useContext(UserStateContext)
 
@@ -16,12 +21,17 @@ const EventView = () => {
     const [attended, setAttended] = useState(false);
     const { eventId } = useParams();
 
+    const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn") ? true : false);
+
     const getEventDetails = async () => {
 
+
         try {
+
             const result = await axios
                 .get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
             console.log('result', result.data);
+
             if (result.data) {
 
                 const user = result.data.participants.includes(loggedInState)
@@ -45,47 +55,67 @@ const EventView = () => {
 
 
     const getAttendEvent = async () => {
-        try {
-            const result = await axios
-                .get(`http://localhost:7000/event/attendEvents/${eventId}`, { withCredentials: true });
-            console.log("event view", result.data);
+        if (loggedIn) {
 
-            if (result.data.user) {
-                setAttended(true)
-                // alert("thank you for joining this Event")
+            try {
+                const result = await axios
+                    .get(`http://localhost:7000/event/attendEvents/${eventId}`, { withCredentials: true });
+                console.log("event view", result.data);
+
+                if (result.data.user) {
+                    setAttended(true)
+                    // addNotificationToQueue("Thank you for joining this Event.")
+
+                }
+
+
+            } catch (error) {
+                console.log(error);
             }
+        } else { props.history.push("/login") }
 
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     const getLeaveEvent = async () => {
-        try {
-            const result = await axios
-                .get(`http://localhost:7000/event/leaveEvents/${eventId}`, { withCredentials: true });
-            console.log('leave event', result.data);
 
-            if (result.data.user) {
-                setAttended(false)
-                // alert("you have leaved this Event")
+        if (loggedIn) {
+
+            try {
+
+                const result = await axios
+                    .get(`http://localhost:7000/event/leaveEvents/${eventId}`, { withCredentials: true });
+                console.log('leave event', result.data);
+
+                if (result.data.user) {
+                    setAttended(false)
+                    // addNotificationToQueue("You have leaved this Event")
+
+                }
+
+
+
+
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
-        }
+
+        } else { props.history.push("/login") }
+
     }
 
     const getSaveEvent = async () => {
-        try {
-            const result = await axios
-                .get(`http://localhost:7000/event/savedEvents/${eventId}`, { withCredentials: true });
-            console.log('save event', result);
+        if (loggedIn) {
 
-            // alert("this Event have been saved")
+            try {
+                const result = await axios
+                    .get(`http://localhost:7000/event/savedEvents/${eventId}`, { withCredentials: true });
+                console.log('save event', result);
 
-        } catch (error) {
-            console.log(error);
-        }
+            } catch (error) {
+                console.log(error);
+            }
+        } else { props.history.push("/login") }
+
     }
 
 
@@ -110,6 +140,7 @@ const EventView = () => {
                     </div>
 
                     <div>
+
                         {attended ?
                             <button onClick={getLeaveEvent} className={styles.leave_btn}>Leave Event</button>
                             :
@@ -120,6 +151,7 @@ const EventView = () => {
 
                         <button className={styles.share_btn}>Share Event</button>
                     </div>
+
                 </div>
 
             </div>
@@ -130,6 +162,7 @@ const EventView = () => {
 
             </div>
         </div>
+
     )
 }
 

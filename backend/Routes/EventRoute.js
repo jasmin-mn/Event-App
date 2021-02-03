@@ -241,6 +241,7 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
         }
 
         const message = `you have attended the event ${event.event_name}`
+
         await sendEmail({
             email: user.email,
             subject: `attended the event ${event.event_name}`,
@@ -273,14 +274,15 @@ router.get('/leaveEvents/:id', authenticate, async (request, response) => {
             return response.status(500).send({ msg: 'Server error event not saved' })
         }
 
-        // const message = `you have attended the event ${event.event_name}`
-        // await sendEmail({
-        //     email: user.email,
-        //     subject: `attended the event ${event.event_name}`,
-        //     text: message
-        // })
+        const message = `you have leaved the event ${event.event_name}`
+        
+        await sendEmail({
+            email: user.email,
+            subject: `leaved the event ${event.event_name}`,
+            text: message
+        })
 
-        response.json({ event, user })
+        response.json({ event, user, msg: 'you recived the email regarding leaving event' })
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
