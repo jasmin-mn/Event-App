@@ -25,7 +25,6 @@ const EventView = (props) => {
 
     const getEventDetails = async () => {
 
-
         try {
 
             const result = await axios
@@ -92,9 +91,6 @@ const EventView = (props) => {
 
                 }
 
-
-
-
             } catch (error) {
                 console.log(error);
             }
@@ -123,16 +119,16 @@ const EventView = (props) => {
 
         <div className={styles.events_show}>
 
-            <div>
+            <div className={styles.events_}>
 
                 <img className={styles.events_show_bg} src={eventDetails.event_photo} alt="" />
-                <h1>{eventDetails.event_name}</h1>
-                <p>Date: {eventDetails.dateEventstarted}</p>
-
+                <h1 className={styles.event_name}>{eventDetails.event_name}</h1>
+                <p className={styles.event_date}>Date: {eventDetails.dateEventstarted}</p>
+                <hr />
                 <div className={styles.events_actions}>
-                    <div>
+                    <div className={styles.host_container}>
                         <img className={styles.host_photo} src={eventDetails.user_id && eventDetails.user_id.photo} alt="" />
-                        <p>Hosted by: {eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
+                        <p>Hosted by: <br /> {eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
                     </div>
 
                     <div>
@@ -151,7 +147,7 @@ const EventView = (props) => {
                 </div>
 
             </div>
-
+            <hr />
             <div>
                 <h1>Description</h1>
                 <p>{eventDetails.description}</p>
