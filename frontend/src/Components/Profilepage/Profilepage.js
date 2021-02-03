@@ -4,6 +4,32 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 function Profilepage(e) {
+  // delete 
+  const [deleteId, setDeleteId] = useState()
+
+  useEffect(()=>{
+    getData() 
+
+  },[])
+   const getData = async(deleteData)=>{
+     const response = await axios.get("http://localhost:7000/user/profile")
+     setDeleteId(response.data)
+   }
+  
+
+   const removeData = (id)=>{
+     axios.delete("http://localhost:7000/user/deleteAccount").then(response =>{
+       const del = deleteId.filter(deleteId=> id !== deleteId.id )
+       setDeleteId(del)
+
+     })
+   }
+
+   const renderHeader = (e)=>{
+    const headerElement = ['id','email']
+    
+   }
+// end of delete part
   const [userData, setUserData] = useState({
     photo: "",
     userName: "",
@@ -57,7 +83,9 @@ function Profilepage(e) {
   const editRegister = async (updateData) => {
     const config = {
       withCredentials: true,
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+                 "Content-Type" :"application/json"
+    },
     };
     try {
       const result = await axios.post(
@@ -69,7 +97,7 @@ function Profilepage(e) {
       console.log(result);
       localStorage.setItem("registered", JSON.stringify(true));
     } catch (error) {
-      console.log()(error);
+      console.log(error);
     } 
   };
   const changeHandler = (e) => {
@@ -78,19 +106,20 @@ function Profilepage(e) {
 
   const handlePhoto = (e) =>{
     setUserData({...userData, photo: e.target.files[0]});
+    console.log(userData.photo);
   }
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('photo',userData.photo)
+    // const formData = new FormData();
+    // formData.append('photo',userData.photo)
    
     try {
       editRegister(userData);
-      const registered = localStorage.getItem("registered");
-      registered = JSON.parse(registered);
+      // const registered = localStorage.getItem("registered");
+      // registered = JSON.parse(registered);
       
 
-      console.log(registered);
+      // console.log(registered);
     } catch (error) {
       console.log(error);
     }
@@ -99,8 +128,23 @@ function Profilepage(e) {
   return (
     <div className={styles.profilecontainer}>
       <h1 className={styles.profileheader}>Profile</h1>
-      <form onSubmit={handleUpdate} encType='multipart/form-data' className={styles.profileform}>
+
+      <div className={styles.deletecontainer}>
+        <p>
+          Are you sure you wanted to delete your account? <br />If you choose to
+          delete your account, you have to register again.
+        </p>
+        <button
+          onClick={removeData}
+          className={styles.deletecontainer1}
+        >
+          Delete Account
+        </button>
+      </div>
+
+      <form onSubmit={handleUpdate}  className={styles.profileform}>
         <div className={styles.photo} > Click to upload Image
+        { userData.photo && <img src={`"${userData.photo.name}"`} /> }
         <input className={styles.photoInput}
         type="file"
         accept=".png, .jpg, .jpeg"

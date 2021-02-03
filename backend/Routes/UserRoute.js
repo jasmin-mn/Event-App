@@ -10,7 +10,8 @@ const sendEmail = require("../Utilities/sendEmail");
 const { response } = require("express");
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
-
+const fileUpload = require('express-fileupload'); 
+router.use(fileUpload())
 //register
 router.post("/register", async (request, response) => {
   const { userName, firstName, lastName, email, password } = request.body;
@@ -124,30 +125,37 @@ router.get("/profile", authenticate, async (request, response) => {
   }
 });
 // upload pix
-const storage = multer.diskStorage({
-  destination: function(request, file, cb) {
-      cb(null, 'images');
-  },
-  filename: function(request, file, cb) {   
-      cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function(request, file, cb) {
+//       cb(null, 'images');
+//   },
+//   filename: function(request, file, cb) {   
+//       cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+//   }
+// });
 
-const fileFilter = (request, file, cb) => {
-  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-  if(allowedFileTypes.includes(file.mimetype)) {
-      cb(null, true);
-  } else {
-      cb(null, false);
-  }
-}
-let upload = multer({ storage, fileFilter });
+// const fileFilter = (request, file, cb) => {
+//   const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+//   if(allowedFileTypes.includes(file.mimetype)) {
+//       cb(null, true);
+//   } else {
+//       cb(null, false);
+//   }
+// }
+// let upload = multer({ storage, fileFilter });
 
-router.post("/profileUpdate",authenticate, upload.single('photo'), async (request, response) => {
-  // const photo = request.file.filename;
+/////// upload.single('photo'),
+
+router.post("/profileUpdate",authenticate,  async (request, response) => {
+  try {
+  // console.log('request.files : ', request.files)
+  
+  // console.log('request.body 12321321', request.body);
+  // // const photo = request.file.filename;
+  // const photo = request.files.photo
   const {
-    photo,
-    userName,
+     
+    // userName,
     firstName,
     lastName,
     email,
@@ -160,14 +168,14 @@ router.post("/profileUpdate",authenticate, upload.single('photo'), async (reques
     others
   } = request.body;
   console.log("this is test request.id", request.user._id);
-  try {
+  
     const user = await User.findById(request.user._id).select("-password");
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
     
     // user.photo = photo;
-    user.userName = userName;
+    // user.userName = userName;
     user.firstName = firstName;
     user.lastName = lastName;
     user.email = email;
@@ -179,9 +187,9 @@ router.post("/profileUpdate",authenticate, upload.single('photo'), async (reques
     user.yourInterests = yourInterests;
     user.others = others;
 
-    user.save();
-    photo.save()
-    response.json({ msg: `user info updated  Back ${user.userName}`, user });
+   const update = await user.save();
+   // photo.save()
+   return response.json({ msg: `user info updated  Back ${user.userName}`, update });
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
