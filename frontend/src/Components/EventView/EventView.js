@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useHistory } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Login from '../Login/Login';
 import ShareButtons from '../ShareButtons/ShareButtons';
@@ -118,10 +118,6 @@ const EventView = (props) => {
 
     }
 
-
-
-
-    // const date = eventDetails.dateEventstarted.toLocaleDateString()
 
     return (
 

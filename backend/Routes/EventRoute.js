@@ -10,8 +10,6 @@ const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
-    console.log(242334, request.body);
-
     try {
         let {
             name,
@@ -27,6 +25,12 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
         } = request.body;
         // location = location.charAt(0).toUpperCase() + location.slice(1);
 
+
+        const dateEventstarted = new Date(date);
+        const [hours, minutes] = time.split(':');
+        dateEventstarted.setHours(hours);
+        dateEventstarted.setMinutes(minutes);
+
         const event = new Events({
             event_name: name,
             event_photo: photo,
@@ -35,8 +39,7 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
             language,
             member,
             eventtype,
-            dateEventstarted: date,
-            eventTime: time,
+            dateEventstarted,
             user_id: request.id,
             category_id: category,
         });
@@ -275,7 +278,7 @@ router.get('/leaveEvents/:id', authenticate, async (request, response) => {
         }
 
         const message = `you have leaved the event ${event.event_name}`
-        
+
         await sendEmail({
             email: user.email,
             subject: `leaved the event ${event.event_name}`,
