@@ -1,4 +1,6 @@
 import { Steps, Step } from "react-step-builder";
+import styles from "./multiStep.module.css";
+
 import Eventname1 from "./EventName1";
 import Eventphoto2 from "./EventPhoto2";
 import Description3 from "./description3";
@@ -14,7 +16,7 @@ import React from "react";
 
 export default function MultiStepForm() {
   return (
-    <div>
+    <div className={styles.multiForm}>
       <Steps>
         <Step component={Eventname1} />
         <Step component={Eventphoto2} />

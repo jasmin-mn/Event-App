@@ -49,10 +49,27 @@ const EventView = () => {
             const result = await axios
                 .get(`http://localhost:7000/event/attendEvents/${eventId}`, { withCredentials: true });
             console.log("event view", result.data);
+
             if (result.data.user) {
                 setAttended(true)
+                // alert("thank you for joining this Event")
             }
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getLeaveEvent = async () => {
+        try {
+            const result = await axios
+                .get(`http://localhost:7000/event/leaveEvents/${eventId}`, { withCredentials: true });
+            console.log('leave event', result.data);
+
+            if (result.data.user) {
+                setAttended(false)
+                // alert("you have leaved this Event")
+            }
         } catch (error) {
             console.log(error);
         }
@@ -63,27 +80,18 @@ const EventView = () => {
             const result = await axios
                 .get(`http://localhost:7000/event/savedEvents/${eventId}`, { withCredentials: true });
             console.log('save event', result);
+
+            // alert("this Event have been saved")
+
         } catch (error) {
             console.log(error);
         }
     }
 
 
-    const getLeaveEvent = async () => {
-        try {
-            const result = await axios
-                .get(`http://localhost:7000/event/leaveEvents/${eventId}`, { withCredentials: true });
-            console.log('leave event', result.data);
-
-            if (result.data.user) {
-                setAttended(false)
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
 
+    // const date = eventDetails.dateEventstarted.toLocaleDateString()
 
     return (
 
@@ -103,14 +111,14 @@ const EventView = () => {
 
                     <div>
                         {attended ?
-                            <button onClick={getLeaveEvent} className={styles.btn}>Leave Event</button>
+                            <button onClick={getLeaveEvent} className={styles.leave_btn}>Leave Event</button>
                             :
-                            <button onClick={getAttendEvent} className={styles.btn}>Join Event</button>
+                            <button onClick={getAttendEvent} className={styles.join_btn}>Join Event</button>
                         }
 
-                        <button onClick={getSaveEvent} className={styles.btn}>Save Event</button>
+                        <button onClick={getSaveEvent} className={styles.save_btn}>Save Event</button>
 
-                        <button className={styles.btn}>Share Event</button>
+                        <button className={styles.share_btn}>Share Event</button>
                     </div>
                 </div>
 

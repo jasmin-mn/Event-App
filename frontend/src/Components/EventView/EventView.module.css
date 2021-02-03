@@ -15,3 +15,59 @@
   flex-direction: row;
   align-items: center;
 }
+
+.join_btn {
+  color: black;
+  background-color: green;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  height: 40px;
+  width: 130px;
+
+  font-size: 20px;
+  text-align: center;
+
+  border: none;
+  cursor: pointer;
+}
+
+.leave_btn {
+  color: black;
+  background-color: rgb(167, 71, 71);
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  height: 40px;
+  width: 130px;
+
+  font-size: 20px;
+  text-align: center;
+
+  border: none;
+  cursor: pointer;
+}
+
+.save_btn {
+  color: black;
+  background-color: orange;
+  height: 40px;
+  width: 130px;
+
+  font-size: 20px;
+  text-align: center;
+
+  border: none;
+  cursor: pointer;
+}
+
+.share_btn {
+  color: black;
+  background-color: orange;
+  height: 40px;
+  width: 130px;
+
+  font-size: 20px;
+  text-align: center;
+
+  border: none;
+  cursor: pointer;
+}
