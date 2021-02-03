@@ -294,7 +294,7 @@ router.post("/forgotPassword", async (request, response) => {
   }
   const payload = {
     id: user.id,
-    iat: Date.now(),
+    iat: Date.now()
   };
   const token = jwt.sign(payload, process.env.RESETPASSWORD_SECRET, {
     expiresIn: "60m",
