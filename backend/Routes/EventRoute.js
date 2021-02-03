@@ -5,6 +5,7 @@ const passport = require("passport");
 const authenticate = require("../middleware/authenticate");
 const restrictTo = require("../middleware/restrictTo");
 const Category = require("../Models/CategoryModel");
+const sendEmail = require("../Utilities/sendEmail");
 const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
@@ -228,7 +229,6 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
             { $addToSet: { participants: request.user._id } },
             { new: true }
         )
-        // .populate('category_id user_id');
 
         const user = await Users.findByIdAndUpdate(request.user._id,
             // pushing event id to UserSchema and avoid duplicates
@@ -239,7 +239,15 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
         if (!event) {
             return response.status(500).send({ msg: 'Server error event not saved' })
         }
-        response.json({ event, user })
+
+        const message = `you have attended the event ${event.event_name}`
+        await sendEmail({
+            email: user.email,
+            subject: `attended the event ${event.event_name}`,
+            text: message
+        })
+
+        response.json({ event, user, msg: 'you recived the email regarding attending event' })
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })
@@ -255,7 +263,6 @@ router.get('/leaveEvents/:id', authenticate, async (request, response) => {
             { $pull: { participants: request.user._id } },
             { new: true }
         )
-        // .populate('category_id user_id');
 
         const user = await Users.findByIdAndUpdate(request.user._id,
             { $pull: { attendEvents: event._id } },
@@ -265,6 +272,14 @@ router.get('/leaveEvents/:id', authenticate, async (request, response) => {
         if (!event) {
             return response.status(500).send({ msg: 'Server error event not saved' })
         }
+
+        // const message = `you have attended the event ${event.event_name}`
+        // await sendEmail({
+        //     email: user.email,
+        //     subject: `attended the event ${event.event_name}`,
+        //     text: message
+        // })
+
         response.json({ event, user })
 
     } catch (error) {
@@ -278,7 +293,6 @@ router.get('/savedEvents/:id', authenticate, async (request, response) => {
 
     try {
         const event = await Events.findById(request.params.id)
-
 
         const user = await Users.findByIdAndUpdate(request.user._id,
             // pushing event id to UserSchema and avoid duplicates
