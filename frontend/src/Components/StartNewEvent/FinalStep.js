@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./multiStep.module.css";
 
 
@@ -8,7 +8,6 @@ function FinalStep(props) {
 
   useEffect(() => {
     getCat()
-
   }, [])
 
   const getCat = async () => {
@@ -18,11 +17,11 @@ function FinalStep(props) {
       if (!result) {
         console.log('server error');
       }
-     console.log("cat result", result.data);
-     
-        const catName = (result.data.filter((item) =>  item._id === props.state.category));
-        console.log('catName', catName[0].name);
-        
+      console.log("cat result", result.data);
+
+      const catName = (result.data.filter((item) => item._id === props.state.category));
+      console.log('catName', catName[0].name);
+
       setCat(catName[0].name)
 
     } catch (error) {

@@ -10,8 +10,6 @@ const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
-    console.log(242334, request.body);
-
     try {
         let {
             name,
@@ -27,6 +25,12 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
         } = request.body;
         // location = location.charAt(0).toUpperCase() + location.slice(1);
 
+
+        const dateEventstarted = new Date(date);
+        const [hours, minutes] = time.split(':');
+        dateEventstarted.setHours(hours);
+        dateEventstarted.setMinutes(minutes);
+
         const event = new Events({
             event_name: name,
             event_photo: photo,
@@ -35,8 +39,7 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
             language,
             member,
             eventtype,
-            dateEventstarted: date,
-            eventTime: time,
+            dateEventstarted,
             user_id: request.id,
             category_id: category,
         });
@@ -241,6 +244,7 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
         }
 
         const message = `you have attended the event ${event.event_name}`
+
         await sendEmail({
             email: user.email,
             subject: `attended the event ${event.event_name}`,
@@ -273,14 +277,15 @@ router.get('/leaveEvents/:id', authenticate, async (request, response) => {
             return response.status(500).send({ msg: 'Server error event not saved' })
         }
 
-        // const message = `you have attended the event ${event.event_name}`
-        // await sendEmail({
-        //     email: user.email,
-        //     subject: `attended the event ${event.event_name}`,
-        //     text: message
-        // })
+        const message = `you have leaved the event ${event.event_name}`
 
-        response.json({ event, user })
+        await sendEmail({
+            email: user.email,
+            subject: `leaved the event ${event.event_name}`,
+            text: message
+        })
+
+        response.json({ event, user, msg: 'you recived the email regarding leaving event' })
 
     } catch (error) {
         response.status(500).send({ msg: 'Server error' })

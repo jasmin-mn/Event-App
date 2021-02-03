@@ -71,3 +71,25 @@
   border: none;
   cursor: pointer;
 }
+
+.host_container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 200px;
+}
+
+.host_photo {
+  height: 80px;
+  width: 80px;
+  border-radius: 50px;
+  border: 1px solid black;
+}
+.event_name,
+.event_name {
+  margin: 10px 0;
+  padding: 0;
+}
+
+
