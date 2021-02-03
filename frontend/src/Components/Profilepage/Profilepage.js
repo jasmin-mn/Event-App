@@ -4,17 +4,22 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 function Profilepage(e) {
+  const [file, setFile] = useState('');
+  const [fileName, setFileName] = useState('please choose the file');
+  const [uploadedFile , setUploadedFile] = useState();
+
+
   // delete 
   const [deleteId, setDeleteId] = useState()
 
-  useEffect(()=>{
-    getData() 
+  // useEffect(()=>{
+  //   getData() 
 
-  },[])
-   const getData = async(deleteData)=>{
-     const response = await axios.get("http://localhost:7000/user/profile")
-     setDeleteId(response.data)
-   }
+  // },[])
+  //  const getData = async(deleteData)=>{
+  //    const response = await axios.get("http://localhost:7000/user/profile")
+  //    setDeleteId(response.data)
+  //  }
   
 
    const removeData = (id)=>{
@@ -78,14 +83,17 @@ function Profilepage(e) {
     getUser();
   }, []);
   
-  const history = useHistory();
+   
 
   const editRegister = async (updateData) => {
     const config = {
-      withCredentials: true,
+    
       headers: { 
-                 "Content-Type" :"application/json"
+        Accept   :"application/json",
+        'Content-Type':'multipart/from-data'
+
     },
+    withCredentials: true
     };
     try {
       const result = await axios.post(
@@ -94,8 +102,10 @@ function Profilepage(e) {
         updateData,
         config
       );
+      const {fileName , filePath } = result.data
+      setUploadedFile({ fileName , filePath})
       console.log(result);
-      localStorage.setItem("registered", JSON.stringify(true));
+    //  localStorage.setItem("registered", JSON.stringify(true));
     } catch (error) {
       console.log(error);
     } 
@@ -105,13 +115,15 @@ function Profilepage(e) {
   };
 
   const handlePhoto = (e) =>{
-    setUserData({...userData, photo: e.target.files[0]});
-    console.log(userData.photo);
+      setFile(e.target.files[0])
+      setFileName(e.target.files[0].name)
+    
   }
   const handleUpdate = async (e) => {
     e.preventDefault();
-    // const formData = new FormData();
-    // formData.append('photo',userData.photo)
+     userData.photo = file 
+   
+
    
     try {
       editRegister(userData);
@@ -142,17 +154,17 @@ function Profilepage(e) {
         </button>
       </div>
 
-      <form onSubmit={handleUpdate} className={styles.profileform} encType='multipart/form-data'>
+      <form onSubmit={handleUpdate} className={styles.profileform}  >
         <div className={styles.photo} > Click to upload Image
         { userData.photo && <img src={`"${userData.photo.name}"`} /> }
         <input className={styles.photoInput}
-        type="file"
-        accept=".png, .jpg, .jpeg"
-        name="photo"
+        type="file"       
+        name="file"
         onChange={handlePhoto}
         // value={photo}
         
         />
+        {/* <button onClick= >Upload </button> */}
 
         </div>
         <div className={styles.formusername}>

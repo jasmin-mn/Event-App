@@ -130,7 +130,7 @@ const storage = multer.diskStorage({
   destination: function(request, file, cb) {
       cb(null, 'images');
   },
-  filename: function(request, file, cb) {   
+  filename: function(request, file, cb){   
       cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
   }
 });
@@ -147,13 +147,11 @@ let upload = multer({ storage, fileFilter });
 
 /////// upload.single('photo'),
 
-router.post("/profileUpdate",authenticate, upload.single('photo'),  async (request, response) => {
-  try {
-  // console.log('request.files : ', request.files)
+router.post("/profileUpdate",authenticate,  async (request, response) => {
+ 
+    const userId = request.user._id;
+   
   
-  // console.log('request.body 12321321', request.body);
-  // // const photo = request.file.filename;
-  // const photo = request.files.photo
   const {
      
     // userName,
@@ -170,12 +168,22 @@ router.post("/profileUpdate",authenticate, upload.single('photo'),  async (reque
   } = request.body;
   console.log("this is test request.id", request.user._id);
   
-    const user = await User.findById(request.user._id).select("-password");
+    const user = await User.findById(userId).select("-password");
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
-    
-    // user.photo = photo;
+    if(request.files === null){
+      return response.status(400).json({ msg : " no file uploaded"})
+    }
+    const file = request.files.file;
+    const newPath = `${Date.now()}-${file.name}`;
+    file.mv(`${__dirname}/../../frontend/public/uploads/${newPath}` , (err)=>{
+     if(err){
+       console.log(err);
+       return response.status(500).send(err);      
+
+     }
+     user.photo = newPath;
     // user.userName = userName;
     user.firstName = firstName;
     user.lastName = lastName;
@@ -188,12 +196,13 @@ router.post("/profileUpdate",authenticate, upload.single('photo'),  async (reque
     user.yourInterests = yourInterests;
     user.others = others;
 
-   const update = await user.save();
+    user.save();
    // photo.save()
-   return response.json({ msg: `user info updated  Back ${user.userName}`, update });
-  } catch (error) {
-    response.status(500).json({ msg: "Server error" });
-  }
+   response.json({ fileName : newPath ,filePath:`/uploads/${newPath}` , msg: ` you updated your data `, user})
+     
+    })
+    
+  
 });
 
 
