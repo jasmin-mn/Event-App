@@ -1,9 +1,11 @@
 .footer {
+
   /* width: 100%;
   position: fixed;
   bottom:0px;
   left:0px;
   overflow: hidden; */
+
   background-color: rgb(75, 71, 71);
   display: flex;
   justify-content: center;
@@ -11,7 +13,6 @@
   align-items: center;
   margin-top: 200px;
   
- 
 }
 
 .footer p {
@@ -22,18 +23,7 @@
   
 }
 
-/* .containerheader {
-  text-align: center;
-  border-radius: 200px;
 
-  position: relative;
-
-  color: white;
-  margin-bottom: 40px;
-
-  height: 410px;
-  
-} */
 .headerparag {
   line-height: 50px;
   font-size: 20px;

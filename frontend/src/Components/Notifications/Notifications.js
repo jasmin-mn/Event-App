@@ -14,7 +14,7 @@ export default function Notifications(props) {
         
         setTimeout(() => {
             setNotifications([...notifications.slice(1)]);
-        }, 3000);
+        }, 5000);
     };
 
     return (

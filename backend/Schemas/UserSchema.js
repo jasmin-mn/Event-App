@@ -6,8 +6,14 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, Number, required: true },
   password: { type: String, Number, required: true },
   gender: { type: String, enum: ["female", "male", "N/A"], default: "N/A" },
+
   age: { type: Number},
-  photo: { type: String },
+  
+
+
+
+  photo: { type: String, default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg" },
+
   place: { type: [String] },
   hometown: { type: [String] },
   language: { type: [String] },

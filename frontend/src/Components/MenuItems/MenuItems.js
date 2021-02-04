@@ -2,11 +2,11 @@
 
 export const MenuItems=[
 
-    {
-       title:'Events',
-       path:'/events',
-       cName:'dropdown-Link'
-    },
+   //  {
+   //     title:'Events',
+   //     path:'/events',
+   //     cName:'dropdown-Link'
+   //  },
     {
         title:'Saved Event',
         path:'/savedEvent',
@@ -22,16 +22,16 @@ export const MenuItems=[
         path:'/startNewEvent',
         cName:'dropdown-Link'
      },
-     {
-        title:'payments made',
-        path:'/payment',
-        cName:'dropdown-Link'
-     },
-     {
-      title:'Settings',
-      path:'/settings',
-      cName:'dropdown-Link'
-   },
+   //   {
+   //      title:'payments made',
+   //      path:'/payment',
+   //      cName:'dropdown-Link'
+   //   },
+   //   {
+   //    title:'Settings',
+   //    path:'/settings',
+   //    cName:'dropdown-Link'
+   // },
      {
         title:'Log out',
         path:'/Logout',

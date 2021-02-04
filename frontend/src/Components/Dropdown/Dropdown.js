@@ -25,20 +25,6 @@ export default function Dropdown({ handleMouseLeave }) {
                 })}
             </ul>
         </>
-        /*       <>
-                <ul onClick={handleClick} className={click ?`
-                ${styles.dropdownmenu.clicked} `:`${styles.dropdownmenu}`}>
-                    {MenuItems.map((item,index)=>{
-        
-                        return(
-                            <li key={index}>
-        
-                        <Link className={item.cName} to={item.path} onClick={()=>setClick(false)}>{item.title}</Link>
-                            </li>
-                        )
-        
-                    })}
-                </ul>
-              </> */
+
     )
 }

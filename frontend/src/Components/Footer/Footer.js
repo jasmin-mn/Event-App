@@ -6,14 +6,14 @@ export default function Footer() {
 
     return (
         <div className={styles.footer}>
+
             <div className={styles.containerfooter} >
+            
                 <ul className={styles.subcontainer}>
                     <li className={styles.contactus}>Contact Us</li>
                     <li><i class="icon-home icon-2x"></i> Wandalenweg 30, 20097 Hamburg</li>
-
                     <li><i class="icon-time icon-2x"></i>  Mondays-Fridays 9am-6pm</li>
                     <li><i class="icon-phone-sign icon-2x"></i> 040 882157080</li>
-
                 </ul>
 
                 <ul className={styles.subcontainer1}>

@@ -1,5 +1,5 @@
-import React, { useContext,useState } from 'react'
-  import Button from '../Button/Button'
+import React, { useContext, useState } from 'react'
+import Button from '../Button/Button'
 // import {Button} from '../Button'
 import { Link } from "react-router-dom";
 import logo from '../../Images/logo.png';
@@ -15,14 +15,14 @@ export default function Header() {
 
     const { loggedInState } = useContext(UserStateContext);
 
-    const[dropdown,setdropdown]=useState(false)
+    const [dropdown, setdropdown] = useState(false)
 
-    const onMauseEnter=()=>{
+    const onMauseEnter = () => {
 
-        if(window.innerWidth<960){
+        if (window.innerWidth < 960) {
 
             setdropdown(false);
-        }else{
+        } else {
 
             setdropdown(true)
         }
@@ -46,12 +46,12 @@ export default function Header() {
                     <ul className={styles.nav_list}>
                         <li>
                             <Link to={'/'} className='navbar-logo'>Home</Link>
-                         
+
                         </li>
 
                         <li onMouseEnter={handleMouseEnter}>
                             <Link to={'/Account'} className='navbar-logo'>Account</Link>
-                         {dropdown && <Dropdown handleMouseLeave={handleMouseLeave}/>  }
+                            {dropdown && <Dropdown handleMouseLeave={handleMouseLeave} />}
 
                         </li>
 
@@ -60,16 +60,17 @@ export default function Header() {
 
                         </li> */}
 
-                        <li>
+                        {/* <li>
                             <Link to={'/Messages'}>Messages</Link>
                         </li>
                         <li>
                             <Link to={'/notification'}>Notification</Link>
-                        </li>
+                        </li> */}
 
                         <li>
                             <Link to={'/contact'}>Contact</Link>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -78,7 +79,7 @@ export default function Header() {
     } else {
 
         return (
-           
+
             <div className={styles.header}>
                 <nav className={styles.nav}>
                     <img id="logo" src={logo} alt={"logo"} />
@@ -101,15 +102,15 @@ export default function Header() {
                         </li>
                     </ul>
 
-                    <Button />
-                    
+                    {/* <Button /> */}
+
                 </nav>
 
                 <div className={styles.header_bg}>
                     <div className={styles.header_text}>
                         <p className={styles.header_tittel}>Enjoy Coding Events, <br /> learning, Workshops Classes from Home.</p>
                         {/* <button className={styles.btn} >Join us </button> */}
-                        <a className={styles.btn}  href="http://localhost:3000/signup">Join us</a>
+                        <a className={styles.btn} href="http://localhost:3000/signup">Join us</a>
                     </div>
                 </div>
             </div>
