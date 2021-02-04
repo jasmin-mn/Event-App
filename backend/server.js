@@ -10,6 +10,9 @@ const Event = require("./Models/EventModel");
 const Register = require("./Models/UserModel");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const fileUpload = require('express-fileupload'); 
+
+
 dotenv.config();
 
 app.get("/", (request, response) => {
@@ -35,13 +38,14 @@ app.use("/user", require("./Routes/UserRoute"));
 app.use("/event", require("./Routes/EventRoute"));
 app.use("/admin", require("./Routes/AdminRoute"));
 app.use("/search", require("./Routes/SearchRoute"));
+app.use(fileUpload())
 
 // connect to mongodb
 
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.MONGO_URI}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
   )
   .then(() => {
     console.log("MongoDB is connected 😎");
