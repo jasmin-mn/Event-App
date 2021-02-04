@@ -5,8 +5,8 @@ import axios from "axios";
 
 function Profilepage(e) {
   const [file, setFile] = useState('');
-  const [fileName, setFileName] = useState('please choose the file');
-  const [uploadedFile , setUploadedFile] = useState();
+  const [fileName, setFileName] = useState('');
+  const [uploadedFile , setUploadedFile] = useState({});
 
 
   // delete 
@@ -35,6 +35,8 @@ function Profilepage(e) {
     
    }
 // end of delete part
+
+
   const [userData, setUserData] = useState({
     photo: "",
     userName: "",
@@ -44,7 +46,7 @@ function Profilepage(e) {
     age: "",
     place: "",
     hometown: "",
-    gender: "",
+    gender: [""],
     language: "",
     yourInterests: "",
     other: "",
@@ -85,12 +87,30 @@ function Profilepage(e) {
   
    
 
-  const editRegister = async (updateData) => {
+  const editRegister = async () => {
+    const formData = new FormData();
+    formData.append('file', file);    
+    formData.append('userName',userName)
+    formData.append('firstName',firstName)
+    formData.append('lastName',lastName)
+    formData.append('email',email)
+    formData.append('age',age)
+    formData.append('place',place)
+    formData.append('hometown',hometown)
+    formData.append('gender',gender)
+    // formData.append('age',female)
+    // formData.append('age',male)
+    // formData.append('age',N/A)
+    formData.append('language',language)
+    formData.append('yourInterests',yourInterests)
+    formData.append('others',others); 
+     
+    
     const config = {
     
       headers: { 
         Accept   :"application/json",
-        'Content-Type':'multipart/from-data'
+        'Content-Type':'multipart/form-data'
 
     },
     withCredentials: true
@@ -99,7 +119,7 @@ function Profilepage(e) {
       const result = await axios.post(
         "http://localhost:7000/user/profileUpdate",
 
-        updateData,
+        formData,
         config
       );
       const {fileName , filePath } = result.data
@@ -121,12 +141,13 @@ function Profilepage(e) {
   }
   const handleUpdate = async (e) => {
     e.preventDefault();
-     userData.photo = file 
+     //userData.photo = file 
    
 
    
     try {
-      editRegister(userData);
+      await editRegister(userData);
+      await getUser();
       // const registered = localStorage.getItem("registered");
       // registered = JSON.parse(registered);
       
@@ -155,8 +176,9 @@ function Profilepage(e) {
       </div>
 
       <form onSubmit={handleUpdate} className={styles.profileform}  >
-        <div className={styles.photo} > Click to upload Image
-        { userData.photo && <img src={`"${userData.photo.name}"`} /> }
+        <div> 
+        { photo && <img className={styles.photo}  src={`/uploads/${photo}`} /> }
+      <label htmlFor="file"> {fileName}</label>
         <input className={styles.photoInput}
         type="file"       
         name="file"
@@ -198,31 +220,36 @@ function Profilepage(e) {
         </div>
 
         <div className={styles.formgroupgender}>
+        <label htmlFor="female">Female
           <input
             type="radio"
             name="gender"
             onChange={changeHandler}
             value={gender}
+            
           />
-          <label htmlFor="female">Female</label>
+          </label>
         </div>
         <div className={styles.formgroupgender}>
+        <label htmlFor="male">Male
           <input
             type="radio"
             name="gender"
             onChange={changeHandler}
             value={gender}
+            
           />
-          <label htmlFor="female">Male</label>
+          </label>
         </div>
         <div className={styles.formgroupgender}>
+        <label htmlFor="N/A">N/A
           <input
             type="radio"
             name="gender"
             onChange={changeHandler}
             value={gender}
           />
-          <label htmlFor="female">N/A</label>
+          </label>
         </div>
 
         <div className={styles.formemail}>

@@ -4,12 +4,17 @@
 
 
 .background{
-   position: absolute;
+   /* position: absolute;
    left: 600px;
-   top:200px;
+   top:200px; */
+   display: flex;
+   align-items: center;
+   justify-content: center;
     width:600px;
     height: 600px;
     background-color: rgb(248, 152, 26);
+    margin-top: 50px;
+    
     
 }
 
@@ -22,22 +27,23 @@
 
 .button{
 
-    position: absolute;
+    /* position: absolute;
     top:400px;
-    left:200px;
+    left:200px; */
     color:black
 }
 
 
 .finalStep{
 
-   position: absolute;
+   /* position: absolute;
    left: 600px;
-   top:200px;
+   top:200px; */
     width:600px;
     height: 600px;
     background-color: rgb(67, 85, 134);
-    color:white
+    color:white;
+    margin-top: 50px;
 
 
 }
