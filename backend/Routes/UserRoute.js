@@ -8,11 +8,12 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 const sendEmail = require("../Utilities/sendEmail");
 const { response } = require("express");
-const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
-const path = require('path');
-const fileUpload = require('express-fileupload'); 
-router.use(fileUpload())
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
+const path = require("path");
+const fileUpload = require("express-fileupload");
+
+router.use(fileUpload());
 //register
 router.post("/register", async (request, response) => {
   const { userName, firstName, lastName, email, password } = request.body;
@@ -49,6 +50,8 @@ router.post("/register", async (request, response) => {
   }
 });
 
+// end of register
+
 //login signin public
 router.post("/login", async (request, response) => {
   const { email, password } = request.body;
@@ -78,7 +81,6 @@ router.post("/login", async (request, response) => {
           httpOnly: true,
 
           sameSite: "lax",
-
         })
         .send(data.id);
     });
@@ -88,74 +90,44 @@ router.post("/login", async (request, response) => {
   }
 });
 
-// @root POST user/dashboard for private
+// end of of signin
 
-router.get("/dashboardboard", authenticate, async (request, response) => {
-  console.log("this is request.id", request.id);
-  try {
-    const user = await User.findById(request.id).select("-password");
-    if (!user) {
-      return response.status(500).json({ msg: "Server error" });
-    }
-    response.json({ msg: ` welcome back ${user.userName}` });
-  } catch (error) {
-    response.status(500).json({ msg: "Server error" });
-  }
-});
+// // @root POST user/dashboard for private
+
+// router.get("/dashboardboard", authenticate, async (request, response) => {
+//   console.log("this is request.id", request.id);
+//   try {
+//     const user = await User.findById(request.id).select("-password");
+//     if (!user) {
+//       return response.status(500).json({ msg: "Server error" });
+//     }
+//     response.json({ msg: ` welcome back ${user.userName}` });
+//   } catch (error) {
+//     response.status(500).json({ msg: "Server error" });
+//   }
+// });
 
 // Profile
-
-
-
-
-
 router.get("/profile", authenticate, async (request, response) => {
   // const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
 
   console.log("this is test request.id", request.user._id);
-
 
   try {
     const user = await User.findById(request.user._id).select("-password");
     if (!user) {
       return response.status(500).json({ msg: "Server error" });
     }
-    response.json({ user} );
+    response.json({ user });
   } catch (error) {
     response.status(500).json({ msg: "Server error" });
   }
 });
-//upload pix
-const storage = multer.diskStorage({
-  destination: function(request, file, cb) {
-      cb(null, 'images');
-  },
-  filename: function(request, file, cb) {   
-      cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
 
-const fileFilter = (request, file, cb) => {
-  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-  if(allowedFileTypes.includes(file.mimetype)) {
-      cb(null, true);
-  } else {
-      cb(null, false);
-  }
-}
-let upload = multer({ storage, fileFilter });
+router.post("/profileUpdate", authenticate, async (request, response) => {
+  const userId = request.user._id;
 
-/////// upload.single('photo'),
-
-router.post("/profileUpdate",authenticate, upload.single('photo'),  async (request, response) => {
-  try {
-  // console.log('request.files : ', request.files)
-  
-  // console.log('request.body 12321321', request.body);
-  // // const photo = request.file.filename;
-  // const photo = request.files.photo
   const {
-     
     // userName,
     firstName,
     lastName,
@@ -166,16 +138,39 @@ router.post("/profileUpdate",authenticate, upload.single('photo'),  async (reque
     gender,
     language,
     yourInterests,
-    others
+    others,
   } = request.body;
+  console.log(request.files);
   console.log("this is test request.id", request.user._id);
-  
-    const user = await User.findById(request.user._id).select("-password");
-    if (!user) {
-      return response.status(500).json({ msg: "Server error" });
+
+  const user = await User.findById(userId).select("-password");
+  if (!user) {
+    return response.status(500).json({ msg: "Server error" });
+  }
+  if (request.files === null) {
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.age = age;
+    user.place = place;
+    user.hometown = hometown;
+    user.gender = gender;
+    user.language = language;
+    user.yourInterests = yourInterests;
+    user.others = others;
+
+    user.save();
+    // photo.save()
+    return response.json({ msg: ` you updated your data `, user });
+  }
+  const file = request.files.file;
+  const newPath = `${Date.now()}-${file.name}`;
+  file.mv(`${__dirname}/../../frontend/public/uploads/${newPath}`, (err) => {
+    if (err) {
+      console.log(err);
+      return response.status(500).send(err);
     }
-    
-    // user.photo = photo;
+    user.photo = newPath;
     // user.userName = userName;
     user.firstName = firstName;
     user.lastName = lastName;
@@ -188,72 +183,30 @@ router.post("/profileUpdate",authenticate, upload.single('photo'),  async (reque
     user.yourInterests = yourInterests;
     user.others = others;
 
-   const update = await user.save();
-   // photo.save()
-   return response.json({ msg: `user info updated  Back ${user.userName}`, update });
-  } catch (error) {
-    response.status(500).json({ msg: "Server error" });
-  }
+    user.save();
+    // photo.save()
+    response.json({
+      fileName: newPath,
+      filePath: `/uploads/${newPath}`,
+      msg: ` you updated your data `,
+      user,
+    });
+  });
 });
 
-
+// end of profile
 
 //Delete Account
-router.delete('/deleteAccount/:id', authenticate, async(request, response)=>{
-  const user = await User.findByIdAndDelete({_id:(request.params.id)} )
-  if(user){
-      response.send('Successfully Deleted')
-  } else{
-      response.send('Server Error')
-  }
-})
-
-
-// Edit Profile
-
-router.post("/profile/:id", authenticate, async (request, response) => {
-  console.log("the id of the current logged in user is : ", request.id);
-  // MAke sure that the user own the profile
-  if (request.id !== request.params.id) {
-    return response.status(401).json({ msg: "Not authorized" });
-  }
-  const {
-    userName,
-    firstName,
-    lastName,
-    email,
-    dateOfBirth,
-    place,
-    hometown,
-    gender,
-    language,
-    yourInterests,
-    others,
-  } = request.body;
-  const user = await User.findByIdAndUpdate(
-    { _id: request.params.id },
-    {
-      $set: {
-        userName,
-        firstName,
-        lastName,
-        email,
-        dateOfBirth,
-        place,
-        hometown,
-        gender,
-        language,
-        yourInterests,
-        others,
-      },
-    }
-  );
+router.delete("/deleteAccount/:id", authenticate, async (request, response) => {
+  const user = await User.findByIdAndDelete({ _id: request.params.id });
   if (user) {
-    response.send(`Profile has been updated`);
+    response.send("Successfully Deleted");
   } else {
     response.send("Server Error");
   }
 });
+
+// Edit Profile
 
 // Get user/adminboard
 
@@ -276,12 +229,6 @@ router.get(
     }
   }
 );
-
-// Signout
-
-router.post("/signout", async (request, response) => {
-  return request.body;
-});
 
 // Forgot password/reset password
 

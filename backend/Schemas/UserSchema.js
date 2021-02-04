@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const UserSchema = new mongoose.Schema({
   userName: { type: String, Number, required: true },
   firstName: { type: String, required: true },
@@ -8,11 +7,15 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, Number, required: true },
   gender: { type: String, enum: ["female", "male", "N/A"], default: "N/A" },
 
-  age: { type: String },
+  age: { type: Number},
+  
 
-  photo: { type: String },
-  place: { type: [String]},
-  hometown: { type: [String]},
+
+
+  photo: { type: String, default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg" },
+
+  place: { type: [String] },
+  hometown: { type: [String] },
   language: { type: [String] },
   yourInterests: { type: [String] },
   others: { type: [String] },

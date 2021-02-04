@@ -31,7 +31,7 @@ const Register = (e) => {
             firstName:formData.get("firstName"),
             lastName:formData.get("lastName"),
             email:formData.get("email"),
-            gender:formData.get("gender"),
+            // gender:formData.get("gender"),
             password:formData.get("password"),
             password_confirm:formData.get("confirm_password")
 
@@ -74,17 +74,17 @@ const Register = (e) => {
                     <input type="text" name="lastName" placeholder="Last Name"     />
                 </div>
 
-                 <div className={styles.formgroupgender}>
+                 {/* <div className={styles.formgroupgender}>
                     <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="true" checked/> 
                    
                     <label className={styles.formgroupgenderlabel}  htmlFor="gender" class="radio"  chec>Female</label>
                     </div>
                    
                     <div className={styles.formgroupgender}>
-                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Female" value="None" /> 
+                    <input className={styles.formgroupgenderinput}  type="radio" name="gender" id="Male" value="None" /> 
                     
                     <label className={styles.formgroupgenderlabel}  htmlFor="gender" class="radio"  chec>Male</label>
-                </div>
+                </div> */}
 
                 <div className={styles.formgroup}>
                     <label id="icon"  htmlFor="email"><i class="icon-envelope "></i></label>

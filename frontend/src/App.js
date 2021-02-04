@@ -83,7 +83,7 @@ function App() {
             <Route path="/editProfile" component={Profilepage} />
 
             <Route path="/about" component={AboutUs} />
-            
+
 
             {/* <Route path="/settings" component={Settings} /> */}
 

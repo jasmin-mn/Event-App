@@ -48,6 +48,7 @@ const Search = () => {
                 });
 
                 setEvents(mySearch)
+                
             }
             setSerchResults(false)
 
@@ -96,8 +97,10 @@ const Search = () => {
 
 
             <div className={styles.search_results}>
-                {!serchInputs && 'Please enter a value to get a results'}
-                {!serchResults && 'Unfortunately, no events were found.'}
+            
+                {/* {!serchResults && <p>Unfortunately, no events were found.</p>} */}
+                <br />
+                {!serchInputs && <p>Please enter at less one value to get a results</p>}
                 {events}
 
             </div>

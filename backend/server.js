@@ -10,6 +10,9 @@ const Event = require("./Models/EventModel");
 const Register = require("./Models/UserModel");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const fileUpload = require('express-fileupload'); 
+
+
 dotenv.config();
 
 app.get("/", (request, response) => {
@@ -35,6 +38,7 @@ app.use("/user", require("./Routes/UserRoute"));
 app.use("/event", require("./Routes/EventRoute"));
 app.use("/admin", require("./Routes/AdminRoute"));
 app.use("/search", require("./Routes/SearchRoute"));
+app.use(fileUpload())
 
 // connect to mongodb
 

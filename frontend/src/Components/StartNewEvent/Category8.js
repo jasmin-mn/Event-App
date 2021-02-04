@@ -30,7 +30,7 @@ export default function Category8(props) {
 
   return (
     <div className={styles.background}>
-      <select>
+      <select name="category" onChange={props.handleChange}  >
         <option className={styles.text} >
           please Select category
       </option>
@@ -39,10 +39,11 @@ export default function Category8(props) {
           category.map((category) => {
             return (
               <option
-                name="category"
+                
                 key={category._id}
                 value={category._id}
-                onChange={props.handleChange}
+                // 
+               
               >{category.name}
               </option>
             );
