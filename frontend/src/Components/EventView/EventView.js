@@ -22,6 +22,7 @@ const EventView = (props) => {
     const [eventDetails, setEventDetails] = useState({});
     const [attended, setAttended] = useState(false);
     const [isHost, setIsHost] = useState(false);
+    const [savedEvents, setSavedEvents] = useState(false);
     const { eventId } = useParams();
 
     const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn") ? true : false);
@@ -40,8 +41,8 @@ const EventView = (props) => {
                     setIsHost(true)
                 }
 
-                const user = result.data.participants.includes(loggedInState)
 
+                const user = result.data.participants.includes(loggedInState)
                 if (user) {
                     setAttended(true)
                 }
@@ -128,10 +129,36 @@ const EventView = (props) => {
 
     }
 
-    const getDeleteEvent = () => {
+    const getUnsaveEvent = async () => {
+        if (loggedIn) {
 
+            try {
+                const result = await axios
+                    .get(`http://localhost:7000/event/unsavedEvents/${eventId}`, { withCredentials: true });
+                console.log('unsave event', result);
+
+            } catch (error) {
+                console.log(error);
+            }
+        } else { props.history.push("/login") }
     }
 
+
+    const getDeleteEvent = async () => {
+        if (loggedIn) {
+
+            try {
+                const result = await axios
+                    .get(`http://localhost:7000/event/deleteEvents/${eventId}`, { withCredentials: true });
+                console.log('save event', result);
+
+            } catch (error) {
+                console.log(error);
+            }
+        } else { props.history.push("/login") }
+    }
+
+    
     const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
 
     return (
@@ -153,15 +180,24 @@ const EventView = (props) => {
                     <div>
 
                         {attended ?
-                            <button onClick={getLeaveEvent} className={styles.leave_btn}>Leave Event</button>
+                            <button onClick={getLeaveEvent}
+                                className={styles.leave_btn}>Leave Event</button>
                             :
-                            <button onClick={getAttendEvent} className={styles.join_btn}>Join Event</button>
+                            <button onClick={getAttendEvent}
+                                className={styles.join_btn}>Join Event</button>
                         }
 
-                        <button onClick={getSaveEvent} className={styles.save_btn}>Save Event</button>
+                        {savedEvents ?
+                            <button onClick={getSaveEvent}
+                                className={styles.save_btn}>Save Event</button>
+                            :
+                            <button onClick={getUnsaveEvent}
+                                className={styles.unsave_btn}>Unsave Event</button>
+                        }
 
                         {isHost ?
-                            <button onClick={getDeleteEvent} className={styles.delete_btn}>Delete Event</button>
+                            <button onClick={getDeleteEvent}
+                                className={styles.delete_btn}>Delete Event</button>
                             : null}
 
                         <button className={styles.share_btn}>Share Event</button>
