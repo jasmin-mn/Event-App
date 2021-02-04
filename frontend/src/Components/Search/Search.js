@@ -62,8 +62,8 @@ const Search = () => {
 
         const formData = new FormData(event.target)
         const data = {
-            event_name: formData.get("event_name"),
-            location: formData.get("location")
+            event_name: formData.get("event_name").trim(),
+            location: formData.get("location").trim()
         }
 
         console.log(data);

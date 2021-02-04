@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import Login from '../Login/Login';
 import ShareButtons from '../ShareButtons/ShareButtons';
 import AttendEvent from '../AttendEvent/AttendEvents';
-// import { NotificationsContext } from '../Notifications/Notifications';
+import moment from "moment";
+
+import { ModalBoxContext } from '../ModalBox/ModalBox';
 
 import styles from './EventView.module.css';
 import axios from 'axios';
@@ -13,12 +15,13 @@ import { UserStateContext } from '../../App';
 
 const EventView = (props) => {
 
-    // const { addNotificationToQueue } = useContext(NotificationsContext);
+    const { addModalBox } = useContext(ModalBoxContext);
 
     const { loggedInState } = useContext(UserStateContext)
 
     const [eventDetails, setEventDetails] = useState({});
     const [attended, setAttended] = useState(false);
+    const [isHost, setIsHost] = useState(false);
     const { eventId } = useParams();
 
     const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn") ? true : false);
@@ -32,6 +35,10 @@ const EventView = (props) => {
             console.log('result', result.data);
 
             if (result.data) {
+
+                if (result.data.user_id === loggedInState) {
+                    setIsHost(true)
+                }
 
                 const user = result.data.participants.includes(loggedInState)
 
@@ -63,7 +70,11 @@ const EventView = (props) => {
 
                 if (result.data.user) {
                     setAttended(true)
-                    // addNotificationToQueue("Thank you for joining this Event.")
+                    addModalBox(
+                        <>
+                            <p>Thank you for joining this Event.</p>
+                        </>
+                    )
 
                 }
 
@@ -87,8 +98,11 @@ const EventView = (props) => {
 
                 if (result.data.user) {
                     setAttended(false)
-                    // addNotificationToQueue("You have leaved this Event")
-
+                    addModalBox(
+                        <>
+                            <p>You have leaved this Event.</p>
+                        </>
+                    )
                 }
 
             } catch (error) {
@@ -114,6 +128,11 @@ const EventView = (props) => {
 
     }
 
+    const getDeleteEvent = () => {
+
+    }
+
+    const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
 
     return (
 
@@ -123,8 +142,8 @@ const EventView = (props) => {
 
                 <img className={styles.events_show_bg} src={eventDetails.event_photo} alt="" />
                 <h1 className={styles.event_name}>{eventDetails.event_name}</h1>
-                <p className={styles.event_date}>Date: {eventDetails.dateEventstarted}</p>
-                <hr />
+                <p className={styles.event_date}>Date: {date}</p>
+
                 <div className={styles.events_actions}>
                     <div className={styles.host_container}>
                         <img className={styles.host_photo} src={eventDetails.user_id && eventDetails.user_id.photo} alt="" />
@@ -141,20 +160,23 @@ const EventView = (props) => {
 
                         <button onClick={getSaveEvent} className={styles.save_btn}>Save Event</button>
 
+                        {isHost ?
+                            <button onClick={getDeleteEvent} className={styles.delete_btn}>Delete Event</button>
+                            : null}
+
                         <button className={styles.share_btn}>Share Event</button>
                     </div>
 
                 </div>
 
             </div>
-            <hr />
+
             <div>
                 <h1>Description</h1>
                 <p>{eventDetails.description}</p>
-
             </div>
-        </div>
 
+        </div>
     )
 }
 
