@@ -6,6 +6,7 @@ const authenticate = require("../middleware/authenticate");
 const restrictTo = require("../middleware/restrictTo");
 const Category = require("../Models/CategoryModel");
 const sendEmail = require("../Utilities/sendEmail");
+
 const router = express.Router();
 
 router.post("/startNewEvent", authenticate, async (request, response) => {

@@ -44,6 +44,7 @@
   align-items: center;
   margin: 0;
   overflow-x: scroll;
+  overflow-y: hidden;
   /* border: 1px solid blue; */
 }
 
