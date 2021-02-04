@@ -143,7 +143,7 @@ const EventView = (props) => {
                 <img className={styles.events_show_bg} src={eventDetails.event_photo} alt="" />
                 <h1 className={styles.event_name}>{eventDetails.event_name}</h1>
                 <p className={styles.event_date}>Date: {date}</p>
-                <hr />
+
                 <div className={styles.events_actions}>
                     <div className={styles.host_container}>
                         <img className={styles.host_photo} src={eventDetails.user_id && eventDetails.user_id.photo} alt="" />
@@ -158,11 +158,11 @@ const EventView = (props) => {
                             <button onClick={getAttendEvent} className={styles.join_btn}>Join Event</button>
                         }
 
-                        {isHost ?
-                            <button onClick={getDeleteEvent} className={styles.save_btn}>Delete Event</button>
-                            : null}
+                        <button onClick={getSaveEvent} className={styles.save_btn}>Save Event</button>
 
-                        {/* <button onClick={getSaveEvent} className={styles.save_btn}>Save Event</button> */}
+                        {isHost ?
+                            <button onClick={getDeleteEvent} className={styles.delete_btn}>Delete Event</button>
+                            : null}
 
                         <button className={styles.share_btn}>Share Event</button>
                     </div>
@@ -170,14 +170,13 @@ const EventView = (props) => {
                 </div>
 
             </div>
-            <hr />
+
             <div>
                 <h1>Description</h1>
                 <p>{eventDetails.description}</p>
-
             </div>
-        </div>
 
+        </div>
     )
 }
 

@@ -4,6 +4,7 @@ import styles from "./AboutUs.module.css";
 const AboutUs = () => {
   return (
 
+
     <div className={styles.containerheader} >
 
       <h1 className={styles.header}>Event Management creates opportunities</h1>
