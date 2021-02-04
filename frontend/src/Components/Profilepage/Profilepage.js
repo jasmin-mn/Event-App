@@ -241,7 +241,7 @@ function Profilepage(e) {
           />
           </label>
         </div>
-        <div className={styles.formgroupgender}>
+        {/* <div className={styles.formgroupgender}>
         <label htmlFor="N/A">N/A
           <input
             type="radio"
@@ -250,7 +250,7 @@ function Profilepage(e) {
             value={gender}
           />
           </label>
-        </div>
+        </div> */}
 
         <div className={styles.formemail}>
           <label htmlFor="email">Email Address</label>
