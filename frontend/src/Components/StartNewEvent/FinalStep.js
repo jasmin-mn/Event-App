@@ -56,22 +56,27 @@ function FinalStep(props) {
   };
 
   return (
+
     <div className={styles.finalStep}>
-      <div className={styles.text}>
-        <p>Enter a name for your Event:{props.state.name}</p>
-        <p>Upload a Photo for your Event:{props.state.photo}</p>
-        <p>description:{props.state.description}</p>
-        <p>Location:{props.state.location}</p>
-        <p>Language:{props.state.language}</p>
-        <p>Member:{props.state.member}</p>
-        <p>Eventtype:{props.state.eventtype}</p>
-        <p>Category:{cat}</p>
-        <p>Date:{props.state.date}</p>
-        <p>Time:{props.state.time}</p>
+
+      <div className={styles.finalShow1}>
+        <div className={styles.finalShow2}>
+          <h4>Event name:{props.state.name}</h4>
+          <h4>Event Photo:{props.state.photo}</h4>
+          <h4>Location:{props.state.location}</h4>
+          <h4>Language:{props.state.language}</h4>
+          <h4>No. Member:{props.state.member}</h4>
+          <h4>Event Type:{props.state.eventtype}</h4>
+          <h4>Category:{cat}</h4>
+          <h4>Date:{props.state.date}</h4>
+          <h4>Time:{props.state.time}</h4>
+        </div>
+        <h4>Description:{props.state.description}</h4>
       </div>
+
       <div className={styles.button}>
         <button onClick={props.prev}>Previous</button>
-        <button onClick={Submit}>Senden</button>
+        <button onClick={Submit}>Save</button>
       </div>
     </div>
   );

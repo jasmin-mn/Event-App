@@ -55,7 +55,7 @@ export default function SavedEvents() {
 
     return (
         <div className={styles.main}>
-            <p>SavedEvent</p>
+            <h2>SavedEvent</h2>
             {events}
         </div>
     )
