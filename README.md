@@ -8,11 +8,11 @@ Najeeb
 Jasmin
 
 ## Features
-*Create and organize an events 
-*User can search the events by category and location
-*Join and leave the events
-*Create and Edit user's account 
-*User can upload photo on profile page
+* Create and organize an events 
+* User can search the events by category and location
+* Join and leave the events
+* Create and Edit user's account 
+* User can upload photo on profile page
 
 ## Technologies
 *HTML5
