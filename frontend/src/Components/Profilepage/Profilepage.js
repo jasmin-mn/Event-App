@@ -7,11 +7,11 @@ function Profilepage(e) {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploadedFile , setUploadedFile] = useState({});
+  const [genderName, setGenderName] = useState()
 
 
   // delete 
   const [deleteId, setDeleteId] = useState()
-
   // useEffect(()=>{
   //   getData() 
 
@@ -46,7 +46,7 @@ function Profilepage(e) {
     age: "",
     place: "",
     hometown: "",
-    gender: [""],
+    
     language: "",
     yourInterests: "",
     other: "",
@@ -62,7 +62,7 @@ function Profilepage(e) {
     age,
     place,
     hometown,
-    gender,
+    
     language,
     yourInterests,
     others,
@@ -97,7 +97,6 @@ function Profilepage(e) {
     formData.append('age',age)
     formData.append('place',place)
     formData.append('hometown',hometown)
-    formData.append('gender',gender)
     // formData.append('age',female)
     // formData.append('age',male)
     // formData.append('age',N/A)
@@ -219,38 +218,6 @@ function Profilepage(e) {
           />
         </div>
 
-        <div className={styles.formgroupgender}>
-        <label htmlFor="female">Female
-          <input
-            type="radio"
-            name="gender"
-            onChange={changeHandler}
-            value={gender}
-            
-          />
-          </label>
-        </div>
-        <div className={styles.formgroupgender}>
-        <label htmlFor="male">Male
-          <input
-            type="radio"
-            name="gender"
-            onChange={changeHandler}
-            value={gender}
-            
-          />
-          </label>
-        </div>
-        <div className={styles.formgroupgender}>
-        <label htmlFor="N/A">N/A
-          <input
-            type="radio"
-            name="gender"
-            onChange={changeHandler}
-            value={gender}
-          />
-          </label>
-        </div>
 
         <div className={styles.formemail}>
           <label htmlFor="email">Email Address</label>
