@@ -66,6 +66,7 @@ router.delete("/deleteEvent", authenticate, async (req, res) => {
         if (!event) {
             return res.status(404).json({ msg: " event not found  " });
         }
+        
         console.log("user id is : ", event.user_id);
         if (event.user_id.toString() !== req.id) {
             return res
