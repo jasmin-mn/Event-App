@@ -59,12 +59,12 @@
   margin: 5px 10px;
 }
 
-.events_container:hover,
+/* .events_container:hover,
 .events_all:hover,
 .events_bg:hover {
-  background-color: rgba(0, 0, 0, 0.452); /* Black w/ opacity */
+  background-color: rgba(0, 0, 0, 0.452);
   color: white;
-}
+} */
 
 .events_date,
 .events_name_category {

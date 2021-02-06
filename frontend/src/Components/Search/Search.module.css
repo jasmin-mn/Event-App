@@ -2,40 +2,45 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-
-  background-color: rgb(198, 223, 238);
+  align-items: center;
+  background-color: lightblue;
   font-size: 25px;
   height: 120px;
-  border-radius: 10px;
-  margin: 10px;
+  /* border-radius: 10px; */
+  margin: 0 10px;
 }
 
 .search_text {
   text-align: center;
   margin: 0;
   padding: 5px;
+  font-weight: bold;
 }
 
 .search_form {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex-direction: row;
   align-items: center;
-  margin: 10px;
+  /* margin: 0 10px; */
+  /* padding: 0px; */
+  /* border: 1px solid red; */
+  margin: 0;
 }
 
 .search_input1,
 .search_input2 {
-  border-radius: 5px;
+  /* border-radius: 5px; */
   font-size: 18px;
   height: 35px;
+  width: 400px;
 }
 
 .btn {
   height: 40px;
-  background-color: rgb(35, 117, 184);
+  background-color: green;
   color: black;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
   padding: 0px 25px;
   border-radius: 15px;
@@ -48,28 +53,65 @@
   color: #fff;
 }
 
+/* search results */
 .search_results {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  margin: 30px 0;
+  /* border: 1px solid red; */
+  max-width: 1200px;
+  padding: 0 10px 20px 10px;
 }
 
 .events_container {
-  border: 1px solid rgb(163, 216, 248);
-  border-radius: 10px;
-  height: 200px;
-  width: 344px;
-  margin: 5px 10px;
+  width: 100%;
+  margin: 10px 0;
 }
 
-.events_container p {
-  text-align: left;
-  margin: 0;
-  padding: 0;
+.event {
+  display: flex;
+  /* outline: 1px solid red; */
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: lightblue;
 }
 
 .events_bg {
   border-radius: 10px;
-  height: 150px;
-  width: 344px;
+  height: 140px;
+  width: 25%;
+}
+
+.events_data {
+  border-radius: 10px;
+  height: 10px;
+  width: 70%;
+}
+
+.events_date,
+.events_name_category,
+.eventtype,
+.language,
+.description {
+  text-align: left;
+  margin: 0 0 0 10px;
+  padding: 1px;
+  color: black;
+  font-size: 18px;
+}
+
+.location_text,
+.category_text {
+  text-align: left !important;
+  margin: 0;
+  padding: 10px;
+  font-size: 22px;
+  color: black;
+}
+
+.savedEvents {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+span {
+  font-weight: bold;
 }

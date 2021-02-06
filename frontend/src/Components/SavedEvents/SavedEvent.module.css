@@ -6,9 +6,7 @@
 }
 
 .events_container {
-
   width: 100%;
-
 }
 
 .event {
@@ -20,10 +18,9 @@
   background-color: lightblue;
 }
 
-
 .events_bg {
   border-radius: 10px;
-  height: 160px;
+  height: 140px;
   width: 25%;
 }
 
@@ -34,7 +31,10 @@
 }
 
 .events_date,
-.events_name_category {
+.events_name_category,
+.eventtype,
+.language,
+.description {
   text-align: left;
   margin: 0 0 0 10px;
   padding: 1px;
@@ -56,6 +56,6 @@
   grid-template-columns: auto auto auto auto;
 }
 
-span{
+span {
   font-weight: bold;
 }
