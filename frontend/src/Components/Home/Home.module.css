@@ -3,8 +3,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px;
-
-
 }
 
 .upcoming_events,
@@ -49,7 +47,6 @@
   overflow-y: hidden;
   /* border: 1px solid blue; */
   padding: 10px 0;
-
 }
 
 .events_container {
@@ -60,6 +57,13 @@
   height: 270px;
   width: 280px;
   margin: 5px 10px;
+}
+
+.events_container:hover,
+.events_all:hover,
+.events_bg:hover {
+  background-color: rgba(0, 0, 0, 0.452); /* Black w/ opacity */
+  color: white;
 }
 
 .events_date,

@@ -56,8 +56,9 @@ function FinalStep(props) {
             <p>You will redirect to the Homepage.</p>
           </>
         )
-        // props.history.push("/")
       }
+      // props.history.push("/")
+
       console.log(345435, result);
     } catch (error) {
       alert(error);

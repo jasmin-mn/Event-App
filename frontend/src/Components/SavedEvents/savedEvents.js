@@ -31,10 +31,17 @@ export default function SavedEvents() {
                     return (
                         <Link to={eventLink} >
                             <div className={styles.events_container}>
-                                <div className={styles.events_all}>
+                                <div className={styles.event}>
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                    <p className={styles.events_date}>{date}</p>
-                                    <p className={styles.events_name_category}>{event.event_name},{category}</p>
+                                    <div className={styles.events_data}>
+                                        <p className={styles.events_name_category}><span>Event Name:</span> {event.event_name},{category}</p>
+                                        <p className={styles.events_date}><span>Date:</span> {date}</p>
+                                        <p className={styles.events_name_category}><span>Category:</span> {category}</p>
+                                        <p className={styles.events_name_category}> <span>Event Type:</span> {event.eventtype}</p>
+                                        <p className={styles.events_name_category}> <span>Language:</span> {event.language}</p>
+                                        <p className={styles.events_name_category}> <span>Description:</span> {event.description}</p>
+
+                                    </div>
                                 </div>
                             </div>
                         </Link>
@@ -55,8 +62,12 @@ export default function SavedEvents() {
 
     return (
         <div className={styles.main}>
-            <h2>SavedEvent</h2>
-            {events}
+
+            <h2>Saved Events</h2>
+
+            <div className={styles.SavedEvents}>
+                {events}
+            </div>
         </div>
     )
 }
