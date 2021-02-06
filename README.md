@@ -15,18 +15,18 @@ Jasmin
 * User can upload photo on profile page
 
 ## Technologies
-*HTML5
-*CSS3
-*Javascript
-*React-bootstrap: 1.4.3
-*React Router DOM
-*Node.Js
-*Express: 4.17.1
-*MongoDB
-*Modal Box CSS
-*Figma
-*Github
-*Heruko
+* HTML5
+* CSS3
+* Javascript
+* React-bootstrap: 1.4.3
+* React Router DOM
+* Node.Js
+* Express: 4.17.1
+* MongoDB
+* Modal Box CSS
+* Figma
+* Github
+* Heruko
 
 ## Setup 
 To run this project, install it locally using npm:
