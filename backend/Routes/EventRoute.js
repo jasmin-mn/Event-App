@@ -24,8 +24,6 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
             time,
             category,
         } = request.body;
-        // location = location.charAt(0).toUpperCase() + location.slice(1);
-
 
         const dateEventstarted = new Date(date);
         const [hours, minutes] = time.split(':');
@@ -33,10 +31,10 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
         dateEventstarted.setMinutes(minutes);
 
         const event = new Events({
-            event_name: name,
+            event_name: name.trim(),
             event_photo: photo,
             description,
-            location,
+            location: location.trim(),
             language,
             member,
             eventtype,
@@ -53,8 +51,6 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
         console.log(error);
         response.status(500).send(error);
     }
-
-
 });
 
 
@@ -66,7 +62,7 @@ router.delete("/deleteEvent", authenticate, async (req, res) => {
         if (!event) {
             return res.status(404).json({ msg: " event not found  " });
         }
-        
+
         console.log("user id is : ", event.user_id);
         if (event.user_id.toString() !== req.id) {
             return res
@@ -346,7 +342,7 @@ router.get('/showSavedEvents', authenticate, async (request, response) => {
 
     try {
         const event = await Users.findById(request.user._id)
-        .populate('savedEvents')
+            .populate('savedEvents')
 
         if (!event) {
             return response.status(500).send({ msg: 'Server error' })

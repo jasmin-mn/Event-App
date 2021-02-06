@@ -69,19 +69,26 @@ function FinalStep(props) {
 
     <div className={styles.finalStep}>
 
-      <div className={styles.finalShow1}>
-        <div className={styles.finalShow2}>
-          <h4>Event name:{props.state.name}</h4>
-          <h4>Event Photo:{props.state.photo}</h4>
-          <h4>Location:{props.state.location}</h4>
-          <h4>Language:{props.state.language}</h4>
-          <h4>No. Member:{props.state.member}</h4>
-          <h4>Event Type:{props.state.eventtype}</h4>
-          <h4>Category:{cat}</h4>
-          <h4>Date:{props.state.date}</h4>
-          <h4>Time:{props.state.time}</h4>
+      <div className={styles.finalShow}>
+        <div className={styles.column1}>
+
+          <img src={props.state.photo} />
+
+          <h3>Event name:{props.state.name}</h3>
+          <h3>Location:{props.state.location}</h3>
+          <h3>Language:{props.state.language}</h3>
+          <h3>No. Member:{props.state.member}</h3>
+          <h3>Event Type:{props.state.eventtype}</h3>
+          <h3>Category:{cat}</h3>
+          <h3>Date:{props.state.date}</h3>
+          <h3>Time:{props.state.time}</h3>
         </div>
-        <h4>Description:{props.state.description}</h4>
+
+        <div className={styles.column2}>
+
+          <h3>Description:<br />{props.state.description}</h3>
+        </div>
+
       </div>
 
       <div className={styles.button}>
