@@ -11,8 +11,8 @@ router.post('/', async (request, response) => {
         const events = await Events.find(
             {
                 $and: [
-                    { location: { $regex: location, $options: "i" } },
-                    { event_name: { $regex: event_name, $options: "i" } }
+                    { location: { $regex: location, $options: "gi" } },
+                    { event_name: { $regex: event_name, $options: "gi" } }
                 ]
             }).populate('category_id');
 

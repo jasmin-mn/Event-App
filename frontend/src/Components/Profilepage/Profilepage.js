@@ -7,11 +7,11 @@ function Profilepage(e) {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploadedFile , setUploadedFile] = useState({});
+  const [genderName, setGenderName] = useState()
 
 
   // delete 
   const [deleteId, setDeleteId] = useState()
-
   // useEffect(()=>{
   //   getData() 
 
@@ -217,6 +217,7 @@ function Profilepage(e) {
             value={lastName}
           />
         </div>
+
 
         <div className={styles.formemail}>
           <label htmlFor="email">Email Address</label>

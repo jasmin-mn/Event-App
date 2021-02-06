@@ -10,6 +10,7 @@ import LocationEventView from './Components/Home/LocationEventView';
 import CategoryEventView from './Components/Home/CategoryEventView';
 // import AttendEvents from './Components/AttendEvent/AttendEvents';
 // import SavedEvents from './Components/SavedEvents/savedEvents';
+import ModalBox from './Components/ModalBox/ModalBox';
 
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -61,34 +62,36 @@ function App() {
         <Header />
 
         <Notifications>
-          <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Register} />
-            <PrivateRoute path="/userpage" component={UserPage} />
+          <ModalBox>
+            <Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Register} />
+              <PrivateRoute path="/userpage" component={UserPage} />
 
-            <Route path='/viewOneEvent/:eventId' component={EventView} />
-            <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
-            <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
+              <Route path='/viewOneEvent/:eventId' component={EventView} />
+              <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
+              <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
 
-            {/* <Route path='/attendEvents/:eventId' component={AttendEvents} />
+              {/* <Route path='/attendEvents/:eventId' component={AttendEvents} />
             <Route path='/savedEvents/:eventId' component={SavedEvents} /> */}
 
-            <Route path="/contact" component={ContactForm} />
+              <Route path="/contact" component={ContactForm} />
 
-            <Route path="/resetPassword" component={Resetpasswordpage} />
-            <Route path="/forgotPassword" component={Forgotpasswordpage} />
-            <Route path="/savedEvent" component={savedEvents} />
-            <Route path="/startNewEvent" component={MultiStepForm} exact />
-            <Route path="/editProfile" component={Profilepage} />
+              <Route path="/resetPassword" component={Resetpasswordpage} />
+              <Route path="/forgotPassword" component={Forgotpasswordpage} />
+              <Route path="/savedEvent" component={savedEvents} />
+              <Route path="/startNewEvent" component={MultiStepForm} exact />
+              <Route path="/editProfile" component={Profilepage} />
 
-            <Route path="/about" component={AboutUs} />
+              <Route path="/about" component={AboutUs} />
 
 
-            {/* <Route path="/settings" component={Settings} /> */}
+              {/* <Route path="/settings" component={Settings} /> */}
 
-            <Route path="/logout" component={Logout} />
-          </Switch>
+              <Route path="/logout" component={Logout} />
+            </Switch>
+          </ModalBox>
         </Notifications>
       </Router>
       <Footer />

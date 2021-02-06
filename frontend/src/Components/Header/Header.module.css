@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
+  height: 50px;
   width: 100%;
   background-color: orange;
 }
@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 10px;
   /* border: 1px solid red; */
   height: 50px;
   text-decoration: none;
