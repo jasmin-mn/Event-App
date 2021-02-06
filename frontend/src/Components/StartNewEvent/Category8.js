@@ -19,7 +19,7 @@ export default function Category8(props) {
       if (!result) {
         console.log('server error');
       }
-      console.log("cat result",result.data);
+      console.log("cat result", result.data);
       setCategory(result.data)
 
     } catch (error) {
@@ -29,26 +29,30 @@ export default function Category8(props) {
 
 
   return (
-    <div className={styles.background}>
-      <select name="category" onChange={props.handleChange}  >
-        <option className={styles.text} >
-          please Select category
-      </option>
 
-        {category &&
-          category.map((category) => {
-            return (
-              <option
-                
-                key={category._id}
-                value={category._id}
+    <div className={styles.background}>
+
+      <div className={styles.catBox}>
+        <p className={styles.text}> Select a Category:</p>
+
+        <select className={styles.catDropDown} name="category" onChange={props.handleChange}  >
+          <option>please Select category</option>
+
+          {category &&
+            category.map((category) => {
+              return (
+                <option
+
+                  key={category._id}
+                  value={category._id}
                 // 
-               
-              >{category.name}
-              </option>
-            );
-          })}
-      </select>
+
+                >{category.name}
+                </option>
+              );
+            })}
+        </select>
+      </div>
 
       <div className={styles.button}>
         <button onClick={props.prev}>Previous</button>

@@ -6,12 +6,10 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, Number, required: true },
   password: { type: String, Number, required: true },
 
-  age: { type: Number },
+  age: { type: Number},
+  
+  photo: { type: String, default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg" },
 
-  photo: {
-    type: String,
-    default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg",
-  },
 
   place: { type: [String] },
   hometown: { type: [String] },
@@ -37,6 +35,7 @@ const UserSchema = new mongoose.Schema({
       ref: "Events",
     },
   ],
+  
 });
 
 module.exports = UserSchema;

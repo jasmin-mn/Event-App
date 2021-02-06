@@ -24,7 +24,7 @@
   height: 40px;
   width: 130px;
 
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 
   border: none;
@@ -33,30 +33,33 @@
 
 .leave_btn {
   color: black;
-  background-color: rgb(167, 71, 71);
+  background-color: rgba(156, 48, 48, 0.788);
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
   height: 40px;
   width: 130px;
 
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 
   border: none;
   cursor: pointer;
 }
 
-.save_btn {
+.save_btn,
+.unsave_btn {
   color: black;
   background-color: orange;
   height: 40px;
   width: 130px;
 
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 
   border: none;
   cursor: pointer;
+
+  margin: 0 5px;
 }
 
 .share_btn {
@@ -65,7 +68,7 @@
   height: 40px;
   width: 130px;
 
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 
   border: none;
@@ -78,6 +81,21 @@
   flex-direction: row;
   align-items: center;
   width: 200px;
+}
+
+.delete_btn {
+  color: black;
+  background-color: red;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 40px;
+  width: 130px;
+
+  font-size: 18px;
+  text-align: center;
+
+  border: none;
+  cursor: pointer;
 }
 
 .host_photo {

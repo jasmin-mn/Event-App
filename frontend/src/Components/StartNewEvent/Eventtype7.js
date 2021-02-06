@@ -5,27 +5,41 @@ import React from 'react'
 
 export default function Eventtype7(props) {
   return (
+
     <div className={styles.background}>
-      <form className={styles.text}>
-        Eventtype:
-          <label>
-          Online
+
+      <form className={styles.newEventForm}>
+
+        <p className={styles.text}>Eventtype:</p>
+        
+        <div className={styles.radioBox}>
+          <div>
+
+            <label className={styles.radio}>
+              Online
             <input
-            type="radio"
-            value="Online"
-            name="eventtype"
-            onChange={props.handleChange}
-          />
-        </label>
-        <label>
-          Present
+
+                type="radio"
+                value="Online"
+                name="eventtype"
+                onChange={props.handleChange}
+              />
+            </label>
+          </div>
+          <div>
+
+            <label className={styles.radio}>
+              Inhouse
             <input
-            type="radio"
-            value="Present"
-            name="eventtype"
-            onChange={props.handleChange}
-          />
-        </label>
+
+                type="radio"
+                value="Inhouse"
+                name="eventtype"
+                onChange={props.handleChange}
+              />
+            </label>
+          </div>
+        </div>
       </form>
 
       <div className={styles.button}>
