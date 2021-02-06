@@ -73,8 +73,7 @@ function App() {
               <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />
               <Route path='/viewBySelectedCategory/:categoryId' component={CategoryEventView} />
 
-              {/* <Route path='/attendEvents/:eventId' component={AttendEvents} />
-            <Route path='/savedEvents/:eventId' component={SavedEvents} /> */}
+              {/* <Route path='/attendEvents/:eventId' component={AttendEvents} /> */}
 
               <Route path="/contact" component={ContactForm} />
 
