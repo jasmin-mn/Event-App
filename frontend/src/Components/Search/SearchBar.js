@@ -5,7 +5,6 @@ const SearchBar = (props) => {
 
     return (
         <form onSubmit={props.onSubmit} className={styles.search_form} >
-            <label htmlFor="search"></label>
             <input  className={styles.search_input1} name="event_name" placeholder="Search for..." />
             <input  className={styles.search_input2} name="location" placeholder="Location..." />
             <button className={styles.btn} type="submit">Search</button>
