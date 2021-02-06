@@ -2,7 +2,9 @@
   /* border: 1px solid red; */
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0;
+  padding: 10px;
+
+
 }
 
 .upcoming_events,
@@ -46,6 +48,8 @@
   overflow-x: scroll;
   overflow-y: hidden;
   /* border: 1px solid blue; */
+  padding: 10px 0;
+
 }
 
 .events_container {

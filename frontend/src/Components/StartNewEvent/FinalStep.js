@@ -1,9 +1,13 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./multiStep.module.css";
+import { ModalBoxContext } from '../ModalBox/ModalBox';
 
 
 function FinalStep(props) {
+
+  const { addModalBox } = useContext(ModalBoxContext);
+
   const [cat, setCat] = useState([]);
 
   useEffect(() => {
@@ -30,11 +34,12 @@ function FinalStep(props) {
   };
 
   const Submit = async () => {
-    const config = {
-      method: "POST",
-      withCredentials: true,
-      headers: { "Content-Type": "application/json" },
-    };
+
+    // const config = {
+    //   method: "POST",
+    //   withCredentials: true,
+    //   headers: { "Content-Type": "application/json" },
+    // };
 
     try {
       const result = await fetch("http://localhost:7000/event/startNewEvent", {
@@ -43,12 +48,16 @@ function FinalStep(props) {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       });
-      // const result = await axios.post(
-      //   "http://localhost:7000/event/startNewEvent",
-      //   props.state,
 
-      //   config
-      // );
+      if (result) {
+        addModalBox(
+          <>
+            <p>The Event have been Created successfully.</p>
+            <p>You will redirect to the Homepage.</p>
+          </>
+        )
+        // props.history.push("/")
+      }
       console.log(345435, result);
     } catch (error) {
       alert(error);
