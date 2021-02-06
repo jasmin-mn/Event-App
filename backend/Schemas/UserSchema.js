@@ -10,10 +10,10 @@ const UserSchema = new mongoose.Schema({
   age: { type: Number },
 
   photo: {
-    type: String,
-    default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg",
-  },
+    type: String
+  }, // , default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg",
 
+  
   place: { type: [String] },
   hometown: { type: [String] },
   language: { type: [String] },
