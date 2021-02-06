@@ -7,11 +7,11 @@ function Profilepage(e) {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploadedFile , setUploadedFile] = useState({});
+  const [genderName, setGenderName] = useState()
 
 
   // delete 
   const [deleteId, setDeleteId] = useState()
-
   // useEffect(()=>{
   //   getData() 
 
@@ -219,24 +219,26 @@ function Profilepage(e) {
           />
         </div>
 
-        <div className={styles.formgroupgender}>
+        <div className={styles.formgroupgender1}>
         <label htmlFor="female">Female
           <input
             type="radio"
             name="gender"
+            checked={true}
             onChange={changeHandler}
-            value={gender}
+            value="female"
             
           />
           </label>
         </div>
-        <div className={styles.formgroupgender}>
+        <div className={styles.formgroupgender}> 
         <label htmlFor="male">Male
           <input
             type="radio"
             name="gender"
+            // checked={true}
             onChange={changeHandler}
-            value={gender}
+            value="male"
             
           />
           </label>
