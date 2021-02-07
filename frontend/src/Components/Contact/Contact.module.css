@@ -44,3 +44,10 @@ textarea {
   color: #fff;
   font-size: 25px;
 }
+
+.contact_head,
+.contact_text {
+  text-align: center;
+  margin: 20px;
+  padding: 5px;
+}

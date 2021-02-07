@@ -10,15 +10,16 @@ router.post('/', async (request, response) => {
 
     const { name, email, phone, date, subject, message } = request.body;
 
-    const NewMessage = new Contact({ // Saving the received E-Mail in the Database
-        name, email, phone, date, subject, message
-    });
-    await NewMessage.save();
+    // Saving the received E-Mail in the Database
+    // const NewMessage = new Contact({
+    //     name, email, phone, date, subject, message
+    // });
+    // await NewMessage.save();
 
     response.send(`Thank you ${name} for contacting us, your E-Mail has been sent !!`)
 
     const today = Date.now();
-    let todayDate = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(today);
+    let todayDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(today);
 
     const output = `
     <p>you have a new message</p>

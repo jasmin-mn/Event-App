@@ -199,7 +199,7 @@ const EventView = (props) => {
     }
 
 
-    const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
+    const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, hh:mm a')
 
     return (
 
