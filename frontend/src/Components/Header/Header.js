@@ -40,7 +40,7 @@ export default function Header() {
 
         return (
             <div className={styles.header}>
-                <div className={styles.nav}>
+                <nav className={styles.nav}>
                     <img id="logo" src={logo} alt={"logo"} />
 
                     <ul className={styles.nav_list}>
@@ -52,7 +52,6 @@ export default function Header() {
                         <li onMouseEnter={handleMouseEnter}>
                             <Link to={'/Account'} className='navbar-logo'>Account</Link>
                             {dropdown && <Dropdown handleMouseLeave={handleMouseLeave} />}
-
                         </li>
 
                         {/* <li>
@@ -70,9 +69,19 @@ export default function Header() {
                         <li>
                             <Link to={'/contact'}>Contact</Link>
                         </li>
-                        
+
                     </ul>
-                </div>
+                </nav>
+
+                {/* <div className={styles.header_bg1}>
+                    <div className={styles.header_text}>
+                        <p className={styles.header_tittel}>Enjoy Coding Events,
+                        <br /> learning, Workshops Classes from Home.</p>
+                        <a className={styles.btn}
+                            href="http://localhost:3000/startNewEvent">Start New Event</a>
+                    </div>
+                </div> */}
+
             </div>
         )
 

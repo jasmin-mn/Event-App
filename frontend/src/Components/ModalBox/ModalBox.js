@@ -14,20 +14,44 @@ export default function ModalBox(props) {
 
         setTimeout(() => {
             setModalBox([...modalBox.slice(1)]);
-        }, 6000);
+        }, 2000);
     };
 
+
+    // const close = {
+    //     display: "none"
+    // };
+
+
+    // When the user clicks on <span> (x), close the modal
+    // const handleClose = () => {
+    //     style.display = "none";
+    // }
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function (event) {
+    //     if (event.target == modal) {
+    //         modal.style.display = "none";
+    //     }
+    // }
+
+    
     return (
+
         <ModalBoxContext.Provider value={{ addModalBox }}>
 
             {modalBox.map((msg) => {
 
                 return (
                     <>
-                        <div id="myModal" className={styles.modal}>
+                        <div  className={styles.modal}>
 
                             <div className={styles.modalContent}>
-                                <span className={styles.close}>&times;</span>
+
+
+                                <span  className={styles.close}>&times;</span>
+
                                 <p className={styles.modalBox}>{msg}</p>
                             </div>
 

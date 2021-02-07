@@ -42,6 +42,17 @@
   /* border: 1px solid red; */
 }
 
+.header_bg1 {
+  position: relative;
+  background: url(../../Images/programming.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
 .header_text {
   /* border: 1px solid red; */
   width: 50%;

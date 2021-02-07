@@ -1,0 +1,61 @@
+.main {
+  /* border: 1px solid red; */
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.events_container {
+  width: 100%;
+}
+
+.event {
+  display: flex;
+  /* outline: 1px solid red; */
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: lightblue;
+}
+
+.events_bg {
+  border-radius: 10px;
+  height: 140px;
+  width: 25%;
+}
+
+.events_data {
+  border-radius: 10px;
+  height: 10px;
+  width: 70%;
+}
+
+.events_date,
+.events_name_category,
+.eventtype,
+.language,
+.description {
+  text-align: left;
+  margin: 0 0 0 10px;
+  padding: 1px;
+  color: black;
+  font-size: 18px;
+}
+
+.location_text,
+.category_text {
+  text-align: left !important;
+  margin: 0;
+  padding: 10px;
+  font-size: 22px;
+  color: black;
+}
+
+.savedEvents {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+span {
+  font-weight: bold;
+}

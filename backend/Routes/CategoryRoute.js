@@ -5,16 +5,19 @@ const restrictTo = require("../middleware/restrictTo");
 
 const router = express.Router();
 
+
 // Adding new Categories
 router.post(
   "/add",
   authenticate,
   restrictTo("admin"),
   async (request, response) => {
+
     try {
       const { name, photo, description } = request.body;
 
       let data = await Category.findOne({ name });
+
       if (data) {
         return response.status(400).json({ msg: "Category already exist" });
       }
@@ -27,12 +30,14 @@ router.post(
       await category.save();
 
       response.send(`${name} Categeory have been created !!`);
+
     } catch (err) {
       console.log(err);
       response.send("server error");
     }
   }
 );
+
 
 // View all Categories
 router.get("/view", async (request, response) => {
@@ -46,6 +51,7 @@ router.get("/view", async (request, response) => {
     response.status(500).send({ msg: "Server error" });
   }
 });
+
 
 // Updating Categories
 router.put(
@@ -66,6 +72,7 @@ router.put(
     }
   }
 );
+
 
 // Deleting Categories
 router.delete(

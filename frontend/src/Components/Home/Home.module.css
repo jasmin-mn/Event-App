@@ -2,7 +2,7 @@
   /* border: 1px solid red; */
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0;
+  padding: 10px;
 }
 
 .upcoming_events,
@@ -46,6 +46,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
   /* border: 1px solid blue; */
+  padding: 10px 0;
 }
 
 .events_container {
@@ -57,6 +58,13 @@
   width: 280px;
   margin: 5px 10px;
 }
+
+/* .events_container:hover,
+.events_all:hover,
+.events_bg:hover {
+  background-color: rgba(0, 0, 0, 0.452);
+  color: white;
+} */
 
 .events_date,
 .events_name_category {

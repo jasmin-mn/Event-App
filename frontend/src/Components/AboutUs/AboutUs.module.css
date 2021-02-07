@@ -1,37 +1,26 @@
 .containerheader {
-  text-align: center;
-  border-radius: 200px;
-
-  position: relative;
-
-  color: white;
-  margin-bottom: 40px;
-
-  height: 410px;
+  /* outline: 1px solid red; */
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 10px;
+  background-color: rgba(173, 216, 230, 0.377);
+  border-radius: 10px;
 }
+
 .headerparag {
-  line-height: 50px;
+  line-height: 45px;
   font-size: 20px;
   color: black;
-  text-align: center;
+  text-align: left;
+}
 
-  margin-left: 150px;
-  margin-right: 150px;
-  position: absolute;
-}
-.headerhr {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
 .header {
-  margin-top: 0px;
-  padding-top: 40px;
   color: orange;
   font-weight: bolder;
+  text-align: center;
 }
 
-.indent{
+.indent {
   color: orange;
   font-weight: bolder;
 }

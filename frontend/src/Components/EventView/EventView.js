@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import Login from '../Login/Login';
-import ShareButtons from '../ShareButtons/ShareButtons';
-import AttendEvent from '../AttendEvent/AttendEvents';
 import moment from "moment";
 
 import { ModalBoxContext } from '../ModalBox/ModalBox';
@@ -15,13 +12,13 @@ import { UserStateContext } from '../../App';
 
 const EventView = (props) => {
 
-    const { addModalBox } = useContext(ModalBoxContext);
-
-    const { loggedInState } = useContext(UserStateContext)
-
     const [eventDetails, setEventDetails] = useState({});
     const [attended, setAttended] = useState(false);
     const [isHost, setIsHost] = useState(false);
+    const [savedEvents, setSavedEvents] = useState(false);
+
+    const { addModalBox } = useContext(ModalBoxContext);
+    const { loggedInState } = useContext(UserStateContext)
     const { eventId } = useParams();
 
     const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn") ? true : false);
@@ -31,7 +28,9 @@ const EventView = (props) => {
         try {
 
             const result = await axios
-                .get(`http://localhost:7000/event/viewOneEvent/${eventId}`);
+                .get(`http://localhost:7000/event/viewOneEvent/${eventId}`,
+                    { withCredentials: true });
+
             console.log('result', result.data);
 
             if (result.data) {
@@ -41,9 +40,13 @@ const EventView = (props) => {
                 }
 
                 const user = result.data.participants.includes(loggedInState)
-
                 if (user) {
                     setAttended(true)
+                }
+
+                const event = result.data.user_id.savedEvents.includes(result.data._id)
+                if (event) {
+                    setSavedEvents(true)
                 }
 
                 setEventDetails(result.data)
@@ -65,7 +68,9 @@ const EventView = (props) => {
 
             try {
                 const result = await axios
-                    .get(`http://localhost:7000/event/attendEvents/${eventId}`, { withCredentials: true });
+                    .get(`http://localhost:7000/event/attendEvents/${eventId}`,
+                        { withCredentials: true });
+
                 console.log("event view", result.data);
 
                 if (result.data.user) {
@@ -75,10 +80,7 @@ const EventView = (props) => {
                             <p>Thank you for joining this Event.</p>
                         </>
                     )
-
                 }
-
-
             } catch (error) {
                 console.log(error);
             }
@@ -93,7 +95,9 @@ const EventView = (props) => {
             try {
 
                 const result = await axios
-                    .get(`http://localhost:7000/event/leaveEvents/${eventId}`, { withCredentials: true });
+                    .get(`http://localhost:7000/event/leaveEvents/${eventId}`,
+                        { withCredentials: true });
+
                 console.log('leave event', result.data);
 
                 if (result.data.user) {
@@ -113,13 +117,25 @@ const EventView = (props) => {
 
     }
 
-    const getSaveEvent = async () => {
+    const getSavedEvent = async () => {
+
         if (loggedIn) {
 
             try {
                 const result = await axios
-                    .get(`http://localhost:7000/event/savedEvents/${eventId}`, { withCredentials: true });
+                    .get(`http://localhost:7000/event/savedEvents/${eventId}`,
+                        { withCredentials: true });
+
                 console.log('save event', result);
+
+                if (result.data) {
+                    setSavedEvents(true)
+                    addModalBox(
+                        <>
+                            <p>You have Saved this Event.</p>
+                        </>
+                    )
+                }
 
             } catch (error) {
                 console.log(error);
@@ -128,9 +144,60 @@ const EventView = (props) => {
 
     }
 
-    const getDeleteEvent = () => {
+    const getUnsavedEvent = async () => {
 
+        if (loggedIn) {
+
+            try {
+                const result = await axios
+                    .get(`http://localhost:7000/event/unsavedEvents/${eventId}`,
+                        { withCredentials: true });
+
+                console.log('unsave event', result);
+
+                if (result.data) {
+                    setSavedEvents(false)
+                    addModalBox(
+                        <>
+                            <p>this Event have been unsaved.</p>
+                        </>
+                    )
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        } else { props.history.push("/login") }
     }
+
+
+    const getDeleteEvent = async () => {
+
+        if (loggedIn) {
+
+            try {
+                const result = await axios
+                    .get(`http://localhost:7000/event/deleteEvents/${eventId}`,
+                        { withCredentials: true });
+
+                console.log('save event', result);
+
+                if (result.data) {
+                    addModalBox(
+                        <>
+                            <p>This Event have been deleted successfully.</p>
+                            <p>You will redirect to the Homepage.</p>
+                        </>
+                    )
+                    props.history.push("/login")
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        } else { props.history.push("/login") }
+    }
+
 
     const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
 
@@ -153,18 +220,27 @@ const EventView = (props) => {
                     <div>
 
                         {attended ?
-                            <button onClick={getLeaveEvent} className={styles.leave_btn}>Leave Event</button>
+                            <button onClick={getLeaveEvent}
+                                className={styles.leave_btn}>Leave Event</button>
                             :
-                            <button onClick={getAttendEvent} className={styles.join_btn}>Join Event</button>
+                            <button onClick={getAttendEvent}
+                                className={styles.join_btn}>Join Event</button>
                         }
 
-                        <button onClick={getSaveEvent} className={styles.save_btn}>Save Event</button>
+                        {savedEvents ?
+                            <button onClick={getSavedEvent}
+                                className={styles.save_btn}>Save Event</button>
+                            :
+                            <button onClick={getUnsavedEvent}
+                                className={styles.unsave_btn}>Unsave Event</button>
+                        }
 
                         {isHost ?
-                            <button onClick={getDeleteEvent} className={styles.delete_btn}>Delete Event</button>
+                            <button onClick={getDeleteEvent}
+                                className={styles.delete_btn}>Delete Event</button>
                             : null}
 
-                        <button className={styles.share_btn}>Share Event</button>
+                        {/* <button className={styles.share_btn}>Share Event</button> */}
                     </div>
 
                 </div>

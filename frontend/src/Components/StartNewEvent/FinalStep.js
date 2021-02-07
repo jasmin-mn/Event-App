@@ -1,9 +1,13 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./multiStep.module.css";
+import { ModalBoxContext } from '../ModalBox/ModalBox';
 
 
 function FinalStep(props) {
+
+  const { addModalBox } = useContext(ModalBoxContext);
+
   const [cat, setCat] = useState([]);
 
   useEffect(() => {
@@ -30,11 +34,12 @@ function FinalStep(props) {
   };
 
   const Submit = async () => {
-    const config = {
-      method: "POST",
-      withCredentials: true,
-      headers: { "Content-Type": "application/json" },
-    };
+
+    // const config = {
+    //   method: "POST",
+    //   withCredentials: true,
+    //   headers: { "Content-Type": "application/json" },
+    // };
 
     try {
       const result = await fetch("http://localhost:7000/event/startNewEvent", {
@@ -43,12 +48,17 @@ function FinalStep(props) {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       });
-      // const result = await axios.post(
-      //   "http://localhost:7000/event/startNewEvent",
-      //   props.state,
 
-      //   config
-      // );
+      if (result) {
+        addModalBox(
+          <>
+            <p>The Event have been Created successfully.</p>
+            <p>You will redirect to the Homepage.</p>
+          </>
+        )
+      }
+      // props.history.push("/")
+
       console.log(345435, result);
     } catch (error) {
       alert(error);
@@ -56,22 +66,34 @@ function FinalStep(props) {
   };
 
   return (
+
     <div className={styles.finalStep}>
-      <div className={styles.text}>
-        <p>Enter a name for your Event:{props.state.name}</p>
-        <p>Upload a Photo for your Event:{props.state.photo}</p>
-        <p>description:{props.state.description}</p>
-        <p>Location:{props.state.location}</p>
-        <p>Language:{props.state.language}</p>
-        <p>Member:{props.state.member}</p>
-        <p>Eventtype:{props.state.eventtype}</p>
-        <p>Category:{cat}</p>
-        <p>Date:{props.state.date}</p>
-        <p>Time:{props.state.time}</p>
+
+      <div className={styles.finalShow}>
+        <div className={styles.column1}>
+
+          <img src={props.state.photo} />
+
+          <h3>Event name:{props.state.name}</h3>
+          <h3>Location:{props.state.location}</h3>
+          <h3>Language:{props.state.language}</h3>
+          <h3>No. Member:{props.state.member}</h3>
+          <h3>Event Type:{props.state.eventtype}</h3>
+          <h3>Category:{cat}</h3>
+          <h3>Date:{props.state.date}</h3>
+          <h3>Time:{props.state.time}</h3>
+        </div>
+
+        <div className={styles.column2}>
+
+          <h3>Description:<br />{props.state.description}</h3>
+        </div>
+
       </div>
+
       <div className={styles.button}>
         <button onClick={props.prev}>Previous</button>
-        <button onClick={Submit}>Senden</button>
+        <button onClick={Submit}>Save</button>
       </div>
     </div>
   );
