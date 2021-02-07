@@ -228,11 +228,11 @@ const EventView = (props) => {
                         }
 
                         {savedEvents ?
-                            <button onClick={getSavedEvent}
-                                className={styles.save_btn}>Save Event</button>
-                            :
                             <button onClick={getUnsavedEvent}
                                 className={styles.unsave_btn}>Unsave Event</button>
+                            :
+                            <button onClick={getSavedEvent}
+                                className={styles.save_btn}>Save Event</button>
                         }
 
                         {isHost ?

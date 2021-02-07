@@ -92,8 +92,8 @@ function FinalStep(props) {
       </div>
 
       <div className={styles.button}>
-        <button onClick={props.prev}>Previous</button>
-        <button onClick={Submit}>Save</button>
+        <button className={styles.btn_previous} onClick={props.prev}>Previous</button>
+        <button className={styles.btn_save} onClick={Submit}>Save</button>
       </div>
     </div>
   );
