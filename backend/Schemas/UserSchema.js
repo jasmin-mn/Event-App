@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, Number, required: true },
   password: { type: String, Number, required: true },
 
+
   age: { type: Number},
   
   photo: { type: String, default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg" },
@@ -17,7 +18,6 @@ const UserSchema = new mongoose.Schema({
   yourInterests: { type: [String] },
   others: { type: [String] },
   role: { type: String, enum: ["user", "admin"], default: "user" },
-
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpire: String,
