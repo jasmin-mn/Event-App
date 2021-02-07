@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./Profilepage.module.css";
 import { useHistory } from "react-router-dom";
+import {ModalBoxContext} from '../ModalBox/ModalBox'
 import axios from "axios";
+import { UserStateContext } from "../../App";
 
 function Profilepage(e) {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploadedFile , setUploadedFile] = useState({});
-  const [genderName, setGenderName] = useState()
+  const {addModalBox} = useContext(ModalBoxContext)
+  // const [modal, setModal] = useState(false)
 
 
   // delete 
@@ -121,10 +124,14 @@ function Profilepage(e) {
         formData,
         config
       );
+      
+     
       const {fileName , filePath } = result.data
       setUploadedFile({ fileName , filePath})
       console.log(result);
     //  localStorage.setItem("registered", JSON.stringify(true));
+    
+
     } catch (error) {
       console.log(error);
     } 
@@ -140,16 +147,15 @@ function Profilepage(e) {
   }
   const handleUpdate = async (e) => {
     e.preventDefault();
-     //userData.photo = file 
-   
+     
 
-   
     try {
       await editRegister(userData);
+
       await getUser();
       // const registered = localStorage.getItem("registered");
       // registered = JSON.parse(registered);
-      
+      addModalBox("You have Successfully updated your profile")
 
       // console.log(registered);
     } catch (error) {
