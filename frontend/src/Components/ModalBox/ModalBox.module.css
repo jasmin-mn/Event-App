@@ -10,6 +10,7 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.452); /* Black w/ opacity */
+  
 }
 
 /* Modal Content */
@@ -20,6 +21,8 @@
   border: 1px solid #888;
   width: 30%;
   border-radius: 10px;
+ 
+ 
 }
 
 /* The Close Button */
@@ -28,6 +31,7 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  
 }
 
 .close:hover,
@@ -35,4 +39,8 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.modalBox{
+  background-color: blue;
 }
