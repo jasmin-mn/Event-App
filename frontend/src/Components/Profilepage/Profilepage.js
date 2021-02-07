@@ -155,7 +155,7 @@ function Profilepage(e) {
       await getUser();
       // const registered = localStorage.getItem("registered");
       // registered = JSON.parse(registered);
-      addModalBox("You have Successfully updated your profile")
+      addModalBox("You have successfully updated your Profile")
 
       // console.log(registered);
     } catch (error) {
