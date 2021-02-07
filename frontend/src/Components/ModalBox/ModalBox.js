@@ -48,7 +48,10 @@ export default function ModalBox(props) {
                         <div  className={styles.modal}>
 
                             <div className={styles.modalContent}>
+
+
                                 <span  className={styles.close}>&times;</span>
+
                                 <p className={styles.modalBox}>{msg}</p>
                             </div>
 
