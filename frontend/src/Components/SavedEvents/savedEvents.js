@@ -32,7 +32,9 @@ export default function SavedEvents() {
                         <Link to={eventLink} >
                             <div className={styles.events_container}>
                                 <div className={styles.event}>
+
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
+                                    
                                     <div className={styles.events_data}>
                                         <p className={styles.events_name_category}><span>Event Name:</span> {event.event_name}</p>
                                         <p className={styles.events_date}><span>Date:</span> {date}</p>
