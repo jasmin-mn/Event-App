@@ -61,11 +61,13 @@
   height: 250px;
   width: 281px;
   margin: 5px 10px;
+
 }
 
 .events_container:hover{
   background-color: lightblue;
   text-decoration: none;
+
 }
 
 .events_date,
