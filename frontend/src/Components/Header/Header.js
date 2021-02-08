@@ -50,7 +50,8 @@ export default function Header() {
                         </li>
 
                         <li onMouseEnter={handleMouseEnter}>
-                            <Link to={'/Account'} className='navbar-logo'>Account</Link>
+                            <Link className='navbar-logo'>Account</Link>
+                            {/* <Link to={'/Account'} className='navbar-logo'>Account</Link> */}
                             {dropdown && <Dropdown handleMouseLeave={handleMouseLeave} />}
                         </li>
 

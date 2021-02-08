@@ -9,6 +9,7 @@ const sendEmail = require("../Utilities/sendEmail");
 
 const router = express.Router();
 
+
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
     try {
@@ -46,7 +47,8 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
         console.log(event)
         await event.save();
 
-        response.send("you have created your Event ");
+        response.send("you have created your Event");
+
     } catch (error) {
         console.log(error);
         response.status(500).send(error);
@@ -120,6 +122,7 @@ router.get("/viewAll", async (request, response) => {
 
 // View one Event
 router.get("/viewOneEvent/:id", async (request, response) => {
+
     try {
         const events = await Events.findById({ _id: request.params.id })
             .populate("category_id user_id");
@@ -128,6 +131,7 @@ router.get("/viewOneEvent/:id", async (request, response) => {
             return response.status(500).send({ msg: "Server error" });
         }
         return response.send(events);
+
     } catch (error) {
         response.status(500).send({ msg: "Server error" });
     }

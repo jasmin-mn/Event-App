@@ -1,5 +1,5 @@
 .events_show {
-  width: 1000px;
+  width: 800px;
   margin: 10px auto;
   padding: 0;
 }
@@ -110,4 +110,37 @@
   padding: 0;
 }
 
+.eventShow {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 5px 0;
+  margin: 10px 0;
+}
 
+.eventShow1 {
+  width: 60%;
+  /* outline: 1px solid red; */
+  padding: 10px;
+  background-color: rgba(173, 216, 230, 0.438);
+  border-radius: 10px;
+}
+
+.eventShow2 {
+  width: 35%;
+  /* outline: 1px solid red; */
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+
+  margin: 10px;
+  padding: 5px;
+}
+
+.shareHead {
+  margin: 0;
+  padding: 0;
+}

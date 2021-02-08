@@ -46,7 +46,7 @@ const EventView = (props) => {
 
                 const event = result.data.user_id.savedEvents.includes(result.data._id)
                 if (event) {
-                    setSavedEvents(true)
+                    // setSavedEvents(true)
                 }
 
                 setEventDetails(result.data)
@@ -64,6 +64,7 @@ const EventView = (props) => {
 
 
     const getAttendEvent = async () => {
+
         if (loggedIn) {
 
             try {
@@ -240,16 +241,29 @@ const EventView = (props) => {
                                 className={styles.delete_btn}>Delete Event</button>
                             : null}
 
-                        {/* <button className={styles.share_btn}>Share Event</button> */}
                     </div>
 
                 </div>
 
             </div>
 
-            <div>
-                <h1>Description</h1>
-                <p>{eventDetails.description}</p>
+            <div className={styles.eventShow}>
+                <div className={styles.eventShow1}>
+                    <h1>Description</h1>
+                    <p>{eventDetails.description}</p>
+                </div>
+
+                <div className={styles.eventShow2}>
+
+                    <h3 className={styles.shareHead}>Share: </h3>
+
+                    <i class="icon-instagram icon-2x btn-success"></i>
+                    <i className="icon-facebook-sign icon-2x btn-white"></i>
+                    <i class="icon-youtube-sign icon-2x btn-danger"></i>
+                    <i class="icon-github icon-2x"></i>
+
+                    {/* <button className={styles.share_btn}>Share Event</button> */}
+                </div>
             </div>
 
         </div>
