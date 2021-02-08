@@ -28,18 +28,20 @@ function HomeDefault() {
 
                     let category = event.category_id.map((category) => <>{category.name}</>);
                     let eventLink = `/viewOneEvent/${event._id}`
-                    const date =  moment(event.dateEventstarted).format('MMMM Do YYYY, hh:mm a')
+                    const date = moment(event.dateEventstarted).format('MMMM Do YYYY, hh:mm a')
 
                     return (
-                        <Link to={eventLink} >
-                            <div className={styles.events_container}>
-                                <div className={styles.events_all}>
+
+                        <div className={styles.events_container}>
+                            <div className={styles.events_all}>
+                                <Link to={eventLink} >
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                    <p className={styles.events_date}>{date}</p>
-                                    <p className={styles.events_name_category}>{event.event_name},  {category}</p>
-                                </div>
+                                </Link>
+                                <p className={styles.events_date}>{date}</p>
+                                <p className={styles.events_name_category}>{event.event_name},  {category}</p>
                             </div>
-                        </Link>
+                        </div>
+
                     )
                 })
                 setEvents(myEvents)
@@ -66,15 +68,17 @@ function HomeDefault() {
                     const eventLink = `/viewBySelectedLocation/${event._id.location}`
 
                     return (
-                        <Link to={eventLink} >
-                            <div className={styles.events_container}>
 
-                                <div className={styles.events_by_city}>
+                        <div className={styles.events_container}>
+
+                            <div className={styles.events_by_city}>
+                                <Link to={eventLink} >
                                     <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                    <p className={styles.location_text}>{event._id.location}</p>
-                                </div>
+                                </Link>
+                                <p className={styles.location_text}>{event._id.location}</p>
                             </div>
-                        </Link>
+                        </div>
+
                     )
                 })
                 setEventsByCity(myEvents)
@@ -102,14 +106,16 @@ function HomeDefault() {
                     console.log(1233434444, event);
 
                     return (
-                        <Link to={eventLink} >
-                            <div className={styles.events_container}>
-                                <div className={styles.events_by_category}>
+
+                        <div className={styles.events_container}>
+                            <div className={styles.events_by_category}>
+                                <Link to={eventLink} >
                                     <img className={styles.events_by_category_bg} src={photo} alt="" />
-                                    <p className={styles.category_text}>{name}</p>
-                                </div>
+                                </Link>
+                                <p className={styles.category_text}>{name}</p>
                             </div>
-                        </Link>
+                        </div>
+
                     )
                 });
                 console.log(1233, myEvents);

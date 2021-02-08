@@ -74,14 +74,14 @@ export default function Header() {
                     </ul>
                 </nav>
 
-                {/* <div className={styles.header_bg1}>
+                <div className={styles.header_bg1}>
                     <div className={styles.header_text}>
                         <p className={styles.header_tittel}>Enjoy Coding Events,
-                        <br /> learning, Workshops Classes from Home.</p>
+                        <br /> learning, Workshops, Classes from Home.</p>
                         <a className={styles.btn}
                             href="http://localhost:3000/startNewEvent">Start New Event</a>
                     </div>
-                </div> */}
+                </div>
 
             </div>
         )
@@ -118,7 +118,7 @@ export default function Header() {
 
                 <div className={styles.header_bg}>
                     <div className={styles.header_text}>
-                        <p className={styles.header_tittel}>Enjoy Coding Events, <br /> learning, Workshops Classes from Home.</p>
+                        <p className={styles.header_tittel}>Enjoy Coding Events, <br /> learning, Workshops, Classes from Home.</p>
                         {/* <button className={styles.btn} >Join us </button> */}
                         <a className={styles.btn} href="http://localhost:3000/signup">Join us</a>
                     </div>

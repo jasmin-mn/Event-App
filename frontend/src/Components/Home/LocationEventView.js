@@ -31,15 +31,17 @@ const LocationEventView = (props) => {
                     let eventLink = `/viewOneEvent/${event._id}`
 
                     return (
-                        <Link to={eventLink} >
-                            <div className={styles.events_container}>
-                                <div className={styles.events_all}>
+                        <div className={styles.events_container}>
+                            <div className={styles.events_all}>
+
+                                <Link to={eventLink} >
                                     <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                    <p className={styles.events_date}>{event.dateEventstarted}</p>
-                                    <p className={styles.events_name_category}>{event.event_name},{category}</p>
-                                </div>
+                                </Link>
+
+                                <p className={styles.events_date}>{event.dateEventstarted}</p>
+                                <p className={styles.events_name_category}>{event.event_name},{category}</p>
                             </div>
-                        </Link>
+                        </div>
                     )
                 });
 
