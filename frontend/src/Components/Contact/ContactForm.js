@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './Contact.module.css';
+import { ModalBoxContext } from '../ModalBox/ModalBox';
 
 
 const ContactForm = () => {
 
     const [status, setStatus] = useState("Submit");
+
+    const { addModalBox } = useContext(ModalBoxContext);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,9 +43,16 @@ const ContactForm = () => {
 
         setStatus("Submit");
 
-        let result = await response.json();
+        addModalBox(
+            <>
+                <p>Than you for contacting us.</p>
+                <p>Your Message have been sent successfully.</p>
+            </>
+        )
 
-        alert(result.status);
+
+        // let result = await response.json();
+        // alert(result.status);
     };
 
     return (

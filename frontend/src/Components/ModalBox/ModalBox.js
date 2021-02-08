@@ -44,15 +44,13 @@ export default function ModalBox(props) {
 
         <ModalBoxContext.Provider value={{ addModalBox }}>
 
-
             <>
                 {show ?
                     <div className={styles.modal}>
 
                         <div className={styles.modalContent}>
 
-
-                            <span className={styles.close}>&times;</span>
+                            {/* <span className={styles.close}>&times;</span> */}
 
                             <p className={styles.modalBox}>{modalBox}</p>
                         </div>

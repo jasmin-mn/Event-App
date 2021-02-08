@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import moment from "moment";
-
 import { ModalBoxContext } from '../ModalBox/ModalBox';
+import { UserStateContext } from '../../App';
 
 import styles from './EventView.module.css';
 import axios from 'axios';
-import { UserStateContext } from '../../App';
+import moment from "moment";
 
 
 
@@ -42,11 +41,6 @@ const EventView = (props) => {
                 }
 
                 const user = result.data.participants.includes(loggedInState)
-                
-                // console.log('result.data.participants : ', result.data.participants);
-                // console.log('loggedInState : ', loggedInState);
-                // console.log('participanted : ',result.data.participants.includes(loggedInState) );
-
                 if (user) {
                     console.log(' setAttended(true)');
                     setAttended(true)
