@@ -6,14 +6,17 @@ export const ModalBoxContext = createContext();
 
 export default function ModalBox(props) {
 
-    const [modalBox, setModalBox] = useState([]);
+    const [modalBox, setModalBox] = useState();
+    const [show, setShow] = useState(false);
 
     const addModalBox = (message) => {
 
-        setModalBox([...modalBox, message]);
+        setModalBox(message);
+        setShow(true)
 
         setTimeout(() => {
-            setModalBox([...modalBox.slice(1)]);
+            setModalBox();
+            setShow(false)
         }, 2000);
     };
 
@@ -36,29 +39,30 @@ export default function ModalBox(props) {
     //     }
     // }
 
-    
+
     return (
 
         <ModalBoxContext.Provider value={{ addModalBox }}>
 
-            {modalBox.map((msg) => {
 
-                return (
-                    <>
-                        <div  className={styles.modal}>
+            <>
+                {show ?
+                    <div className={styles.modal}>
 
-                            <div className={styles.modalContent}>
+                        <div className={styles.modalContent}>
 
 
-                                <span  className={styles.close}>&times;</span>
+                            <span className={styles.close}>&times;</span>
 
-                                <p className={styles.modalBox}>{msg}</p>
-                            </div>
-
+                            <p className={styles.modalBox}>{modalBox}</p>
                         </div>
-                    </>
-                )
-            })}
+
+                    </div>
+                    :
+
+                    null
+                }
+            </>
 
             {props.children}
 

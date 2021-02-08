@@ -13,6 +13,7 @@ import { UserStateContext } from '../../App';
 const EventView = (props) => {
 
     const [eventDetails, setEventDetails] = useState({});
+
     const [attended, setAttended] = useState(false);
     const [isHost, setIsHost] = useState(false);
     const [savedEvents, setSavedEvents] = useState(false);
@@ -34,19 +35,26 @@ const EventView = (props) => {
             console.log('result', result.data);
 
             if (result.data) {
+               
 
                 if (result.data.user_id === loggedInState) {
                     setIsHost(true)
                 }
 
                 const user = result.data.participants.includes(loggedInState)
+                
+                // console.log('result.data.participants : ', result.data.participants);
+                // console.log('loggedInState : ', loggedInState);
+                // console.log('participanted : ',result.data.participants.includes(loggedInState) );
+
                 if (user) {
+                    console.log(' setAttended(true)');
                     setAttended(true)
                 }
 
                 const event = result.data.user_id.savedEvents.includes(result.data._id)
                 if (event) {
-                    // setSavedEvents(true)
+                    setSavedEvents(true)
                 }
 
                 setEventDetails(result.data)
@@ -59,7 +67,7 @@ const EventView = (props) => {
 
     useEffect(() => {
         getEventDetails();
-
+         
     }, []);
 
 

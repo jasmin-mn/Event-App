@@ -14,6 +14,9 @@ const path = require("path");
 const fileUpload = require("express-fileupload");
 
 router.use(fileUpload());
+
+
+
 //register
 router.post("/register", async (request, response) => {
   const { userName, firstName, lastName, email, password } = request.body;
@@ -106,6 +109,8 @@ router.post("/login", async (request, response) => {
 //     response.status(500).json({ msg: "Server error" });
 //   }
 // });
+
+
 
 // Profile
 router.get("/profile", authenticate, async (request, response) => {
