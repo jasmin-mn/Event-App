@@ -1,5 +1,7 @@
 import axios from "axios";
-import React, { useState, useEffect, useContext , useHistory } from "react";
+import React, { useState, useEffect, useContext } from "react";
+// import { useHistory } from "react-router-dom";
+
 import styles from "./multiStep.module.css";
 import { ModalBoxContext } from '../ModalBox/ModalBox';
 
@@ -8,15 +10,17 @@ function FinalStep(props) {
 
   const { addModalBox } = useContext(ModalBoxContext);
 
+  // let history = useHistory();
+
   const [cat, setCat] = useState([]);
-   
+
 
   useEffect(() => {
     getCat()
   }, [])
 
 
- 
+
 
   const getCat = async () => {
 
@@ -60,9 +64,8 @@ function FinalStep(props) {
             <p>You will redirect to the Homepage.</p>
           </>
         )
-       
-
       }
+
       // props.history.push("/")
 
       console.log(345435, result);
@@ -88,7 +91,6 @@ function FinalStep(props) {
           <h3>Category:{cat}</h3>
           <h3>Date:{props.state.date}</h3>
           <h3>Time:{props.state.time}</h3>
-          {/* <h3>Host Name:{props.state.user.firstName} {props.state.user.lastName}</h3> */}
         </div>
 
         <div className={styles.column2}>
