@@ -109,7 +109,7 @@ router.post(
 // View all Events
 router.get("/viewAll", async (request, response) => {
     try {
-        const events = await Events.find().populate("category_id user_id");
+        const events = await Events.find().populate("category_id user_id").sort("-dateEventcreated");
 
         if (!events) {
             return response.status(500).send({ msg: "Server error" });
