@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import styles from './Home.module.css';
 import axios from 'axios';
+import moment from 'moment';
 
 
 const CategoryEventView = (props) => {
@@ -31,19 +32,26 @@ const CategoryEventView = (props) => {
                     setCategoryName(category)
 
                     let eventLink = `/viewOneEvent/${event._id}`
+                    const date = moment(event.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
 
                     return (
-                        <div className={styles.events_container}>
-                            <div className={styles.events_all}>
+                        <Link to={eventLink} >
 
-                                <Link to={eventLink} >
-                                    <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                </Link>
+                            <div className={styles.event}>
 
-                                <p className={styles.events_date}>{event.dateEventstarted}</p>
-                                <p className={styles.events_name_category}>{event.event_name},{category}</p>
+                                <img className={styles.event_bg} src={event.event_photo} alt="" />
+
+                                <div className={styles.events_data}>
+                                    <p className={styles.events_name_category}><span>Event Name:</span> {event.event_name}</p>
+                                    <p className={styles.events_date}><span>Date:</span> {date}</p>
+                                    <p className={styles.events_name_category}><span>Category:</span> {category}</p>
+                                    <p className={styles.eventtype}> <span>Event Type:</span> {event.eventtype}</p>
+                                    <p className={styles.language}> <span>Language:</span> {event.language}</p>
+                                    {/* <p className={styles.description}> <span>Description:</span> {event.description}</p> */}
+                                </div>
                             </div>
-                        </div>
+                        </Link>
+
                     )
                 });
 
@@ -67,9 +75,7 @@ const CategoryEventView = (props) => {
 
             <h1> All Events in {categoryName} Category</h1>
 
-            <div className={styles.eventsByCategory}>
-                {events}
-            </div>
+            {events}
         </div>
 
     )

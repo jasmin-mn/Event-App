@@ -34,7 +34,7 @@ const EventView = (props) => {
             console.log('result', result.data);
 
             if (result.data) {
-               
+
 
                 if (result.data.user_id._id === loggedInState) {
                     setIsHost(true)
@@ -61,7 +61,7 @@ const EventView = (props) => {
 
     useEffect(() => {
         getEventDetails();
-         
+
     }, []);
 
 
@@ -180,20 +180,23 @@ const EventView = (props) => {
 
             try {
                 const result = await axios
-                    .get(`http://localhost:7000/event/deleteEvents/${eventId}`,
+                    .delete(`http://localhost:7000/event/deleteEvent/${eventId}`,
                         { withCredentials: true });
 
                 console.log('delete event', result);
 
-                if (result.data) {
+                if (result) {
                     addModalBox(
                         <>
                             <p>This Event have been deleted successfully.</p>
                             <p>You will redirect to the Homepage.</p>
                         </>
                     )
-                    props.history.push("/")
                 }
+
+                setTimeout(() => {
+                    props.history.push("/")
+                }, 2000);
 
             } catch (error) {
                 console.log(error);
@@ -204,16 +207,21 @@ const EventView = (props) => {
 
     const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, hh:mm a')
     const host_photo = `/uploads/${eventDetails.user_id && eventDetails.user_id.photo}`
-    
+
     return (
 
         <div className={styles.events_show}>
 
             <div className={styles.events_}>
 
-                <img className={styles.events_show_bg} src={eventDetails.event_photo} alt="" />
-                <h1 className={styles.event_name}>{eventDetails.event_name}</h1>
-                <p className={styles.event_date}>Date: {date}</p>
+                <div className={styles.events_head}>
+                    <img className={styles.events_show_bg} src={eventDetails.event_photo} alt="" />
+
+                    <div className={styles.event_nameDate}>
+                        <h1 className={styles.event_name}>{eventDetails.event_name}</h1>
+                        <p className={styles.event_date}>Date: {date}</p>
+                    </div>
+                </div>
 
                 <div className={styles.events_actions}>
                     <div className={styles.host_container}>
@@ -253,7 +261,7 @@ const EventView = (props) => {
             <div className={styles.eventShow}>
 
                 <div className={styles.eventShow1}>
-                    <h1  className={styles.description_head}>Description</h1>
+                    <h1 className={styles.description_head}>Description</h1>
                     <p className={styles.description_text}>{eventDetails.description}</p>
                 </div>
 
@@ -265,7 +273,7 @@ const EventView = (props) => {
                     <i className="icon-linkedin-sign icon-3x"></i>
                     <i className="icon-facebook-sign icon-3x"></i>
                     <i className="icon-github icon-3x"></i>
-                    <i class="icon-stackexchange icon-3x"></i> 
+                    <i class="icon-stackexchange icon-3x"></i>
 
                     {/* <button className={styles.share_btn}>Share Event</button> */}
 
