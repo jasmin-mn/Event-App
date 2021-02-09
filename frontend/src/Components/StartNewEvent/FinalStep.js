@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import styles from "./multiStep.module.css";
 import { ModalBoxContext } from '../ModalBox/ModalBox';
@@ -10,7 +10,7 @@ function FinalStep(props) {
 
   const { addModalBox } = useContext(ModalBoxContext);
 
-  // let history = useHistory();
+  const history = useHistory();
 
   const [cat, setCat] = useState([]);
 
@@ -57,7 +57,7 @@ function FinalStep(props) {
         headers: { "Content-Type": "application/json" },
       });
 
-      if (result.data) {
+      if (result) {
         addModalBox(
           <>
             <p>The Event have been Created successfully.</p>
@@ -66,7 +66,10 @@ function FinalStep(props) {
         )
       }
 
-      // props.history.push("/")
+      setTimeout(() => {
+        history.push("/")
+
+      }, 2000);
 
       console.log(345435, result);
     } catch (error) {

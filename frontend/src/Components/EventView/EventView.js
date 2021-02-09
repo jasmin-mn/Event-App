@@ -204,6 +204,7 @@ const EventView = (props) => {
 
     const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, hh:mm a')
     const host_photo = `/uploads/${eventDetails.user_id && eventDetails.user_id.photo}`
+    
     return (
 
         <div className={styles.events_show}>
