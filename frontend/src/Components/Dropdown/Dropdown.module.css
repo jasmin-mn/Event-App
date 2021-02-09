@@ -1,10 +1,17 @@
 .dropdownmenu {
-  width: 250px;
+  width: 230px;
   position: absolute;
   top: 50px;
   right: 0px;
   list-style: none;
   text-align: start;
+
+  z-index: 1;
+
+  /* outline: 1px solid red; */
+
+  margin: 0;
+  padding: 0;
 }
 
 .dropdownmenu li {

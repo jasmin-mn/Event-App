@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import moment from "moment";
-
 import { ModalBoxContext } from '../ModalBox/ModalBox';
+import { UserStateContext } from '../../App';
 
 import styles from './EventView.module.css';
 import axios from 'axios';
-import { UserStateContext } from '../../App';
+import moment from "moment";
 
 
 
 const EventView = (props) => {
 
     const [eventDetails, setEventDetails] = useState({});
+
     const [attended, setAttended] = useState(false);
     const [isHost, setIsHost] = useState(false);
     const [savedEvents, setSavedEvents] = useState(false);
@@ -34,13 +34,15 @@ const EventView = (props) => {
             console.log('result', result.data);
 
             if (result.data) {
+               
 
-                if (result.data.user_id === loggedInState) {
+                if (result.data.user_id._id === loggedInState) {
                     setIsHost(true)
                 }
 
                 const user = result.data.participants.includes(loggedInState)
                 if (user) {
+                    console.log(' setAttended(true)');
                     setAttended(true)
                 }
 
@@ -59,11 +61,12 @@ const EventView = (props) => {
 
     useEffect(() => {
         getEventDetails();
-
+         
     }, []);
 
 
     const getAttendEvent = async () => {
+
         if (loggedIn) {
 
             try {
@@ -180,7 +183,7 @@ const EventView = (props) => {
                     .get(`http://localhost:7000/event/deleteEvents/${eventId}`,
                         { withCredentials: true });
 
-                console.log('save event', result);
+                console.log('delete event', result);
 
                 if (result.data) {
                     addModalBox(
@@ -189,7 +192,7 @@ const EventView = (props) => {
                             <p>You will redirect to the Homepage.</p>
                         </>
                     )
-                    props.history.push("/login")
+                    props.history.push("/")
                 }
 
             } catch (error) {
@@ -199,8 +202,8 @@ const EventView = (props) => {
     }
 
 
-    const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, h:mm:ss a')
-
+    const date = moment(eventDetails.dateEventstarted).format('MMMM Do YYYY, hh:mm a')
+    const host_photo = `/uploads/${eventDetails.user_id && eventDetails.user_id.photo}`
     return (
 
         <div className={styles.events_show}>
@@ -213,8 +216,8 @@ const EventView = (props) => {
 
                 <div className={styles.events_actions}>
                     <div className={styles.host_container}>
-                        <img className={styles.host_photo} src={eventDetails.user_id && eventDetails.user_id.photo} alt="" />
-                        <p>Hosted by: <br /> {eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
+                        <img className={styles.host_photo} src={host_photo} alt="" />
+                        <p className={styles.host_name}>Hosted by: <br /> {eventDetails.user_id && eventDetails.user_id.firstName} {eventDetails.user_id && eventDetails.user_id.lastName}</p>
                     </div>
 
                     <div>
@@ -228,11 +231,11 @@ const EventView = (props) => {
                         }
 
                         {savedEvents ?
-                            <button onClick={getSavedEvent}
-                                className={styles.save_btn}>Save Event</button>
-                            :
                             <button onClick={getUnsavedEvent}
                                 className={styles.unsave_btn}>Unsave Event</button>
+                            :
+                            <button onClick={getSavedEvent}
+                                className={styles.save_btn}>Save Event</button>
                         }
 
                         {isHost ?
@@ -240,16 +243,32 @@ const EventView = (props) => {
                                 className={styles.delete_btn}>Delete Event</button>
                             : null}
 
-                        {/* <button className={styles.share_btn}>Share Event</button> */}
                     </div>
 
                 </div>
 
             </div>
 
-            <div>
-                <h1>Description</h1>
-                <p>{eventDetails.description}</p>
+            <div className={styles.eventShow}>
+
+                <div className={styles.eventShow1}>
+                    <h1  className={styles.description_head}>Description</h1>
+                    <p className={styles.description_text}>{eventDetails.description}</p>
+                </div>
+
+                <div className={styles.eventShow2}>
+
+                    <h3 className={styles.shareHead}>Share:</h3>
+
+                    <i className="icon-xing-sign icon-3x"></i>
+                    <i className="icon-linkedin-sign icon-3x"></i>
+                    <i className="icon-facebook-sign icon-3x"></i>
+                    <i className="icon-github icon-3x"></i>
+                    <i class="icon-stackexchange icon-3x"></i> 
+
+                    {/* <button className={styles.share_btn}>Share Event</button> */}
+
+                </div>
             </div>
 
         </div>

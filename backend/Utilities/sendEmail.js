@@ -22,7 +22,7 @@ const sendEmail = async (options) => {
         subject: options.subject,
         Phone: options.Phone,
         text: options.text,
-        // html: output
+        html: options.html
     }
 
     let info = await transporter.sendMail(message);

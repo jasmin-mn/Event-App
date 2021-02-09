@@ -37,7 +37,9 @@
   width: 550px;
 }
 
-button {
+.btn_previous,
+.btn_next,
+.btn_save {
   color: black;
   background-color: orange;
   height: 40px;
@@ -60,7 +62,7 @@ button {
 }
 
 input {
-  border-radius: 5px;
+  /* border-radius: 5px; */
   /* border: none; */
 }
 

@@ -18,7 +18,7 @@ import Profilepage from './Components/Profilepage/Profilepage'
 import ContactForm from './Components/Contact/ContactForm';
 import Resetpasswordpage from './Components/Resetpasswordpage/Resetpasswordpage'
 import Forgotpasswordpage from './Components/Forgotpasswordpage/Forgotpasswordpage'
-import UserPage from './Components/UserPage/UserPage'
+// import UserPage from './Components/UserPage/UserPage'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
 import Notifications from './Components/Notifications/Notifications';
 import HomeDefault from './Components/Home/Default'
@@ -35,7 +35,7 @@ export const UserStateContext = createContext();
 
 function App() {
 
-  const [loggedInState, setLoggedInState] = useState(null);
+  const [loggedInState, setLoggedInState] = useState(JSON.parse(window.localStorage.getItem("loggedIn")));
 
   const setLoggedIn = (userId) => {
     if (userId) {
@@ -46,15 +46,6 @@ function App() {
 
     setLoggedInState(userId);
   }
-
-  useEffect(() => {
-    const userId = JSON.parse(window.localStorage.getItem("loggedIn"));
-
-    if (userId) {
-      setLoggedInState(userId);
-    };
-  }, [])
-
 
   return (
     <UserStateContext.Provider value={{ loggedInState, setLoggedIn }}>
@@ -67,7 +58,7 @@ function App() {
               <Route path="/" component={Home} exact />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Register} />
-              <PrivateRoute path="/userpage" component={UserPage} />
+              {/* <PrivateRoute path="/userpage" component={UserPage} /> */}
 
               <Route path='/viewOneEvent/:eventId' component={EventView} />
               <Route path='/viewBySelectedLocation/:eventLocation' component={LocationEventView} />

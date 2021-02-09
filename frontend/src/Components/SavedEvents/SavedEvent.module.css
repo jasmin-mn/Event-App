@@ -16,7 +16,9 @@
   padding: 10px;
   border-radius: 10px;
   background-color: lightblue;
+  margin: 8px 0;
 }
+
 
 .events_bg {
   border-radius: 10px;
@@ -29,6 +31,7 @@
   height: 10px;
   width: 70%;
 }
+
 
 .events_date,
 .events_name_category,

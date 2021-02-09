@@ -1,12 +1,14 @@
 .events_show {
-  width: 1000px;
+  width: 800px;
   margin: 10px auto;
   padding: 0;
 }
+
 .events_show_bg {
   width: 100%;
-  height: 280px;
+  height: 250px;
   border-radius: 10px;
+  margin: 20px 0;
 }
 
 .events_actions {
@@ -14,6 +16,7 @@
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  margin: 20px 0;
 }
 
 .join_btn {
@@ -75,14 +78,6 @@
   cursor: pointer;
 }
 
-.host_container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  align-items: center;
-  width: 200px;
-}
-
 .delete_btn {
   color: black;
   background-color: red;
@@ -98,16 +93,77 @@
   cursor: pointer;
 }
 
+.host_container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 180px;
+}
+
 .host_photo {
   height: 60px;
   width: 60px;
   border-radius: 50px;
   border: 1px solid black;
 }
-.event_name,
+
 .event_name {
-  margin: 10px 0;
+  margin: 0;
   padding: 0;
 }
 
+.host_name{
+margin-top: 15px;
+}
 
+.eventShow {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 5px 0;
+  margin: 10px 0;
+    /* outline: 1px solid red; */
+
+}
+
+.eventShow1 {
+  width: 60%;
+  /* outline: 1px solid red; */
+  padding: 10px;
+  background-color: rgba(173, 216, 230, 0.438);
+  border-radius: 10px;
+}
+
+.eventShow2 {
+  width: 38%;
+  /* outline: 1px solid red; */
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+}
+
+.shareHead {
+  margin: 0;
+  padding-right: 10px;
+  /* outline: 1px solid red; */
+}
+
+.description_head{
+  margin: 0;
+  padding: 10px 0;
+}
+
+.description_text{
+  margin: 0;
+  padding: 5px 0;
+  font-size: 18px;
+  opacity: 0.8;
+  line-height: 30px;
+}

@@ -6,24 +6,33 @@
   height: 50px;
   width: 100%;
   background-color: orange;
+  /* padding: 0 20px; */
+  margin: 0;
+}
+
+.logo {
+  margin: 0;
+  padding: 0;
 }
 
 .nav_list {
   list-style-type: none;
   display: flex;
   /* border: 1px solid red; */
+  padding: 20px;
 }
 
 .nav_list li a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 10px;
+  padding: 20px 15px 5px;
+  margin: 0;
   /* border: 1px solid red; */
   height: 50px;
   text-decoration: none;
   color: rgb(0, 0, 0);
-  font-size: large;
+  font-size: 20px;
 }
 
 .nav_list li a:hover {
@@ -39,17 +48,25 @@
   background-size: cover;
   height: 200px;
   width: 100%;
+
+  box-shadow: 3px 5px #888888;
+
   /* border: 1px solid red; */
 }
 
 .header_bg1 {
   position: relative;
-  background: url(../../Images/programming.jpg);
+  background: url(../../Images/abstract.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 200px;
   width: 100%;
+
+  box-shadow: 3px 5px rgba(255, 166, 0, 0.582);
+
+  /* opacity: 0.5;
+  z-index: -1; */
   /* border: 1px solid red; */
 }
 
@@ -75,7 +92,7 @@
   color: rgb(2, 0, 0);
   font-size: 25px;
   text-align: center;
-  padding: 0px 30px;
+  padding: 5px 30px;
   position: absolute;
 
   border-radius: 20px;
@@ -85,7 +102,7 @@
 
 .btn:hover {
   color: #fff;
-  
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {

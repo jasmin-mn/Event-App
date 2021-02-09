@@ -31,9 +31,9 @@ export default function Date9(props) {
 
       <div className={styles.button}>
 
-        <button onClick={props.prev}>Previous</button>
+        <button  className={styles.btn_previous} onClick={props.prev}>Previous</button>
 
-        {props.hasNext() && <button onClick={props.next}>Next</button>}
+        {props.hasNext() && <button  className={styles.btn_next} onClick={props.next}>Next</button>}
 
       </div>
     </div>

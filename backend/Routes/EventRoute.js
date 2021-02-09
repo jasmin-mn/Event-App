@@ -6,8 +6,10 @@ const authenticate = require("../middleware/authenticate");
 const restrictTo = require("../middleware/restrictTo");
 const Category = require("../Models/CategoryModel");
 const sendEmail = require("../Utilities/sendEmail");
+// const Logo = require("../../frontend/src/Images/logo.png")
 
 const router = express.Router();
+
 
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
@@ -39,14 +41,15 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
             member,
             eventtype,
             dateEventstarted,
-            user_id: request.id,
+            user_id: request.user._id,
             category_id: category,
         });
 
         console.log(event)
         await event.save();
 
-        response.send("you have created your Event ");
+        response.send("you have created your Event");
+
     } catch (error) {
         console.log(error);
         response.status(500).send(error);
@@ -120,6 +123,7 @@ router.get("/viewAll", async (request, response) => {
 
 // View one Event
 router.get("/viewOneEvent/:id", async (request, response) => {
+
     try {
         const events = await Events.findById({ _id: request.params.id })
             .populate("category_id user_id");
@@ -128,6 +132,7 @@ router.get("/viewOneEvent/:id", async (request, response) => {
             return response.status(500).send({ msg: "Server error" });
         }
         return response.send(events);
+
     } catch (error) {
         response.status(500).send({ msg: "Server error" });
     }
@@ -241,12 +246,26 @@ router.get('/attendEvents/:id', authenticate, async (request, response) => {
             return response.status(500).send({ msg: 'Server error event not saved' })
         }
 
-        const message = `you have attended the event ${event.event_name}`
+        // const message2 = "
+        //     <div>
+        //     <img src= '/../../frontend/src/Images/logo.png' />
+        //     <p>Thank you for using Events Manager App</p>
+        //     <img src={{event.event_id.photo}} />
+        //     <p> `${event.event_id.firstName} ${event.event_id.lastName} welcomes you to`</p>
+        //     <h2>`${event.event_name}`</h2>
+        //     <div/>
+        //     ";
+        // const logo = `${__dirname}/../../frontend/logos/logo.png`
+
+        const message = `Welcome to ${event.event_name} Events`
 
         await sendEmail({
             email: user.email,
             subject: `attended the event ${event.event_name}`,
-            text: message
+            text: message,
+            // html: `<img src= "${logo}" />`
+
+
         })
 
         response.json({ event, user, msg: 'you recived the email regarding attending event' })

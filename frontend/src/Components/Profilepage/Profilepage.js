@@ -70,6 +70,7 @@ function Profilepage(e) {
     yourInterests,
     others,
   } = userData;
+  
   const getUser = async (update) => {
     const config = {
       withCredentials: true,

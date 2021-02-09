@@ -1,9 +1,14 @@
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./multiStep.module.css";
-import React from 'react'
 
 
 
 export default function EventPhoto2(props) {
+
+  const [file, setFile] = useState('');
+  const [fileName, setFileName] = useState('');
+  const [uploadedFile , setUploadedFile] = useState({});
+  
 
   return (
     <div className={styles.background}>
@@ -17,8 +22,8 @@ export default function EventPhoto2(props) {
       </p>
 
       <div className={styles.button}>
-        <button onClick={props.prev}>Previous</button>
-        {props.hasNext() && <button onClick={props.next}>Next</button>}
+        <button className={styles.btn_previous} onClick={props.prev}>Previous</button>
+        {props.hasNext() && <button className={styles.btn_next} onClick={props.next}>Next</button>}
       </div>
     </div>
   );

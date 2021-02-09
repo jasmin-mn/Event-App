@@ -7,9 +7,9 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, Number, required: true },
  
 
-  age: { type: Number},
-  
-  photo: { type: String, default: "https://de.m.wikipedia.org/wiki/Datei:User_font_awesome.svg" },
+  age: { type: Number },
+
+  photo: { type: String, default: "https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg" },
 
 
   place: { type: [String] },
@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
   yourInterests: { type: [String] },
   others: { type: [String] },
   role: { type: String, enum: ["user", "admin"], default: "user" },
+  
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpire: String,
@@ -35,7 +36,7 @@ const UserSchema = new mongoose.Schema({
       ref: "Events",
     },
   ],
-  
+
 });
 
 module.exports = UserSchema;
