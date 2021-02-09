@@ -10,6 +10,11 @@
   margin: 0;
 }
 
+.logo {
+  margin: 0;
+  padding: 0;
+}
+
 .nav_list {
   list-style-type: none;
   display: flex;
@@ -45,7 +50,6 @@
   width: 100%;
 
   box-shadow: 3px 5px #888888;
-
 
   /* border: 1px solid red; */
 }
@@ -94,7 +98,6 @@
   border-radius: 20px;
   border: none;
   cursor: pointer;
-
 }
 
 .btn:hover {

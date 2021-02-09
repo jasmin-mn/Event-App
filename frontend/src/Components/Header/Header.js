@@ -41,7 +41,7 @@ export default function Header() {
         return (
             <div className={styles.header}>
                 <nav className={styles.nav}>
-                    <img id="logo" src={logo} alt={"logo"} />
+                    <img className={styles.logo} src={logo} alt={"logo"} />
 
                     <ul className={styles.nav_list}>
                         <li>
