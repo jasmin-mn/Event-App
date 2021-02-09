@@ -137,7 +137,7 @@ margin-top: 15px;
 }
 
 .eventShow2 {
-  width: 35%;
+  width: 38%;
   /* outline: 1px solid red; */
 
   display: flex;
@@ -151,6 +151,19 @@ margin-top: 15px;
 
 .shareHead {
   margin: 0;
-  padding: 0;
+  padding-right: 10px;
   /* outline: 1px solid red; */
+}
+
+.description_head{
+  margin: 0;
+  padding: 10px 0;
+}
+
+.description_text{
+  margin: 0;
+  padding: 5px 0;
+  font-size: 18px;
+  opacity: 0.8;
+  line-height: 30px;
 }

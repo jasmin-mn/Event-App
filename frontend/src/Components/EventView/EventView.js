@@ -252,13 +252,13 @@ const EventView = (props) => {
             <div className={styles.eventShow}>
 
                 <div className={styles.eventShow1}>
-                    <h1>Description</h1>
-                    <p>{eventDetails.description}</p>
+                    <h1  className={styles.description_head}>Description</h1>
+                    <p className={styles.description_text}>{eventDetails.description}</p>
                 </div>
 
                 <div className={styles.eventShow2}>
 
-                    <h3 className={styles.shareHead}>Share: </h3>
+                    <h3 className={styles.shareHead}>Share:</h3>
 
                     <i className="icon-xing-sign icon-3x"></i>
                     <i className="icon-linkedin-sign icon-3x"></i>
