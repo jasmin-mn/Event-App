@@ -1,9 +1,14 @@
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./multiStep.module.css";
-import React from 'react'
 
 
 
 export default function EventPhoto2(props) {
+
+  const [file, setFile] = useState('');
+  const [fileName, setFileName] = useState('');
+  const [uploadedFile , setUploadedFile] = useState({});
+  
 
   return (
     <div className={styles.background}>
