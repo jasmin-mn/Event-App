@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styles from './Home.module.css';
 import axios from "axios";
 import moment from "moment";
+import Slider from "react-slick";
 
 
 function HomeDefault() {
@@ -11,9 +12,18 @@ function HomeDefault() {
     const [eventsByCity, setEventsByCity] = useState();
     const [eventsByCategory, setEventsByCategory] = useState();
 
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1
+    };
 
     // get all Events
     const getAllEvents = async () => {
+
+
 
         try {
             const result = await axios.get('http://localhost:7000/event/viewAll');
@@ -33,10 +43,10 @@ function HomeDefault() {
                     return (
 
                         <div className={styles.events_container}>
-                            <div className={styles.events_all}>
-                                <Link to={eventLink} >
-                                    <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                </Link>
+                            <Link to={eventLink} >
+                                <img className={styles.events_bg} src={event.event_photo} alt="" />
+                            </Link>
+                            <div className={styles.events_text}>
                                 <p className={styles.events_date}>{date}</p>
                                 <p className={styles.events_name_category}>{event.event_name},  {category}</p>
                             </div>
@@ -71,10 +81,10 @@ function HomeDefault() {
 
                         <div className={styles.events_container}>
 
-                            <div className={styles.events_by_city}>
-                                <Link to={eventLink} >
-                                    <img className={styles.events_by_city_bg} src={event.event_photo} alt="" />
-                                </Link>
+                            <Link to={eventLink} >
+                                <img className={styles.events_bg} src={event.event_photo} alt="" />
+                            </Link>
+                            <div className={styles.events_text}>
                                 <p className={styles.location_text}>{event._id.location}</p>
                             </div>
                         </div>
@@ -108,10 +118,12 @@ function HomeDefault() {
                     return (
 
                         <div className={styles.events_container}>
-                            <div className={styles.events_by_category}>
-                                <Link to={eventLink} >
-                                    <img className={styles.events_by_category_bg} src={photo} alt="" />
-                                </Link>
+
+                            <Link to={eventLink} >
+                                <img className={styles.events_bg} src={photo} alt="" />
+                            </Link>
+
+                            <div className={styles.events_text}>
                                 <p className={styles.category_text}>{name}</p>
                             </div>
                         </div>
@@ -140,38 +152,37 @@ function HomeDefault() {
     return (
         <>
             <div className={styles.upcoming_events}>
-                <div className={styles.upcoming_events_head}>
+                <div className={styles.events_head}>
                     <h2> Upcoming Events</h2>
-                    <p>See all Events</p>
                 </div>
 
-                <div className={styles.upcoming_events_body}>
+                <Slider {...settings}>
                     {events}
-                </div>
+                </Slider>
+
             </div>
 
 
             <div className={styles.events_by_city}>
-                <div className={styles.events_by_city_head}>
+                <div className={styles.events_head}>
                     <h2> Events by Location</h2>
-                    <p>See all Events</p>
                 </div>
 
-                <div className={styles.events_by_citys_body}>
+                <Slider {...settings}>
                     {eventsByCity}
-                </div>
+                </Slider>
+
             </div>
 
-
             <div className={styles.events_by_Category}>
-                <div className={styles.events_by_Category_head}>
+                <div className={styles.events_head}>
                     <h2> Events by Category</h2>
-                    <p>See all Events</p>
                 </div>
 
-                <div className={styles.events_by_Category_body}>
+                <Slider {...settings}>
                     {eventsByCategory}
-                </div>
+                </Slider>
+
             </div>
         </>
     )

@@ -1,73 +1,30 @@
-
 .main {
   /* border: 1px solid red; */
-  max-width: 1220px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 10px;
-
 }
 
+/* Home start */
 .upcoming_events,
 .events_by_city,
 .events_by_Category {
   border-radius: 10px;
   /* border: 1px solid green; */
   margin-bottom: 30px;
-  padding: 0;
+  padding: 5px;
 }
 
-.upcoming_events_head,
-.events_by_city_head,
-.events_by_Category_head {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  align-items: center;
-  /* border: 1px solid green; */
-  margin: 0 10px;
-  padding: 0;
-}
-
-.upcoming_events_head h2,
-.upcoming_events_head p,
-.events_by_city_head h2,
-.events_by_city_head p,
-.events_by_Category_head h2,
-.events_by_Category_head p {
+.events_head h2 {
   margin: 0;
+  padding: 5px;
 }
 
-.upcoming_events_body,
-.events_by_citys_body,
-.events_by_Category_body {
-  display: flex;
-  justify-content:start;
-  flex-direction: row;
-  align-items: center;
-  margin: 0;
-  gap: 0px;
-
-  overflow-x: scroll;
-  overflow-y: hidden;
-  /* border: 1px solid blue; */
-  padding: 5px 0;
-}
-
-.events_container {
-  /* background-color: rgb(233, 246, 253); */
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border: 0.5px solid orange;
-  height: 250px;
-  width: 281px;
-  margin: 5px 10px;
-
-}
-
-.events_container:hover{
-  background-color: lightblue;
-  text-decoration: none;
-
+.events_text {
+  background-color: white;
+  margin: 0 5px 15px 5px;
+  padding: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .events_date,
@@ -79,16 +36,12 @@
   font-size: 16px;
 }
 
-
-
-.events_bg,
-.events_by_city_bg,
-.events_by_category_bg {
-  /* position: relative; */
+.events_bg {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   height: 200px;
-  width: 280px;
+  padding: 0 5px;
+  width: 100%;
 }
 
 .location_text,
@@ -99,8 +52,9 @@
   font-size: 22px;
   color: black;
 }
+/* Home end */
 
-.eventsByLocation,
+/* .eventsByLocation,
 .eventsByCategory {
   display: grid;
   grid-template-columns: auto auto auto auto;
@@ -122,4 +76,65 @@
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+} */
+
+
+.events_container {
+  width: 100%;
+}
+
+.event {
+  display: flex;
+  /* outline: 1px solid red; */
+  width: 100%;
+  padding: 0px;
+  border-radius: 10px;
+  background-color: rgba(173, 216, 230, 0.712);
+  margin: 15px 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.event_bg {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 150px;
+  width: 30%;
+}
+
+.events_data {
+  border-radius: 10px;
+  height: 10px;
+  width: 70%;
+  padding: 10px 0;
+}
+
+.events_date,
+.events_name_category,
+.eventtype,
+.language,
+.description {
+  text-align: left;
+  margin: 0 0 0 10px;
+  padding: 1px;
+  color: black;
+  font-size: 18px;
+}
+
+.location_text,
+.category_text {
+  text-align: left !important;
+  margin: 0;
+  padding: 10px;
+  font-size: 22px;
+  color: black;
+}
+
+
+.savedEvents {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+span {
+  font-weight: bold;
 }

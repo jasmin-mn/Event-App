@@ -30,19 +30,17 @@ export default function SavedEvents() {
 
                     return (
                         <Link to={eventLink} >
-                            <div className={styles.events_container}>
-                                <div className={styles.event}>
+                            <div className={styles.event}>
 
-                                    <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                    
-                                    <div className={styles.events_data}>
-                                        <p className={styles.events_name_category}><span>Event Name:</span> {event.event_name}</p>
-                                        <p className={styles.events_date}><span>Date:</span> {date}</p>
-                                        <p className={styles.events_name_category}><span>Category:</span> {category}</p>
-                                        <p className={styles.eventtype}> <span>Event Type:</span> {event.eventtype}</p>
-                                        <p className={styles.language}> <span>Language:</span> {event.language}</p>
-                                        {/* <p className={styles.description}> <span>Description:</span> {event.description}</p> */}
-                                    </div>
+                                <img className={styles.events_bg} src={event.event_photo} alt="" />
+
+                                <div className={styles.events_data}>
+                                    <p className={styles.events_name_category}><span>Event Name:</span> {event.event_name}</p>
+                                    <p className={styles.events_date}><span>Date:</span> {date}</p>
+                                    <p className={styles.events_name_category}><span>Category:</span> {category}</p>
+                                    <p className={styles.eventtype}> <span>Event Type:</span> {event.eventtype}</p>
+                                    <p className={styles.language}> <span>Language:</span> {event.language}</p>
+                                    {/* <p className={styles.description}> <span>Description:</span> {event.description}</p> */}
                                 </div>
                             </div>
                         </Link>
@@ -66,9 +64,8 @@ export default function SavedEvents() {
 
             <h2>Saved Events</h2>
 
-            <div className={styles.SavedEvents}>
-                {events}
-            </div>
+            {events}
+
         </div>
     )
 }

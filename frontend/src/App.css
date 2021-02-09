@@ -10,9 +10,15 @@ body {
   /* font-family: 'Hammersmith One', sans-serif; */
   font-family: "Hammersmith One", sans-serif;
 
-
   display: block;
   position: relative;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  color: black !important;
+  font-size: 35px;
+  margin: -30px;
 }
 
 body::after {
