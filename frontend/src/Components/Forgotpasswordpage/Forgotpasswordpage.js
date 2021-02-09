@@ -11,11 +11,11 @@ function Forgotpasswordpage() {
   }
   const sendData = async(data)=>{
     const config = {
-      withCredentials: true,
+      // withCredentials: true,
       headers : {  
       'Content-Type': 'application/json'
     },
-    withCredentials: true
+    // withCredentials: true
       
     };
     try {

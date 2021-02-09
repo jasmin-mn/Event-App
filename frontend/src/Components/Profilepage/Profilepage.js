@@ -14,7 +14,7 @@ function Profilepage(e) {
 
 
   // delete 
-  const [deleteId, setDeleteId] = useState()
+  // const [deleteId, setDeleteId] = useState()
   // useEffect(()=>{
   //   getData() 
 
@@ -25,18 +25,18 @@ function Profilepage(e) {
   //  }
   
 
-   const removeData = (id)=>{
-     axios.delete("http://localhost:7000/user/deleteAccount").then(response =>{
-       const del = deleteId.filter(deleteId=> id !== deleteId.id )
-       setDeleteId(del)
+  //  const removeData = (id)=>{
+  //    axios.delete("http://localhost:7000/user/deleteAccount").then(response =>{
+  //      const del = deleteId.filter(deleteId=> id !== deleteId.id )
+  //      setDeleteId(del)
 
-     })
-   }
+  //    })
+  //  }
 
-   const renderHeader = (e)=>{
-    const headerElement = ['id','email']
+  //  const renderHeader = (e)=>{
+  //   const headerElement = ['id','email']
     
-   }
+  //  }
 // end of delete part
 
 
@@ -166,7 +166,7 @@ function Profilepage(e) {
   return (
     <div className={styles.profilecontainer}>
       <h1 className={styles.profileheader}>Profile</h1>
-
+{/* 
       <div className={styles.deletecontainer}>
         <p>
           Are you sure you wanted to delete your account? <br />If you choose to
@@ -178,7 +178,7 @@ function Profilepage(e) {
         >
           Delete Account
         </button>
-      </div>
+      </div> */}
 
       <form onSubmit={handleUpdate} className={styles.profileform}  >
         <div> 

@@ -157,7 +157,7 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
       return response.status(500).send(err);
     }
     user.photo = newPath;
-    // user.userName = userName;
+    user.userName = userName;
     user.firstName = firstName;
     user.lastName = lastName;
     user.email = email;
@@ -170,7 +170,6 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
     user.others = others;
 
     user.save();
-    // photo.save()
     response.json({
       fileName: newPath,
       filePath: `/uploads/${newPath}`,
@@ -184,15 +183,21 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
 
 //Delete Account
 router.delete("/deleteAccount/:id", authenticate, async (request, response) => {
-  const user = await User.findByIdAndDelete({ _id: request.params.id });
-  if (user) {
-    response.send("Successfully Deleted");
-  } else {
-    response.send("Server Error");
+  console.log("This is request.id tessst", request.params.id);
+  try {
+    const user = await User.findByIdAndDelete({ _id: request.params.id });
+    
+  if (request.params.id ) {
+    return response.status(200).json({msg: "User deleted"});
+  } 
+  response.json({msg:"Error"})
+  } catch (error) {
+    console.log(error);
+    
   }
+ 
 });
 
-// Edit Profile
 
 // Get user/adminboard
 
