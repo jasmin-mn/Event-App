@@ -19,8 +19,9 @@ router.use(fileUpload());
 
 //register
 router.post("/register", async (request, response) => {
-  const { userName, firstName, lastName, email, password } = request.body;
-  try {
+  const { userName, firstName, lastName, email, password} = request.body;
+
+   try {
     const data = await User.findOne({ email });
     if (data) {
       return response.status(400).json({ msg: "User already exist" });
@@ -95,26 +96,11 @@ router.post("/login", async (request, response) => {
 
 // end of of signin
 
-// // @root POST user/dashboard for private
-
-// router.get("/dashboardboard", authenticate, async (request, response) => {
-//   console.log("this is request.id", request.id);
-//   try {
-//     const user = await User.findById(request.id).select("-password");
-//     if (!user) {
-//       return response.status(500).json({ msg: "Server error" });
-//     }
-//     response.json({ msg: ` welcome back ${user.userName}` });
-//   } catch (error) {
-//     response.status(500).json({ msg: "Server error" });
-//   }
-// });
 
 
 
 // Profile
 router.get("/profile", authenticate, async (request, response) => {
-  // const { userName, firstName, lastName, email, password, dateOfBirth, place, hometown, gender, language, yourInterests, others} = request.body
 
   console.log("this is test request.id", request.user._id);
 
@@ -133,7 +119,7 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
   const userId = request.user._id;
 
   const {
-    // userName,
+    userName,
     firstName,
     lastName,
     email,
@@ -176,7 +162,7 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
       return response.status(500).send(err);
     }
     user.photo = newPath;
-    // user.userName = userName;
+    user.userName = userName;
     user.firstName = firstName;
     user.lastName = lastName;
     user.email = email;
@@ -189,7 +175,6 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
     user.others = others;
 
     user.save();
-    // photo.save()
     response.json({
       fileName: newPath,
       filePath: `/uploads/${newPath}`,
@@ -203,15 +188,21 @@ router.post("/profileUpdate", authenticate, async (request, response) => {
 
 //Delete Account
 router.delete("/deleteAccount/:id", authenticate, async (request, response) => {
-  const user = await User.findByIdAndDelete({ _id: request.params.id });
-  if (user) {
-    response.send("Successfully Deleted");
-  } else {
-    response.send("Server Error");
+  console.log("This is request.id tessst", request.params.id);
+  try {
+    const user = await User.findByIdAndDelete({ _id: request.params.id });
+    
+  if (request.params.id ) {
+    return response.status(200).json({msg: "User deleted"});
+  } 
+  response.json({msg:"Error"})
+  } catch (error) {
+    console.log(error);
+    
   }
+ 
 });
 
-// Edit Profile
 
 // Get user/adminboard
 

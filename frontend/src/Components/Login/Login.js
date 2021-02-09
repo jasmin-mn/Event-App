@@ -3,8 +3,10 @@ import styles from './Login.module.css';
 import { useHistory } from "react-router-dom"
 import axios from 'axios';
 import { UserStateContext } from '../../App';
+import {ModalBoxContext} from '../ModalBox/ModalBox'
 
 const Login = (event) => {
+    const {addModalBox} = useContext(ModalBoxContext)
 
     const { setLoggedIn } = useContext(UserStateContext)
     const history = useHistory();
@@ -24,7 +26,7 @@ const Login = (event) => {
             setLoggedIn(result.data)
             history.push('/')
         } catch (error) {
-            alert(error.response.data.msg);
+            addModalBox("You have entered an invalid email or password")
         }
     }
 
@@ -41,6 +43,7 @@ const Login = (event) => {
             sendLogin(data);
             // if the user successfully logs in
             // save the item "loggedIn" into localstorage, set it to true
+
 
 
         } catch (error) {

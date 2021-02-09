@@ -1,4 +1,6 @@
 const passport = require("passport");
+const jwt = require("jsonwebtoken")
+const User = require("../Models/UserModel")
 
 
 const authenticate = (request, response, next) => {
@@ -12,3 +14,5 @@ const authenticate = (request, response, next) => {
 };
 
 module.exports = authenticate;
+
+
