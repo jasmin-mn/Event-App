@@ -54,11 +54,11 @@ const Register = (e) => {
 
 
     return (
-        <div className ={styles.formcontainer}>
+        <div className ={styles.header}>
             <h1 className={styles.textregister}>
                  Registration 
             </h1>
-            <form onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit} className={styles.formcontainer} >
                  <div className={styles.formgroup}>
                     <label id="icon" htmlFor="userName"> <i class="icon-user"></i></label>
                     <input type="text" name="userName"  placeholder="User Name"  />
