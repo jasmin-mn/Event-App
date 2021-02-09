@@ -1,7 +1,8 @@
 const User = require("../Models/UserModel");
 const { Strategy } = require("passport-jwt");
 
-const strategy = new Strategy(
+const strategy = new Strategy( 
+  
   {
     jwtFromRequest: (request) => {
       console.log(12313, request.cookies.jwt);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from './Forgotpasswordpage.module.css'
 import axios from 'axios';
-// import FlashMessage from 'react-flash-message'
+
 
 
 function Forgotpasswordpage() {
@@ -11,10 +11,11 @@ function Forgotpasswordpage() {
   }
   const sendData = async(data)=>{
     const config = {
-      withCredentials: true,
+      // withCredentials: true,
       headers : {  
       'Content-Type': 'application/json'
-    }
+    },
+    // withCredentials: true
       
     };
     try {
