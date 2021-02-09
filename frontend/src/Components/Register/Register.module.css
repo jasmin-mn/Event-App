@@ -13,7 +13,7 @@
 
 .submitregister {
   top: 3px;
-  background-color: gray;
+  background-color: orange;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -48,4 +48,16 @@ input:focus{
 input:hover{
   background-color: orange;
   cursor: pointer;
+}
+
+.formheader{
+  box-shadow: 20px 10px #888888;
+  border: 3px solid;
+  height: 400px;
+  width: 700px;
+  margin-left: 600px;
+}
+
+.formgroup1{
+  margin-top: 30px;
 }

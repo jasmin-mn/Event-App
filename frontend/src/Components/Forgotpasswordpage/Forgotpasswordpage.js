@@ -39,7 +39,7 @@ function Forgotpasswordpage() {
     <div className={styles.containerforgotpw}>
       <h1 class="fa fa-lock fa-4x">Forgot Password</h1>
       <p className={styles.paragforgotpw}>You can reset your password here.</p>
-      <form onSubmit= {submitForm}> 
+      <form onSubmit= {submitForm} className={styles.forgotpasswordform}> 
         <div className={styles.forgotpassword} >
           <label htmlFor="email"><i className={styles.containerforgotpwicon} class="icon-envelope "></i></label>
           <input className={styles.forgotpasswordinput}type="email" onChange={changeEmail} name="email" placeholder = " Enter your email" />
