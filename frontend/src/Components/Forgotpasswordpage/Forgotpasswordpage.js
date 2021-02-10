@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from './Forgotpasswordpage.module.css'
+import {ModalBoxContext} from '../ModalBox/ModalBox'
 import axios from 'axios';
 
 
 
 function Forgotpasswordpage() {
   const [email, setEmail ] = useState();
+  const {addModalBox} = useContext(ModalBoxContext)
+  
   const changeEmail = (e)=>{
     setEmail(e.target.value)
   }
@@ -20,8 +23,9 @@ function Forgotpasswordpage() {
     };
     try {
      
-      const result =await axios.post('/user/forgotPassword',data , config);
+      const result =await axios.post('http://localhost:7000/user/forgotPassword',data , config);
       console.log(result);
+      addModalBox("Check your email to change your password")
       
       
     } catch (error) {

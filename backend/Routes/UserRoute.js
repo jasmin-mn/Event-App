@@ -246,9 +246,7 @@ router.post("/forgotPassword", async (request, response) => {
   user.passwordResetToken = token;
   user.passwordChangedAt = Date.now() + 1 * 60 * 60 * 1000; //(1 * 60 * 1000)
   user.save();
-  const resetUrl = `${request.protocol}://${request.get(
-    "host"
-  )}/user/resetPassword/${token}`;
+  const resetUrl = `http://localhost:3000/resetPassword/${token}`;
   const message = `Forgot your password? Click on the link and submit your new password and password confirmation to ${resetUrl} \n \n if you did not reset your password. Kindly ignore this email`;
 
   try {
@@ -282,5 +280,51 @@ router.post("/resetPassword/:token", async (request, response) => {
     response.send(`You may reset your Password`);
   }
 });
+
+router.get("/newPassword/:token", async (request, response)=>{
+
+const token = request.params.token ;
+const data = await User.findOne({passwordResetToken:token})
+if (!data) {
+  return response
+    .status(400)
+    .json({ msg: "Token is invalid or already expired" });
+}
+response
+    .status(200)
+    .json({ msg: "enter new password" });
+
+
+})
+
+router.post("/newPassword", async (request, response) => {
+  const  {password, token} = request.body
+  try {
+    const data = await User.findOne({passwordResetToken:token})
+    console.log(data);
+    if (!data) {
+      return response
+        .status(400)
+        .json({ msg: "Token is invalid or already expired" });
+    }
+    // const salt = bcrypt.genSalt(10)
+    // data.password = await bcrypt.hash(password,salt)
+    console.log('pass', password);
+    const salt = await bcrypt.genSalt(10);
+    data.password = await bcrypt.hash(password, salt);   
+    data.passwordResetToken = '';
+    console.log('data after save', data);
+    await data.save();
+  
+    return response.status(200).json({msg: "Password Resetted successfully"})
+  } catch (error) {
+    response
+    .status(500)
+    .json({ msg: "Error with resetting password" });
+
+    
+  }
+
+})
 
 module.exports = router;

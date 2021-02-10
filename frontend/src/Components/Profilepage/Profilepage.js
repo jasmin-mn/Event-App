@@ -3,7 +3,7 @@ import styles from "./Profilepage.module.css";
 import { useHistory } from "react-router-dom";
 import {ModalBoxContext} from '../ModalBox/ModalBox'
 import axios from "axios";
-import { UserStateContext } from "../../App";
+
 
 function Profilepage(e) {
   const [file, setFile] = useState('');
