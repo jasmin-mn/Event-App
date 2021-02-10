@@ -16,16 +16,21 @@
     padding: 10px;
     box-shadow: 20px 10px #888888;
     margin-left: 600px;
-    background-color:lightblue;
+    
     
     
 
 }
 
 .submitregister{
-    background-color: gray;
+    background-color: orange;
     margin-left: 60px;
 
+}
+
+.submitregister:hover{
+    color: white;
+    background-color: orange;
 }
 
 .formgroupgender[type=radio]{
@@ -52,7 +57,7 @@
 
 .formemail{
 
-    margin-left: -29px;
+    margin-left: -23px;
 }
 
 .formdate{

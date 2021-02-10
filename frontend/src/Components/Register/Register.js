@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styles from './Register.module.css';
 import { useHistory } from "react-router-dom"
+import {ModalBoxContext} from '../ModalBox/ModalBox'
 import axios from 'axios'
 
 
+
 const Register = (e) => {
+const {addModalBox} = useContext(ModalBoxContext)
 
     const history = useHistory();
     const sendRegister = async (registerData) => {
@@ -19,7 +22,7 @@ const Register = (e) => {
             history.push('/login')
         }
         catch(error){
-            alert(error.response.data.msg);
+            addModalBox("User already exist. Please login now")
         } //
     }
 
@@ -58,8 +61,8 @@ const Register = (e) => {
             <h1 className={styles.textregister}>
                  Registration 
             </h1>
-            <form onSubmit={handleSubmit} >
-                 <div className={styles.formgroup}>
+            <form onSubmit={handleSubmit} className={styles.formheader} >
+                 <div className={styles.formgroup1}>
                     <label id="icon" htmlFor="userName"> <i class="icon-user"></i></label>
                     <input type="text" name="userName"  placeholder="User Name"  />
                 </div>

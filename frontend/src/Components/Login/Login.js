@@ -56,12 +56,12 @@ const Login = (event) => {
             <h1
                 className={styles.user}> Login
             </h1>
-            <form onSubmit={handleSubmit}  >
+            <form onSubmit={handleSubmit} className={styles.formcontainer} >
                 <div className={styles.form}>
                     <label htmlFor="email"><i class="icon-envelope "></i></label>
                     <input type="email" name="email" placeholder="Email" />
                 </div>
-                <div className={styles.container}>
+                <div className={styles.containerpw}>
                     <label htmlFor="password"><i class="icon-shield"></i></label>
                     <input type="password" name="password" placeholder="Password" />
                 </div>

@@ -68,7 +68,7 @@ function App() {
 
               <Route path="/contact" component={ContactForm} />
 
-              <Route path="/resetPassword" component={Resetpasswordpage} />
+              <Route path="/resetPassword/:token" component={Resetpasswordpage} />
               <Route path="/forgotPassword" component={Forgotpasswordpage} />
               <Route path="/savedEvent" component={savedEvents} />
               <Route path="/startNewEvent" component={MultiStepForm} exact />
