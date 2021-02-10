@@ -57,23 +57,11 @@ router.post("/startNewEvent", authenticate, async (request, response) => {
 });
 
 
-router.delete("/deleteEvent", authenticate, async (req, res) => {
+router.delete("/deleteEvent/:id", authenticate, async (req, res) => {
     try {
-        const event = await Events.findById(req.body.id);
-        console.log("the user id : ", req.id);
-
-        if (!event) {
-            return res.status(404).json({ msg: " event not found  " });
-        }
-
-        console.log("user id is : ", event.user_id);
-        if (event.user_id.toString() !== req.id) {
-            return res
-                .status(401)
-                .json({ msg: " you are not authorized to delete " });
-        }
-        await Events.findByIdAndRemove(req.body.id);
+        await Events.findByIdAndRemove(req.params.id);
         res.send("deleted");
+        console.log(req.params.id);
     } catch (err) {
         console.log(err);
     }
@@ -126,7 +114,7 @@ router.get("/viewOneEvent/:id", async (request, response) => {
 
     try {
         const events = await Events.findById({ _id: request.params.id })
-            .populate("category_id user_id");
+            .populate("category_id user_id").sort("-dateEventcreated");
 
         if (!events) {
             return response.status(500).send({ msg: "Server error" });
@@ -150,7 +138,7 @@ router.get("/viewByCity", async (request, response) => {
                     count: { $sum: 1 },
                 },
             },
-        ]);
+        ]).sort("-dateEventcreated");
 
         if (!events) {
             return response.status(500).send({ msg: "No events" });
@@ -165,7 +153,7 @@ router.get("/viewByCity", async (request, response) => {
 // View Events by seected Location
 router.get("/viewBySelectedLocation/:city", async (request, response) => {
     try {
-        const events = await Events.find({ location: request.params.city });
+        const events = await Events.find({ location: request.params.city }).sort("-dateEventcreated");
 
         console.log(events);
 
@@ -194,7 +182,7 @@ router.get("/viewByCategory", async (request, response) => {
             {
                 $group: { _id: "$category", count: { $sum: 1 } },
             },
-        ]);
+        ]).sort("-dateEventcreated");
 
         if (!events) {
             return response.status(500).send({ msg: "Server error" });
@@ -212,7 +200,7 @@ router.get('/viewBySelectedCategory/:id', async (request, response) => {
 
     try {
         const events = await Events.find({ category_id: request.params.id })
-            .populate('category_id user_id')
+            .populate('category_id user_id').sort("-dateEventcreated")
 
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })

@@ -37,17 +37,15 @@ const Search = () => {
 
                     return (
                         <Link to={eventLink} >
-                          <div className={styles.events_container}>
-                                <div className={styles.event}>
-                                    <img className={styles.events_bg} src={event.event_photo} alt="" />
-                                    <div className={styles.events_data}>
-                                        <p className={styles.events_name_category}><span>Event Name:</span> {event.event_name},{category}</p>
-                                        <p className={styles.events_date}><span>Date:</span> {date}</p>
-                                        <p className={styles.events_name_category}><span>Category:</span> {category}</p>
-                                        <p className={styles.eventtype}> <span>Event Type:</span> {event.eventtype}</p>
-                                        <p className={styles.language}> <span>Language:</span> {event.language}</p>
-                                        {/* <p className={styles.description}> <span>Description:</span> {event.description}</p> */}
-                                    </div>
+                            <div className={styles.event}>
+                                <img className={styles.events_bg} src={event.event_photo} alt="" />
+                                <div className={styles.events_data}>
+                                    <p className={styles.events_name_category}><span>Event Name:</span> {event.event_name},{category}</p>
+                                    <p className={styles.events_date}><span>Date:</span> {date}</p>
+                                    <p className={styles.events_name_category}><span>Category:</span> {category}</p>
+                                    <p className={styles.eventtype}> <span>Event Type:</span> {event.eventtype}</p>
+                                    <p className={styles.language}> <span>Language:</span> {event.language}</p>
+                                    {/* <p className={styles.description}> <span>Description:</span> {event.description}</p> */}
                                 </div>
                             </div>
                         </Link>
@@ -55,7 +53,7 @@ const Search = () => {
                 });
 
                 setEvents(mySearch)
-                
+
             }
             setSerchResults(false)
 
@@ -103,14 +101,9 @@ const Search = () => {
             </div>
 
 
-            <div className={styles.search_results}>
-            
-                {/* {!serchResults && <p>Unfortunately, no events were found.</p>} */}
-                <br />
-                {!serchInputs && <p>Please enter at less one value to get a results</p>}
-                {events}
+            {!serchInputs && <p className={styles.searchErr}>Please enter at less one value to get Results</p>}
+            {events}
 
-            </div>
         </>
     );
 }
