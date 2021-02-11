@@ -96,7 +96,7 @@ function Resetpasswordpage() {
           />
         </form>
       ) : (
-        <h1>
+        <h1 className={styles.invalidpw}>
           <span>Your token is not valid </span>{" "}
         </h1>
       )}

@@ -234,7 +234,7 @@ router.post("/forgotPassword", async (request, response) => {
   user.passwordChangedAt = Date.now() + 1 * 60 * 60 * 1000; //(1 * 60 * 1000)
   user.save();
   const resetUrl = `http://localhost:3000/resetPassword/${token}`;
-  const message = `Forgot your password? Click on the link and submit your new password and password confirmation to ${resetUrl} \n \n if you did not reset your password. Kindly ignore this email`;
+  const message = `Forgot your password? Click on the link and submit your new password and password confirmation to ${resetUrl} \n \n If you did not reset your password. Kindly ignore this email`;
 
   try {
     await sendEmail({

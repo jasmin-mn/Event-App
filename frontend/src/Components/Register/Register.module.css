@@ -2,6 +2,7 @@
   margin-top: 20px;
   margin-bottom: 50px;
   text-align: center;
+  padding-bottom: 30px;
 }
 
 .formcontainer p {
@@ -55,7 +56,7 @@ input:hover{
   border: 3px solid;
   height: 400px;
   width: 700px;
-  margin-left: 600px;
+  margin: 20px auto;
 }
 
 .formgroup1{
