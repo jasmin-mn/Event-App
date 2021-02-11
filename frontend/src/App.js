@@ -29,6 +29,7 @@ import AboutUs from './Components/AboutUs/AboutUs'
 import MultiStepForm from './Components/StartNewEvent/MultiStepForm'
 
 import './App.css';
+import StartNewEvent from './Components/StartNewEvent/StartNewEvent';
 
 
 export const UserStateContext = createContext();
@@ -71,7 +72,7 @@ function App() {
               <Route path="/resetPassword/:token" component={Resetpasswordpage} />
               <Route path="/forgotPassword" component={Forgotpasswordpage} />
               <Route path="/savedEvent" component={savedEvents} />
-              <Route path="/startNewEvent" component={MultiStepForm} exact />
+              <Route path="/startNewEvent" component={StartNewEvent} exact />
               <Route path="/editProfile" component={Profilepage} />
 
               <Route path="/about" component={AboutUs} />

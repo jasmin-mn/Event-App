@@ -7,73 +7,97 @@ const restrictTo = require("../middleware/restrictTo");
 const Category = require("../Models/CategoryModel");
 const sendEmail = require("../Utilities/sendEmail");
 // const Logo = require("../../frontend/src/Images/logo.png")
+const fileUpload = require("express-fileupload");
+
 
 const router = express.Router();
+router.use(fileUpload());
 
 
+//start New Event
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
-    try {
-        let {
-            name,
-            photo,
-            description,
-            location,
-            language,
-            member,
-            eventtype,
-            date,
-            time,
-            category,
-        } = request.body;
+    const userId = request.user._id;
 
+    let {
+        name,
+        description,
+        location,
+        language,
+        member,
+        eventtype,
+        date,
+        time,
+        category,
+    } = request.body;
+
+    try {
         const dateEventstarted = new Date(date);
         const [hours, minutes] = time.split(':');
         dateEventstarted.setHours(hours);
         dateEventstarted.setMinutes(minutes);
 
-        const event = new Events({
-            event_name: name.trim(),
-            event_photo: photo,
-            description,
-            location: location.trim(),
-            language,
-            member,
-            eventtype,
-            dateEventstarted,
-            user_id: request.user._id,
-            category_id: category,
+        if (request.files === null) {
+            const event = new Events({
+                event_name: name.trim(),
+                description,
+                location: location.trim(),
+                language,
+                member,
+                eventtype,
+                dateEventstarted,
+                user_id: request.user._id,
+                category_id: category,
+            });
+
+            console.log(event)
+            await event.save();
+
+            return response.send("you have created your Event");
+
+        }
+
+        const file = request.files.file;
+        const newPath = `${Date.now()}-${userId}-${file.name}`;
+
+        file.mv(`${__dirname}/../../frontend/public/uploads/${newPath}`, async(err) => {
+            if(err) {
+                console.log(err)
+                return response.status(500).send(err)
+             }
+            const event = new Events({
+
+                event_name: name.trim(),
+                event_photo: `/uploads/${newPath}`,
+                description,
+                location: location.trim(),
+                language,
+                member,
+                eventtype,
+                dateEventstarted,
+                user_id: request.user._id,
+                category_id: category,
+            });
+
+           await event.save();
+            response.json({msg:"you have created your Event", event});
+
         });
 
-        console.log(event)
-        await event.save();
-
-        response.send("you have created your Event");
 
     } catch (error) {
         console.log(error);
-        response.status(500).send(error);
+        response.status(500).json({ msg: 'error with create event', error });
     }
 });
 
 
-router.delete("/deleteEvent", authenticate, async (req, res) => {
+//Delete Event
+router.delete("/deleteEvent/:id", authenticate, async (req, res) => {
     try {
-        const event = await Events.findById(req.body.id);
-        console.log("the user id : ", req.id);
-
-        if (!event) {
-            return res.status(404).json({ msg: " event not found  " });
-        }
-
-        console.log("user id is : ", event.user_id);
-        if (event.user_id.toString() !== req.id) {
-            return res
-                .status(401)
-                .json({ msg: " you are not authorized to delete " });
-        }
-        await Events.findByIdAndRemove(req.body.id);
+        await Events.findByIdAndRemove(req.params.id);
         res.send("deleted");
+        console.log(req.params.id);
     } catch (err) {
         console.log(err);
     }
@@ -126,7 +150,7 @@ router.get("/viewOneEvent/:id", async (request, response) => {
 
     try {
         const events = await Events.findById({ _id: request.params.id })
-            .populate("category_id user_id");
+            .populate("category_id user_id").sort("-dateEventcreated");
 
         if (!events) {
             return response.status(500).send({ msg: "Server error" });
@@ -150,7 +174,7 @@ router.get("/viewByCity", async (request, response) => {
                     count: { $sum: 1 },
                 },
             },
-        ]);
+        ]).sort("-dateEventcreated");
 
         if (!events) {
             return response.status(500).send({ msg: "No events" });
@@ -165,7 +189,7 @@ router.get("/viewByCity", async (request, response) => {
 // View Events by seected Location
 router.get("/viewBySelectedLocation/:city", async (request, response) => {
     try {
-        const events = await Events.find({ location: request.params.city });
+        const events = await Events.find({ location: request.params.city }).sort("-dateEventcreated");
 
         console.log(events);
 
@@ -194,7 +218,7 @@ router.get("/viewByCategory", async (request, response) => {
             {
                 $group: { _id: "$category", count: { $sum: 1 } },
             },
-        ]);
+        ]).sort("-dateEventcreated");
 
         if (!events) {
             return response.status(500).send({ msg: "Server error" });
@@ -212,7 +236,7 @@ router.get('/viewBySelectedCategory/:id', async (request, response) => {
 
     try {
         const events = await Events.find({ category_id: request.params.id })
-            .populate('category_id user_id')
+            .populate('category_id user_id').sort("-dateEventcreated")
 
         if (!events) {
             return response.status(500).send({ msg: 'Server error' })

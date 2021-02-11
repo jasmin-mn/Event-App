@@ -1,0 +1,81 @@
+.newEventForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* border: blueviolet solid 2px; */
+  margin: 20px auto;
+  max-width: 650px;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  /* border: red solid 2px; */
+  width: 650px;
+  margin: 5px;
+}
+
+
+
+.radioContainer {
+  /* border: red solid 2px; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 70%;
+}
+
+.radio {
+  /* border: red solid 2px; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+}
+
+.inputContainer input {
+  width: 80%;
+  height: 40px;
+  margin: 5px;
+}
+
+.inputContainer label {
+  width: 20%;
+  height: 40px;
+  font-size: 19px;
+  padding: 10px 5px;
+}
+
+.catDropDown {
+  width: 80%;
+  height: 40px;
+  margin: 0 5px;
+}
+
+.description {
+  width: 80%;
+  margin: 5px;
+}
+
+.saveBtn {
+  float: right;
+  width: 78%;
+  height: 40px;
+  background-color: orange;
+  font-size: 25px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+}
+
+.saveBtn:hover {
+  background-color: orange;
+  color: white;
+  border: none;
+}
