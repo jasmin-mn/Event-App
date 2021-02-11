@@ -8,20 +8,15 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 const sendEmail = require("../Utilities/sendEmail");
 const { response } = require("express");
-const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const fileUpload = require("express-fileupload");
-
 router.use(fileUpload());
-
-
 
 //register
 router.post("/register", async (request, response) => {
-  const { userName, firstName, lastName, email, password} = request.body;
+  const { userName, firstName, lastName, email, password } = request.body;
 
-   try {
+  try {
     const data = await User.findOne({ email });
     if (data) {
       return response.status(400).json({ msg: "User already exist" });
@@ -78,8 +73,7 @@ router.post("/login", async (request, response) => {
   try {
     jwt.sign(payload, process.env.SECRET, (error, token) => {
       if (error) throw error;
-      //console.log(token);
-      // response.cookie({token})
+
       return response
         .cookie("jwt", token, {
           httpOnly: true,
@@ -96,12 +90,8 @@ router.post("/login", async (request, response) => {
 
 // end of of signin
 
-
-
-
 // Profile
 router.get("/profile", authenticate, async (request, response) => {
-
   console.log("this is test request.id", request.user._id);
 
   try {
@@ -191,18 +181,15 @@ router.delete("/deleteAccount/:id", authenticate, async (request, response) => {
   console.log("This is request.id tessst", request.params.id);
   try {
     const user = await User.findByIdAndDelete({ _id: request.params.id });
-    
-  if (request.params.id ) {
-    return response.status(200).json({msg: "User deleted"});
-  } 
-  response.json({msg:"Error"})
+
+    if (request.params.id) {
+      return response.status(200).json({ msg: "User deleted" });
+    }
+    response.json({ msg: "Error" });
   } catch (error) {
     console.log(error);
-    
   }
- 
 });
-
 
 // Get user/adminboard
 
@@ -237,7 +224,7 @@ router.post("/forgotPassword", async (request, response) => {
   }
   const payload = {
     id: user.id,
-    iat: Date.now()
+    iat: Date.now(),
   };
   const token = jwt.sign(payload, process.env.RESETPASSWORD_SECRET, {
     expiresIn: "60m",
@@ -247,7 +234,7 @@ router.post("/forgotPassword", async (request, response) => {
   user.passwordChangedAt = Date.now() + 1 * 60 * 60 * 1000; //(1 * 60 * 1000)
   user.save();
   const resetUrl = `http://localhost:3000/resetPassword/${token}`;
-  const message = `Forgot your password? Click on the link and submit your new password and password confirmation to ${resetUrl} \n \n if you did not reset your password. Kindly ignore this email`;
+  const message = `Forgot your password? Click on the link and submit your new password and password confirmation to ${resetUrl} \n \n If you did not reset your password. Kindly ignore this email`;
 
   try {
     await sendEmail({
@@ -281,50 +268,39 @@ router.post("/resetPassword/:token", async (request, response) => {
   }
 });
 
-router.get("/newPassword/:token", async (request, response)=>{
-
-const token = request.params.token ;
-const data = await User.findOne({passwordResetToken:token})
-if (!data) {
-  return response
-    .status(400)
-    .json({ msg: "Token is invalid or already expired" });
-}
-response
-    .status(200)
-    .json({ msg: "enter new password" });
-
-
-})
+router.get("/newPassword/:token", async (request, response) => {
+  const token = request.params.token;
+  const data = await User.findOne({ passwordResetToken: token });
+  if (!data) {
+    return response
+      .status(400)
+      .json({ msg: "Token is invalid or already expired" });
+  }
+  response.status(200).json({ msg: "enter new password" });
+});
 
 router.post("/newPassword", async (request, response) => {
-  const  {password, token} = request.body
+  const { password, token } = request.body;
   try {
-    const data = await User.findOne({passwordResetToken:token})
+    const data = await User.findOne({ passwordResetToken: token });
     console.log(data);
     if (!data) {
       return response
         .status(400)
         .json({ msg: "Token is invalid or already expired" });
     }
-    // const salt = bcrypt.genSalt(10)
-    // data.password = await bcrypt.hash(password,salt)
-    console.log('pass', password);
-    const salt = await bcrypt.genSalt(10);
-    data.password = await bcrypt.hash(password, salt);   
-    data.passwordResetToken = '';
-    console.log('data after save', data);
-    await data.save();
-  
-    return response.status(200).json({msg: "Password Resetted successfully"})
-  } catch (error) {
-    response
-    .status(500)
-    .json({ msg: "Error with resetting password" });
-
     
-  }
+    console.log("pass", password);
+    const salt = await bcrypt.genSalt(10);
+    data.password = await bcrypt.hash(password, salt);
+    data.passwordResetToken = "";
+    console.log("data after save", data);
+    await data.save();
 
-})
+    return response.status(200).json({ msg: "Password Resetted successfully" });
+  } catch (error) {
+    response.status(500).json({ msg: "Error with resetting password" });
+  }
+});
 
 module.exports = router;
