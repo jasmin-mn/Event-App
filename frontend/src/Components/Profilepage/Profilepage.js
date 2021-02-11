@@ -170,10 +170,7 @@ function Profilepage(e) {
 {/* 
       <div className={styles.deletecontainer}>
         <p>
-          Are you sure you wanted to delete your account? <br />If you choose to
-          delete your account, you have to register again.
-        </p>
-        <button
+          Are you sure yousend
           onClick={removeData}
           className={styles.deletecontainer1}
         >

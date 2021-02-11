@@ -7,56 +7,92 @@ const restrictTo = require("../middleware/restrictTo");
 const Category = require("../Models/CategoryModel");
 const sendEmail = require("../Utilities/sendEmail");
 // const Logo = require("../../frontend/src/Images/logo.png")
+const fileUpload = require("express-fileupload");
+
 
 const router = express.Router();
+router.use(fileUpload());
 
 
+//start New Event
 router.post("/startNewEvent", authenticate, async (request, response) => {
 
-    try {
-        let {
-            name,
-            photo,
-            description,
-            location,
-            language,
-            member,
-            eventtype,
-            date,
-            time,
-            category,
-        } = request.body;
+    const userId = request.user._id;
 
+    let {
+        name,
+        description,
+        location,
+        language,
+        member,
+        eventtype,
+        date,
+        time,
+        category,
+    } = request.body;
+
+    try {
         const dateEventstarted = new Date(date);
         const [hours, minutes] = time.split(':');
         dateEventstarted.setHours(hours);
         dateEventstarted.setMinutes(minutes);
 
-        const event = new Events({
-            event_name: name.trim(),
-            event_photo: photo,
-            description,
-            location: location.trim(),
-            language,
-            member,
-            eventtype,
-            dateEventstarted,
-            user_id: request.user._id,
-            category_id: category,
+        if (request.files === null) {
+            const event = new Events({
+                event_name: name.trim(),
+                description,
+                location: location.trim(),
+                language,
+                member,
+                eventtype,
+                dateEventstarted,
+                user_id: request.user._id,
+                category_id: category,
+            });
+
+            console.log(event)
+            await event.save();
+
+            return response.send("you have created your Event");
+
+        }
+
+        const file = request.files.file;
+        const newPath = `${Date.now()}-${userId}-${file.name}`;
+
+        file.mv(`${__dirname}/../../frontend/public/uploads/${newPath}`, async(err) => {
+            if(err) {
+                console.log(err)
+                return response.status(500).send(err)
+             }
+            const event = new Events({
+
+                event_name: name.trim(),
+                event_photo: `/uploads/${newPath}`,
+                description,
+                location: location.trim(),
+                language,
+                member,
+                eventtype,
+                dateEventstarted,
+                user_id: request.user._id,
+                category_id: category,
+            });
+
+           await event.save();
+            response.json({msg:"you have created your Event", event});
+
         });
 
-        console.log(event)
-        await event.save();
-
-        response.send("you have created your Event");
 
     } catch (error) {
         console.log(error);
-        response.status(500).send(error);
+        response.status(500).json({ msg: 'error with create event', error });
     }
 });
 
 
+//Delete Event
 router.delete("/deleteEvent/:id", authenticate, async (req, res) => {
     try {
         await Events.findByIdAndRemove(req.params.id);

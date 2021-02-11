@@ -48,7 +48,7 @@ function FinalStep(props) {
     //   withCredentials: true,
     //   headers: { "Content-Type": "application/json" },
     // };
-
+console.log("props.state: ", props.state);
     try {
       const result = await fetch("http://localhost:7000/event/startNewEvent", {
         body: JSON.stringify(props.state),

@@ -17,8 +17,6 @@
 .dropdownmenu li {
   background: rgba(255, 166, 0, 0.774);
   cursor: pointer;
-
-  border-radius: 5px;
 }
 
 .dropdownmenu li:hover {

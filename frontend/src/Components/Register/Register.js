@@ -24,6 +24,7 @@ const Register = (e) => {
     }
 
     const handleSubmit = async (e) => {
+        
         e.preventDefault()
         const formData = new FormData(e.target)
         const data=  {
