@@ -55,7 +55,7 @@ function Resetpasswordpage() {
         console.log(response.data.msg);
         window.location = "/login";
       } catch (error) {
-        console.log(error.response.data.msg);
+        console.log(error.response.data.msg);   
       }
     }
   };
