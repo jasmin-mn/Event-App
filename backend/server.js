@@ -60,3 +60,19 @@ mongoose
 
 
 
+// mongoose
+// .connect(
+//   `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.MONGO_URI}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+//   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
+// )
+// .then(() => {
+//   console.log("MongoDB is connected 😎");
+// })
+// .catch((err) => {
+//   console.log(err);
+// });
+// app.listen(process.env.PORT, () => {
+//   console.log(`Server Started on port ${process.env.PORT}`);
+// });
+
+// DB_PASS= MnB36C0H5UPnjatT
